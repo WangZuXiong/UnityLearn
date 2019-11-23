@@ -1,7 +1,9 @@
 ﻿using SimpleJSON;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.WebSockets;
+using System.Reflection;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,6 +20,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     private Student _student;
     public AnimationCurve curve;
 
+    FileStream fileStream;
 
     [SerializeField] private List<int> Vs;
 
@@ -67,10 +70,16 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //{
         //    imgs[i].sprite = list[i];
         //}
+        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
     }
-    public Transform t;
 
-    private void Start()
+    //void Start()
+    ////{
+    //    fileStream = null;
+    //    fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+    //}
+
+    void Start()
     {
         //var img = GetComponent<Image>();
         //if (img != null)
@@ -98,8 +107,13 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         {
 
         }
-    }
+        fileStream = null;
 
+        System.GC.Collect();
+        System.GC.WaitForPendingFinalizers();
+
+        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+    }
     private void Func1(string name)
     {
         Debug.LogErrorFormat(name);
@@ -149,6 +163,25 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
             Debug.Log("clear");
         }
     }
+
+    public void OnDestroy()
+    {
+        List<FieldInfo> infoDic = UnityUtility.GetFilesInfo(this);
+        int infoCount = infoDic.Count;
+        for (int i = 0; i < infoCount; i++)
+        {
+            try
+            {
+                infoDic[i].SetValue(this, null);
+            }
+            catch (Exception)
+            {
+
+            }
+            infoDic[i].SetValue(this, null);
+        }
+    }
+
 
 
     /// <summary>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public static class UnityUtility
@@ -83,5 +84,32 @@ public static class UnityUtility
             return pos;
         }
         return pos;
+    }
+
+
+    /// <summary>
+    /// 获取对象的属性和值
+    /// </summary>
+    /// <param name="obj">对象</param>
+    /// <returns>返回属性与值一一对应的字典</returns>
+    public static List<FieldInfo> GetFilesInfo<T>(T obj)
+    {
+        List<FieldInfo> infoList = new List<FieldInfo>();
+        if (obj != null)
+        {
+            Type type = obj.GetType();
+
+            FieldInfo[] propertyInfos = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+            foreach (FieldInfo item in propertyInfos)
+            {
+                Type type2 = item.GetType();
+                infoList.Add(item);
+
+            }
+
+            return infoList;
+        }
+        return null;
     }
 }
