@@ -5,7 +5,12 @@ using System.Net.WebSockets;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.U2D;
 using UnityEngine.UI;
+using System.Linq;
+using UnityEngine.Profiling;
+using Unity.Profiling;
+
 [ExecuteInEditMode]
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
@@ -13,15 +18,86 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     private Student _student;
     public AnimationCurve curve;
 
+
+    [SerializeField] private List<int> Vs;
+
+
+    [ContextMenu("Set Sprite")]
     private void Awake()
     {
-        _student = new Student();
+        //var sprites = Resources.LoadAll<Sprite>("ATM");
+
+        //var imgs = transform.GetComponentsInChildren<Image>();
+
+
+        //for (int i = 0; i < imgs.Length; i++)
+        //{
+        //    imgs[i].sprite = sprites[i];
+        //}
+
+        //var sprites = Resources.Load<SpriteAtlas>("ATM1");
+        //var count = sprites.spriteCount;
+        //var spriteArray = new Sprite[count];
+        //sprites.GetSprites(spriteArray);
+        //var list = spriteArray.ToList();
+        //list.Sort((Sprite x,Sprite y) =>
+        //{
+        //    if (int.Parse(x.name) > int.Parse(y.name))
+        //    {
+        //        return x;
+        //    }
+        //    else
+        //    {
+        //        return y;
+        //    }
+        //});
+
+        //list.Sort(delegate (Sprite p1, Sprite p2)
+        //{
+        //    Debug.Log((p1.name.Substring(p1.name.IndexOf("_") + 1, p1.name.Length - p1.name.IndexOf("_") - 1)).Replace("(Clone)", ""));
+        //    var index1 = (p1.name.Substring(p1.name.IndexOf("_") + 1, p1.name.Length - p1.name.IndexOf("_") - 1)).Replace("(Clone)", "");
+        //    var index2 = (p2.name.Substring(p2.name.IndexOf("_") + 2, p2.name.Length - p2.name.IndexOf("_") - 2)).Replace("(Clone)", "");
+        //    return index1.CompareTo(index2);//升序
+        //});
+
+
+
+        //var imgs = transform.GetComponentsInChildren<Image>();
+        //for (int i = 0; i < imgs.Length; i++)
+        //{
+        //    imgs[i].sprite = list[i];
+        //}
     }
     public Transform t;
 
     private void Start()
     {
+        //var img = GetComponent<Image>();
+        //if (img != null)
+        //{
+        //    var mat = img.material;
+        //    var sprite = img.sprite;
+        //    mat.SetVector("_Pos", new Vector4(sprite.rect.x, sprite.rect.y));
+        //    mat.SetVector("_Size", new Vector4(sprite.texture.width, sprite.texture.height));
+        //    mat.SetVector("_SubSize", new Vector4(sprite.rect.width, sprite.rect.height));
+        //    return;
+        //}
 
+        var rawImg = GetComponent<RawImage>();
+        if (rawImg)
+        {
+            Debug.LogError("raw image");
+            //var mat = rawImg.material;
+            //mat.SetVector("_Pos", Vector4.zero);
+            //mat.SetVector("_Size", new Vector4(rawImg.texture.width, rawImg.texture.height));
+            //mat.SetVector("_SubSize", new Vector4(rawImg.texture.width, rawImg.texture.height));
+        }
+
+        int i = 0;
+        for (i = 0; i < 10; i++)
+        {
+
+        }
     }
 
     private void Func1(string name)
@@ -43,31 +119,36 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     public float X;
 
-    public void Update()
+
+    void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        //float temp = Time.realtimeSinceStartup;
+
+
+        //var a = new A();
+
+        //Profiler.BeginSample("10 x 10");
+        //new Texture2D(10, 10);
+        //Profiler.EndSample();
+
+        //Profiler.BeginSample("1024 x 1024");
+        //new Texture2D(1024, 1024);
+        //Profiler.EndSample();
+
+        using (new ProfilerMarker("Test1").Auto())
         {
-            //LongmudaSort();
-
-            //向量
-            Vector3 temp = Earth.position - MainCamera.position;
-
-
-
-
-
-
-
-
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            MessageManager.RemoveListtener<string>(ActionName.TEST_1, Func1);
+            float x = 10l;
         }
     }
 
 
-
+    class A
+    {
+        ~A()
+        {
+            Debug.Log("clear");
+        }
+    }
 
 
     /// <summary>
