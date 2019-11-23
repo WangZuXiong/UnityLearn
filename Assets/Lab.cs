@@ -13,37 +13,65 @@ using System.Linq;
 using UnityEngine.Profiling;
 using Unity.Profiling;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
-    WebSocket webSocket;
+    private WebSocket webSocket;
     private Student _student;
     public AnimationCurve curve;
-
-    FileStream fileStream;
-
+    private FileStream fileStream;
     [SerializeField] private List<int> Vs;
 
-
-    [ContextMenu("Set Sprite")]
     private void Awake()
     {
-        //var sprites = Resources.LoadAll<Sprite>("ATM");
+      
+    }
 
-        //var imgs = transform.GetComponentsInChildren<Image>();
+    private void Start()
+    {
 
+    }
 
-        //for (int i = 0; i < imgs.Length; i++)
-        //{
-        //    imgs[i].sprite = sprites[i];
-        //}
+    private void Update()
+    {
+   
+    }
 
-        //var sprites = Resources.Load<SpriteAtlas>("ATM1");
-        //var count = sprites.spriteCount;
-        //var spriteArray = new Sprite[count];
-        //sprites.GetSprites(spriteArray);
-        //var list = spriteArray.ToList();
-        //list.Sort((Sprite x,Sprite y) =>
+    public void OnDestroy()
+    {
+       
+    }
+
+    private void GCTest()
+    {
+        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        fileStream = null;
+        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
+        fileStream = null;
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+    }
+
+    private void ReadSprites()
+    {
+        var sprites = Resources.LoadAll<Sprite>("ATM");
+        var imgs = transform.GetComponentsInChildren<Image>();
+        for (int i = 0; i < imgs.Length; i++)
+        {
+            imgs[i].sprite = sprites[i];
+        }
+    }
+
+    private void ReadSpriteAltas()
+    {
+        var sprites = Resources.Load<SpriteAtlas>("ATM1");
+        var count = sprites.spriteCount;
+        var spriteArray = new Sprite[count];
+        sprites.GetSprites(spriteArray);
+        var list = spriteArray.ToList();
+        //list.Sort((Sprite x, Sprite y) =>
         //{
         //    if (int.Parse(x.name) > int.Parse(y.name))
         //    {
@@ -55,106 +83,47 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //    }
         //});
 
-        //list.Sort(delegate (Sprite p1, Sprite p2)
-        //{
-        //    Debug.Log((p1.name.Substring(p1.name.IndexOf("_") + 1, p1.name.Length - p1.name.IndexOf("_") - 1)).Replace("(Clone)", ""));
-        //    var index1 = (p1.name.Substring(p1.name.IndexOf("_") + 1, p1.name.Length - p1.name.IndexOf("_") - 1)).Replace("(Clone)", "");
-        //    var index2 = (p2.name.Substring(p2.name.IndexOf("_") + 2, p2.name.Length - p2.name.IndexOf("_") - 2)).Replace("(Clone)", "");
-        //    return index1.CompareTo(index2);//升序
-        //});
+        list.Sort(delegate (Sprite p1, Sprite p2)
+        {
+            Debug.Log((p1.name.Substring(p1.name.IndexOf("_") + 1, p1.name.Length - p1.name.IndexOf("_") - 1)).Replace("(Clone)", ""));
+            var index1 = (p1.name.Substring(p1.name.IndexOf("_") + 1, p1.name.Length - p1.name.IndexOf("_") - 1)).Replace("(Clone)", "");
+            var index2 = (p2.name.Substring(p2.name.IndexOf("_") + 2, p2.name.Length - p2.name.IndexOf("_") - 2)).Replace("(Clone)", "");
+            return index1.CompareTo(index2);//升序
+        });
 
-
-
-        //var imgs = transform.GetComponentsInChildren<Image>();
-        //for (int i = 0; i < imgs.Length; i++)
-        //{
-        //    imgs[i].sprite = list[i];
-        //}
-        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        var imgs = transform.GetComponentsInChildren<Image>();
+        for (int i = 0; i < imgs.Length; i++)
+        {
+            imgs[i].sprite = list[i];
+        }
     }
 
-    //void Start()
-    ////{
-    //    fileStream = null;
-    //    fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-    //}
-
-    void Start()
-    {
-        //var img = GetComponent<Image>();
-        //if (img != null)
-        //{
-        //    var mat = img.material;
-        //    var sprite = img.sprite;
-        //    mat.SetVector("_Pos", new Vector4(sprite.rect.x, sprite.rect.y));
-        //    mat.SetVector("_Size", new Vector4(sprite.texture.width, sprite.texture.height));
-        //    mat.SetVector("_SubSize", new Vector4(sprite.rect.width, sprite.rect.height));
-        //    return;
-        //}
-
-        var rawImg = GetComponent<RawImage>();
-        if (rawImg)
-        {
-            Debug.LogError("raw image");
-            //var mat = rawImg.material;
-            //mat.SetVector("_Pos", Vector4.zero);
-            //mat.SetVector("_Size", new Vector4(rawImg.texture.width, rawImg.texture.height));
-            //mat.SetVector("_SubSize", new Vector4(rawImg.texture.width, rawImg.texture.height));
-        }
-
-        int i = 0;
-        for (i = 0; i < 10; i++)
-        {
-
-        }
-        fileStream = null;
-
-        System.GC.Collect();
-        System.GC.WaitForPendingFinalizers();
-
-        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-    }
     private void Func1(string name)
     {
         Debug.LogErrorFormat(name);
     }
-
 
     private void Func2(string name)
     {
         Debug.LogErrorFormat("Func2");
     }
 
-
-    public Transform Earth;
-    public Transform MainCamera;
-    public float R;
-
-
-    public float X;
-
-
-    void Update()
+    private void ProfilerDemo()
     {
-        //float temp = Time.realtimeSinceStartup;
+        Profiler.BeginSample("10 x 10");
+        new Texture2D(10, 10);
+        Profiler.EndSample();
 
+        Profiler.BeginSample("1024 x 1024");
+        new Texture2D(1024, 1024);
+        Profiler.EndSample();
 
-        //var a = new A();
-
-        //Profiler.BeginSample("10 x 10");
-        //new Texture2D(10, 10);
-        //Profiler.EndSample();
-
-        //Profiler.BeginSample("1024 x 1024");
-        //new Texture2D(1024, 1024);
-        //Profiler.EndSample();
-
+        //推荐写法
         using (new ProfilerMarker("Test1").Auto())
         {
             float x = 10l;
         }
     }
-
 
     class A
     {
@@ -163,26 +132,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
             Debug.Log("clear");
         }
     }
-
-    public void OnDestroy()
-    {
-        List<FieldInfo> infoDic = UnityUtility.GetFilesInfo(this);
-        int infoCount = infoDic.Count;
-        for (int i = 0; i < infoCount; i++)
-        {
-            try
-            {
-                infoDic[i].SetValue(this, null);
-            }
-            catch (Exception)
-            {
-
-            }
-            infoDic[i].SetValue(this, null);
-        }
-    }
-
-
 
     /// <summary>
     /// 把所有的语言包按照模块名称写到多个
@@ -251,6 +200,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.LogError("按照业务模块划分之后的：" + count);
 
     }
+
 
     /// <summary>
     /// 把所有的语言包写到一个文本中
@@ -324,7 +274,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     [Serializable]
     public class Root
     {
-        public string ModelName;
         public List<Language> languages;
     }
 
@@ -357,7 +306,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.Log(222);
     }
 
-
     static Task GetData()
     {
         Debug.Log(000);
@@ -375,7 +323,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         throw new System.NotImplementedException();
     }
 
-
     public async Task SetAsync()
     {
         Debug.Log(00000000000000);
@@ -385,7 +332,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
         Debug.Log(1111);
     }
-
 
     /// <summary>
     /// 屏幕截图

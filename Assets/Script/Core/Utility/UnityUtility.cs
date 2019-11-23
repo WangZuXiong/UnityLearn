@@ -111,5 +111,22 @@ public static class UnityUtility
             return infoList;
         }
         return null;
+
+        /*
+            List<FieldInfo> infoDic = UnityUtility.GetFilesInfo(this);
+            int infoCount = infoDic.Count;
+            for (int i = 0; i < infoCount; i++)
+            {
+                try
+                {
+                    infoDic[i].SetValue(this, null);
+                }
+                catch (Exception)
+                {
+
+                }
+                infoDic[i].SetValue(this, null);
+            }
+         */
     }
 }
