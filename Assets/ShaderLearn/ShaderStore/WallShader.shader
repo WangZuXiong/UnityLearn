@@ -12,6 +12,7 @@
         LOD 200
 
         CGPROGRAM
+		 #pragma surface surf MyLambert
 
         sampler2D _MainTex;
 		sampler2D _BumpTex;
@@ -21,7 +22,7 @@
             float2 uv_MainTex;
         };
 
-		inline fixed4 LightingMyLamber (SurfaceOutput s,fixed3 lightDir,fixed atten)
+		inline fixed4 LightingMyLambert (SurfaceOutput s,fixed3 lightDir,fixed atten)
 		{
 			fixed diff = max (0, dot (s.Normal, lightDir));
 			fixed4 c;

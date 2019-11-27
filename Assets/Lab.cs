@@ -34,7 +34,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
-   
+        Debug.Log(111);
     }
 
     public void OnDestroy()
