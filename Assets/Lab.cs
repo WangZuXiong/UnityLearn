@@ -22,24 +22,76 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     private FileStream fileStream;
     [SerializeField] private List<int> Vs;
 
+    [SerializeField]
+    private Image _image;
+    [SerializeField]
+    private RawImage _rawImage;
+
     private void Awake()
     {
-      
+        var pool = new ObjectPoolSimple<GameObject>(3);
+
+        var temp = pool.New();
+
+
+        var x = UnityEngine.Random.Range(0, 1f);
+
+        temp.gameObject.GetComponent<Image>().color = Color.white * x;
+        pool.Clear();
     }
 
     private void Start()
     {
+        //A n = new A();
+        //A m = new A();
 
+        Debug.Log("" + Cow.count);
+        Cow cow1 = new Cow();
+        Cow cow2 = new Cow();
+        Debug.Log("" + Cow.count);
+    }
+
+
+    public class Cow
+    {
+        public static int count;
+
+
+        static Cow()
+        {
+            count++;
+        }
+    }
+
+
+
+    class A
+    {
+        public A()
+        {
+            Debug.Log("构造A");
+        }
+
+        ~A()
+        {
+            Debug.Log("clear");
+        }
     }
 
     private void Update()
     {
-        Debug.Log(111);
+
     }
 
     public void OnDestroy()
     {
-       
+
+    }
+
+    private void MemoryTest()
+    {
+        Texture2D texture = Resources.Load<Texture2D>("ATM");
+        _rawImage.texture = texture;
     }
 
     private void GCTest()
@@ -125,13 +177,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         }
     }
 
-    class A
-    {
-        ~A()
-        {
-            Debug.Log("clear");
-        }
-    }
+
 
     /// <summary>
     /// 把所有的语言包按照模块名称写到多个
@@ -415,7 +461,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     {
         Texture2D texture2D = Resources.Load<Texture2D>("");
         texture2D.GetPixel(1, 1);   //返回坐标处的像素颜色
-        //可用于不规则的点击区域判断
+                                    //可用于不规则的点击区域判断
     }
 }
 public class Student

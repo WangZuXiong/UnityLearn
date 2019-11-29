@@ -7,7 +7,7 @@ public class FrameRateController : MonoBehaviour
     private int _heightFrame = 30;
     [SerializeField]
     private int _screenIdleFrame;
-
+    [SerializeField]
     private int _changeFrameLimit = 30000;
 
     //降帧，并非所有场景都需要60帧（腾讯桌球游戏场景60帧，其他场景30帧；天天酷跑，在开始游戏前，FPS被限制为30，
@@ -15,10 +15,10 @@ public class FrameRateController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Time.frameCount % 2 == 0)
+        if (Time.frameCount % 100 == 0)
         {
-            _screenIdleFrame += 2;
-            if (_screenIdleFrame > _changeFrameLimit)
+            _screenIdleFrame += 100;
+            if (Application.targetFrameRate != _lowFrame && _screenIdleFrame > _changeFrameLimit)
             {
                 _screenIdleFrame = 0;
                 Application.targetFrameRate = _lowFrame;
@@ -32,7 +32,7 @@ public class FrameRateController : MonoBehaviour
             if (Application.targetFrameRate != _heightFrame)
             {
                 Application.targetFrameRate = _heightFrame;
-            }   
+            }
         }
     }
 }
