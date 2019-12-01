@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UGUIAdvance : MonoBehaviour
 {
 
-    [MenuItem("GameObject/UI/Image")]
+    [MenuItem("GameObject/UI/Image_NoRaycastTarget")]
     static void CreatImage()
     {
         if (Selection.activeTransform)
@@ -23,7 +23,7 @@ public class UGUIAdvance : MonoBehaviour
         }
     }
 
-    [MenuItem("GameObject/UI/Text")]
+    [MenuItem("GameObject/UI/Text_NoRaycastTarget")]
     static void CreatText()
     {
         if (Selection.activeTransform)
