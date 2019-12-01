@@ -103,6 +103,11 @@
     <Compile Include="Assets\Cinemachine\PostFX\Editor\CinemachinePostProcessingEditor.cs" />
     <Compile Include="Assets\Cinemachine\PostFX\Editor\PostFXAutoImport.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\Editor\CinemachineShotEditor.cs" />
+    <Compile Include="Assets\PlayMaker\Editor\AssetGUIDs.cs" />
+    <Compile Include="Assets\PlayMaker\Editor\EditorStartupPrefs.cs" />
+    <Compile Include="Assets\PlayMaker\Editor\PlayMakerEditorStartup.cs" />
+    <Compile Include="Assets\PlayMaker\Editor\PlayMakerWelcomeWindow.cs" />
+    <Compile Include="Assets\PlayMaker\Editor\PreUpdateChecker.cs" />
     <Compile Include="Assets\ThirdParty\LuaPerfect\Editor\ApiGenerator.cs" />
     <Compile Include="Assets\Tool\Editor\FindAllReferences\FindAllReferences.cs" />
     <Compile Include="Assets\Tool\Editor\FindAllReferences\FindAllReferencesHelper.cs" />
@@ -209,6 +214,7 @@
     <None Include="Assets\XLuaLearn\XLua\Src\Editor\Template\LuaEnumWrap.tpl.txt" />
     <None Include="Assets\XLuaLearn\XLua\Src\Editor\Template\LuaDelegateWrap.tpl.txt" />
     <None Include="Assets\XLuaLearn\XLua\Src\Editor\Template\LuaRegisterGCM.tpl.txt" />
+    <None Include="Assets\PlayMaker\Editor\Install\readme.txt" />
     <None Include="Assets\XLuaLearn\XLua\Src\Editor\Template\LuaRegister.tpl.txt" />
     <None Include="Assets\XLuaLearn\XLua\Src\Editor\Template\LuaInterfaceBridge.tpl.txt" />
     <None Include="Assets\XLuaLearn\XLua\Src\Editor\Template\LuaClassWrap.tpl.txt" />

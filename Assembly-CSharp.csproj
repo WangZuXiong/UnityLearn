@@ -160,11 +160,13 @@
     <Compile Include="Assets\Script\Config.cs" />
     <Compile Include="Assets\Script\Core\Message\MessageManager.cs" />
     <Compile Include="Assets\Script\Core\UI\BaseView.cs" />
+    <Compile Include="Assets\Script\Core\Utility\CleanMaterial.cs" />
     <Compile Include="Assets\Script\Core\Utility\DateTimeExtension.cs" />
     <Compile Include="Assets\Script\Core\Utility\DebugUtility.cs" />
     <Compile Include="Assets\Script\Core\Utility\GameObjectUtil.cs" />
     <Compile Include="Assets\Script\Core\Utility\Json\JSONObject.cs" />
     <Compile Include="Assets\Script\Core\Utility\Json\SimpleJSON.cs" />
+    <Compile Include="Assets\Script\Core\Utility\ObjectDumper.cs" />
     <Compile Include="Assets\Script\Core\Utility\SaveData.cs" />
     <Compile Include="Assets\Script\Core\Utility\ScreeManager.cs" />
     <Compile Include="Assets\Script\Core\Utility\TextSpacing.cs" />
@@ -187,6 +189,9 @@
     <Compile Include="Assets\Script\Service\LanguageService.cs" />
     <Compile Include="Assets\Script\Service\NetManager.cs" />
     <Compile Include="Assets\Script\UGUI\MySlider.cs" />
+    <Compile Include="Assets\Script\UGUI\NewBehaviourScript.cs" />
+    <Compile Include="Assets\Script\UGUI\SliderExtenssion.cs" />
+    <Compile Include="Assets\ShaderLearn\ShaderStore\UGUIMaskPro\UGUIMaskComponent.cs" />
     <Compile Include="Assets\ShaderLearn\ShaderStore\UGUIMaskTest.cs" />
     <Compile Include="Assets\ThirdParty\LuaPerfect\ObjectFormater.cs" />
     <Compile Include="Assets\Tool\AsyncAwaitUtil\Source\Awaiters.cs" />
@@ -247,9 +252,12 @@
     <None Include="Assets\DesignPatternLearn\MVCPattern\remade.txt" />
     <None Include="Assets\XLuaLearn\XLua\Examples\07_AsyncTest\Resources\message_box.lua.txt" />
     <None Include="Assets\XLuaLearn\XLua\Examples\06_Coroutine\Resources\cs_coroutine.lua.txt" />
+    <None Include="Assets\PlayMaker\Readme.txt" />
+    <None Include="Assets\StreamingAssets\1.txt" />
     <None Include="Assets\XLuaLearn\XLua\Examples\02_U3DScripting\LuaTestScript.lua.txt" />
     <None Include="Assets\XLuaLearn\XLua\Examples\07_AsyncTest\Resources\async_test.lua.txt" />
     <None Include="Assets\XLuaLearn\XLua\Tutorial\LoadLuaScript\ByFile\Resources\byfile.lua.txt" />
+    <None Include="Assets\ShaderLearn\ShaderStore\UGUIMaskPro\UGUIMask.shader" />
     <None Include="Assets\XLuaLearn\XLua\Examples\06_Coroutine\Resources\coruntine_test.lua.txt" />
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
     <None Include="Assets\XLuaLearn\XLua\Resources\xlua\util.lua.txt" />
@@ -259,6 +267,7 @@
     <None Include="Assets\XLuaLearn\XLua\Resources\perf\profiler.lua.txt" />
     <None Include="Assets\XLuaLearn\XLua\Resources\perf\memory.lua.txt" />
     <None Include="Assets\ShaderLearn\ShaderStore\UGUIMask.shader" />
+    <None Include="Assets\ShaderLearn\CubeShader.shader" />
     <None Include="Assets\XLuaLearn\XLua\Resources\tdr\tdr.lua.txt" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/UnityLearn/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
