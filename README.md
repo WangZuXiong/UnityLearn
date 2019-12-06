@@ -1,6 +1,12 @@
+# UI框架
+- 基础控件库
+- 工具库+拓展库（Extension+Utility）
+- Panel+Window （PanelSystem+WindowSystem）
+- 每个业务模块都是MVC结构
+- 各个业务模块之间的通信使用事件系统 EventDispatcher
+- 各个业务中的最小的单位（Item）可以用 Compontent
 
-### 业务
-- UI框架
+
 - 网络
 - 音效管理
 - 日志系统

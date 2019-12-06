@@ -231,6 +231,7 @@
     <Compile Include="Assets\Script\Core\Utility\ScreeManager.cs" />
     <Compile Include="Assets\Script\Core\Utility\TextSpacing.cs" />
     <Compile Include="Assets\Script\Core\Utility\UGUIAdvance.cs" />
+    <Compile Include="Assets\Script\Core\Utility\UGUIExtension.cs" />
     <Compile Include="Assets\Script\Core\Utility\UnityUtility.cs" />
     <Compile Include="Assets\Script\Empty4Raycast.cs" />
     <Compile Include="Assets\Script\Enum\LoadAssetType.cs" />
@@ -248,8 +249,8 @@
     <Compile Include="Assets\Script\Service\AssetsService.cs" />
     <Compile Include="Assets\Script\Service\LanguageService.cs" />
     <Compile Include="Assets\Script\Service\NetManager.cs" />
+    <Compile Include="Assets\Script\UGUI\CanvasRebuild.cs" />
     <Compile Include="Assets\Script\UGUI\MySlider.cs" />
-    <Compile Include="Assets\Script\UGUI\NewBehaviourScript.cs" />
     <Compile Include="Assets\Script\UGUI\SliderExtenssion.cs" />
     <Compile Include="Assets\ShaderLearn\ShaderStore\UGUIMaskPro\UGUIMaskComponent.cs" />
     <Compile Include="Assets\ThirdParty\LuaPerfect\ObjectFormater.cs" />

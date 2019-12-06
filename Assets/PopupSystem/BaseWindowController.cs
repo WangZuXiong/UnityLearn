@@ -13,8 +13,14 @@ public class BaseWindowController : MonoBehaviour
         }
     }
 
+    protected virtual void OnEnable()
+    {
+        //tween
+    }
+
     protected virtual void OnBtnClose()
     {
+        //tween
         PopupSystem.Instance.CloseCurrentPop();
     }
 
