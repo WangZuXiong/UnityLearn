@@ -4,6 +4,15 @@ using UnityEngine.UI;
 
 public class BaseWindowController : MonoBehaviour
 {
+    [Tooltip("勾选后，将使用遮罩背景")]
+    [SerializeField]
+    private bool _useMask;
+    [Tooltip("勾选后，点击背景遮罩也能关闭弹窗")]
+    [SerializeField]
+    private bool _closeOnClickMask;
+    [Tooltip("勾选后，打开改弹窗的前会关闭所有弹窗")]
+    [SerializeField]
+    private bool _clearBeforeOpenWindow;
     protected virtual void Awake()
     {
         var btnClose = GetBtnClose();

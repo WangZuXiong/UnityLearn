@@ -116,6 +116,7 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\CinemachineLearn\Move.cs" />
     <Compile Include="Assets\DemoWindowController.cs" />
+    <Compile Include="Assets\DesignPatternLearn\FactoryPattern\Demo\BaseView.cs" />
     <Compile Include="Assets\DesignPatternLearn\FactoryPattern\Demo\Resource\UIFactory.cs" />
     <Compile Include="Assets\DesignPatternLearn\FactoryPattern\Demo\UIFrame\SetController.cs" />
     <Compile Include="Assets\DesignPatternLearn\FactoryPattern\Demo\UIFrame\SetData.cs" />
@@ -262,8 +263,8 @@
     <Compile Include="Assets\Script\CommonUICompontents\TipsCompontent.cs" />
     <Compile Include="Assets\Script\CommonUICompontents\TipsFactory.cs" />
     <Compile Include="Assets\Script\Config.cs" />
-    <Compile Include="Assets\Script\Core\Message\MessageManager.cs" />
-    <Compile Include="Assets\Script\Core\UI\BaseView.cs" />
+    <Compile Include="Assets\Script\Core\EventDispatcher\EventDispatcher.cs" />
+    <Compile Include="Assets\Script\Core\EventDispatcher\EventKeyConst.cs" />
     <Compile Include="Assets\Script\Core\Utility\AsyncAwaitUtil\Source\Awaiters.cs" />
     <Compile Include="Assets\Script\Core\Utility\AsyncAwaitUtil\Source\AwaitExtensions.cs" />
     <Compile Include="Assets\Script\Core\Utility\AsyncAwaitUtil\Source\IEnumeratorAwaitExtensions.cs" />
