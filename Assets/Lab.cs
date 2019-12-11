@@ -29,15 +29,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
-        var pool = new ObjectPoolSimple<GameObject>(3);
-
-        var temp = pool.New();
-
-
-        var x = UnityEngine.Random.Range(0, 1f);
-
-        temp.gameObject.GetComponent<Image>().color = Color.white * x;
-        pool.Clear();
+        CombineMesh1();
     }
 
     private void Start()
@@ -50,7 +42,51 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Cow cow2 = new Cow();
         Debug.Log("" + Cow.count);
     }
+    /// <summary>
+    /// 合并mesh
+    /// </summary>
+    private void CombineMesh()
+    {
+        var meshFilters = GetComponentsInChildren<MeshFilter>();
+        var combine = new CombineInstance[meshFilters.Length];
+        for (int i = 0; i < meshFilters.Length; i++)
+        {
+            combine[i].mesh = meshFilters[i].sharedMesh;
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+            meshFilters[i].gameObject.SetActive(false);
+        }
 
+        var meshFilter = gameObject.AddComponent<MeshFilter>();
+        meshFilter.mesh = new Mesh();
+        meshFilter.mesh.CombineMeshes(combine);
+        gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 合并mesh
+    /// </summary>
+    private void CombineMesh1()
+    {
+        var meshFilters = GetComponentsInChildren<MeshFilter>();
+        var combine = new CombineInstance[meshFilters.Length];
+
+        var meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        var materials = new Material[meshRenderers.Length];
+
+        for (int i = 0; i < meshFilters.Length; i++)
+        {
+            materials[i] = meshRenderers[i].sharedMaterial;
+            combine[i].mesh = meshFilters[i].sharedMesh;
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+            meshFilters[i].gameObject.SetActive(false);
+        }
+
+        var meshFilter = gameObject.AddComponent<MeshFilter>();
+        meshFilter.mesh = new Mesh();
+        meshFilter.mesh.CombineMeshes(combine, false);
+        gameObject.AddComponent<MeshRenderer>().sharedMaterials = materials;
+        gameObject.SetActive(true);
+    }
 
     public class Cow
     {

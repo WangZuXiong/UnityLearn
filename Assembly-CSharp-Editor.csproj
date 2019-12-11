@@ -103,6 +103,32 @@
     <Compile Include="Assets\Cinemachine\PostFX\Editor\CinemachinePostProcessingEditor.cs" />
     <Compile Include="Assets\Cinemachine\PostFX\Editor\PostFXAutoImport.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\Editor\CinemachineShotEditor.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\core\MB_EditorUtil.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\core\MB3_BakeInPlace.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\core\MB3_MBVersionEditor.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\core\MB3_MeshBakerEditorFunctions.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\core\MB3_TextureCombinerEditorFunctions.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_BatchPrefabBakerEditor.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_BoneWeightCopierEditor.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_DisableHiddenAnimationsEditor.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_GameObjectMaterialInfo.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_MBVersionConcreteEditor.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_MeshBakerEditor.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_MeshBakerEditorInternal.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_MeshBakerEditorWindow.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_MeshBakerGrouperEditor.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_MultiMeshBakerEditor.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_SearchFilters.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_ShaderTexturePropertyDrawer.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_TextureBakerEditor.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\MB3_TextureBakerEditorInternal.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\searchFilters\MB3_GroupByAlreadyAdded.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\searchFilters\MB3_GroupByLightmapIndex.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\searchFilters\MB3_GroupByMaterial.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\searchFilters\MB3_GroupByOutOfBoundsUVs.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\searchFilters\MB3_GroupByRenderType.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\searchFilters\MB3_GroupByShader.cs" />
+    <Compile Include="Assets\MeshBaker\scripts\Editor\searchFilters\MB3_GroupByStatic.cs" />
     <Compile Include="Assets\MissingReferencesFinder\Editor\MissingReferencesFinder.cs" />
     <Compile Include="Assets\ThirdParty\LuaPerfect\Editor\ApiGenerator.cs" />
     <Compile Include="Assets\Tool\Editor\FindAllReferences\FindAllReferences.cs" />
@@ -508,9 +534,6 @@
     </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>D:/soft/unity201840/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Android.Extensions">
-      <HintPath>D:/soft/unity201840/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>D:/soft/unity201840/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
