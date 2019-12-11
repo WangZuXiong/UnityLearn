@@ -1,4 +1,5 @@
 ﻿#if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,5 +46,18 @@ public class UGUIAdvance : MonoBehaviour
         }
     }
 
+
+    //[MenuItem("Assets/FindNodePath &q", false, 21)]
+    [MenuItem("GameObject/FindNodePath &q", false, 1)]
+    static void OutputNodePath2()
+    {
+        Transform selectedTransform = Selection.activeTransform;
+        string prefabRoot = selectedTransform.GetNodePath();
+        prefabRoot = prefabRoot.Replace(".", "/");
+        int index = prefabRoot.IndexOf("/");
+        prefabRoot = prefabRoot.Remove(0, index + 1);
+        // 复制粘贴到剪贴板
+        GUIUtility.systemCopyBuffer = prefabRoot;
+    }
 }
 #endif

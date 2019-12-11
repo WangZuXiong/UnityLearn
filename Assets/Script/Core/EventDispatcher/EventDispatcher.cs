@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 
-public class MessageManager : MonoBehaviour
+public class EventDispatcher 
 {
-    private static MessageModel _mode = new MessageModel();
+    public static Dictionary<string, Delegate> DelegateDict = new Dictionary<string, Delegate>();
 
     /// <summary>
     /// 添加事件
@@ -20,9 +17,9 @@ public class MessageManager : MonoBehaviour
             throw new Exception("事件为空：" + actionName);
         }
 
-        if (_mode.DelegateDict.ContainsKey(actionName))
+        if (DelegateDict.ContainsKey(actionName))
         {
-            Delegate temp = _mode.DelegateDict[actionName];
+            Delegate temp = DelegateDict[actionName];
 
             if (!temp.GetType().Equals(action.GetType()))
             {
@@ -31,11 +28,11 @@ public class MessageManager : MonoBehaviour
 
             Delegate delegates = Delegate.Combine(temp, action);
 
-            _mode.DelegateDict[actionName] = delegates;
+            DelegateDict[actionName] = delegates;
         }
         else
         {
-            _mode.DelegateDict.Add(actionName, action);
+            DelegateDict.Add(actionName, action);
         }
     }
 
@@ -52,9 +49,9 @@ public class MessageManager : MonoBehaviour
             throw new Exception("事件为空：" + actionName);
         }
 
-        if (_mode.DelegateDict.ContainsKey(actionName))
+        if (DelegateDict.ContainsKey(actionName))
         {
-            Delegate temp = _mode.DelegateDict[actionName];
+            Delegate temp = DelegateDict[actionName];
 
             if (!temp.GetType().Equals(action.GetType()))
             {
@@ -62,11 +59,11 @@ public class MessageManager : MonoBehaviour
             }
 
             Delegate delegates = Delegate.Combine(temp, action);
-            _mode.DelegateDict[actionName] = delegates;
+            DelegateDict[actionName] = delegates;
         }
         else
         {
-            _mode.DelegateDict.Add(actionName, action);
+            DelegateDict.Add(actionName, action);
         }
     }
 
@@ -76,12 +73,12 @@ public class MessageManager : MonoBehaviour
     /// <param name="actionName">事件名称</param>
     public static void TriggerListener(string actionName)
     {
-        if (!_mode.DelegateDict.ContainsKey(actionName))
+        if (!DelegateDict.ContainsKey(actionName))
         {
             throw new Exception("不存在该事件：" + actionName);
         }
 
-        Delegate[] delegates = _mode.DelegateDict[actionName].GetInvocationList();
+        Delegate[] delegates = DelegateDict[actionName].GetInvocationList();
 
         for (int i = 0; i < delegates.Length; i++)
         {
@@ -92,12 +89,12 @@ public class MessageManager : MonoBehaviour
 
     public static void TriggerListener<T>(string actionName, T t)
     {
-        if (!_mode.DelegateDict.ContainsKey(actionName))
+        if (!DelegateDict.ContainsKey(actionName))
         {
             throw new Exception("不存在该事件：" + actionName);
         }
 
-        Delegate[] delegates = _mode.DelegateDict[actionName].GetInvocationList();
+        Delegate[] delegates = DelegateDict[actionName].GetInvocationList();
 
         for (int i = 0; i < delegates.Length; i++)
         {
@@ -115,19 +112,19 @@ public class MessageManager : MonoBehaviour
     /// <param name="actionName"></param>
     public static void RemoveListtener(string actionName)
     {
-        if (!_mode.DelegateDict.ContainsKey(actionName))
+        if (!DelegateDict.ContainsKey(actionName))
         {
             throw new Exception("不存在该事件：" + actionName);
         }
-        Delegate[] delegates = _mode.DelegateDict[actionName].GetInvocationList();
+        Delegate[] delegates = DelegateDict[actionName].GetInvocationList();
 
         for (int i = 0; i < delegates.Length; i++)
         {
             delegates[i] = null;
         }
 
-        Delegate.RemoveAll(_mode.DelegateDict[actionName], _mode.DelegateDict[actionName]);
-        _mode.DelegateDict.Remove(actionName);
+        Delegate.RemoveAll(DelegateDict[actionName], DelegateDict[actionName]);
+        DelegateDict.Remove(actionName);
     }
 
     /// <summary>
@@ -137,34 +134,34 @@ public class MessageManager : MonoBehaviour
     /// <param name="action"></param>
     public static void RemoveListtener(string actionName, Action action)
     {
-        if (!_mode.DelegateDict.ContainsKey(actionName))
+        if (!DelegateDict.ContainsKey(actionName))
         {
             throw new Exception("不存在该事件：" + actionName);
         }
-        _mode.DelegateDict[actionName] = Delegate.Remove(_mode.DelegateDict[actionName], action);
+        DelegateDict[actionName] = Delegate.Remove(DelegateDict[actionName], action);
 
-        if (_mode.DelegateDict[actionName] == null)
+        if (DelegateDict[actionName] == null)
         {
-            _mode.DelegateDict.Remove(actionName);
+            DelegateDict.Remove(actionName);
         }
     }
 
     public static void RemoveListtener<T>(string actionName, Action<T> action)
     {
-        if (!_mode.DelegateDict.ContainsKey(actionName))
+        if (!DelegateDict.ContainsKey(actionName))
         {
             throw new Exception("不存在该事件：" + actionName);
         }
-        if (!_mode.DelegateDict[actionName].GetType().Equals(action.GetType()))
+        if (!DelegateDict[actionName].GetType().Equals(action.GetType()))
         {
-            throw new Exception("参数类型不对应：" + actionName + "_" + _mode.DelegateDict[actionName].GetType() + "_" + action.GetType());
+            throw new Exception("参数类型不对应：" + actionName + "_" + DelegateDict[actionName].GetType() + "_" + action.GetType());
         }
 
-        _mode.DelegateDict[actionName] = (Action<T>)Delegate.Remove(_mode.DelegateDict[actionName], action);
+        DelegateDict[actionName] = (Action<T>)Delegate.Remove(DelegateDict[actionName], action);
 
-        if (_mode.DelegateDict[actionName] == null)
+        if (DelegateDict[actionName] == null)
         {
-            _mode.DelegateDict.Remove(actionName);
+            DelegateDict.Remove(actionName);
         }
     }
 
@@ -173,28 +170,13 @@ public class MessageManager : MonoBehaviour
     /// </summary>
     public static void Clear()
     {
-        var enumerator = _mode.DelegateDict.GetEnumerator();
+        var enumerator = DelegateDict.GetEnumerator();
         while (enumerator.MoveNext())
         {
             Delegate temp = enumerator.Current.Value;
             temp = Delegate.RemoveAll(temp, temp);
             temp = null;
         }
-        _mode.DelegateDict.Clear();
+        DelegateDict.Clear();
     }
-}
-
-public class MessageModel
-{
-    public Dictionary<string, Delegate> DelegateDict;
-
-    public MessageModel()
-    {
-        DelegateDict = new Dictionary<string, Delegate>();
-    }
-}
-
-public struct ActionName
-{
-    public readonly static string TEST_1 = "TEST_1";
 }
