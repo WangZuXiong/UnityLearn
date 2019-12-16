@@ -12,6 +12,7 @@ using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.Profiling;
 using Unity.Profiling;
+using UnityEditor;
 
 //[ExecuteInEditMode]
 public class Lab : MonoBehaviour, IPointerEnterHandler
@@ -29,19 +30,29 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
-        CombineMesh1();
+       
     }
 
     private void Start()
     {
         //A n = new A();
         //A m = new A();
-
-        Debug.Log("" + Cow.count);
-        Cow cow1 = new Cow();
-        Cow cow2 = new Cow();
-        Debug.Log("" + Cow.count);
+        RenderMaterialTest();
+        //RenderShareMaterialTest();
     }
+
+
+    private void RenderMaterialTest()
+    {
+        GetComponent<Renderer>().material.color = Color.white * UnityEngine.Random.Range(0, 1f);
+    }
+
+    private void RenderShareMaterialTest()
+    {
+        GetComponent<Renderer>().sharedMaterial.color = Color.white * UnityEngine.Random.Range(0, 1f);
+    }
+
+
     /// <summary>
     /// 合并mesh
     /// </summary>
@@ -88,6 +99,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         gameObject.SetActive(true);
     }
 
+
     public class Cow
     {
         public static int count;
@@ -116,7 +128,10 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
-
+        if (Input.GetMouseButtonDown(1))
+        {
+            Resources.UnloadUnusedAssets();
+        }
     }
 
     public void OnDestroy()
@@ -211,6 +226,41 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         {
             float x = 10l;
         }
+
+
+        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+        stopwatch.Start();
+        for (int i = 0; i < 100; i++)
+        {
+            Debug.LogError("111");
+        }
+        stopwatch.Stop();
+        Debug.LogError(stopwatch.ElapsedMilliseconds);
+
+        Dictionary<int, string> keyValuePairs = new Dictionary<int, string>();
+        for (int i = 0; i < 100; i++)
+        {
+            keyValuePairs.Add(i, "123456");
+        }
+
+        using (new ProfilerMarker("Test_foreach").Auto())
+        {
+            foreach (var item in keyValuePairs)
+            {
+                Debug.LogError(item.Key);
+            }
+        };
+
+
+        using (new ProfilerMarker("Test_GetEnumerator").Auto())
+        {
+            var enumerator = keyValuePairs.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                Debug.LogError(enumerator.Current.Key);
+            }
+
+        };
     }
 
 

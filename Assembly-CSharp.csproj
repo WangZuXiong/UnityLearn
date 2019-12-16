@@ -225,6 +225,7 @@
     <Compile Include="Assets\EditorTool\TextureOverview\TextureMemoryUsageInfo.cs" />
     <Compile Include="Assets\EditorTool\TextureOverview\TextureMemoryUsageOverlay.cs" />
     <Compile Include="Assets\EditorTool\TextureOverview\TextureOverviewMenuItem.cs" />
+    <Compile Include="Assets\GameObjectActivity.cs" />
     <Compile Include="Assets\Lab.cs" />
     <Compile Include="Assets\Lab1.cs" />
     <Compile Include="Assets\LabInEditMode.cs" />
@@ -415,6 +416,7 @@
     <None Include="Assets\MeshBaker\Resources\Shaders\NormalMapShader.shader" />
     <None Include="Assets\XLuaLearn\XLua\Examples\03_UIEvent\ButtonInteraction.lua.txt" />
     <None Include="Assets\ShaderLearn\ShaderStore\WallShader.shader" />
+    <None Include="Assets\ShaderLearn\ShaderStore\PlayerDiffuse.shader" />
     <None Include="Assets\AssetBundleLearn\RawAssets\MyShader.shader" />
     <None Include="Assets\MeshBaker\Release Notes.txt" />
     <None Include="Assets\ShaderLearn\ShaderStore\TurnTransparentShader.shader" />
