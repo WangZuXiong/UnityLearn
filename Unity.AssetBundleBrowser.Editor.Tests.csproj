@@ -303,40 +303,40 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>D:/wangzuxiong/UnityLearn/Assets/NetLearn/WebSocket/websocket-sharp.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Assets/NetLearn/WebSocket/websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil">
-      <HintPath>D:/wangzuxiong/UnityLearn/Assets/XLuaLearn/XLua/Editor/Mono.Cecil.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Assets/XLuaLearn/XLua/Editor/Mono.Cecil.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>D:/wangzuxiong/UnityLearn/Assets/XLuaLearn/XLua/Editor/Mono.Cecil.Mdb.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Assets/XLuaLearn/XLua/Editor/Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>D:/wangzuxiong/UnityLearn/Assets/XLuaLearn/XLua/Editor/Mono.Cecil.Pdb.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Assets/XLuaLearn/XLua/Editor/Mono.Cecil.Pdb.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Editor/UnityEditor.Advertisements.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.collections@0.0.9-preview.12/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.collections@0.0.9-preview.12/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/soft/unity201840/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

@@ -30,15 +30,17 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
-       
+
     }
 
     private void Start()
     {
         //A n = new A();
         //A m = new A();
-        RenderMaterialTest();
+        //RenderMaterialTest();
         //RenderShareMaterialTest();
+
+        LongmudaSort();
     }
 
 
@@ -489,19 +491,19 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     /// </summary>
     private void LongmudaSort()
     {
-        var list = new List<Student>
-            {
-                new Student (10,160),
-                new Student (20,170),
-                new Student (20,150)
-            };
+        //var list = new List<Student>
+        //    {
+        //        new Student (10,160),
+        //        new Student (20,170),
+        //        new Student (20,150)
+        //    };
 
-        for (int i = 0; i < list.Count; i++)
-        {
-            Debug.Log(list[i].ToString());
-        }
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    Debug.Log(list[i].ToString());
+        //}
 
-        Debug.LogError("==============");
+        //Debug.LogError("==============");
 
         //按照年龄排序
         //如果年龄一致的话则按照身高排序
@@ -515,15 +517,102 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //    return item1.Age.CompareTo(item2.Age);
         //});
 
-        //权重大的排前面
-        list.Sort((item1, item2) => item1.Age.CompareTo(item2.Age) * 2 + item1.Height.CompareTo(item2.Height));
+        ////权重大的排前面
+        //list.Sort((item1, item2) => item1.Age.CompareTo(item2.Age) * 2 + item1.Height.CompareTo(item2.Height));
 
 
-        //list.AddRange(new List<Student>());
-        for (int i = 0; i < list.Count; i++)
+        ////list.AddRange(new List<Student>());
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    Debug.Log(list[i].ToString());
+        //}
+
+
+
+        List<Tuple<int, int>> tmp = new List<Tuple<int, int>>()
         {
-            Debug.Log(list[i].ToString());
+            new Tuple<int,int>(2,1),
+            new Tuple<int,int>(53,1),
+            new Tuple<int,int>(12,1),
+            new Tuple<int,int>(22,3),
+            new Tuple<int,int>(1,2),
+        };
+
+        //先按照Item2升序排列 Item2相同的情况下在按照Item1降序排列
+        //tmp.Sort((x, y) =>
+        //(x.Item1.CompareTo(y.Item1) * -1
+        //+ x.Item2.CompareTo(y.Item2) * 2));
+
+        //for (int i = 0; i < tmp.Count; i++)
+        //{
+        //    Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
+        //}
+        //53,1
+        //12,1
+        //2,1
+        //1,2
+        //22,3
+
+
+        //先按照Item2降序排列 Item2相同的情况下在按照Item1降序排列
+        // tmp.Sort((x, y) =>
+        //-(x.Item1.CompareTo(y.Item1)
+        //+ x.Item2.CompareTo(y.Item2) * 2));
+        // for (int i = 0; i < tmp.Count; i++)
+        // {
+        //     Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
+        // }
+        //22,3
+        //1,2
+        //53,1
+        //12,1
+        //2,1
+
+
+        //先按照Item2升序排列 Item2相同的情况下在按照Item1升序排列
+        // tmp.Sort((x, y) =>
+        //(x.Item1.CompareTo(y.Item1) * 1
+        //+ x.Item2.CompareTo(y.Item2) * 2));
+        // for (int i = 0; i < tmp.Count; i++)
+        // {
+        //     Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
+        // }
+        //2,1
+        //12,1
+        //53,1
+        //1,2
+        //22,3
+
+
+
+        //先按照Item2升序排列 Item2相同的情况下在按照Item1降序排列
+        // tmp.Sort((x, y) =>
+        //(y.Item1.CompareTo(x.Item1) * 1
+        //+ x.Item2.CompareTo(y.Item2) * 2));
+        // for (int i = 0; i < tmp.Count; i++)
+        // {
+        //     Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
+        // }
+        //53,1
+        //12,1
+        //2,1
+        //1,2
+        //22,3
+
+
+        //先按照Item2降序排列 Item2相同的情况下在按照Item1降序排列
+        tmp.Sort((x, y) =>
+       (y.Item1.CompareTo(x.Item1) * 1
+       + y.Item2.CompareTo(x.Item2) * 2));
+        for (int i = 0; i < tmp.Count; i++)
+        {
+            Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
         }
+        //22,3
+        //1,2
+        //53,1
+        //12,1
+        //2,1
     }
 
     /// <summary>
