@@ -3,6 +3,7 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
+//https://blog.uwa4d.com/archives/ABTheory.html
 public class LoadAssetBundle : MonoBehaviour
 {
     public string Name1 = "cube";

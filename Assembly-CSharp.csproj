@@ -305,6 +305,9 @@
     <Compile Include="Assets\Script\Config.cs" />
     <Compile Include="Assets\Script\Core\EventDispatcher\EventDispatcher.cs" />
     <Compile Include="Assets\Script\Core\EventDispatcher\EventKeyConst.cs" />
+    <Compile Include="Assets\Script\Core\MVC\Controller.cs" />
+    <Compile Include="Assets\Script\Core\MVC\Model.cs" />
+    <Compile Include="Assets\Script\Core\MVC\View.cs" />
     <Compile Include="Assets\Script\Core\Utility\AsyncAwaitUtil\Source\Awaiters.cs" />
     <Compile Include="Assets\Script\Core\Utility\AsyncAwaitUtil\Source\AwaitExtensions.cs" />
     <Compile Include="Assets\Script\Core\Utility\AsyncAwaitUtil\Source\IEnumeratorAwaitExtensions.cs" />
@@ -343,6 +346,7 @@
     <Compile Include="Assets\Script\MyTest.cs" />
     <Compile Include="Assets\Script\Service\AssetsService.cs" />
     <Compile Include="Assets\Script\Service\LanguageService.cs" />
+    <Compile Include="Assets\Script\Service\LanguageText.cs" />
     <Compile Include="Assets\Script\Service\NetManager.cs" />
     <Compile Include="Assets\Script\UGUI\CanvasRebuild.cs" />
     <Compile Include="Assets\Script\UGUI\MySlider.cs" />
@@ -429,70 +433,70 @@
     <None Include="Assets\MeshBaker\Resources\Shaders\AlbedoShader.shader" />
     <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
     <Reference Include="Unity.Entities.Properties">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Entities.Properties.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Entities.Properties.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Properties.Codegen">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Properties.Codegen.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Properties.Codegen.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Jobs">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Jobs.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Jobs.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Jobs.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Jobs.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Jobs.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Entities.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Entities.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Entities.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Entities.StaticTypeRegistry">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Entities.StaticTypeRegistry.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Entities.StaticTypeRegistry.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Properties">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Properties.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Properties.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Collections.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Burst.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Entities.Hybrid">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Entities.Hybrid.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Entities.Hybrid.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Entities">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Entities.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Transforms">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Transforms.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Transforms.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Transforms.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Transforms.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Transforms.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Burst.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Transforms.Hybrid">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/soft/unity201840/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -696,25 +700,25 @@
       <HintPath>D:/soft/unity201840/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>D:/wangzuxiong/UnityLearn/Assets/NetLearn/WebSocket/websocket-sharp.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Assets/NetLearn/WebSocket/websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Runtime/UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe">
-      <HintPath>D:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.collections@0.0.9-preview.12/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>E:/wangzuxiong/UnityLearn/Library/PackageCache/com.unity.collections@0.0.9-preview.12/System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>D:/soft/unity201840/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
