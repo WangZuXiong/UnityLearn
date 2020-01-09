@@ -346,6 +346,7 @@
     <Compile Include="Assets\Script\MyTest.cs" />
     <Compile Include="Assets\Script\Service\AssetsService.cs" />
     <Compile Include="Assets\Script\Service\LanguageService.cs" />
+    <Compile Include="Assets\Script\Service\LanguageText.cs" />
     <Compile Include="Assets\Script\Service\NetManager.cs" />
     <Compile Include="Assets\Script\UGUI\CanvasRebuild.cs" />
     <Compile Include="Assets\Script\UGUI\MySlider.cs" />

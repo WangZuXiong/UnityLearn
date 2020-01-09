@@ -130,6 +130,7 @@
     <Compile Include="Assets\MeshBaker\scripts\Editor\searchFilters\MB3_GroupByShader.cs" />
     <Compile Include="Assets\MeshBaker\scripts\Editor\searchFilters\MB3_GroupByStatic.cs" />
     <Compile Include="Assets\MissingReferencesFinder\Editor\MissingReferencesFinder.cs" />
+    <Compile Include="Assets\Script\Service\Editor\LanguageEditor.cs" />
     <Compile Include="Assets\ThirdParty\LuaPerfect\Editor\ApiGenerator.cs" />
     <Compile Include="Assets\Tool\Editor\FindAllReferences\FindAllReferences.cs" />
     <Compile Include="Assets\Tool\Editor\FindAllReferences\FindAllReferencesHelper.cs" />

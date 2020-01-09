@@ -1,19 +1,28 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class LanguageService : MonoBehaviour
+//[ExecuteInEditMode]
+public class LanguageService
 {
-    public static LanguageService Instance { get; private set; }
+    private static LanguageService _instance;
+    public static LanguageService Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new LanguageService();
+            }
+            return _instance;
+        }
 
-    private Dictionary<Module, Dictionary<string, string>> _languageDict;
+    }
+
+
+    private Dictionary<Module, Dictionary<string, string>> _languageDict = new Dictionary<Module, Dictionary<string, string>>();
 
     private readonly string BASTEPATH = "Language/";
 
-    private void Awake()
-    {
-        Instance = this;
-        _languageDict = new Dictionary<Module, Dictionary<string, string>>();
-    }
 
     private void OnDestroy()
     {
@@ -35,11 +44,17 @@ public class LanguageService : MonoBehaviour
 
         if (!_languageDict[module].ContainsKey(key))
         {
-            Debug.LogError("不存在 module：" + module + " key:" + key);
+            //Debug.LogError("不存在 module：" + module + " key:" + key);
             return string.Empty;
         }
 
         return _languageDict[module][key];
+    }
+
+
+    public string GetString(string key)
+    {
+        return GetString(Module.Common, key);
     }
 
     /// <summary>

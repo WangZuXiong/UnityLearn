@@ -6,12 +6,20 @@ using UnityEngine.Networking;
 
 public class AssetsService : MonoBehaviour
 {
-    public static AssetsService Instance { get; private set; }
-
-    private void Awake()
+    private static AssetsService _instance;
+    public static AssetsService Instance
     {
-        Instance = this;
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new AssetsService();
+            }
+            return _instance;
+        }
     }
+
+
     /// <summary>
     /// 
     /// </summary>

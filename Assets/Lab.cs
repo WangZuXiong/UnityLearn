@@ -27,6 +27,10 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     private Image _image;
     [SerializeField]
     private RawImage _rawImage;
+    [SerializeField]
+    public int X = 111;
+    [SerializeField]
+    public Lab RefLab;
 
     private void Awake()
     {
@@ -40,7 +44,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //RenderMaterialTest();
         //RenderShareMaterialTest();
 
-        LongmudaSort();
+        //LongmudaSort();
     }
 
 
