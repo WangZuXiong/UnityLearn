@@ -129,6 +129,7 @@
     <Compile Include="Assets\DesignPatternLearn\MVCPattern\PlayerData.cs" />
     <Compile Include="Assets\DesignPatternLearn\MVCPattern\PlayerModel.cs" />
     <Compile Include="Assets\DesignPatternLearn\MVCPattern\PlayerView.cs" />
+    <Compile Include="Assets\DesignPatternLearn\ObserverPattern\Observer.cs" />
     <Compile Include="Assets\DesignPatternLearn\ProxyPattern\ProxyPattern.cs" />
     <Compile Include="Assets\DesignPatternLearn\StrategyPattern\Main.cs" />
     <Compile Include="Assets\DesignPatternLearn\StrategyPattern\StratagyDemo.cs" />

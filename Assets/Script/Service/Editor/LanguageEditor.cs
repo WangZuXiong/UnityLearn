@@ -11,9 +11,9 @@ public class LanguageEditor : Editor
     {
         base.OnInspectorGUI();
 
-        if (Application.isPlaying)
-            return;
-        Debug.LogError("OnInspectorGUI");
+        //if (Application.isPlaying)
+        //    return;
+        //Debug.LogError("OnInspectorGUI");
 
         LanguageText temp = target as LanguageText;
         var value = LanguageService.Instance.GetString(temp.Key);
@@ -27,7 +27,7 @@ public class LanguageEditor : Editor
         }
 
         //EditorGUILayout.TextField("Test", "123")
-        EditorGUILayout.Popup("Test", 1, new string[] { "1", "2" });
+        //EditorGUILayout.Popup("Test", 1, new string[] { "1", "2" });
 
 
 
