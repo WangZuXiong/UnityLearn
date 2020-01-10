@@ -45,6 +45,15 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //RenderShareMaterialTest();
 
         //LongmudaSort();
+
+
+        using (new ProfilerMarker("Test").Auto())
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Debug.LogError("111");
+            }
+        }
     }
 
 
