@@ -57,6 +57,43 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     }
 
 
+    public int[] TwoSum(int[] nums, int target)
+    {
+        if (nums == null)
+        {
+            throw new Exception("nums = null");
+        }
+        for (int i = 0; i < nums.Length - 1; i++)
+        {
+            for (int j = i + 1; j < nums.Length; j++)
+            {
+                if (nums[i] + nums[j] == target)
+                {
+                    return new int[] { i, j };
+                }
+            }
+        }
+        return null;
+
+        //数组较长情况下的更优解
+        //var tempDict = new Dictionary<int, int>();
+        //for (int i = 0; i < nums.Length; i++)
+        //{
+        //    var temp = target - nums[i];
+        //    if (tempDict.ContainsKey(temp))
+        //    {
+        //        return new int[] { tempDict[temp], i };
+        //    }
+
+        //    if (!tempDict.ContainsKey(nums[i]))
+        //    {
+        //        tempDict.Add(nums[i], i);
+        //    }
+        //}
+        //return null;
+    }
+
+
     private void RenderMaterialTest()
     {
         GetComponent<Renderer>().material.color = Color.white * UnityEngine.Random.Range(0, 1f);

@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 373516649
+CRC: 434804590
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 4d73f57ba67b1f45564294215f187d83
+    Hash: 943add0eb99ba3a988e938fe481b0a35
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 52e38a3098f97f1133dcc9ace733f39e
+    Hash: 848e8bf41a9290db639fc958fbe8c074
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -23,10 +23,8 @@ ClassTypes:
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
-- Class: 65
-  Script: {instanceID: 0}
 - Class: 135
   Script: {instanceID: 0}
 Assets:
-- Assets/AssetBundleLearn/RawAssets/Cube.prefab
+- Assets/AssetBundleLearn/RawAssets/Asset_B.prefab
 Dependencies: []

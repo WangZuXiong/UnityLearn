@@ -3,18 +3,25 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
-//https://blog.uwa4d.com/archives/ABTheory.html
 public class LoadAssetBundle : MonoBehaviour
 {
-    public string Name1 = "cube";
-    public string Name2 = "cube1";
-    public string Path1 = @"D:\wangzuxiong\UnityLearn\Assets\AssetBundleLearn\AssetBundles\cube";
-    public string Path2 = @"D:\wangzuxiong\UnityLearn\Assets\AssetBundleLearn\AssetBundles\cube1";
-
+    [SerializeField]
+    private string _name1 = "cube";
+    [SerializeField]
+    private string _name2 = "cube1";
+    [SerializeField]
+    private string _path1 = "AssetBundleLearn/AssetBundles/cube";
+    [SerializeField]
+    private string _path2 = "AssetBundleLearn/AssetBundles/cube1";
+    [SerializeField]
+    private Transform _root;
     private void Start()
     {
-        StartCoroutine(DownAB<GameObject>(Name1, Path1));
-        StartCoroutine(DownAB<GameObject>(Name2, Path2));
+        _path1 = Application.dataPath + "/" + _path1;
+        _path2 = Application.dataPath + "/" + _path2;
+
+        StartCoroutine(DownAB<GameObject>(_name1, _path1));
+        StartCoroutine(DownAB<GameObject>(_name2, _path2));
     }
 
     /// <summary>
@@ -32,7 +39,7 @@ public class LoadAssetBundle : MonoBehaviour
         AssetBundle assetBundle = (unityWebRequest.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
         Debug.LogError(assetBundle == null);
         T gameObject = assetBundle.LoadAsset<T>(resName);
-        Instantiate(gameObject, Camera.main.transform);
+        Instantiate(gameObject, _root);
     }
 
     /// <summary>
@@ -46,7 +53,7 @@ public class LoadAssetBundle : MonoBehaviour
         {
             yield return null;
         }
-        WWW www = WWW.LoadFromCacheOrDownload(Path1, 1);
+        WWW www = WWW.LoadFromCacheOrDownload(_path1, 1);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))
@@ -55,7 +62,7 @@ public class LoadAssetBundle : MonoBehaviour
             yield break;
         }
         AssetBundle ab = www.assetBundle;
-        GameObject go = ab.LoadAsset<GameObject>(Name1);
+        GameObject go = ab.LoadAsset<GameObject>(_name1);
         Instantiate(go);
     }
 
@@ -64,9 +71,9 @@ public class LoadAssetBundle : MonoBehaviour
     /// </summary>
     private void LoadBinaryAB()
     {
-        var binary = File.ReadAllBytes(Path1);
+        var binary = File.ReadAllBytes(_path1);
         var ab = AssetBundle.LoadFromMemory(binary);
-        var go = ab.LoadAsset<GameObject>(Name1);
+        var go = ab.LoadAsset<GameObject>(_name1);
         Instantiate(go);
     }
 
@@ -76,11 +83,11 @@ public class LoadAssetBundle : MonoBehaviour
     /// <returns></returns>
     private IEnumerator LoadBinaryABAsync()
     {
-        var binary = File.ReadAllBytes(Path1);
+        var binary = File.ReadAllBytes(_path1);
         AssetBundleCreateRequest request = AssetBundle.LoadFromMemoryAsync(binary);
         yield return request;
         AssetBundle ab = request.assetBundle;
-        GameObject cube = ab.LoadAsset<GameObject>(Name1);
+        GameObject cube = ab.LoadAsset<GameObject>(_name1);
         Instantiate(cube);
     }
 
@@ -89,8 +96,8 @@ public class LoadAssetBundle : MonoBehaviour
     /// </summary>
     private void LoadFileAB()
     {
-        AssetBundle ab = AssetBundle.LoadFromFile(Path1);
-        GameObject go = ab.LoadAsset<GameObject>(Name1);
+        AssetBundle ab = AssetBundle.LoadFromFile(_path1);
+        GameObject go = ab.LoadAsset<GameObject>(_name1);
         Instantiate(go);
     }
 
@@ -100,10 +107,10 @@ public class LoadAssetBundle : MonoBehaviour
     /// <returns></returns>
     private IEnumerator LoadFileABAsync()
     {
-        AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(Path1);
+        AssetBundleCreateRequest request = AssetBundle.LoadFromFileAsync(_path1);
         yield return request;
         AssetBundle ab = request.assetBundle;
-        GameObject go = ab.LoadAsset<GameObject>(Name1);
+        GameObject go = ab.LoadAsset<GameObject>(_name1);
         Instantiate(go);
     }
 
