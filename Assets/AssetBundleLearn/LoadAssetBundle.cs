@@ -40,6 +40,7 @@ public class LoadAssetBundle : MonoBehaviour
         Debug.LogError(assetBundle == null);
         T gameObject = assetBundle.LoadAsset<T>(resName);
         Instantiate(gameObject, _root);
+        assetBundle.Unload(false);
     }
 
     /// <summary>

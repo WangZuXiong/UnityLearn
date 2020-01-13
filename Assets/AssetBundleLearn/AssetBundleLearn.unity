@@ -306,8 +306,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e722967cbfbe84aaa3a9593c736d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name1: cube
-  _name2: cube1
-  _path1: AssetBundleLearn/AssetBundles/cube
-  _path2: AssetBundleLearn/AssetBundles/cube1
+  _name1: asset_a
+  _name2: asset_b
+  _path1: AssetBundleLearn/AssetBundles/asset_ab
+  _path2: AssetBundleLearn/AssetBundles/asset_ab
   _root: {fileID: 807441653}

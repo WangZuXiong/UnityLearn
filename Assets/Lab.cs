@@ -34,6 +34,14 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
+        IsPalindrome(121);
+
+        Debug.LogError("(123 / 10)=" + (123 / 10));
+        Debug.LogError("(123 % 10)=" + (123 % 10));
+
+
+        Debug.LogError("(12 / 10)=" + (12 / 10));
+        Debug.LogError("(12 % 10)=" + (12 % 10));
 
     }
 
@@ -47,52 +55,40 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //LongmudaSort();
 
 
-        using (new ProfilerMarker("Test").Auto())
-        {
-            for (int i = 0; i < 100; i++)
-            {
-                Debug.LogError("111");
-            }
-        }
-    }
-
-
-    public int[] TwoSum(int[] nums, int target)
-    {
-        if (nums == null)
-        {
-            throw new Exception("nums = null");
-        }
-        for (int i = 0; i < nums.Length - 1; i++)
-        {
-            for (int j = i + 1; j < nums.Length; j++)
-            {
-                if (nums[i] + nums[j] == target)
-                {
-                    return new int[] { i, j };
-                }
-            }
-        }
-        return null;
-
-        //数组较长情况下的更优解
-        //var tempDict = new Dictionary<int, int>();
-        //for (int i = 0; i < nums.Length; i++)
+        //using (new ProfilerMarker("Test").Auto())
         //{
-        //    var temp = target - nums[i];
-        //    if (tempDict.ContainsKey(temp))
+        //    for (int i = 0; i < 100; i++)
         //    {
-        //        return new int[] { tempDict[temp], i };
-        //    }
-
-        //    if (!tempDict.ContainsKey(nums[i]))
-        //    {
-        //        tempDict.Add(nums[i], i);
+        //        Debug.LogError("111");
         //    }
         //}
-        //return null;
     }
 
+
+    public bool IsPalindrome(int x)
+    {
+        // 特殊情况：
+        // 如上所述，当 x < 0 时，x 不是回文数。
+        // 同样地，如果数字的最后一位是 0，为了使该数字为回文，
+        // 则其第一位数字也应该是 0
+        // 只有 0 满足这一属性
+        if (x < 0 || (x % 10 == 0 && x != 0))
+        {
+            return false;
+        }
+
+        int revertedNumber = 0;
+        while (x > revertedNumber)
+        {
+            revertedNumber = revertedNumber * 10 + x % 10;
+            x /= 10;
+        }
+
+        // 当数字长度为奇数时，我们可以通过 revertedNumber/10 去除处于中位的数字。
+        // 例如，当输入为 12321 时，在 while 循环的末尾我们可以得到 x = 12，revertedNumber = 123，
+        // 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。
+        return x == revertedNumber || x == revertedNumber / 10;
+    }
 
     private void RenderMaterialTest()
     {
