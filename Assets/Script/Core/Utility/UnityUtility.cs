@@ -135,6 +135,11 @@ public static class UnityUtility
     public static string GetNodePath(this Transform node)
     {
         List<string> nodenames = new List<string>();
+
+        if (node == null)
+        {
+            return string.Empty;
+        }
         nodenames.Add(node.name);
         Transform temp = node;
         while (null != temp.parent)
@@ -143,6 +148,7 @@ public static class UnityUtility
             temp = temp.parent;
         }
         nodenames.Reverse();
+
         return string.Join(".", nodenames.ToArray());
     }
 }
