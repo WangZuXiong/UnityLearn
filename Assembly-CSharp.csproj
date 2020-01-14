@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AssetBundleLearn\AssetBundleTest.cs" />
     <Compile Include="Assets\AssetBundleLearn\LoadAssetBundle.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
