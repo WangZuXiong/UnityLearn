@@ -13,6 +13,7 @@ using System.Linq;
 using UnityEngine.Profiling;
 using Unity.Profiling;
 using UnityEditor;
+using System.Text;
 
 //[ExecuteInEditMode]
 public class Lab : MonoBehaviour, IPointerEnterHandler
@@ -34,17 +35,29 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
-        IsPalindrome(121);
+        //IsPalindrome(121);
 
-        Debug.LogError("(123 / 10)=" + (123 / 10));
-        Debug.LogError("(123 % 10)=" + (123 % 10));
+        //Debug.LogError("(123 / 10)=" + (123 / 10));
+        //Debug.LogError("(123 % 10)=" + (123 % 10));
 
 
-        Debug.LogError("(12 / 10)=" + (12 / 10));
-        Debug.LogError("(12 % 10)=" + (12 % 10));
+        //Debug.LogError("(12 / 10)=" + (12 / 10));
+        //Debug.LogError("(12 % 10)=" + (12 % 10));
 
+
+        //Debug.LogError(IsValid("()"));
+
+
+        //Debug.LogError(CountAndSay(3));
+        //Debug.LogError(CountAndSay(4));
+        //Debug.LogError(CountAndSay(5));
+        //Debug.LogError(CountAndSay(6));
+
+
+        var temp = LongestCommonPrefix(new string[] {"aca", "cba" });
+
+        Debug.LogError(temp);
     }
-
     private void Start()
     {
         //A n = new A();
@@ -62,6 +75,164 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //        Debug.LogError("111");
         //    }
         //}
+    }
+
+    public string LongestCommonPrefix(string[] strs)
+    {
+        if (strs.Length <= 0 && strs == null)
+        {
+            return string.Empty;
+        }
+
+        Debug.LogError(strs.Length);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < strs[0].Length; i++)
+        {
+            var temp = strs[0][i];
+
+            var count = 0;
+            for (int j = 1; j < strs.Length; j++)
+            {
+                if (strs[j].Length > i && strs[j][i].Equals(temp))
+                {
+                    count++;
+                }
+            }
+            //全部一致
+            if (count == strs.Length - 1)
+            {
+                stringBuilder.Append(temp);
+            }
+        }
+        return stringBuilder.ToString();
+    }
+
+
+    public string CountAndSay(int n)
+    {
+        if (n == 1)
+        {
+            return "1";
+        }
+
+        var last = CountAndSay(n - 1);
+        StringBuilder stringBuilder = new StringBuilder();
+        var count = 0;
+        char temp = last[0];
+        for (int i = 0; i < last.Length; i++)
+        {
+            if (temp.Equals(last[i]))
+            {
+                count++;
+            }
+            else
+            {
+                stringBuilder.Append(count);
+                stringBuilder.Append(temp);
+
+                count = 1;
+                temp = last[i];
+            }
+
+            //如果没有下一个元素
+            if (i >= last.Length - 1)
+            {
+                stringBuilder.Append(count);
+                stringBuilder.Append(temp);
+            }
+        }
+        return stringBuilder.ToString();
+    }
+
+
+    public bool IsValid(string s)
+    {
+        if (s.Length % 2 != 0)
+        {
+            return false;
+        }
+
+        var charStack = new Stack<char>();
+        for (int idx = 0; idx < s.Length; idx++)
+        {
+            if (s[idx] == '(')
+            {
+                charStack.Push(s[idx]);
+            }
+            else if (s[idx] == '[')
+            {
+                charStack.Push(s[idx]);
+            }
+            else if (s[idx] == '{')
+            {
+                charStack.Push(s[idx]);
+            }
+            else if (s[idx] == ')')
+            {
+                if (charStack.Count < 1)
+                {
+                    return false;
+                }
+                if (charStack.Peek() == '(')
+                {
+                    charStack.Pop();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (s[idx] == ']')
+            {
+                if (charStack.Count < 1)
+                {
+                    return false;
+                }
+                if (charStack.Peek() == '[')
+                {
+                    charStack.Pop();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else if (s[idx] == '}')
+            {
+                if (charStack.Count < 1)
+                {
+                    return false;
+                }
+                if (charStack.Peek() == '{')
+                {
+                    charStack.Pop();
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            if (charStack.Count > s.Length - idx - 1)
+            {
+                return false;
+            }
+        }
+        if (charStack.Count > 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// 返回char列表的最后一个元素
+    /// </summary>
+    /// <param name="charList"></param>
+    /// <returns></returns>
+    private char GetLastChar(List<char> charList)
+    {
+
+        return charList[charList.Count - 1];
     }
 
 

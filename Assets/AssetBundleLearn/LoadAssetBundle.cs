@@ -147,6 +147,20 @@ public class LoadAssetBundle : MonoBehaviour
         AssetBundle ab = request.assetBundle;
     }
 
+
+    private void LoadFromStream(Stream stream)
+    {
+        AssetBundle assetBundle = AssetBundle.LoadFromStream(stream);
+    }
+
+
+    private IEnumerator LoadFromStreamAsync(Stream stream)
+    {
+        AssetBundleCreateRequest request = AssetBundle.LoadFromStreamAsync(stream);
+        yield return request;
+        AssetBundle assetBundle = request.assetBundle;
+    }
+
     #endregion
 
 
