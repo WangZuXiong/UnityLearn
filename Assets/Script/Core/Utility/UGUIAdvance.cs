@@ -46,9 +46,7 @@ public class UGUIAdvance : MonoBehaviour
         }
     }
 
-
-    //[MenuItem("Assets/FindNodePath &q", false, 21)]
-    [MenuItem("GameObject/FindNodePath &q", false, 1)]
+    [MenuItem("GameObject/Copy Path", false, 21)]
     static void OutputNodePath2()
     {
         Transform selectedTransform = Selection.activeTransform;
