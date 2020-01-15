@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 1702558913
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 19886b434f3cdd2692fd1a9f8ca78f0c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fe397485c3cec1106b49e9ff95e8f8a2
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleLearn/RawAssets/Material_A.mat
+Dependencies:
+- E:/wangzuxiong/UnityLearn/Assets/AssetBundleLearn/AssetBundles/texture_a
