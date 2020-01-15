@@ -39,10 +39,16 @@ public class AssetBundleTest : MonoBehaviour
         //});
 
 
-        LoadAssetBundle.Instance.LoadAssetBundleAsync<Material>(_name2, _path2, (t) =>
+        LoadAssetBundle.Instance.LoadAssetBundleAsync<Texture2D>(_name1, _path1, (tx) =>
         {
-            _cube.material = t;
+            LoadAssetBundle.Instance.LoadAssetBundleAsync<Material>(_name2, _path2, (t) =>
+            {
+                _cube.material = t;
+            });
         });
+
+
+  
     }
     private Texture2D _texture2D;
     private Sprite _sprite;

@@ -33,6 +33,8 @@ public class LoadAssetBundle : MonoBehaviour
     {
         AssetBundle manifestAB = AssetBundle.LoadFromFile("AssetBundles/AssetBundles");
         AssetBundleManifest manifest = manifestAB.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
+        //AssetBundleManifest.GetAllDependencies返回AssetBundle的所有层次依赖项，其中包括AssetBundle的直接子级、其子级的依赖项等。
+        //ssetBundleManifest.GetDirectDependations只返回AssetBundle的直接子级
         string[] strArr = manifest.GetAllDependencies("scene/cubewall.ab");
         foreach (var item in strArr)
         {

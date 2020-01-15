@@ -1,0 +1,18 @@
+ManifestFileVersion: 0
+CRC: 3778789926
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b3a502dcd8a35b357caf022f502ca059
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: ea5a42e0fd8ea905efa7aa926a3b8944
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+Assets:
+- Assets/AssetBundleLearn/RawAssets/Texture_A.png
+Dependencies: []

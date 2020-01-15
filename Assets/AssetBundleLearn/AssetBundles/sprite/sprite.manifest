@@ -1,0 +1,11 @@
+ManifestFileVersion: 0
+CRC: 2088626108
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: texture_a
+      Dependencies: {}
+    Info_1:
+      Name: material_a
+      Dependencies:
+        Dependency_0: texture_a
