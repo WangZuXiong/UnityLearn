@@ -17,23 +17,31 @@ public class AssetBundleTest : MonoBehaviour
     private Transform _root;
     [SerializeField]
     private Image _image;
+    [SerializeField]
+    private Renderer _cube;
 
     private void Start()
     {
         _path1 = Application.dataPath + "/" + _path1;
         _path2 = Application.dataPath + "/" + _path2;
 
-        LoadAssetBundle.Instance.LoadAssetBundleAsync<GameObject>(_name1, _path1, (t) =>
-        {
-            Instantiate(t, _root);
-        });
+        //LoadAssetBundle.Instance.LoadAssetBundleAsync<GameObject>(_name1, _path1, (t) =>
+        //{
+        //    Instantiate(t, _root);
+        //});
 
 
-        LoadAssetBundle.Instance.LoadAssetBundleAsync<Texture2D>(_name2, _path2, (t) =>
+        //LoadAssetBundle.Instance.LoadAssetBundleAsync<Texture2D>(_name2, _path2, (t) =>
+        //{
+        //    _texture2D = t;
+        //    _sprite = Sprite.Create(t, new Rect(Vector2.zero, new Vector2(t.width, t.height)), Vector2.zero);
+        //    _image.sprite = _sprite;
+        //});
+
+
+        LoadAssetBundle.Instance.LoadAssetBundleAsync<Material>(_name2, _path2, (t) =>
         {
-            _texture2D = t;
-            _sprite = Sprite.Create(t, new Rect(Vector2.zero, new Vector2(t.width, t.height)), Vector2.zero);
-            _image.sprite = _sprite;
+            _cube.material = t;
         });
     }
     private Texture2D _texture2D;

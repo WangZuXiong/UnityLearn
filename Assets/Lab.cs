@@ -83,8 +83,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         {
             return string.Empty;
         }
-
-        Debug.LogError(strs.Length);
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < strs[0].Length; i++)
         {
@@ -102,6 +100,10 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
             if (count == strs.Length - 1)
             {
                 stringBuilder.Append(temp);
+            }
+            else
+            {
+                return stringBuilder.ToString();
             }
         }
         return stringBuilder.ToString();

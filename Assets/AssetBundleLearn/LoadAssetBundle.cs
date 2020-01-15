@@ -127,6 +127,7 @@ public class LoadAssetBundle : MonoBehaviour
 
     /// <summary>
     /// 二进制文件
+    /// Unity的建议是——不要使用这个API，因为会导致资产在内存中冗余
     /// </summary>
     /// <param name="path"></param>
     private void LoadFromMemory(string path)
@@ -137,6 +138,7 @@ public class LoadAssetBundle : MonoBehaviour
 
     /// <summary>
     /// 二进制文件 异步加载
+    /// Unity的建议是——不要使用这个API，因为会导致资产在内存中冗余
     /// </summary>
     /// <returns></returns>
     private IEnumerator LoadFromMemoryAsync(string path)
@@ -195,6 +197,22 @@ public class LoadAssetBundle : MonoBehaviour
         UnityEngine.Object[] temp = obj1.allAssets;
         AssetBundleRequest obj2 = assetBundle.LoadAllAssetsAsync(typeof(GameObject));
         yield return obj2;
+    }
+
+    /// <summary>
+    /// 加载包含多个嵌入式对象的复合Asset时
+    /// 例如嵌入动画的FBX模型或嵌入多个精灵的sprite图集
+    /// </summary>
+    /// <param name="assetBundle"></param>
+    /// <param name="name"></param>
+    private void LoadAssetWithSubAsset(AssetBundle assetBundle, string name)
+    {
+        var ab = assetBundle.LoadAssetWithSubAssets(name);
+    }
+
+    private IEnumerator LoadAssetWithSubAssetsAsync(AssetBundle assetBundle, string name)
+    {
+        yield return assetBundle.LoadAssetWithSubAssetsAsync(name);
     }
 
     #endregion
