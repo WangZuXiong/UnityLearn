@@ -25,19 +25,39 @@ xlua.hotfix(CS.XLuaLoad,'Play',function(self)
 	--local n,m = LuaRetun()
 	--print("n:",n,"m",m)
 
-	print("play")
-	print(test1 == nil)
+	--print("play")
+	--print(test1 == nil)
 		
-	local temp = nil
-	print(temp)
+	--local temp = nil
+	--print(temp)
+
+
+
+	--xlua set字典 
+	--self._dict[1][1]="ssss"
+	--xlua get字典
+	
+	tempTable = {} 
+	tempTable[0] = "000"
+	tempTable[1] = "111"
+	tempTable[2] = "222"
+
+	self._dict[1] = tempTable
+
+	print("lua:"..self._dict[1][1])
+
 end)
 
 xlua.private_accessible(CS.XLuaLoad)
 util.hotfix_ex(CS.XLuaLoad,'Play1',function(self)
-	self:Play1()
-	print("do lua 2  Play1  Play1  Play1")
+	--self:Play1()
+	--print("do lua 2  Play1  Play1  Play1")
 end)
 
+
+xlua.hotfix(CS.XLuaLoad,'Awake',function(self)
+	print("lua:"..self._dict[1][1])
+end)
 
 --可以一次返回多个参数
 function LuaRetun( ... )

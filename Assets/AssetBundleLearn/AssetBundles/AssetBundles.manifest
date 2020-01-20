@@ -1,11 +1,15 @@
 ManifestFileVersion: 0
-CRC: 2556990729
+CRC: 1175103484
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: material_a
+      Name: image (1)
       Dependencies:
-        Dependency_0: texture_a
+        Dependency_0: atm (1)
     Info_1:
-      Name: texture_a
+      Name: image
+      Dependencies:
+        Dependency_0: atm (1)
+    Info_2:
+      Name: atm (1)
       Dependencies: {}
