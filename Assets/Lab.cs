@@ -54,7 +54,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //Debug.LogError(CountAndSay(6));
 
 
-        var temp = LongestCommonPrefix(new string[] {"aca", "cba" });
+        var temp = LongestCommonPrefix(new string[] { "aca", "cba" });
 
         Debug.LogError(temp);
     }
@@ -76,6 +76,47 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //    }
         //}
     }
+
+
+
+    public int RomanToInt(string s)
+    {
+        var _dict = new Dictionary<char, int>
+        {
+            { 'I', 1 },
+            { 'V', 5 },
+            { 'X', 10 },
+            { 'L', 50 },
+            { 'C', 100 },
+            { 'D', 500 },
+            { 'M', 1000 }
+        };
+
+        var chars = s.ToCharArray();
+
+        if (chars.Length == 1)
+        {
+            return _dict[chars[0]];
+        }
+
+        var result = 0;
+        for (int i = 0; i < chars.Length - 1; i++)
+        {
+            var next = _dict[chars[i + 1]];
+            var current = _dict[chars[i]];
+
+            if (current >= next)
+            {
+                result += current;
+            }
+            else
+            {
+                result += (next - current);
+            }
+        }
+        return result;
+    }
+
 
     public string LongestCommonPrefix(string[] strs)
     {
