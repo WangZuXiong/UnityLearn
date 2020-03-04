@@ -54,9 +54,9 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //Debug.LogError(CountAndSay(6));
 
 
-        var temp = LongestCommonPrefix(new string[] { "aca", "cba" });
+        //var temp = LongestCommonPrefix(new string[] { "aca", "cba" });
 
-        Debug.LogError(temp);
+        //Debug.LogError(temp);
     }
     private void Start()
     {
@@ -75,9 +75,24 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //        Debug.LogError("111");
         //    }
         //}
+        Test();
     }
 
+    private void Test()
+    {
+        var cube = transform.Find("Cube");
+        var sphere = transform.Find("Sphere");
 
+
+        Debug.Log(cube.position);
+        Debug.Log(sphere.position);
+
+        Debug.Log(cube.InverseTransformPoint(sphere.position));
+
+        Debug.Log(sphere.InverseTransformPoint(cube.position));
+
+
+    }
 
     public int RomanToInt(string s)
     {
@@ -897,6 +912,18 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Texture2D texture2D = Resources.Load<Texture2D>("");
         texture2D.GetPixel(1, 1);   //返回坐标处的像素颜色
                                     //可用于不规则的点击区域判断
+    }
+
+    private bool CheckInputPositionIsInRect(RectTransform rectTransform)
+    {
+        var x = rectTransform.rect.x + Screen.width * 0.5f;
+        var y = rectTransform.rect.y + Screen.height * 0.5f;
+
+        var width = rectTransform.rect.width;
+        var height = rectTransform.rect.height;
+
+        var temp = new Rect(x, y, width, height);
+        return temp.Contains(Input.mousePosition);
     }
 }
 public class Student
