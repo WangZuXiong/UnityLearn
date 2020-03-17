@@ -154,13 +154,45 @@ namespace memoryTest
             //foreach (var item in _spriteDict)
             //{
             //    Destroy(item.Value);
-            //}
-
-
-
-
-
-            
+            //}         
         }
+    }
+}
+
+
+
+public class Base : MonoBehaviour
+{
+    protected virtual void OnDestroy()
+    {
+        if (this != null)
+        {
+            var type = GetType();
+            var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            for (int i = 0; i < fields.Length; i++)
+            {
+                try
+                {
+                    fields[i].SetValue(this, null);
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+            }
+        }
+        Resources.UnloadUnusedAssets();
+    }
+}
+
+public class Test1 : Base
+{
+    private Image _img;
+    private Sprite _sprite;
+
+    protected override void OnDestroy()
+    {
+        _img.sprite = null;
+        base.OnDestroy();
     }
 }
