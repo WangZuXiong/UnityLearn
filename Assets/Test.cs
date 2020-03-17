@@ -12,6 +12,9 @@ namespace memoryTest
         private Dictionary<string, Texture> _spriteDict;
         [SerializeField]
         private RawImage _rawImg;
+
+        private GameObject _cube;
+
         private void Start()
         {
             _spriteDict = new Dictionary<string, Texture>
@@ -22,6 +25,8 @@ namespace memoryTest
 
             //被Image.sprite 或者 RawImage.texture引用后 引用计数增加了 在内存中所占空间大小不变化
             _rawImg.texture = _spriteDict["4"];
+
+            _cube = Instantiate(Resources.Load<GameObject>("Cube"));
         }
 
 
@@ -44,9 +49,9 @@ namespace memoryTest
                 //Resources.UnloadUnusedAssets();
 
                 //RawImage.texture的引用被断开了 _spriteDict对图片的引用被断开 >>>>>>在内存中所占空间被清理掉<<<<<<  引用断开顺序无关紧要
-                _spriteDict = null;
-                _rawImg.texture = null;
-                Resources.UnloadUnusedAssets();
+                //_spriteDict = null;
+                //_rawImg.texture = null;
+                //Resources.UnloadUnusedAssets();
 
 
                 //RawImage.texture的引用未被断开了 _spriteDict对图片的引用被断开 所以在内存中所占空间大小不变化
@@ -107,6 +112,15 @@ namespace memoryTest
                 //    }
                 //}
                 //Resources.UnloadUnusedAssets();
+
+                //Assets 中Cube(original)的内存占用被清理了  Scene中Cube(Clone)的内存未被清理
+                //_cube = null;
+                //Resources.UnloadUnusedAssets();
+
+                //Assets 中Cube(original)的内存占用被清理了  Scene中Cube(Clone)的内存占用被清理了
+                Destroy(_cube);
+                _cube = null;
+                Resources.UnloadUnusedAssets();
             }
         }
 
