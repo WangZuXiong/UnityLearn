@@ -1,25 +1,28 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class BaseWindowController : MonoBehaviour
+namespace uidemo
 {
-    protected virtual void Awake()
+    public class BaseWindowController : MonoBehaviour
     {
-        var btnClose = GetBtnClose();
-        if (btnClose != null)
-        {
-            btnClose.onClick.AddListener(OnBtnClose);
-        }
-    }
+        //protected virtual void Awake()
+        //{
+        //    var btnClose = GetBtnClose();
+        //    if (btnClose != null)
+        //    {
+        //        btnClose.onClick.AddListener(OnBtnClose);
+        //    }
+        //}
 
 
-    protected virtual void OnBtnClose()
-    {
-        PopupController.instance.ClosePopup();
-    }
+        //protected virtual void OnBtnClose()
+        //{
+        //    PopupController.instance.ClosePopup();
+        //}
 
-    protected Button GetBtnClose()
-    {
-        return transform.Find("BtnClose").GetComponent<Button>();
+        //protected Button GetBtnClose()
+        //{
+        //    return transform.Find("BtnClose").GetComponent<Button>();
+        //}
     }
 }

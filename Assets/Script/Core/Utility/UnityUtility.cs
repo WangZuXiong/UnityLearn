@@ -151,4 +151,64 @@ public static class UnityUtility
 
         return string.Join(".", nodenames.ToArray());
     }
+
+    public static bool Execute<T>(this EventHandler<T> self, object sender, T e) where T : EventArgs
+    {
+        if (self != null)
+        {
+            self(sender, e);
+            return true;
+        }
+        return false;
+    }
+
+    public static bool Execute(this Action self)
+    {
+        if (self != null)
+        {
+            self();
+            return true;
+        }
+        return false;
+    }
+
+    public static bool Execute<T>(this Action<T> self, T t)
+    {
+        if (self != null)
+        {
+            self(t);
+            return true;
+        }
+        return false;
+    }
+
+    public static bool Execute<T1, T2>(this Action<T1, T2> self, T1 t1, T2 t2)
+    {
+        if (self != null)
+        {
+            self(t1, t2);
+            return true;
+        }
+        return false;
+    }
+
+    public static bool Execute<T1, T2, T3>(this Action<T1, T2, T3> self, T1 t1, T2 t2, T3 t3)
+    {
+        if (self != null)
+        {
+            self(t1, t2, t3);
+            return true;
+        }
+        return false;
+    }
+
+    public static bool Execute<T1, T2, T3, T4>(this Action<T1, T2, T3, T4> self, T1 t1, T2 t2, T3 t3, T4 t4)
+    {
+        if (self != null)
+        {
+            self(t1, t2, t3, t4);
+            return true;
+        }
+        return false;
+    }
 }
