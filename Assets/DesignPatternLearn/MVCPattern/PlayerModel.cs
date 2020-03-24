@@ -20,9 +20,6 @@ public class PlayerModel
             PlayerData.Level = PlayerData.Exp / 500;
             PlayerData.Exp = 0;
         }
-        if (OnValueChange != null)
-        {
-            OnValueChange(this);
-        }
+        OnValueChange?.Invoke(this);
     }
 }
