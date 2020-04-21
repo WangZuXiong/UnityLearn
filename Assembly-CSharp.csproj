@@ -341,6 +341,7 @@
     <None Include="Assets\MeshBaker\Release Notes.txt" />
     <None Include="Assets\ShaderLearn\ShaderStore\TurnTransparentShader.shader" />
     <None Include="Assets\XLuaLearn\XLua\Resources\perf\profiler.lua.txt" />
+    <None Include="Assets\Resources\Effects\ActivityConfetti\confetti_bloom.shader" />
     <None Include="Assets\XLuaLearn\XLua\Resources\perf\memory.lua.txt" />
     <None Include="Assets\ShaderLearn\ShaderStore\UGUIMask.shader" />
     <None Include="Assets\MeshBaker\README.txt" />

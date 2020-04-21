@@ -35,55 +35,84 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
-        //IsPalindrome(121);
-
-        //Debug.LogError("(123 / 10)=" + (123 / 10));
-        //Debug.LogError("(123 % 10)=" + (123 % 10));
-
-
-        //Debug.LogError("(12 / 10)=" + (12 / 10));
-        //Debug.LogError("(12 % 10)=" + (12 % 10));
-
-
-        //Debug.LogError(IsValid("()"));
-
-
-        //Debug.LogError(CountAndSay(3));
-        //Debug.LogError(CountAndSay(4));
-        //Debug.LogError(CountAndSay(5));
-        //Debug.LogError(CountAndSay(6));
-
-
-        //var temp = LongestCommonPrefix(new string[] { "aca", "cba" });
-
-        //Debug.LogError(temp);
-
 
     }
 
     private void Start()
     {
-        //A n = new A();
-        //A m = new A();
-        //RenderMaterialTest();
-        //RenderShareMaterialTest();
-
-        //LongmudaSort();
-
-
-        //using (new ProfilerMarker("Test").Auto())
-        //{
-        //    for (int i = 0; i < 100; i++)
-        //    {
-        //        Debug.LogError("111");
-        //    }
-        //}
-        //Test();
-
-        ProfilerDemo();
+        CopyList();
     }
 
-    private void Test()
+
+    private void CopyList()
+    {
+        //======================值类型List======================
+        //var oldList = new List<int>();
+        //oldList.Add(5);
+
+        //浅拷贝
+        //var newList = oldList;
+        //newList[0] *= 5;
+        //Debug.Log(oldList[0]);//25
+
+        //深拷贝
+        //var newList = new List<int>(oldList);
+        //newList[0] *= 5;
+        //Debug.Log(oldList[0]);//5
+
+        //======================引用型List======================
+        var oldList = new List<CopyListClass>();
+        CopyListClass item = new CopyListClass();
+        item.X = 5;
+        oldList.Add(item);
+        //浅拷贝1
+        //var newList = new List<CopyListClass>(oldList);
+        //newList[0].X *= 5;
+        //Debug.Log(oldList[0].X);//25
+
+        //浅拷贝2
+        //var newArr = new CopyListClass[oldList.Count];
+        //oldList.CopyTo(newArr);
+        //newArr[0].X *= 5;
+        //Debug.Log(oldList[0].X);//25
+
+        //浅拷贝3
+        //var newList = new List<CopyListClass>();
+        //for (int i = 0; i < oldList.Count; i++)
+        //{
+        //    newList.Add(oldList[i]);
+        //}
+        //newList[0].X *= 5;
+        //Debug.Log(oldList[0].X);//25
+
+
+        //深拷贝
+        var newList = new List<CopyListClass>();
+        for (int i = 0; i < oldList.Count; i++)
+        {
+            newList.Add(oldList[i].Clone() as CopyListClass);
+        }
+        newList[0].X *= 5;
+        Debug.Log(oldList[0].X);//5
+    }
+
+
+    class CopyListClass : ICloneable
+    {
+        public int X;
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
+    }
+
+
+
+    /// <summary>
+    /// 坐标
+    /// </summary>
+    private void InverseTransformPointAPITest()
     {
         var cube = transform.Find("Cube");
         var sphere = transform.Find("Sphere");
@@ -93,10 +122,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.Log(sphere.position);
 
         Debug.Log(cube.InverseTransformPoint(sphere.position));
-
         Debug.Log(sphere.InverseTransformPoint(cube.position));
-
-
     }
 
     public int RomanToInt(string s)
