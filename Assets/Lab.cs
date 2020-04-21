@@ -86,24 +86,40 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //Debug.Log(oldList[0].X);//25
 
 
-        //深拷贝
+        //深拷贝1
+        //var newList = new List<CopyListClass>();
+        //for (int i = 0; i < oldList.Count; i++)
+        //{
+        //    newList.Add(oldList[i].Clone() as CopyListClass);
+        //}
+        //newList[0].X *= 5;
+        //Debug.Log(oldList[0].X);//5
+
+        //深拷贝2
         var newList = new List<CopyListClass>();
         for (int i = 0; i < oldList.Count; i++)
         {
-            newList.Add(oldList[i].Clone() as CopyListClass);
+            newList.Add(oldList[i].MyClone());
         }
         newList[0].X *= 5;
-        Debug.Log(oldList[0].X);//5
+        Debug.Log(oldList[0].X);
     }
 
 
-    class CopyListClass : ICloneable
+    class CopyListClass //: ICloneable
     {
         public int X;
 
-        public object Clone()
+        //public object Clone()
+        //{
+        //    return MemberwiseClone();
+        //}
+
+        public CopyListClass MyClone()
         {
-            return MemberwiseClone();
+            var temp = new CopyListClass();
+            temp.X = X;
+            return temp;
         }
     }
 
