@@ -15,6 +15,18 @@ using Unity.Profiling;
 using UnityEditor;
 using System.Text;
 
+class Animal
+{
+    public void call() { Debug.LogError("无声的叫唤"); }
+}
+
+class Dog : Animal
+{
+    // new的作用是隐藏父类的同名方法
+    public new void call() { Debug.LogError("叫声：汪～汪～汪～"); }
+    public void smell() { Debug.LogError("嗅觉相当不错！"); }
+}
+
 //[ExecuteInEditMode]
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
@@ -35,6 +47,10 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
+        Animal animal = new Dog();
+        Dog dog3 = animal as Dog;
+
+        dog3.call();
         //IsPalindrome(121);
 
         //Debug.LogError("(123 / 10)=" + (123 / 10));
@@ -58,7 +74,10 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
         //Debug.LogError(temp);
 
-
+        //using (new ProfilerMarker("Test_Awake").Auto())
+        //{
+        //    Debug.LogError(100);
+        //};
     }
 
     private void Start()
@@ -80,7 +99,12 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //}
         //Test();
 
-        ProfilerDemo();
+        //ProfilerDemo();
+
+        //using (new ProfilerMarker("Test_Start").Auto())
+        //{
+        //    Debug.LogError("Test_Start");
+        //};
     }
 
     private void Test()
@@ -409,6 +433,11 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
+
+        //using (new ProfilerMarker("Test_Update").Auto())
+        //{
+        //    Debug.LogError("Test_Update");
+        //};
         if (Input.GetMouseButtonDown(1))
         {
             Resources.UnloadUnusedAssets();
