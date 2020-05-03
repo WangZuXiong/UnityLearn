@@ -47,67 +47,141 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
-        Animal animal = new Dog();
-        Dog dog3 = animal as Dog;
+//[ExecuteInEditMode]
+public class Lab : MonoBehaviour, IPointerEnterHandler
+{
+    private WebSocket webSocket;
+    private Student _student;
+    public AnimationCurve curve;
+    private FileStream fileStream;
+    [SerializeField] private List<int> Vs;
 
-        dog3.call();
-        //IsPalindrome(121);
+    [SerializeField]
+    private Image _image;
+    [SerializeField]
+    private RawImage _rawImage;
+    [SerializeField]
+    public int X = 111;
+    [SerializeField]
+    public Lab RefLab;
 
-        //Debug.LogError("(123 / 10)=" + (123 / 10));
-        //Debug.LogError("(123 % 10)=" + (123 % 10));
+    private void Awake()
+    {
 
-
-        //Debug.LogError("(12 / 10)=" + (12 / 10));
-        //Debug.LogError("(12 % 10)=" + (12 % 10));
-
-
-        //Debug.LogError(IsValid("()"));
-
-
-        //Debug.LogError(CountAndSay(3));
-        //Debug.LogError(CountAndSay(4));
-        //Debug.LogError(CountAndSay(5));
-        //Debug.LogError(CountAndSay(6));
-
-
-        //var temp = LongestCommonPrefix(new string[] { "aca", "cba" });
-
-        //Debug.LogError(temp);
-
-        //using (new ProfilerMarker("Test_Awake").Auto())
-        //{
-        //    Debug.LogError(100);
-        //};
     }
 
     private void Start()
     {
-        //A n = new A();
-        //A m = new A();
-        //RenderMaterialTest();
-        //RenderShareMaterialTest();
-
-        //LongmudaSort();
+        CopyList();
+    }
 
 
-        //using (new ProfilerMarker("Test").Auto())
+    private void CopyList()
+    {
+        //======================值类型List======================
+        //var oldList = new List<int>();
+        //oldList.Add(5);
+
+        //浅拷贝
+        //var newList = oldList;
+        //newList[0] *= 5;
+        //Debug.Log(oldList[0]);//25
+
+        //深拷贝
+        //var newList = new List<int>(oldList);
+        //newList[0] *= 5;
+        //Debug.Log(oldList[0]);//5
+
+        //======================引用型List======================
+        var oldList = new List<CopyListClass>();
+        CopyListClass item = new CopyListClass();
+        item.X = 5;
+        oldList.Add(item);
+        //浅拷贝1
+        //var newList = new List<CopyListClass>(oldList);
+        //newList[0].X *= 5;
+        //Debug.Log(oldList[0].X);//25
+
+        //浅拷贝2
+        //var newArr = new CopyListClass[oldList.Count];
+        //oldList.CopyTo(newArr);
+        //newArr[0].X *= 5;
+        //Debug.Log(oldList[0].X);//25
+
+        //浅拷贝3
+        //var newList = new List<CopyListClass>();
+        //for (int i = 0; i < oldList.Count; i++)
         //{
-        //    for (int i = 0; i < 100; i++)
-        //    {
-        //        Debug.LogError("111");
-        //    }
+        //    newList.Add(oldList[i]);
         //}
-        //Test();
+        //newList[0].X *= 5;
+        //Debug.Log(oldList[0].X);//25
 
+
+<<<<<<< .mine
+        //using (new ProfilerMarker("Test_Awake").Auto())
+        //{
+        //    Debug.LogError(100);
+        //};
+
+
+
+
+
+=======
+        //深拷贝1
+        //var newList = new List<CopyListClass>();
+        //for (int i = 0; i < oldList.Count; i++)
+        //{
+        //    newList.Add(oldList[i].Clone() as CopyListClass);
+        //}
+        //newList[0].X *= 5;
+        //Debug.Log(oldList[0].X);//5
+
+>>>>>>> .theirs
+        //深拷贝2
+        var newList = new List<CopyListClass>();
+        for (int i = 0; i < oldList.Count; i++)
+        {
+            newList.Add(oldList[i].MyClone());
+        }
+        newList[0].X *= 5;
+        Debug.Log(oldList[0].X);
+    }
+
+
+    class CopyListClass //: ICloneable
+    {
+        public int X;
+
+        //public object Clone()
+        //{
+        //    return MemberwiseClone();
+        //}
+
+<<<<<<< .mine
         //ProfilerDemo();
 
         //using (new ProfilerMarker("Test_Start").Auto())
         //{
         //    Debug.LogError("Test_Start");
         //};
+=======
+        public CopyListClass MyClone()
+        {
+            var temp = new CopyListClass();
+            temp.X = X;
+            return temp;
+        }
+>>>>>>> .theirs
     }
 
-    private void Test()
+
+
+    /// <summary>
+    /// 坐标
+    /// </summary>
+    private void InverseTransformPointAPITest()
     {
         var cube = transform.Find("Cube");
         var sphere = transform.Find("Sphere");
@@ -117,10 +191,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.Log(sphere.position);
 
         Debug.Log(cube.InverseTransformPoint(sphere.position));
-
         Debug.Log(sphere.InverseTransformPoint(cube.position));
-
-
     }
 
     public int RomanToInt(string s)
