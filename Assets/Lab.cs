@@ -15,6 +15,38 @@ using Unity.Profiling;
 using UnityEditor;
 using System.Text;
 
+class Animal
+{
+    public void call() { Debug.LogError("无声的叫唤"); }
+}
+
+class Dog : Animal
+{
+    // new的作用是隐藏父类的同名方法
+    public new void call() { Debug.LogError("叫声：汪～汪～汪～"); }
+    public void smell() { Debug.LogError("嗅觉相当不错！"); }
+}
+
+//[ExecuteInEditMode]
+public class Lab : MonoBehaviour, IPointerEnterHandler
+{
+    private WebSocket webSocket;
+    private Student _student;
+    public AnimationCurve curve;
+    private FileStream fileStream;
+    [SerializeField] private List<int> Vs;
+
+    [SerializeField]
+    private Image _image;
+    [SerializeField]
+    private RawImage _rawImage;
+    [SerializeField]
+    public int X = 111;
+    [SerializeField]
+    public Lab RefLab;
+
+    private void Awake()
+    {
 //[ExecuteInEditMode]
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
@@ -86,6 +118,17 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //Debug.Log(oldList[0].X);//25
 
 
+<<<<<<< .mine
+        //using (new ProfilerMarker("Test_Awake").Auto())
+        //{
+        //    Debug.LogError(100);
+        //};
+
+
+
+
+
+=======
         //深拷贝1
         //var newList = new List<CopyListClass>();
         //for (int i = 0; i < oldList.Count; i++)
@@ -95,6 +138,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //newList[0].X *= 5;
         //Debug.Log(oldList[0].X);//5
 
+>>>>>>> .theirs
         //深拷贝2
         var newList = new List<CopyListClass>();
         for (int i = 0; i < oldList.Count; i++)
@@ -115,12 +159,21 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //    return MemberwiseClone();
         //}
 
+<<<<<<< .mine
+        //ProfilerDemo();
+
+        //using (new ProfilerMarker("Test_Start").Auto())
+        //{
+        //    Debug.LogError("Test_Start");
+        //};
+=======
         public CopyListClass MyClone()
         {
             var temp = new CopyListClass();
             temp.X = X;
             return temp;
         }
+>>>>>>> .theirs
     }
 
 
@@ -451,6 +504,11 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
+
+        //using (new ProfilerMarker("Test_Update").Auto())
+        //{
+        //    Debug.LogError("Test_Update");
+        //};
         if (Input.GetMouseButtonDown(1))
         {
             Resources.UnloadUnusedAssets();
