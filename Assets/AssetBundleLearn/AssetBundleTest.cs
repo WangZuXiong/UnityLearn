@@ -39,16 +39,29 @@ public class AssetBundleTest : MonoBehaviour
         //});
 
 
-        LoadAssetBundle.Instance.LoadAssetBundleAsync<Texture2D>(_name1, _path1, (tx) =>
+        //LoadAssetBundle.Instance.LoadAssetBundleAsync<Texture2D>(_name1, _path1, (tx) =>
+        //{
+        //    LoadAssetBundle.Instance.LoadAssetBundleAsync<Material>(_name2, _path2, (t) =>
+        //    {
+        //        _cube.material = t;
+        //    });
+        //});
+
+
+        var path = "http://192.168.1.243:8082/basketball/theme_activity/configure/Android/1";
+        LoadAssetBundle.Instance.LoadAssetBundleAsync(path, (t) =>
         {
-            LoadAssetBundle.Instance.LoadAssetBundleAsync<Material>(_name2, _path2, (t) =>
-            {
-                _cube.material = t;
-            });
+            var original = t.LoadAsset<GameObject>("1");
+            Instantiate(original, GameObject.Find("Canvas").transform);
+            //t.transform.SetParent(GameObject.Find("Canvas").transform);
+            t.Unload(false);
+
+
+            //转化为二进制
+
+            //写入本地
         });
 
-
-  
     }
     private Texture2D _texture2D;
     private Sprite _sprite;

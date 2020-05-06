@@ -19,9 +19,9 @@ public class LoadAssetBundle : MonoBehaviour
 
     public static LoadAssetBundle Instance { get; private set; }
 
-    public void LoadAssetBundleAsync<T>(string resName, string url, Action<T> callBack) where T : UnityEngine.Object
+    public void LoadAssetBundleAsync(string url, Action<AssetBundle> callBack)
     {
-        StartCoroutine(LoadAssetbundleByUnityWebRequest(resName, url, callBack));
+        StartCoroutine(LoadAssetbundleByUnityWebRequest1(url, callBack));
     }
 
 
@@ -55,20 +55,47 @@ public class LoadAssetBundle : MonoBehaviour
     /// <param name="resName"></param>
     /// <param name="url"></param>
     /// <returns></returns>
-    private IEnumerator LoadAssetbundleByUnityWebRequest<T>(string resName, string url, Action<T> callBack) where T : UnityEngine.Object
+    private IEnumerator LoadAssetbundleByUnityWebRequest(string url, Action<AssetBundle> callBack)
     {
         UnityWebRequest unityWebRequest = UnityWebRequestAssetBundle.GetAssetBundle(url);
         yield return unityWebRequest.SendWebRequest();
-        //AssetBundle assetBundle = DownloadHandlerAssetBundle.GetContent(unityWebRequest);
-        AssetBundle assetBundle = (unityWebRequest.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
+        AssetBundle assetBundle = DownloadHandlerAssetBundle.GetContent(unityWebRequest);
+        //AssetBundle assetBundle = (unityWebRequest.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
+
+
+        var bytes = unityWebRequest.downloadHandler.data;//NotSupportedException: Raw data access is not supported for asset bundles
+
 
         if (assetBundle == null)
         {
             throw new Exception("assetBundle = null");
         }
-        T temp = assetBundle.LoadAsset<T>(resName);
-        callBack?.Invoke(temp);
-        assetBundle.Unload(false);
+        callBack?.Invoke(assetBundle);
+    }
+
+
+    /// <summary>
+    /// 远程下载
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="resName"></param>
+    /// <param name="url"></param>
+    /// <returns></returns>
+    private IEnumerator LoadAssetbundleByUnityWebRequest1(string url, Action<AssetBundle> callBack)
+    {
+        UnityWebRequest unityWebRequest = UnityWebRequest.Get(url);
+        yield return unityWebRequest.SendWebRequest();
+        var bytes = unityWebRequest.downloadHandler.data;
+        //AssetBundle assetBundle = DownloadHandlerAssetBundle.GetContent(unityWebRequest); //InvalidCastException: Specified cast is not valid.
+        //AssetBundle assetBundle = (unityWebRequest.downloadHandler as DownloadHandlerAssetBundle).assetBundle;//NullReferenceException: Object reference not set to an instance of an object
+
+        AssetBundle assetBundle = AssetBundle.LoadFromMemory(bytes);//Unity的建议是——不要使用这个API。
+
+        if (assetBundle == null)
+        {
+            throw new Exception("assetBundle = null");
+        }
+        callBack?.Invoke(assetBundle);
     }
 
     /// <summary>
