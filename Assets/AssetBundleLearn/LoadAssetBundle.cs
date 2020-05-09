@@ -3,7 +3,8 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 using System;
-
+using System.Text;
+using System.Collections.Generic;
 
 public class LoadAssetBundle : MonoBehaviour
 {
@@ -48,6 +49,9 @@ public class LoadAssetBundle : MonoBehaviour
 
     #region 获取AssetBundle对象的常用API
 
+
+
+
     /// <summary>
     /// 远程下载
     /// </summary>
@@ -63,9 +67,14 @@ public class LoadAssetBundle : MonoBehaviour
         //AssetBundle assetBundle = (unityWebRequest.downloadHandler as DownloadHandlerAssetBundle).assetBundle;
 
 
-        var bytes = unityWebRequest.downloadHandler.data;//NotSupportedException: Raw data access is not supported for asset bundles
+        //var bytes = unityWebRequest.downloadHandler.data;//NotSupportedException: Raw data access is not supported for asset bundles
 
 
+
+        var buffer = DownloadHandlerBuffer.GetContent(unityWebRequest);
+        var bytes = System.Text.Encoding.UTF8.GetBytes(buffer);
+
+        Debug.LogError(bytes.Length);
         if (assetBundle == null)
         {
             throw new Exception("assetBundle = null");
@@ -89,6 +98,8 @@ public class LoadAssetBundle : MonoBehaviour
         //AssetBundle assetBundle = DownloadHandlerAssetBundle.GetContent(unityWebRequest); //InvalidCastException: Specified cast is not valid.
         //AssetBundle assetBundle = (unityWebRequest.downloadHandler as DownloadHandlerAssetBundle).assetBundle;//NullReferenceException: Object reference not set to an instance of an object
 
+
+
         AssetBundle assetBundle = AssetBundle.LoadFromMemory(bytes);//Unity的建议是——不要使用这个API。
 
         if (assetBundle == null)
@@ -96,6 +107,46 @@ public class LoadAssetBundle : MonoBehaviour
             throw new Exception("assetBundle = null");
         }
         callBack?.Invoke(assetBundle);
+    }
+
+    /// <summary>
+    /// 远程下载
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="resName"></param>
+    /// <param name="url"></param>
+    /// <returns></returns>
+    private IEnumerator LoadAssetbundleByUnityWebRequest2(string url, Action<AssetBundle> callBack)
+    {
+        UnityWebRequest unityWebRequest = UnityWebRequest.Get(url);
+        yield return unityWebRequest.SendWebRequest();
+
+        //get bytes
+        var bytes = unityWebRequest.downloadHandler.data;
+
+        //bytes to stream
+        FileStream stream = new FileStream(Application.streamingAssetsPath + "/11", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        stream.Write(bytes, 0, bytes.Length);
+
+        //Load Assetbundle From Stream
+        AssetBundle assetBundle = AssetBundle.LoadFromStream(stream);
+
+        stream.Dispose();
+
+        if (assetBundle == null)
+        {
+            throw new Exception("assetBundle = null");
+        }
+        callBack?.Invoke(assetBundle);
+    }
+
+    private IEnumerator LoadAssetbundleByUnityWebRequest3(string url, Action<AssetBundle> callBack)
+    {
+        Caching.currentCacheForWriting = Caching.AddCache(@"E:\wangzuxiong\UnityLearn\Assets\AssetBundleLearn");
+        UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(url, 2, 0);//这里随便给了一个版本号：2
+        yield return request.SendWebRequest();
+        AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+        callBack?.Invoke(bundle);
     }
 
     /// <summary>

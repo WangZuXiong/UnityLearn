@@ -58,7 +58,6 @@ public class AssetBundleTest : MonoBehaviour
 
 
             //转化为二进制
-
             //写入本地
         });
 

@@ -14,6 +14,8 @@ using UnityEngine.Profiling;
 using Unity.Profiling;
 using UnityEditor;
 using System.Text;
+using UnityEngine.Networking;
+using System.Collections;
 
 class Animal
 {
@@ -27,6 +29,7 @@ class Dog : Animal
     public void smell() { Debug.LogError("嗅觉相当不错！"); }
 }
 
+
 //[ExecuteInEditMode]
 public class Lab : MonoBehaviour, IPointerEnterHandler
 {
@@ -47,32 +50,35 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Awake()
     {
-//[ExecuteInEditMode]
-public class Lab : MonoBehaviour, IPointerEnterHandler
-{
-    private WebSocket webSocket;
-    private Student _student;
-    public AnimationCurve curve;
-    private FileStream fileStream;
-    [SerializeField] private List<int> Vs;
+        List<int> vs = new List<int>();
+        vs.Add(1);
 
-    [SerializeField]
-    private Image _image;
-    [SerializeField]
-    private RawImage _rawImage;
-    [SerializeField]
-    public int X = 111;
-    [SerializeField]
-    public Lab RefLab;
 
-    private void Awake()
+        Debug.LogError(vs[0]);
+
+
+        //var newVs = vs;
+        //newVs[0] = 2;
+        //Debug.LogError(vs[0]);
+        TestList(vs);
+
+
+        Debug.LogError(vs[0]);
+    }
+
+
+    private void TestList(List<int> vs)
     {
+        var newVs = vs;
+        newVs[0] = 2;
+        Debug.LogError(vs[0]);
 
     }
 
+
     private void Start()
     {
-        CopyList();
+        //RenderMaterialTest();
     }
 
 
@@ -118,7 +124,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //Debug.Log(oldList[0].X);//25
 
 
-<<<<<<< .mine
+
         //using (new ProfilerMarker("Test_Awake").Auto())
         //{
         //    Debug.LogError(100);
@@ -128,7 +134,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
 
 
-=======
+
         //深拷贝1
         //var newList = new List<CopyListClass>();
         //for (int i = 0; i < oldList.Count; i++)
@@ -138,7 +144,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //newList[0].X *= 5;
         //Debug.Log(oldList[0].X);//5
 
->>>>>>> .theirs
+
         //深拷贝2
         var newList = new List<CopyListClass>();
         for (int i = 0; i < oldList.Count; i++)
@@ -159,21 +165,21 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         //    return MemberwiseClone();
         //}
 
-<<<<<<< .mine
+
         //ProfilerDemo();
 
         //using (new ProfilerMarker("Test_Start").Auto())
         //{
         //    Debug.LogError("Test_Start");
         //};
-=======
+
         public CopyListClass MyClone()
         {
             var temp = new CopyListClass();
             temp.X = X;
             return temp;
         }
->>>>>>> .theirs
+
     }
 
 
