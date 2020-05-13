@@ -67,6 +67,10 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     }
 
 
+    public GameObject Cube;
+    public Texture2D texture2D;
+
+
     private void TestList(List<int> vs)
     {
         var newVs = vs;

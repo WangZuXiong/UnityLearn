@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class DemoWindowController : BaseWindowController
 {
-    // Start is called before the first frame update
+    protected override void Awake()
+    {
+        base.Awake();
+        ClearBeforeOpenWindow = false;
+    }
     void Start()
     {
         Debug.LogError("demo window");

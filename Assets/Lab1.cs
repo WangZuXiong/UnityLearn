@@ -1,36 +1,60 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
-public class Lab1
+public partial class Lab1 : MonoBehaviour
 {
+    private GameObject _cubeOriginal;
+    public GameObject _cube;
 
-    static Lab1()
+
+    private void Awake()
     {
-        Debug.LogError("构造 Lab1");
+        _cubeOriginal = Resources.Load<GameObject>("Cube");
+        DestroyImmediate(_cubeOriginal, true);
     }
+    Texture2D texture;
+    Texture2D texture2;
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            //_cube = Instantiate(_cubeOriginal, transform);
 
-    //public static Lab1 Instance { get; private set; }
 
-    //public int Num = 1;
+            //var lab = GameObject.FindObjectOfType<Lab>();
+            ////lab.Cube = _cube;
 
-    //private void Awake()
-    //{
-    //    GetPlayer();
-    //}
 
-    //private static void GetPlayer()
-    //{
-    //    Debug.LogError("1");
-    //}
+            texture = new Texture2D(1024, 1024);
+            texture.name = "by new";
 
-    //public void Func()
-    //{
-    //    Debug.LogError("Func");
-    //}
 
-    //public void Func1(string value)
-    //{
-    //    Debug.LogError("Func1:" + value);
-    //}
+            //texture2 = Resources.Load<Texture2D>("ATM");
+          
+
+            var bytes= File.ReadAllBytes(@"E:\wangzuxiong\UnityLearn\Assets\Resources\ATM.jpg");
+
+            texture2 = new Texture2D(0, 0);
+            texture2.name = "by resources";
+            texture2.LoadImage(bytes);
+            //lab.texture2D = texture;
+        }
+
+        if (Input.GetMouseButtonDown(2))
+        {
+            //var lab = GameObject.FindObjectOfType<Lab>();
+            //lab.texture2D = null;
+            //Destroy(gameObject);
+            ////texture = null;
+            //Destroy(texture);
+            texture = null;
+            texture2 = null;
+            Resources.UnloadAsset(texture);
+            Resources.UnloadAsset(texture2);
+
+            ////Resources.UnloadUnusedAssets();
+        }
+    }
 }

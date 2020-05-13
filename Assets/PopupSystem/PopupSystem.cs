@@ -42,6 +42,18 @@ public class PopupSystem : MonoBehaviour
         _count++;
         _mask.SetSiblingIndex(_count - 1);
         _mask.gameObject.SetActive(true);
+
+        var controller = (BaseWindowController)result.GetComponent<T>();
+        if (controller.ClearBeforeOpenWindow)
+        {
+            //some code
+        }
+
+        if (controller.CloseOnClickMask)
+        {
+            //some code
+        }
+
         return result;
     }
 
