@@ -6,9 +6,11 @@ public class DemoWindowController : BaseWindowController
 {
     protected override void Awake()
     {
+        _clearBeforeOpenWindow = false;
         base.Awake();
-        ClearBeforeOpenWindow = false;
     }
+
+
     void Start()
     {
         Debug.LogError("demo window");

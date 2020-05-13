@@ -43,16 +43,13 @@ public class PopupSystem : MonoBehaviour
         _mask.SetSiblingIndex(_count - 1);
         _mask.gameObject.SetActive(true);
 
-        var controller = (BaseWindowController)result.GetComponent<T>();
-        if (controller.ClearBeforeOpenWindow)
-        {
-            //some code
-        }
+        //一个canvas 一个window
+        //一个canvas 一个window
+        //一个canvas 一个window
+        //......
 
-        if (controller.CloseOnClickMask)
-        {
-            //some code
-        }
+        var controller = (BaseWindowController)result.GetComponent<T>();
+        controller.SetParent(transform);
 
         return result;
     }
