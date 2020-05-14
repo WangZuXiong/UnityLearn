@@ -34,15 +34,23 @@ public class AssetsService : MonoBehaviour
         DownloadHandlerTexture handler = new DownloadHandlerTexture(true);
         request.downloadHandler = handler;
         yield return request.SendWebRequest();
+
         if (string.IsNullOrEmpty(request.error))
         {
             Texture2D texture = handler.texture;
+            texture.name = "texture from net";
             Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, 1f);
+            texture = null;
             action?.Invoke(sprite);
+            
             if (cache)
             {
                 //写入本地
             }
+        }
+        else
+        {
+            Debug.LogError("DownTexture Error");
         }
         request.Dispose();
         handler.Dispose();

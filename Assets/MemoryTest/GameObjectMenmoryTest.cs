@@ -12,6 +12,9 @@ public class GameObjectMenmoryTest : MonoBehaviour
     {
         _cube = Instantiate(Resources.Load<GameObject>("Cube"));
         _cube.name = "Test Cube";
+
+
+        //问题resources original 的内存在profiler中能否看到？实例化出来之后的gameobject destroy之后的是否会从内存中unload？
     }
 
     // Update is called once per frame
