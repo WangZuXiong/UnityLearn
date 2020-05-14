@@ -5,42 +5,30 @@ using UnityEngine.UI;
 public class BaseWindowController : MonoBehaviour
 {
     [Tooltip("勾选后，将使用遮罩背景")]
-    [SerializeField]
-    protected bool _useMask;
+    public bool UseMask = true;
     [Tooltip("勾选后，点击背景遮罩也能关闭弹窗")]
-    [SerializeField]
-    protected bool _closeOnClickMask;
+    public bool CloseOnClickMask = false;
     [Tooltip("勾选后，打开改弹窗的前会关闭所有弹窗")]
-    [SerializeField]
-    protected bool _clearBeforeOpenWindow;
+    public bool ClearBeforeOpenWindow = false;
+    [Tooltip("勾选后，使用静态背景")]
+    public bool UseStaticBg = false;
+    [Tooltip("遮罩背景的颜色")]
+    public Color MaskColor = Color.white;
 
-    protected Transform Parent { get; private set; }
+    protected Button _btnClose;
 
     protected virtual void Awake()
     {
-
-        if (_clearBeforeOpenWindow)
+        _btnClose = GetBtnClose();
+        if (_btnClose != null)
         {
-            //some code
-        }
-
-        if (_clearBeforeOpenWindow)
-        {
-            //some code
-        }
-
-
-
-        var btnClose = GetBtnClose();
-        if (btnClose != null)
-        {
-            btnClose.onClick.AddListener(OnBtnClose);
+            _btnClose.onClick.AddListener(OnBtnClose);
         }
     }
 
-    public void SetParent(Transform parent)
+    private void Start()
     {
-        Parent = parent;
+
     }
 
     protected virtual void OnEnable()
@@ -51,11 +39,13 @@ public class BaseWindowController : MonoBehaviour
     protected virtual void OnBtnClose()
     {
         //tween
-        PopupSystem.Instance.CloseCurrentPop();
+        PopupSystem.Instance.CloseCurrentPopup();
+        Resources.UnloadUnusedAssets();
     }
 
     private Button GetBtnClose()
     {
         return transform.Find("BtnClose").GetComponent<Button>();
     }
+
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3240583839105456472}
   - component: {fileID: 3240583839105456478}
   - component: {fileID: 3240583839105456479}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 3240583839940487038}
   - component: {fileID: 3240583839940487039}
   - component: {fileID: 3240583839940487032}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: BtnClose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,9 +208,9 @@ GameObject:
   - component: {fileID: 3240583840868724424}
   - component: {fileID: 3240583840868724430}
   - component: {fileID: 3240583840868724431}
-  - component: {fileID: 8706321260719755484}
-  m_Layer: 5
-  m_Name: Window
+  - component: {fileID: 4329123854937881390}
+  m_Layer: 8
+  m_Name: DemoWindow_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &8706321260719755484
+--- !u!114 &4329123854937881390
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -282,9 +282,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3240583840868724425}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41412b81c74341342aa33b9b98871059, type: 3}
+  m_Script: {fileID: 11500000, guid: 440718f754842a849b06cba3f93e0df2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useMask: 0
-  _closeOnClickMask: 0
-  _clearBeforeOpenWindow: 0
+  UseMask: 1
+  CloseOnClickMask: 0
+  ClearBeforeOpenWindow: 1
+  UseStaticBg: 0
+  MaskColor: {r: 1, g: 0.73333335, b: 0.06666667, a: 0.47058824}

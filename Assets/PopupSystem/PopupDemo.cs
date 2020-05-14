@@ -13,13 +13,17 @@ public class PopupDemo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            PopupSystem.Instance.Pop<DemoWindowController>("Window");
+            PopupSystem.Instance.GetPopup<DemoWindowController>("DemoWindow");
         }
-        else if (Input.GetMouseButtonDown(2))
+        else if (Input.GetKeyDown(KeyCode.W))
         {
-            PopupSystem.Instance.CloseAllPop();
+            PopupSystem.Instance.GetPopup<DemoWindowController1>("DemoWindow_1");
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+            PopupSystem.Instance.CloseAllPopup();
         }
     }
 }

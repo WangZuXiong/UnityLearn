@@ -8,7 +8,10 @@ public static class GameObjectUtil
     /// <param name="gameObject"></param>
     public static void Hide(this GameObject gameObject)
     {
-        gameObject.SetActive(false);
+        if (gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
+        }
     }
     
     /// <summary>
@@ -17,6 +20,9 @@ public static class GameObjectUtil
     /// <param name="gameObject"></param>
     public static void Show(this GameObject gameObject)
     {
-        gameObject.SetActive(true);
+        if (!gameObject.activeSelf)
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

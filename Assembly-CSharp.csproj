@@ -116,7 +116,6 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\CinemachineLearn\Move.cs" />
-    <Compile Include="Assets\DemoWindowController.cs" />
     <Compile Include="Assets\DesignPatternLearn\FactoryPattern\Demo\BaseView.cs" />
     <Compile Include="Assets\DesignPatternLearn\FactoryPattern\Demo\Resource\UIFactory.cs" />
     <Compile Include="Assets\DesignPatternLearn\FactoryPattern\Demo\UIFrame\SetController.cs" />
@@ -191,9 +190,11 @@
     <Compile Include="Assets\MessageFrameLearn\UIBehaviour.cs" />
     <Compile Include="Assets\NetLearn\Socket\Server.cs" />
     <Compile Include="Assets\NetLearn\WebSocket\WebSocketDemo.cs" />
-    <Compile Include="Assets\PopupSystem\BaseWindowController.cs" />
+    <Compile Include="Assets\PopupSystem\Core\BaseWindowController.cs" />
+    <Compile Include="Assets\PopupSystem\Core\PopupSystem.cs" />
+    <Compile Include="Assets\PopupSystem\DemoWindowController.cs" />
+    <Compile Include="Assets\PopupSystem\DemoWindowController1.cs" />
     <Compile Include="Assets\PopupSystem\PopupDemo.cs" />
-    <Compile Include="Assets\PopupSystem\PopupSystem.cs" />
     <Compile Include="Assets\RedPointSystem\BootStart.cs" />
     <Compile Include="Assets\RedPointSystem\Core\RedPointConst.cs" />
     <Compile Include="Assets\RedPointSystem\Core\RedPointNode.cs" />
