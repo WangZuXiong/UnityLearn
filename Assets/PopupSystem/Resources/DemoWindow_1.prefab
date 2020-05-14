@@ -288,5 +288,5 @@ MonoBehaviour:
   UseMask: 1
   CloseOnClickMask: 0
   ClearBeforeOpenWindow: 1
-  UseStaticBg: 0
+  UseStaticBg: 1
   MaskColor: {r: 1, g: 0.73333335, b: 0.06666667, a: 0.47058824}

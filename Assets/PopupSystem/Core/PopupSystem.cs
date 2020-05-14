@@ -10,9 +10,12 @@ public class PopupSystem : MonoBehaviour
     private int _index = 0;
     [SerializeField]
     private int _popupMaxCount = 3;
-    private Dictionary<int, Transform> _parentDict = new Dictionary<int, Transform>();
 
+    private Dictionary<int, (GameObject, Image, Button)> _parentDict = new Dictionary<int, (GameObject, Image, Button)>();
     private Dictionary<int, BaseWindowController> _popupDict = new Dictionary<int, BaseWindowController>();
+    private RawImage _rawImg;
+    private RenderTexture _renderTexture;
+    private Camera _camera;
 
     private PopupSystem() { }
 
@@ -40,14 +43,20 @@ public class PopupSystem : MonoBehaviour
 
         for (int i = 0; i < _popupMaxCount; i++)
         {
-            _parentDict.Add(i, transform.Find("Level_" + i.ToString()));
+            var parent = transform.Find("Level_" + i.ToString());
+            var img = parent.GetComponent<Image>();
+            var btn = parent.GetComponent<Button>();
+            _parentDict.Add(i, (parent.gameObject, img, btn));
         }
+        _rawImg = transform.Find("RawImage").GetComponent<RawImage>();
+        _camera = Camera.main;
     }
 
     private void OnDestroy()
     {
         _parentDict.Clear();
         _popupDict.Clear();
+        ClearStaticBg();
     }
 
     public T GetPopup<T>(string path) where T : BaseWindowController
@@ -68,18 +77,24 @@ public class PopupSystem : MonoBehaviour
         {
             CloseAllPopup();
         }
-        var parent = _parentDict[_index];
-        parent.gameObject.Show();
-        parent.GetComponent<Image>().color = basePopup.UseMask ? basePopup.MaskColor : Color.clear;
-        parent.GetComponent<Button>().onClick.RemoveAllListeners();
+
+        _parentDict[_index].Item1.Show();
+        _parentDict[_index].Item2.color = basePopup.UseMask ? basePopup.MaskColor : Color.clear;
+        _parentDict[_index].Item3.onClick.RemoveAllListeners();
         if (basePopup.CloseOnClickMask)
         {
-            parent.GetComponent<Button>().onClick.AddListener(() =>
+            _parentDict[_index].Item3.onClick.AddListener(() =>
             {
                 CloseCurrentPopup();
             });
         }
-        result.transform.SetParent(parent);
+
+        if (basePopup.UseStaticBg && _renderTexture == null)
+        {
+            CreateStaticBg();
+        }
+
+        result.transform.SetParent(_parentDict[_index].Item1.transform);
         _popupDict.Add(_index++, result);
         return result;
     }
@@ -88,17 +103,65 @@ public class PopupSystem : MonoBehaviour
     {
         if (ToppingPopup != null)
         {
+            if (ToppingPopup.UseStaticBg)
+            {
+                ClearStaticBg();
+            }
             Destroy(ToppingPopup.gameObject);
             var temp = _index - 1;
-            _parentDict[temp].gameObject.Hide();
+            _parentDict[temp].Item1.Hide();
             _popupDict.Remove(temp);
             _index--;
             Resources.UnloadUnusedAssets();
         }
     }
 
+    private void CreateStaticBg()
+    {
+        //_renderTexture = RenderTexture.GetTemporary(Screen.width, Screen.height, 0);
+        //_renderTexture.filterMode = FilterMode.Bilinear;
+        //RenderTexture.active = _renderTexture;
+        //_camera.targetTexture = _renderTexture;
+        //_camera.Render();
+        //_rawImg.texture = _renderTexture;
+        //_rawImg.gameObject.Show();
+        //RenderTexture.active = null;
+        //_camera.targetTexture = null;
+
+
+
+        _renderTexture = new RenderTexture(Screen.width, Screen.height, 16);
+        _renderTexture.filterMode = FilterMode.Bilinear;
+        RenderTexture.active = _renderTexture;
+        _camera.targetTexture = _renderTexture;
+        _camera.Render();
+        _rawImg.texture = _renderTexture;
+        _rawImg.gameObject.Show();
+        RenderTexture.active = null;
+        _camera.targetTexture = null;
+    }
+
+    private void ClearStaticBg()
+    {
+        //RenderTexture.GetTemporary这个api要和RenderTexture.ReleaseTemporary 配套使用否则会内存泄漏      
+        //RenderTexture.ReleaseTemporary(_renderTexture);
+
+        if (_renderTexture != null)
+        {
+            _renderTexture.Release();
+            _renderTexture = null;
+        }
+        _renderTexture = null;
+        _rawImg.texture = null;
+        _rawImg.gameObject.Hide();
+    }
+
     public void CloseAllPopup()
     {
+        if (_renderTexture != null)
+        {
+            ClearStaticBg();
+        }
         foreach (var item in _popupDict)
         {
             Destroy(item.Value.gameObject);
@@ -106,7 +169,7 @@ public class PopupSystem : MonoBehaviour
         _popupDict.Clear();
         foreach (var item in _parentDict)
         {
-            item.Value.gameObject.Hide();
+            item.Value.Item1.Hide();
         }
         _index = 0;
         Resources.UnloadUnusedAssets();

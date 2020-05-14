@@ -82,7 +82,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
-        //RenderMaterialTest();
+        RenderTextureLab();
     }
 
 
@@ -883,7 +883,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     /// </summary>
     private void RenderTextureLab()
     {
-        RenderTexture renderTexture = RenderTexture.GetTemporary(100, 100, 0);
+        RenderTexture renderTexture = RenderTexture.GetTemporary(Screen.width, Screen.height, 0);
         renderTexture.filterMode = FilterMode.Bilinear;
         RenderTexture.active = renderTexture;
         Camera camera = Camera.main;
