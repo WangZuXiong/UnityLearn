@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.4}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UseMask: 1
-  CloseOnClickMask: 0
+  CloseOnClickMask: 1
   ClearBeforeOpenWindow: 1
   UseStaticBg: 1
-  MaskColor: {r: 1, g: 0.73333335, b: 0.06666667, a: 0.47058824}
+  MaskColor: {r: 0, g: 0.47058824, b: 0.827451, a: 0.44705883}

@@ -10,14 +10,28 @@ public partial class Lab1 : MonoBehaviour
 
     private void Awake()
     {
-        _original = Resources.Load<GameObject>("TestImage");
-        GameObject img = Instantiate(_original, transform);
+        //_original = Resources.Load<GameObject>("TestImage");
+        //GameObject img = Instantiate(_original, transform);
+        Debug.LogError("Awake" + gameObject.name);
+
+    }
+
+    private void OnEnable()
+    {
+        Debug.LogError("OnEnable" + gameObject.name);
+
+    }
+
+    private void Start()
+    {
+        Debug.LogError("Start" + gameObject.name);
+
     }
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
         if (Input.GetMouseButtonDown(2))
@@ -28,6 +42,8 @@ public partial class Lab1 : MonoBehaviour
 
     private void OnDestroy()
     {
-        Resources.UnloadUnusedAssets();
+        //Resources.UnloadUnusedAssets();
+
+        Debug.LogError("OnDestroy" + gameObject.name);
     }
 }

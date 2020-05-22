@@ -16,6 +16,7 @@ using UnityEditor;
 using System.Text;
 using UnityEngine.Networking;
 using System.Collections;
+using System.Threading;
 
 class Animal
 {
@@ -47,44 +48,20 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     public int X = 111;
     [SerializeField]
     public Lab RefLab;
-
-    private void Awake()
-    {
-        List<int> vs = new List<int>();
-        vs.Add(1);
-
-
-        Debug.LogError(vs[0]);
-
-
-        //var newVs = vs;
-        //newVs[0] = 2;
-        //Debug.LogError(vs[0]);
-        TestList(vs);
-
-
-        Debug.LogError(vs[0]);
-    }
-
-
     public GameObject Cube;
     public Texture2D texture2D;
 
 
-    private void TestList(List<int> vs)
+    public Transform Canvas;
+    private void Awake()
     {
-        var newVs = vs;
-        newVs[0] = 2;
-        Debug.LogError(vs[0]);
-
+       
     }
-
 
     private void Start()
     {
-        RenderTextureLab();
-    }
 
+    }
 
     private void CopyList()
     {
@@ -511,16 +488,15 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
             Debug.Log("clear");
         }
     }
+    [SerializeField]
+    private GameObject _temp;
 
     private void Update()
     {
-
-        //using (new ProfilerMarker("Test_Update").Auto())
-        //{
-        //    Debug.LogError("Test_Update");
-        //};
         if (Input.GetMouseButtonDown(1))
         {
+            //Destroy(GameObjectMenmoryTest.Instance.gameObject);
+            //GameObjectMenmoryTest.Instance = null;
             Resources.UnloadUnusedAssets();
         }
     }
@@ -865,7 +841,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 
     public async Task SetAsync()

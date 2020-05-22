@@ -61,7 +61,7 @@ public class PopupSystem : MonoBehaviour
 
     public T GetPopup<T>(string path) where T : BaseWindowController
     {
-        if (_index - 1 > _popupMaxCount)
+        if (_index >= _popupMaxCount)
         {
             throw new Exception("弹窗过多，建议从设计上减负");
         }
@@ -130,7 +130,7 @@ public class PopupSystem : MonoBehaviour
 
 
 
-        _renderTexture = new RenderTexture(Screen.width, Screen.height, 16);
+        _renderTexture = new RenderTexture(Screen.width / 2, Screen.height / 2, 16);
         _renderTexture.filterMode = FilterMode.Bilinear;
         RenderTexture.active = _renderTexture;
         _camera.targetTexture = _renderTexture;
@@ -158,10 +158,7 @@ public class PopupSystem : MonoBehaviour
 
     public void CloseAllPopup()
     {
-        if (_renderTexture != null)
-        {
-            ClearStaticBg();
-        }
+        ClearStaticBg();
         foreach (var item in _popupDict)
         {
             Destroy(item.Value.gameObject);

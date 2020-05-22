@@ -16,10 +16,10 @@ public class TextureMemoryTest : MonoBehaviour
 
     private void Start()
     {
-        _spriteDict = new Dictionary<string, Texture>
-        {
-            { "4", Resources.Load<Texture>("ATM") }
-        };
+        //_spriteDict = new Dictionary<string, Texture>
+        //{
+        //    { "4", Resources.Load<Texture>("ATM") }
+        //};
         //就算没有被Image.sprite 或者 RawImage.texture引用也会被load到内存中
 
         //被Image.sprite 或者 RawImage.texture引用后 引用计数增加了 在内存中所占空间大小不变化
@@ -28,13 +28,13 @@ public class TextureMemoryTest : MonoBehaviour
         //问题：从服务器上面下载下来的texture 赋值给gameobject之后,Destroy Gameobject 之前是都要对其中引用置空？是否置空之后texture才能从内存中Unload
         //- 需要对Image.sprite或者RawImage.texture置空，置空之后下载下来的texture没有引用之后调用Resources.UnloadUnusedAssets才能被unload。不是对Image或者RawImage置空
 
-        //_img = transform.Find("Image").GetComponent<Image>();
-        //var path = "http://192.168.1.243:8082/basketball/my_team_logo/dh6.png";
+        _img = transform.Find("Image").GetComponent<Image>();
+        var path = "http://192.168.1.243:8082/basketball/my_team_logo/dh6.png";
 
-        //StartCoroutine(AssetsService.Instance.DownTexture(path, false, (t) =>
-        //{
-        //    _img.sprite = t;
-        //}));
+        StartCoroutine(AssetsService.Instance.DownTexture(path, false, (t) =>
+        {
+            _img.sprite = t;
+        }));
 
 
         //问题：场景中原先有一个Image,其引用这一张图片，如果Destroy Image所在的Gameobject，那么这张图片是否能从内存中unload
@@ -46,7 +46,7 @@ public class TextureMemoryTest : MonoBehaviour
 
 
 
-        GameObject img = Instantiate(Resources.Load<GameObject>("Lab1"), transform);
+        //GameObject img = Instantiate(Resources.Load<GameObject>("Lab1"), transform);
 
     }
 
@@ -55,6 +55,8 @@ public class TextureMemoryTest : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
+            _img = null;
+            Resources.UnloadUnusedAssets();
 
             //以下方式都不能断开Texture 与 Image的Sprite的引用
             //Destroy(_img);
@@ -158,6 +160,10 @@ public class TextureMemoryTest : MonoBehaviour
 
     private void OnDestroy()
     {
+        //_img = null;
+
+        Resources.UnloadUnusedAssets();  
+
         //_spriteDict对图片的引用会自动被断开
 
         //依然存在RawImage.texture的引用  在内存中所占空间大小不变化
@@ -207,38 +213,38 @@ public class TextureMemoryTest : MonoBehaviour
 
 
 
-public class Base : MonoBehaviour
-{
-    protected virtual void OnDestroy()
-    {
-        if (this != null)
-        {
-            var type = GetType();
-            var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            for (int i = 0; i < fields.Length; i++)
-            {
-                try
-                {
-                    fields[i].SetValue(this, null);
-                }
-                catch (Exception e)
-                {
-                    throw e;
-                }
-            }
-        }
-        Resources.UnloadUnusedAssets();
-    }
-}
+//public class Base : MonoBehaviour
+//{
+//    protected virtual void OnDestroy()
+//    {
+//        if (this != null)
+//        {
+//            var type = GetType();
+//            var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+//            for (int i = 0; i < fields.Length; i++)
+//            {
+//                try
+//                {
+//                    fields[i].SetValue(this, null);
+//                }
+//                catch (Exception e)
+//                {
+//                    throw e;
+//                }
+//            }
+//        }
+//        Resources.UnloadUnusedAssets();
+//    }
+//}
 
-public class Test1 : Base
-{
-    private Image _img;
-    private Sprite _sprite;
+//public class Test1 : Base
+//{
+//    private Image _img;
+//    private Sprite _sprite;
 
-    protected override void OnDestroy()
-    {
-        _img.sprite = null;
-        base.OnDestroy();
-    }
-}
+//    protected override void OnDestroy()
+//    {
+//        _img.sprite = null;
+//        base.OnDestroy();
+//    }
+//}
