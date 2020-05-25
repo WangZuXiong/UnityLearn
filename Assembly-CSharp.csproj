@@ -60,6 +60,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_Lab\Lab.cs" />
+    <Compile Include="Assets\_Lab\Lab.CSharp.CopyList.cs" />
+    <Compile Include="Assets\_Lab\Lab.CSharp.cs" />
+    <Compile Include="Assets\_Lab\Lab.Unity.3D.cs" />
+    <Compile Include="Assets\_Lab\Lab.Unity.cs" />
+    <Compile Include="Assets\_Lab\Lab.Unity.Profiler.cs" />
+    <Compile Include="Assets\_Lab\UnityLifeCycleTest.cs" />
     <Compile Include="Assets\AssetBundleLearn\AssetBundleTest.cs" />
     <Compile Include="Assets\AssetBundleLearn\LoadAssetBundle.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
@@ -136,8 +143,6 @@
     <Compile Include="Assets\DesignPatternLearn\StrategyPattern\StratagyDemo.cs" />
     <Compile Include="Assets\ECSDemo\EcsLearn.cs" />
     <Compile Include="Assets\ECSDemo\EntitiesTest.cs" />
-    <Compile Include="Assets\Lab.cs" />
-    <Compile Include="Assets\Lab1.cs" />
     <Compile Include="Assets\LabInEditMode.cs" />
     <Compile Include="Assets\MemoryTest\GameObjectMemoryTest.cs" />
     <Compile Include="Assets\MemoryTest\TextureMemoryTest.cs" />

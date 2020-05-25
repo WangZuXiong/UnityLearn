@@ -32,7 +32,7 @@ class Dog : Animal
 
 
 //[ExecuteInEditMode]
-public class Lab : MonoBehaviour, IPointerEnterHandler
+public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
     private WebSocket webSocket;
     private Student _student;
@@ -51,120 +51,38 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     public GameObject Cube;
     public Texture2D texture2D;
     public Transform Canvas;
+    public Vector3 _vector3;
+    public Matrix4x4 _matrix4X4;
+
+    public int _tempValue;
+    public int TempValue
+    {
+        get
+        {
+            return _tempValue;
+        }
+
+        set
+        {
+            _tempValue = value;
+        }
+    }
 
     private void Awake()
     {
-
-
-  
+        //ipp_ppi_Test();
     }
+
+
+
 
     private void Start()
     {
-        //Rigidbody bullet;
-        //bullet.transform.Rotate(Vector3.left, 30f);
-        //bullet.velocity = new Vector3(0, 0, 10);
-    }
-
-    private void CopyList()
-    {
-        //======================值类型List======================
-        //var oldList = new List<int>();
-        //oldList.Add(5);
-
-        //浅拷贝
-        //var newList = oldList;
-        //newList[0] *= 5;
-        //Debug.Log(oldList[0]);//25
-
-        //深拷贝
-        //var newList = new List<int>(oldList);
-        //newList[0] *= 5;
-        //Debug.Log(oldList[0]);//5
-
-        //======================引用型List======================
-        var oldList = new List<CopyListClass>();
-        CopyListClass item = new CopyListClass();
-        item.X = 5;
-        oldList.Add(item);
-        //浅拷贝1
-        //var newList = new List<CopyListClass>(oldList);
-        //newList[0].X *= 5;
-        //Debug.Log(oldList[0].X);//25
-
-        //浅拷贝2
-        //var newArr = new CopyListClass[oldList.Count];
-        //oldList.CopyTo(newArr);
-        //newArr[0].X *= 5;
-        //Debug.Log(oldList[0].X);//25
-
-        //浅拷贝3
-        //var newList = new List<CopyListClass>();
-        //for (int i = 0; i < oldList.Count; i++)
-        //{
-        //    newList.Add(oldList[i]);
-        //}
-        //newList[0].X *= 5;
-        //Debug.Log(oldList[0].X);//25
-
-
-
-        //using (new ProfilerMarker("Test_Awake").Auto())
-        //{
-        //    Debug.LogError(100);
-        //};
-
-
-
-
-
-
-        //深拷贝1
-        //var newList = new List<CopyListClass>();
-        //for (int i = 0; i < oldList.Count; i++)
-        //{
-        //    newList.Add(oldList[i].Clone() as CopyListClass);
-        //}
-        //newList[0].X *= 5;
-        //Debug.Log(oldList[0].X);//5
-
-
-        //深拷贝2
-        var newList = new List<CopyListClass>();
-        for (int i = 0; i < oldList.Count; i++)
-        {
-            newList.Add(oldList[i].MyClone());
-        }
-        newList[0].X *= 5;
-        Debug.Log(oldList[0].X);
+        Shoot();
     }
 
 
-    class CopyListClass //: ICloneable
-    {
-        public int X;
 
-        //public object Clone()
-        //{
-        //    return MemberwiseClone();
-        //}
-
-
-        //ProfilerDemo();
-
-        //using (new ProfilerMarker("Test_Start").Auto())
-        //{
-        //    Debug.LogError("Test_Start");
-        //};
-
-        public CopyListClass MyClone()
-        {
-            var temp = new CopyListClass();
-            temp.X = X;
-            return temp;
-        }
-
-    }
 
 
 
@@ -201,21 +119,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.LogError(strFromBytes2);
     }
 
-    /// <summary>
-    /// 坐标
-    /// </summary>
-    private void InverseTransformPointAPITest()
-    {
-        var cube = transform.Find("Cube");
-        var sphere = transform.Find("Sphere");
 
-
-        Debug.Log(cube.position);
-        Debug.Log(sphere.position);
-
-        Debug.Log(cube.InverseTransformPoint(sphere.position));
-        Debug.Log(sphere.InverseTransformPoint(cube.position));
-    }
 
     public int RomanToInt(string s)
     {
@@ -441,62 +345,10 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         return x == revertedNumber || x == revertedNumber / 10;
     }
 
-    private void RenderMaterialTest()
-    {
-        GetComponent<Renderer>().material.color = Color.white * UnityEngine.Random.Range(0, 1f);
-    }
-
-    private void RenderShareMaterialTest()
-    {
-        GetComponent<Renderer>().sharedMaterial.color = Color.white * UnityEngine.Random.Range(0, 1f);
-    }
+ 
 
 
-    /// <summary>
-    /// 合并mesh
-    /// </summary>
-    private void CombineMesh()
-    {
-        var meshFilters = GetComponentsInChildren<MeshFilter>();
-        var combine = new CombineInstance[meshFilters.Length];
-        for (int i = 0; i < meshFilters.Length; i++)
-        {
-            combine[i].mesh = meshFilters[i].sharedMesh;
-            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-            meshFilters[i].gameObject.SetActive(false);
-        }
-
-        var meshFilter = gameObject.AddComponent<MeshFilter>();
-        meshFilter.mesh = new Mesh();
-        meshFilter.mesh.CombineMeshes(combine);
-        gameObject.SetActive(true);
-    }
-
-    /// <summary>
-    /// 合并mesh
-    /// </summary>
-    private void CombineMesh1()
-    {
-        var meshFilters = GetComponentsInChildren<MeshFilter>();
-        var combine = new CombineInstance[meshFilters.Length];
-
-        var meshRenderers = GetComponentsInChildren<MeshRenderer>();
-        var materials = new Material[meshRenderers.Length];
-
-        for (int i = 0; i < meshFilters.Length; i++)
-        {
-            materials[i] = meshRenderers[i].sharedMaterial;
-            combine[i].mesh = meshFilters[i].sharedMesh;
-            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-            meshFilters[i].gameObject.SetActive(false);
-        }
-
-        var meshFilter = gameObject.AddComponent<MeshFilter>();
-        meshFilter.mesh = new Mesh();
-        meshFilter.mesh.CombineMeshes(combine, false);
-        gameObject.AddComponent<MeshRenderer>().sharedMaterials = materials;
-        gameObject.SetActive(true);
-    }
+  
 
 
     public class Cow
@@ -529,11 +381,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
-
-
-
-
-
         if (Input.GetMouseButtonDown(1))
         {
             //Destroy(GameObjectMenmoryTest.Instance.gameObject);
@@ -551,11 +398,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     }
 
-    private void MemoryTest()
-    {
-        Texture2D texture = Resources.Load<Texture2D>("ATM");
-        _rawImage.texture = texture;
-    }
 
     private void GCTest()
     {
@@ -623,79 +465,7 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.LogErrorFormat("Func2");
     }
 
-    private void ProfilerDemo()
-    {
-        //var dict = new Dictionary<int, int>();
 
-        //for (int i = 0; i < 1000; i++)
-        //{
-        //    dict.Add(i, i);
-        //}
-
-        //using (new ProfilerMarker("Test1").Auto())
-        //{
-        //    foreach (var item in dict)
-        //    {
-        //        Debug.Log(item.Key + item.Value);
-        //    }
-        //}
-
-        //using (new ProfilerMarker("Test2").Auto())
-        //{
-        //    var temp = dict.GetEnumerator();
-        //    while (temp.MoveNext())
-        //    {
-        //        Debug.Log(temp.Current.Key + temp.Current.Value);
-        //    }
-        //}
-
-
-        //Profiler.BeginSample("10 x 10");
-        //new Texture2D(10, 10);
-        //Profiler.EndSample();
-
-        //Profiler.BeginSample("1024 x 1024");
-        //new Texture2D(1024, 1024);
-        //Profiler.EndSample();
-
-        ////推荐写法
-        //using (new ProfilerMarker("Test1").Auto())
-        //{
-        //    float x = 10l;
-        //}
-
-
-        //System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
-        //stopwatch.Start();
-        //for (int i = 0; i < 100; i++)
-        //{
-        //    Debug.LogError("111");
-        //}
-        //stopwatch.Stop();
-        //Debug.LogError(stopwatch.ElapsedMilliseconds);
-
-        Dictionary<int, string> keyValuePairs = new Dictionary<int, string>();
-        for (int i = 0; i < 1000; i++)
-        {
-            keyValuePairs.Add(i, "123456");
-        }
-        using (new ProfilerMarker("Test_GetEnumerator").Auto())
-        {
-            var enumerator = keyValuePairs.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                Debug.LogError(enumerator.Current.Key);
-            }
-        };
-
-        using (new ProfilerMarker("Test_foreach").Auto())
-        {
-            foreach (KeyValuePair<int, string> item in keyValuePairs)
-            {
-                Debug.LogError(item.Key);
-            }
-        };
-    }
 
 
 
@@ -899,24 +669,6 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.Log(1111);
     }
 
-    /// <summary>
-    /// 屏幕截图
-    /// </summary>
-    private void RenderTextureLab()
-    {
-        RenderTexture renderTexture = RenderTexture.GetTemporary(Screen.width, Screen.height, 0);
-        renderTexture.filterMode = FilterMode.Bilinear;
-        RenderTexture.active = renderTexture;
-        Camera camera = Camera.main;
-        camera.targetTexture = renderTexture;
-        camera.Render();
-        RawImage rawImage = transform.Find("RawImage").GetComponent<RawImage>();
-        rawImage.texture = renderTexture;
-        RenderTexture.active = null;
-        camera.targetTexture = null;
-        //RenderTexture.GetTemporary这个api要和RenderTexture.ReleaseTemporary 配套使用否则会内存泄漏
-        //RenderTexture.ReleaseTemporary(renderTexture);
-    }
 
     /// <summary>
     /// 朗母达表达式排序
