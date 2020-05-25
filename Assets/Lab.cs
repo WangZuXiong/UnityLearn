@@ -50,17 +50,20 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     public Lab RefLab;
     public GameObject Cube;
     public Texture2D texture2D;
-
-
     public Transform Canvas;
+
     private void Awake()
     {
-       
+
+
+  
     }
 
     private void Start()
     {
-
+        //Rigidbody bullet;
+        //bullet.transform.Rotate(Vector3.left, 30f);
+        //bullet.velocity = new Vector3(0, 0, 10);
     }
 
     private void CopyList()
@@ -164,6 +167,39 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
     }
 
 
+
+    void EncryptionTest()
+    {
+        var str = "123";
+        var bytes = Encoding.UTF8.GetBytes(str);
+        Debug.LogError(string.Join(",", bytes));
+        var strFromBytes = Encoding.UTF8.GetString(bytes);
+        Debug.LogError(strFromBytes);
+
+
+
+        Debug.LogError("========加密========");
+        //加密
+        for (int i = 0; i < bytes.Length; i++)
+        {
+            bytes[i] ^= 1;
+        }
+        Debug.LogError(string.Join(",", bytes));
+        var strFromBytes1 = Encoding.UTF8.GetString(bytes);
+        Debug.LogError(strFromBytes1);
+
+
+
+        Debug.LogError("========解密========");
+        //解密
+        for (int i = 0; i < bytes.Length; i++)
+        {
+            bytes[i] ^= 1;
+        }
+        Debug.LogError(string.Join(",", bytes));
+        var strFromBytes2 = Encoding.UTF8.GetString(bytes);
+        Debug.LogError(strFromBytes2);
+    }
 
     /// <summary>
     /// 坐标
@@ -493,11 +529,20 @@ public class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
+
+
+
+
+
         if (Input.GetMouseButtonDown(1))
         {
             //Destroy(GameObjectMenmoryTest.Instance.gameObject);
             //GameObjectMenmoryTest.Instance = null;
-            Resources.UnloadUnusedAssets();
+            //Resources.UnloadUnusedAssets();
+
+            //bullet.transform.Rotate(Vector3.left, 30f);
+            //bullet.velocity = new Vector3(0, 0, 10);
+            //bullet.AddForce(new Vector3(0, 0, 30), ForceMode.Impulse);
         }
     }
 

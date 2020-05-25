@@ -26,7 +26,7 @@ public class AssetsService : MonoBehaviour
     /// <param name="url"></param>
     /// <param name="cache"></param>
     /// <returns></returns>
-    public IEnumerator DownTexture(string url, bool cache = false, Action<Sprite> action = null)
+    public IEnumerator DownTexture(string url, bool cache = false, Action<Texture> action = null)
     {
         //如果本地存在
         //...
@@ -39,9 +39,9 @@ public class AssetsService : MonoBehaviour
         {
             Texture2D texture = handler.texture;
             texture.name = "texture from net";
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, 1f);
-            texture = null;
-            action?.Invoke(sprite);
+            //Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, 1f);
+            //texture = null;
+            action?.Invoke(texture);
             
             if (cache)
             {

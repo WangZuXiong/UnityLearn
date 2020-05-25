@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,8 +12,13 @@ public class TextureMemoryTest : MonoBehaviour
     private Dictionary<string, Texture> _spriteDict;
     [SerializeField]
     private RawImage _rawImg;
+    [SerializeField]
     private Image _img;
 
+    private GameObject _cubeOriginal;
+
+    private Sprite _tempSprite;
+    private Texture _tempTexture;
 
     private void Start()
     {
@@ -20,6 +26,10 @@ public class TextureMemoryTest : MonoBehaviour
         //{
         //    { "4", Resources.Load<Texture>("ATM") }
         //};
+        //_rawImg.texture = Resources.Load<Texture>("ATM");
+        //_tempSprite = Resources.Load<Sprite>("ATM");
+        //_tempTexture = Resources.Load<Texture>("ATM");
+
         //就算没有被Image.sprite 或者 RawImage.texture引用也会被load到内存中
 
         //被Image.sprite 或者 RawImage.texture引用后 引用计数增加了 在内存中所占空间大小不变化
@@ -28,13 +38,19 @@ public class TextureMemoryTest : MonoBehaviour
         //问题：从服务器上面下载下来的texture 赋值给gameobject之后,Destroy Gameobject 之前是都要对其中引用置空？是否置空之后texture才能从内存中Unload
         //- 需要对Image.sprite或者RawImage.texture置空，置空之后下载下来的texture没有引用之后调用Resources.UnloadUnusedAssets才能被unload。不是对Image或者RawImage置空
 
-        _img = transform.Find("Image").GetComponent<Image>();
+        //_img = transform.Find("Image").GetComponent<Image>();
         var path = "http://192.168.1.243:8082/basketball/my_team_logo/dh6.png";
 
+        //StartCoroutine(AssetsService.Instance.DownTexture(path, false, (t) =>
+        //{
+        //    //transform.Find("Image").GetComponent<Image>().sprite = t;
+        //    _tempSprite = t;
+        //}));
         StartCoroutine(AssetsService.Instance.DownTexture(path, false, (t) =>
         {
-            _img.sprite = t;
+            _tempTexture = t;
         }));
+        //_tempTexture = Resources.Load<Texture>("ATM");
 
 
         //问题：场景中原先有一个Image,其引用这一张图片，如果Destroy Image所在的Gameobject，那么这张图片是否能从内存中unload
@@ -45,9 +61,8 @@ public class TextureMemoryTest : MonoBehaviour
         //Resource Instantiate 到场景中的gameobject的对象 destroy之后，再调用 Resources.UnloadUnusedAssets() 可以unload gameObject中引用的所有资源的内存
 
 
-
-        //GameObject img = Instantiate(Resources.Load<GameObject>("Lab1"), transform);
-
+        //_cubeOriginal = Resources.Load<GameObject>("Cube");
+        //Instantiate(Resources.Load<GameObject>("Cube"), transform);
     }
 
 
@@ -55,8 +70,20 @@ public class TextureMemoryTest : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            _img = null;
-            Resources.UnloadUnusedAssets();
+            //_cubeOriginal = null;
+            //transform.Find("Cube").GetComponent<MeshRenderer>().material = null;
+            //Destroy(transform.Find("Cube(Clone)").gameObject);
+            //Destroy(_img.gameObject);
+
+            //Resources.UnloadAsset(_tempSprite);
+            Resources.UnloadAsset(_tempTexture);//UnloadAsset can only be used on assets;
+
+
+            //Resources.UnloadAsset(_img.sprite);//UnloadAsset can only be used on assets;
+            //Resources.UnloadAsset(_rawImg);//UnloadAsset can only be used on assets;
+            //Resources.UnloadAsset(_rawImg.texture);//UnloadAsset can only be used on assets;
+
+            //Resources.UnloadUnusedAssets();
 
             //以下方式都不能断开Texture 与 Image的Sprite的引用
             //Destroy(_img);
@@ -162,7 +189,7 @@ public class TextureMemoryTest : MonoBehaviour
     {
         //_img = null;
 
-        Resources.UnloadUnusedAssets();  
+        Resources.UnloadUnusedAssets();
 
         //_spriteDict对图片的引用会自动被断开
 
