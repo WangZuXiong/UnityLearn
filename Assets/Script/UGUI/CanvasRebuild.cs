@@ -16,6 +16,13 @@ public class CanvasRebuild : MonoBehaviour
         m_LayoutRebuildQueue = (IList<ICanvasElement>)field.GetValue(CanvasUpdateRegistry.instance);
         field = type.GetField("m_GraphicRebuildQueue", BindingFlags.NonPublic | BindingFlags.Instance);
         m_GraphicRebuildQueue = (IList<ICanvasElement>)field.GetValue(CanvasUpdateRegistry.instance);
+
+        //是指UGUI库中Layout组件调整RectTransform尺寸、Graphic组件更新Mesh和Material，以及Mask执行Cull的过程  导致Rebuild
+        //也就是一下这些情况等等
+        //Text 文字变化
+        //Recttransform 长宽变化（位移、缩放和旋转不会导致Rebuild）
+        //Image 更新Sprite 更新Material
+        //添加Mask Mask的Disable和Enable
     }
 
     private void Update()
