@@ -108,6 +108,7 @@
     <Compile Include="Assets\EditorTool\Editor\FindAllReferences\FindAllReferencesHelper.cs" />
     <Compile Include="Assets\EditorTool\Editor\ReportAssets.cs" />
     <Compile Include="Assets\EditorTool\Editor\ResourceChecker.cs" />
+    <Compile Include="Assets\EditorTool\Editor\SortLanguageConfig.cs" />
     <Compile Include="Assets\EditorTool\Editor\TextureOverview\EditorFramework\AboutWindow.cs" />
     <Compile Include="Assets\EditorTool\Editor\TextureOverview\EditorFramework\AssetBundleManifest2.cs" />
     <Compile Include="Assets\EditorTool\Editor\TextureOverview\EditorFramework\AssetBundleManifestParser.cs" />

@@ -78,6 +78,23 @@ public partial class Lab : MonoBehaviour
         }
     }
 
+
+
+    void StringSort()
+    {
+
+        List<string> vs = new List<string>();
+        vs.Add("A/B/C");
+        vs.Add("A");
+        vs.Add("A/B");
+
+        vs.Add("F/B");
+
+        vs.Sort();
+
+        Debug.LogError(string.Join(",", vs));
+    }
+
 }
 
 

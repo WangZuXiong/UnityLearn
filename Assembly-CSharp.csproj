@@ -141,6 +141,7 @@
     <Compile Include="Assets\DesignPatternLearn\ProxyPattern\ProxyPattern.cs" />
     <Compile Include="Assets\DesignPatternLearn\StrategyPattern\Main.cs" />
     <Compile Include="Assets\DesignPatternLearn\StrategyPattern\StratagyDemo.cs" />
+    <Compile Include="Assets\DrawCallTest\SetChildPostion.cs" />
     <Compile Include="Assets\ECSDemo\EcsLearn.cs" />
     <Compile Include="Assets\ECSDemo\EntitiesTest.cs" />
     <Compile Include="Assets\LabInEditMode.cs" />

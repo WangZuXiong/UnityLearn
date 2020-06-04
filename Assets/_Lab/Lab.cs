@@ -71,6 +71,10 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     private void Awake()
     {
         //ipp_ppi_Test();
+
+        StringSort();
+
+
     }
 
 
@@ -78,7 +82,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
-        Shoot();
+        //Shoot();
     }
 
 
