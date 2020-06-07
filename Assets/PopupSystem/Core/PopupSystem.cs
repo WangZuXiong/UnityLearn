@@ -92,6 +92,14 @@ public class PopupSystem : MonoBehaviour
         if (basePopup.UseStaticBg && _renderTexture == null)
         {
             CreateStaticBg();
+            //关闭场景相机
+            if (_camera.enabled)
+                _camera.enabled = false;
+        }
+        else
+        {
+            if (!_camera.enabled)
+                _camera.enabled = true;
         }
 
         result.transform.SetParent(_parentDict[_index].Item1.transform);
@@ -106,6 +114,8 @@ public class PopupSystem : MonoBehaviour
             if (ToppingPopup.UseStaticBg)
             {
                 ClearStaticBg();
+                if (!_camera.enabled)
+                    _camera.enabled = true;
             }
             Destroy(ToppingPopup.gameObject);
             var temp = _index - 1;
@@ -170,5 +180,7 @@ public class PopupSystem : MonoBehaviour
         }
         _index = 0;
         Resources.UnloadUnusedAssets();
+        if (!_camera.enabled)
+            _camera.enabled = true;
     }
 }
