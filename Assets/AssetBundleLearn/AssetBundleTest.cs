@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -48,10 +49,10 @@ public class AssetBundleTest : MonoBehaviour
         //});
 
 
-        var path = "http://192.168.1.243:8082/basketball/theme_activity/configure/Android/1";
+        var path = Path.Combine(Application.dataPath, "AssetBundleLearn/AssetBundles/cube"); // "http://192.168.1.243:8082/basketball/theme_activity/configure/Android/1";
         LoadAssetBundle.Instance.LoadAssetBundleAsync(path, (t) =>
         {
-            var original = t.LoadAsset<GameObject>("1");
+            var original = t.LoadAsset<GameObject>("cube");
             Instantiate(original, GameObject.Find("Canvas").transform);
             //t.transform.SetParent(GameObject.Find("Canvas").transform);
             t.Unload(false);
@@ -61,6 +62,10 @@ public class AssetBundleTest : MonoBehaviour
             //写入本地
         });
 
+        //var path1 = Path.Combine(Application.dataPath, "AssetBundleLearn/AssetBundles/cube");
+
+        //var bundle = AssetBundle.LoadFromFile(path1);
+        //Instantiate(bundle.get, GameObject.Find("Canvas").transform);
     }
     private Texture2D _texture2D;
     private Sprite _sprite;
