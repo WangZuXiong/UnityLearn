@@ -1,8 +1,0 @@
-(Click me, if I am too big copy and paste me into a spreadsheet or text editor)
-		OBJECT NAME	LIGHTMAP INDEX	STATIC	OVERLAPPING SUBMESHES	OUT-OF-BOUNDS UVs	NUM MATS	MATERIAL	WARNINGS
-	Custom/MyShader (24 verts): 
-		Cube (24 verts)	-1	False	False	False	1	[Yellow (UnityEngine.Material)] 	
-	Custom/WallShader (515 verts): 
-		Sphere (515 verts)	-1	False	False	True	1	[WallMaterial (UnityEngine.Material)] 	 [WARNING: has uvs outside the range (0,1) tex is tiled 0x0 times]
-	Standard (Specular setup) (550 verts): 
-		Capsule (550 verts)	-1	False	False	True	1	[YellowSmooth (UnityEngine.Material)] 	 [WARNING: has uvs outside the range (0,1) tex is tiled 1x0 times]
