@@ -17,6 +17,7 @@ using System.Text;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Threading;
+using System.ComponentModel;
 
 class Animal
 {
@@ -34,6 +35,11 @@ class Dog : Animal
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
+
+
+    public LayerMask lm;
+
+
     private WebSocket webSocket;
     private Student _student;
     public AnimationCurve curve;
@@ -349,10 +355,10 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         return x == revertedNumber || x == revertedNumber / 10;
     }
 
- 
 
 
-  
+
+
 
 
     public class Cow
@@ -383,6 +389,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     [SerializeField]
     private GameObject _temp;
 
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))
@@ -394,6 +401,42 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
             //bullet.transform.Rotate(Vector3.left, 30f);
             //bullet.velocity = new Vector3(0, 0, 10);
             //bullet.AddForce(new Vector3(0, 0, 30), ForceMode.Impulse);
+        }
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            //Debug.ClearDeveloperConsole();
+
+            Debug.Log("-1 & -1 = " + (-1 & -1));
+            Debug.Log("-1 & 0  = " + (-1 & 0));
+            Debug.Log("-1 & 1  = " + (-1 & 1));
+
+            Debug.Log("0 & -1 = " + (0 & -1));
+            Debug.Log("0 & 0  = " + (0 & 0));
+            Debug.Log("0 & 1  = " + (0 & 1));
+
+            Debug.Log("1 & -1 = " + (1 & -1));
+            Debug.Log("1 & 0  = " + (1 & 0));
+            Debug.Log("1 & 1  = " + (1 & 1));
+
+
+            Debug.Log("123 & -1 = " + (123 & -1)); //1111011 -1 = 
+
+            Debug.Log("lm value::" + lm.value);
+            //Debug.Log("lm name::" + LayerMask.LayerToName(lm.value));
+            Debug.Log("gameObject layer::" + gameObject.layer);
+
+
+            Debug.Log(lm.value + ":" + gameObject.layer + ":" + (lm.value & gameObject.layer));
+            if ((lm.value & (int)Mathf.Pow(2, gameObject.layer)) == (int)Mathf.Pow(2, gameObject.layer))
+            {
+                Debug.Log("在层中");
+            }
+            else
+            {
+                Debug.Log("不在层中");
+            }
         }
     }
 

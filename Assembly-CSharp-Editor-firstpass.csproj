@@ -378,18 +378,6 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>E:/wangzuxiong/Unity Project/UnityLearn/Assets/NetLearn/WebSocket/websocket-sharp.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>E:/wangzuxiong/Unity Project/UnityLearn/Assets/XLuaLearn/XLua/Editor/Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>E:/wangzuxiong/Unity Project/UnityLearn/Assets/XLuaLearn/XLua/Editor/Mono.Cecil.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Pdb">
-      <HintPath>E:/wangzuxiong/Unity Project/UnityLearn/Assets/XLuaLearn/XLua/Editor/Mono.Cecil.Pdb.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>E:/wangzuxiong/Unity Project/UnityLearn/Library/PackageCache/com.unity.ads@2.3.1/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -413,6 +401,18 @@
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
       <HintPath>E:/wangzuxiong/Unity Project/UnityLearn/Library/PackageCache/com.unity.purchasing@2.0.3/Editor/UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>E:/wangzuxiong/Unity Project/UnityLearn/Assets/Learn/NetLearn/WebSocket/websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>E:/wangzuxiong/Unity Project/UnityLearn/Assets/Learn/XLuaLearn/XLua/Editor/Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>E:/wangzuxiong/Unity Project/UnityLearn/Assets/Learn/XLuaLearn/XLua/Editor/Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>E:/wangzuxiong/Unity Project/UnityLearn/Assets/Learn/XLuaLearn/XLua/Editor/Mono.Cecil.Mdb.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>E:/Soft/Unity/2018.4.0f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
