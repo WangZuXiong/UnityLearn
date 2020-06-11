@@ -129,7 +129,9 @@
     <Compile Include="Assets\Learn\CinemachineLearn\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\Learn\CinemachineLearn\Move.cs" />
     <Compile Include="Assets\Learn\CombineTextureTest\CombineTexture.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\AbstractFactoryPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\BridgePattern\Bridge.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\BuilderPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Demo\BaseView.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Demo\Resource\UIFactory.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Demo\UIFrame\SetController.cs" />
@@ -329,7 +331,6 @@
     <None Include="Assets\Learn\DesignPatternLearn\MVCPattern\remade.txt" />
     <None Include="Assets\Learn\XLuaLearn\XLua\Examples\07_AsyncTest\Resources\message_box.lua.txt" />
     <None Include="Assets\Learn\XLuaLearn\XLua\Examples\06_Coroutine\Resources\cs_coroutine.lua.txt" />
-    <None Include="Assets\StreamingAssets\1.txt" />
     <None Include="Assets\Learn\XLuaLearn\XLua\Examples\02_U3DScripting\LuaTestScript.lua.txt" />
     <None Include="Assets\Learn\XLuaLearn\XLua\Examples\07_AsyncTest\Resources\async_test.lua.txt" />
     <None Include="Assets\Learn\XLuaLearn\XLua\Tutorial\LoadLuaScript\ByFile\Resources\byfile.lua.txt" />
@@ -342,7 +343,7 @@
     <None Include="Assets\Learn\XLuaLearn\XLua\Examples\03_UIEvent\ButtonInteraction.lua.txt" />
     <None Include="Assets\Learn\ShaderLearn\ShaderStore\WallShader.shader" />
     <None Include="Assets\Learn\ShaderLearn\ShaderStore\PlayerDiffuse.shader" />
-    <None Include="Assets\Learn\AssetBundleLearn\RawAssets\MyShader.shader" />
+    <None Include="Assets\RawResources\Shaders\MyShader.shader" />
     <None Include="Assets\ThirdParty\MeshBaker\Release Notes.txt" />
     <None Include="Assets\Learn\ShaderLearn\ShaderStore\TurnTransparentShader.shader" />
     <None Include="Assets\Learn\XLuaLearn\XLua\Resources\perf\profiler.lua.txt" />
