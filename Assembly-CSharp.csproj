@@ -143,6 +143,8 @@
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Demo\UIFrame\SetView.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Factory.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Main.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\FilterPattern.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\MediatorPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\MVCPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\NullObjectPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\ObserverPattern\Observer.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Assets\Learn\DesignPatternLearn\UnityMVC\PlayerData.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\UnityMVC\PlayerModel.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\UnityMVC\PlayerView.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\VisitorPattern.cs" />
     <Compile Include="Assets\Learn\DrawCallTest\SetChildPostion.cs" />
     <Compile Include="Assets\Learn\DrawCallTest\SetChildPostionZ.cs" />
     <Compile Include="Assets\Learn\ECSDemo\EcsLearn.cs" />
