@@ -12,8 +12,7 @@ public class BuilderPattern
     {
         string GetName();
         IPacking GetPack();
-
-        public float GetPrice();
+        float GetPrice();
     }
 
 
