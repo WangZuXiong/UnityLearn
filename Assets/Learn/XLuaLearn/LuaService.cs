@@ -41,7 +41,7 @@ public class LuaService : MonoBehaviour
 
     private byte[] MyLoader(ref string fileName)
     {
-        string path = Application.dataPath + "/XLuaLearn/LuaScript/" + fileName + ".lua";
+        string path = Application.dataPath + "/Learn/XLuaLearn/LuaScript/" + fileName + ".lua";
 
         Debug.Log("path:" + path);
         if (File.Exists(path))

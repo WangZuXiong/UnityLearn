@@ -37,14 +37,23 @@ xlua.hotfix(CS.XLuaLoad,'Play',function(self)
 	--self._dict[1][1]="ssss"
 	--xlua get字典
 	
-	tempTable = {} 
-	tempTable[0] = "000"
-	tempTable[1] = "111"
-	tempTable[2] = "222"
+	--tempTable = {} 
+	--tempTable[0] = "000"
+	--tempTable[1] = "111"
+	--tempTable[2] = "222"
 
-	self._dict[1] = tempTable
+	--self._dict[1] = tempTable
 
-	print("lua:"..self._dict[1][1])
+	--print("lua:"..self._dict[1][1])
+
+
+	local a = {}
+	local b = setmetatable({},{__index = a})
+	a.i = 10
+	print(b.i)
+	b.i = 20
+	print(a.i)
+
 
 end)
 
