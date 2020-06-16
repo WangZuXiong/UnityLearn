@@ -106,6 +106,9 @@
     <Compile Include="Assets\Learn\CinemachineLearn\Cinemachine\PostFX\Editor\CinemachinePostProcessingEditor.cs" />
     <Compile Include="Assets\Learn\CinemachineLearn\Cinemachine\PostFX\Editor\PostFXAutoImport.cs" />
     <Compile Include="Assets\Learn\CinemachineLearn\Cinemachine\Timeline\Editor\CinemachineShotEditor.cs" />
+    <Compile Include="Assets\Learn\CombineTextureTest\Editor\CombineTexture.cs" />
+    <Compile Include="Assets\Learn\SceneModelAdditiveLearn\ScriptableObjectTest\Editor\MyClass.cs" />
+    <Compile Include="Assets\Learn\SceneModelAdditiveLearn\ScriptableObjectTest\Editor\ScriptableTool.cs" />
     <Compile Include="Assets\Learn\XLuaLearn\XLua\Editor\ExampleConfig.cs" />
     <Compile Include="Assets\Learn\XLuaLearn\XLua\Editor\XLuaConfig.cs" />
     <Compile Include="Assets\Learn\XLuaLearn\XLua\Examples\13_BuildFromCLI\Editor\BuildFromCLI.cs" />
@@ -207,7 +210,6 @@
     <Compile Include="Assets\ThirdParty\Editor\TextureOverview\TextureMemoryUsageInfo.cs" />
     <Compile Include="Assets\ThirdParty\Editor\TextureOverview\TextureMemoryUsageOverlay.cs" />
     <Compile Include="Assets\ThirdParty\Editor\TextureOverview\TextureOverviewMenuItem.cs" />
-    <Compile Include="Assets\ThirdParty\LuaPerfect\Editor\ApiGenerator.cs" />
     <Compile Include="Assets\ThirdParty\MeshBaker\scripts\Editor\core\MB_EditorUtil.cs" />
     <Compile Include="Assets\ThirdParty\MeshBaker\scripts\Editor\core\MB3_BakeInPlace.cs" />
     <Compile Include="Assets\ThirdParty\MeshBaker\scripts\Editor\core\MB3_MBVersionEditor.cs" />

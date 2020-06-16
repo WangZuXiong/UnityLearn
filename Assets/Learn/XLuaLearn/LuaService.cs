@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 using UnityEngine;
 using XLua;
@@ -15,7 +16,9 @@ public class LuaService : MonoBehaviour
 
     private void Start()
     {
-        LoadLuaScript();
+        _luaEnv = new LuaEnv();
+        _luaEnv.AddLoader(Loader);
+        _luaEnv.DoString("require 'LuaScript'");
     }
 
     private void OnDisable()
@@ -28,26 +31,22 @@ public class LuaService : MonoBehaviour
         _luaEnv.Dispose();
     }
 
-    public void LoadLuaScript()
+    internal void ReLoadLuaScript()
     {
-        //if (_luaEnv == null)
-        {
-            _luaEnv = new LuaEnv();
-        }
-        //_luaEnv.ClearLoadList();
-        _luaEnv.AddLoader(MyLoader);
+        //_luaEnv.DoString("package.loaded['LuaScript'] = nil");
+        _luaEnv.ClearLoadList();
+        _luaEnv.AddLoader(Loader);
         _luaEnv.DoString("require 'LuaScript'");
     }
 
-    private byte[] MyLoader(ref string fileName)
+    private byte[] Loader(ref string filepath)
     {
-        string path = Application.dataPath + "/Learn/XLuaLearn/LuaScript/" + fileName + ".lua";
-
-        Debug.Log("path:" + path);
+        string path = Application.dataPath + "/Learn/XLuaLearn/LuaScript/" + filepath + ".lua";
         if (File.Exists(path))
         {
             return Encoding.UTF8.GetBytes(File.ReadAllText(path));
         }
+        Debug.LogError("path:" + path);
         return null;
     }
 }

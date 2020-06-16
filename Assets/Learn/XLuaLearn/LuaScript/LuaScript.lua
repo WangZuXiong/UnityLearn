@@ -5,7 +5,7 @@ local x = 1
 -- Hello Word
 print('hello,this message from lua Script !')
 
-xlua.hotfix(CS.XLuaLoad,'Play',function(self)
+util.hotfix_ex(CS.XLuaLoad,'Play',function(self)
 	
 	--loop()
 	--print(max(1,2))
@@ -33,7 +33,7 @@ xlua.hotfix(CS.XLuaLoad,'Play',function(self)
 	--self._dict[1] = tempTable
 
 	--print("lua:"..self._dict[1][1])
-
+	self:Play()
 
 	local a = {}
 	local b = setmetatable({},{__index = a})
@@ -45,10 +45,9 @@ xlua.hotfix(CS.XLuaLoad,'Play',function(self)
 
 end)
 
-xlua.private_accessible(CS.XLuaLoad)
-util.hotfix_ex(CS.XLuaLoad,'Play1',function(self)
-	--self:Play1()
-	--print("do lua 2  Play1  Play1  Play1")
+--xlua.private_accessible(CS.XLuaLoad)
+xlua.hotfix(CS.XLuaLoad,'Play1',function(self)	
+	print(">>>Play1")
 end)
 
 

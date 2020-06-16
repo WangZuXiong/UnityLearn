@@ -14,8 +14,8 @@ public class XLuaLoad : MonoBehaviour
 
     private void Start()
     {
-        Debug.LogError(_dict[1][0]);
-        Debug.LogError(_dict[1][1]);
+        //Debug.LogError(_dict[1][0]);
+        //Debug.LogError(_dict[1][1]);
     }
 
     private void Update()
@@ -23,7 +23,7 @@ public class XLuaLoad : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             //重新load
-            LuaService.Instance.LoadLuaScript();
+            LuaService.Instance.ReLoadLuaScript();
             Play();
             Play1();
         }
