@@ -1,17 +1,7 @@
-local _, LuaDebuggee = pcall(require, 'LuaDebuggee')
-if LuaDebuggee and LuaDebuggee.StartDebug then
-	if LuaDebuggee.StartDebug('127.0.0.1', 9826) then
-		print('LuaPerfect: Successfully connected to debugger!')
-	else
-		print('LuaPerfect: Failed to connect debugger!')
-	end
-else
-	print('LuaPerfect: Check documents at: https://luaperfect.net')
-end
-
 local  util = require 'util'
 local test1 = require 'test1'
 local x = 1
+
 -- Hello Word
 print('hello,this message from lua Script !')
 
@@ -30,8 +20,6 @@ xlua.hotfix(CS.XLuaLoad,'Play',function(self)
 		
 	--local temp = nil
 	--print(temp)
-
-
 
 	--xlua set字典 
 	--self._dict[1][1]="ssss"
@@ -75,7 +63,7 @@ function LuaRetun( ... )
 	return  x,y
 end
 
---迭代器
+--Lua迭代器
 function LuaIterator( ... )
 
 	--[[
@@ -186,8 +174,7 @@ function  LuaOperator( ... )
 	print(4^3 * 16^4 * 16^3)
 end
 
-
-
+--Lua元表
 
 
 
