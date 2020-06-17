@@ -1,1 +1,2 @@
-require 'lua-metatables'
+--require 'lua-metatables'
+require 'lua-tables'
