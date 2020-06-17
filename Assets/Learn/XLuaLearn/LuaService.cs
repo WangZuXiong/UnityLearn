@@ -33,10 +33,7 @@ public class LuaService : MonoBehaviour
 
     internal void ReLoadLuaScript()
     {
-        //_luaEnv.DoString("package.loaded['LuaScript'] = nil");
-        _luaEnv.ClearLoadList();
-        _luaEnv.AddLoader(Loader);
-        _luaEnv.DoString("require 'LuaScript'");
+        Start();
     }
 
     private byte[] Loader(ref string filepath)
