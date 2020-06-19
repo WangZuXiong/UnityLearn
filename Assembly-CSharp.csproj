@@ -133,9 +133,11 @@
     <Compile Include="Assets\Learn\DesignPatternLearn\BridgePattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\BuilderPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\BusinessDelegatePattern.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\ChainOfResponsibilityPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\CommandPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\CompositeEntityPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\DecoratorPattern.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\FacadePattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Demo\BaseView.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Demo\Resource\UIFactory.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Demo\UIFrame\SetController.cs" />
@@ -145,6 +147,8 @@
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Factory.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Main.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FilterPattern.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\FlyweightPattern.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\InterpreterPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\MediatorPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\MementoPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\MVCPattern.cs" />

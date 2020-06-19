@@ -78,9 +78,9 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     {
         //ipp_ppi_Test();
 
-        StringSort();
+        //StringSort();
 
-
+        GetHashCodeTest();
     }
 
 

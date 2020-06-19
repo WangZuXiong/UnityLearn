@@ -78,8 +78,6 @@ public partial class Lab : MonoBehaviour
         }
     }
 
-
-
     void StringSort()
     {
 
@@ -95,6 +93,79 @@ public partial class Lab : MonoBehaviour
         Debug.LogError(string.Join(",", vs));
     }
 
+
+    void GetHashCodeTest()
+    {
+        var str1 = "wzx";
+        var str2 = "www";
+
+        Debug.Log("wzx hash code:" + str1.GetHashCode());
+        Debug.Log("www hash code:" + str2.GetHashCode());
+
+
+        Student student1 = new Student();
+        student1.Name = "1";
+
+        Student student2 = new Student();
+        student2.Name = "1";
+
+        Debug.Log("student1== student2   " + (student1 == student2));
+        Debug.Log("student1.Equals(student2)   " + (student1.Equals(student2)));
+        Debug.Log("student1.GetHashCode()==student2.GetHashCode()  " + (student1.GetHashCode() == student2.GetHashCode()));
+    }
+
+    public class Student
+    {
+        public string Name;
+
+
+        public override bool Equals(object obj)
+        {
+            return Name == ((Student)obj).Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
+    }
+
+
+    /// <summary>
+    /// 字典比较的方案
+    /// </summary>
+    public void DictComparerTest()
+    {
+        //用枚举用作Dict的Key时，会有装箱的的操作
+        Dictionary<TestEnum, int> keyValuePairs = new Dictionary<TestEnum, int>();
+        
+
+        //比较合理的方式 不造成装箱的操作
+        Dictionary<TestEnum, int> keyValuePairs2 = new Dictionary<TestEnum, int>(new DictEqualityComparer());
+    }
+
+    /// <summary>
+    /// Key比较器
+    /// </summary>
+    public class DictEqualityComparer : IEqualityComparer<TestEnum>
+    {
+        public bool Equals(TestEnum x, TestEnum y)
+        {
+            return x == y;
+        }
+
+        public int GetHashCode(TestEnum obj)
+        {
+            return (int)obj;
+        }
+    }
+
+    public enum TestEnum
+    {
+        X = 1,
+        Y = 2,
+        Z = 3
+    }
 }
 
 
