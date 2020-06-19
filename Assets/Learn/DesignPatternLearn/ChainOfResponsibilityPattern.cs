@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using UnityEngine;
+﻿using UnityEngine;
 /// <summary>
 /// 责任链模式
 /// </summary>
@@ -87,7 +84,7 @@ public class ChainOfResponsibilityPattern : MonoBehaviour
     }
 
 
-    public void Start()
+    public void Main()
     {
         AbstractLogger loggerChian = GetChainOfLoggers();
         loggerChian.LogMessage(AbstractLogger.Debug, "debug");
