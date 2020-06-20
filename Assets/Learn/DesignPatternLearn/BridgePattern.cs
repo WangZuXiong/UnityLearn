@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public class Bridge
+/// <summary>
+/// 桥接模式
+/// </summary>
+public class Bridge : MonoBehaviour
 {
     public interface IDraw
     {

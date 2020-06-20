@@ -601,9 +601,9 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   scriptingDefineSymbols:
-    1: CROSS_PLATFORM_INPUT
+    1: "CROSS_PLATFORM_INPUT\uFF1BHOTFIX_ENABLE;CROSS_PLATFORM_INPUT"
     4: CROSS_PLATFORM_INPUT;MOBILE_INPUT
-    7: CROSS_PLATFORM_INPUT;MOBILE_INPUT;HOTFIX_ENABLE;DEBUG_ENABLE
+    7: HOTFIX_ENABLE
     14: MOBILE_INPUT
   platformArchitecture: {}
   scriptingBackend: {}

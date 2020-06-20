@@ -134,6 +134,16 @@ local function createdelegate(delegate_cls, obj, impl_cls, method_name, paramete
     return CS.System.Delegate.CreateDelegate(typeof(delegate_cls), obj, m)
 end
 
+local function print_func_ref_by_csharp()
+    local registry = debug.getregistry()
+    for k, v in pairs(registry) do
+        if type(k) == 'number' and type(v) == 'function' and registry[v] == k then
+            local info = debug.getinfo(v)
+            print(string.format('%s:%d', info.short_src, info.linedefined))
+        end
+    end
+end
+
 return {
     async_to_sync = async_to_sync,
     coroutine_call = coroutine_call,
@@ -143,4 +153,7 @@ return {
     hotfix_ex = hotfix_ex,
     bind = bind,
     createdelegate = createdelegate,
+    print_func_ref_by_csharp = print_func_ref_by_csharp,
 }
+
+

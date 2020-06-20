@@ -49,24 +49,25 @@ public class AssetBundleTest : MonoBehaviour
         //});
 
 
-        var path = Path.Combine(Application.dataPath, "AssetBundleLearn/AssetBundles/cube"); // "http://192.168.1.243:8082/basketball/theme_activity/configure/Android/1";
-        LoadAssetBundle.Instance.LoadAssetBundleAsync(path, (t) =>
-        {
-            var original = t.LoadAsset<GameObject>("cube");
-            Instantiate(original, GameObject.Find("Canvas").transform);
-            //t.transform.SetParent(GameObject.Find("Canvas").transform);
-            t.Unload(false);
+        //var path = Path.Combine(Application.dataPath, "AssetBundleLearn/AssetBundles/cube"); // "http://192.168.1.243:8082/basketball/theme_activity/configure/Android/1";
+        //LoadAssetBundle.Instance.LoadAssetBundleAsync(path, (t) =>
+        //{
+        //    var original = t.LoadAsset<GameObject>("cube");
+        //    Instantiate(original, GameObject.Find("Canvas").transform);
+        //    //t.transform.SetParent(GameObject.Find("Canvas").transform);
+        //    t.Unload(false);
 
 
-            //转化为二进制
-            //写入本地
-        });
+        //    //转化为二进制
+        //    //写入本地
+        //});
 
         //var path1 = Path.Combine(Application.dataPath, "AssetBundleLearn/AssetBundles/cube");
 
         //var bundle = AssetBundle.LoadFromFile(path1);
-        //Instantiate(bundle.get, GameObject.Find("Canvas").transform);
+        //Instantiate(bundle.get, GameObject.Find("Canvas").transform);  
     }
+
     private Texture2D _texture2D;
     private Sprite _sprite;
 
@@ -74,16 +75,22 @@ public class AssetBundleTest : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            _image.sprite = null;
-            Destroy(_sprite);
-            _sprite = null;
+            //_image.sprite = null;
+            //Destroy(_sprite);
+            //_sprite = null;
 
-            //AssetBundle.UnloadAllAssetBundles(true);
+            ////AssetBundle.UnloadAllAssetBundles(true);
 
 
-            DestroyImmediate(_texture2D, true);
-            _texture2D = null;
+            //DestroyImmediate(_texture2D, true);
+            //_texture2D = null;
 
+
+            var temoPath = Application.dataPath + "/StreamingAssets/rawimage";
+            var ab = AssetBundle.LoadFromFile(temoPath);
+            var go = ab.LoadAsset<GameObject>("RawImage");
+            Instantiate(go);
+            ab.Unload(false);
         }
     }
 }
