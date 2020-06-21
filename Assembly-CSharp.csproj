@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{8121BC22-1B0B-C349-8D1A-46ED91C50F57}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -63,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Learn\DesignPatternLearn\FrontControllerPattern.cs" />
     <Compile Include="Assets\_Lab\ConditionTest.cs" />
     <Compile Include="Assets\_Lab\Lab.cs" />
     <Compile Include="Assets\_Lab\Lab.CSharp.CopyList.cs" />
