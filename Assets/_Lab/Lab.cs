@@ -883,27 +883,4 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         var temp = new Rect(x, y, width, height);
         return temp.Contains(Input.mousePosition);
     }
-
-    public class Student
-    {
-        public int Age;
-        public int Height;
-
-        public Student()
-        {
-
-        }
-
-        public Student(int age, int height)
-        {
-            Age = age;
-            Height = height;
-        }
-
-        public override string ToString()
-        {
-            return ("Age:" + Age + " Height:" + Height);
-        }
-    }
-
 }

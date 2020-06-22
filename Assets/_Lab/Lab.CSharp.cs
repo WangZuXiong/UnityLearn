@@ -128,9 +128,17 @@ public partial class Lab : MonoBehaviour
         return;
     }
 
+
     public class Student
     {
+        public int Age;
+        public int Height;
         public string Name;
+
+        public Student()
+        {
+
+        }
 
 
         public override bool Equals(object obj)
@@ -142,8 +150,18 @@ public partial class Lab : MonoBehaviour
         {
             return Name.GetHashCode();
         }
-    }
 
+        public Student(int age, int height)
+        {
+            Age = age;
+            Height = height;
+        }
+
+        public override string ToString()
+        {
+            return ("Age:" + Age + " Height:" + Height);
+        }
+    }
 
     /// <summary>
     /// 字典比较的方案
