@@ -80,7 +80,9 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         //StringSort();
 
-        GetHashCodeTest();
+        //GetHashCodeTest();
+
+        ReturnTest();
     }
 
 

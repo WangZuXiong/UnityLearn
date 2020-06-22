@@ -148,6 +148,7 @@
     <Compile Include="Assets\Learn\DesignPatternLearn\FactoryPattern\Main.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FilterPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\FlyweightPattern.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\InterceptingFilterPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\InterpreterPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\MediatorPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\MementoPattern.cs" />
@@ -156,9 +157,11 @@
     <Compile Include="Assets\Learn\DesignPatternLearn\ObserverPattern\Observer.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\PrototypePattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\ProxyPattern\ProxyPattern.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\ServiceLocatorPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\StrategyPattern\Main.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\StrategyPattern\StratagyDemo.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\TemplatePattern.cs" />
+    <Compile Include="Assets\Learn\DesignPatternLearn\TransferObjectPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\UnityMVC\Player.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\UnityMVC\PlayerController.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\UnityMVC\PlayerData.cs" />

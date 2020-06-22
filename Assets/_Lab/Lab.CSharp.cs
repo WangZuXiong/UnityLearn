@@ -114,6 +114,20 @@ public partial class Lab : MonoBehaviour
         Debug.Log("student1.GetHashCode()==student2.GetHashCode()  " + (student1.GetHashCode() == student2.GetHashCode()));
     }
 
+
+    void ReturnTest()
+    {
+        Debug.Log("1");
+        Return();
+        Debug.Log("2");
+        Debug.Log("3");
+    }
+
+    void Return()
+    {
+        return;
+    }
+
     public class Student
     {
         public string Name;
