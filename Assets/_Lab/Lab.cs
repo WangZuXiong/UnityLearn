@@ -19,19 +19,6 @@ using System.Collections;
 using System.Threading;
 using System.ComponentModel;
 
-class Animal
-{
-    public void call() { Debug.LogError("无声的叫唤"); }
-}
-
-class Dog : Animal
-{
-    // new的作用是隐藏父类的同名方法
-    public new void call() { Debug.LogError("叫声：汪～汪～汪～"); }
-    public void smell() { Debug.LogError("嗅觉相当不错！"); }
-}
-
-
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
@@ -82,7 +69,10 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         //GetHashCodeTest();
 
-        ReturnTest();
+        //ReturnTest();
+
+
+        DisposableTestFunc();
     }
 
 

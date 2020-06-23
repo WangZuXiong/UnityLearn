@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -128,6 +129,40 @@ public partial class Lab : MonoBehaviour
         return;
     }
 
+    void StackTest()
+    {
+        //栈是先进后出
+        Stack<string> strStack = new Stack<string>();
+        //元素入栈用push,就是向栈中添加元素
+        strStack.Push("A");
+        strStack.Push("B");
+        strStack.Push("C");
+
+        //获取stack 中的元素个数
+        int num = strStack.Count;
+        //Pop出栈，返回栈顶的元素 并且删除
+        string str1 = strStack.Pop();
+        //Peek返回栈顶的元素 不删除
+        string str2 = strStack.Peek();
+
+        strStack.Clear();
+    }
+
+    void QueueTest()
+    {
+        //队列是先进先出
+        Queue<string> strQueue = new Queue<string>();
+        strQueue.Enqueue("A");
+        strQueue.Enqueue("B");
+        strQueue.Enqueue("C");
+
+        int count = strQueue.Count;
+        //返回队列里面第一个元素  并且删除这个元素
+        string str1 = strQueue.Dequeue();
+        //返回队列里面第一个元素
+        string str2 = strQueue.Peek();
+    }
+
 
     public class Student
     {
@@ -198,46 +233,83 @@ public partial class Lab : MonoBehaviour
         Y = 2,
         Z = 3
     }
+
+    public abstract class TestA : MonoBehaviour
+    {
+        /// <summary>
+        /// 抽象
+        /// </summary>
+        public abstract void Func1();
+
+        internal abstract void Func3();
+
+        protected abstract void Func2();
+
+
+        public virtual void Func4()
+        {
+
+        }
+
+    }
+    public class TestB : TestA
+    {
+        public override void Func1()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void Func2()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        internal override void Func3()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public override void Func4()
+        {
+            base.Func4();
+        }
+    }
+
+
+    class Animal
+    {
+        public void call() { Debug.LogError("无声的叫唤"); }
+    }
+
+    class Dog : Animal
+    {
+        // new的作用是隐藏父类的同名方法
+        public new void call() { Debug.LogError("叫声：汪～汪～汪～"); }
+        public void smell() { Debug.LogError("嗅觉相当不错！"); }
+    }
+
+    public void DisposableTestFunc()
+    {
+        DisposableTest disposableTest = new DisposableTest();
+        //do something
+        disposableTest.Dispose();
+
+
+        using (DisposableTest disposableTest1 = new DisposableTest())
+        {
+            //do something
+        }
+    }
+
+
+    public class DisposableTest : IDisposable
+    {
+        public void Dispose()
+        {
+            Debug.Log("Do Dispose");
+        }
+    }
 }
 
 
-public abstract class TestA : MonoBehaviour
-{
-    /// <summary>
-    /// 抽象
-    /// </summary>
-    public abstract void Func1();
 
-    internal abstract void Func3();
-
-    protected abstract void Func2();
-
-
-    public virtual void Func4()
-    {
-
-    }
-
-}
-public class TestB : TestA
-{
-    public override void Func1()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    protected override void Func2()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    internal override void Func3()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Func4()
-    {
-        base.Func4();
-    }
-}
