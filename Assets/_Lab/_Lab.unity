@@ -482,44 +482,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2101468433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a8461a94771b9c4685035dea6f621f3, type: 3}
+  m_Script: {fileID: 11500000, guid: d59a028a20feb88459b4ab7cd24b1c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lm:
-    serializedVersion: 2
-    m_Bits: 0
-  curve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  Vs: 
-  _image: {fileID: 0}
-  _rawImage: {fileID: 0}
-  X: 111
-  RefLab: {fileID: 0}
-  Cube: {fileID: 0}
-  texture2D: {fileID: 0}
-  Canvas: {fileID: 0}
-  _vector3: {x: 0, y: 0, z: 0}
-  _matrix4X4:
-    e00: 0
-    e01: 0
-    e02: 0
-    e03: 0
-    e10: 0
-    e11: 0
-    e12: 0
-    e13: 0
-    e20: 0
-    e21: 0
-    e22: 0
-    e23: 0
-    e30: 0
-    e31: 0
-    e32: 0
-    e33: 0
-  _tempValue: 0
-  _temp: {fileID: 0}
-  _bullet: {fileID: 0}

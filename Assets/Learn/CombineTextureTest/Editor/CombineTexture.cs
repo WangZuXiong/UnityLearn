@@ -22,10 +22,12 @@ public class CombineTexture : EditorWindow
             Graphics.Blit(tex, tmp);
             RenderTexture previous = RenderTexture.active;
             RenderTexture.active = tmp;
+
             Texture2D @new = new Texture2D(width, height);
             @new.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             @new.Apply();
-            @new.SetPixels(offset.Item1, offset.Item2, width, height, @new.GetPixels());
+
+            @out.SetPixels(offset.Item1, offset.Item2, width, height, @new.GetPixels());
             RenderTexture.active = previous;
             RenderTexture.ReleaseTemporary(tmp);
         }
@@ -40,10 +42,10 @@ public class CombineTexture : EditorWindow
         Texture2D texture2D2 = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/Resources/Color/red.png");
         Texture2D @out = Combine(
             new[] { texture2D1, texture2D2 },//贴图
-            new[] { (0, 0), (600, 600) },//偏移
-            1024);//最终贴图的大小
+            new[] { (0, 0), (0, 100) },//偏移
+            256);//最终贴图的大小
 
-        File.WriteAllBytes("Assets/Out.png", @out.EncodeToPNG());
+        File.WriteAllBytes("Assets/Learn/CombineTextureTest/Out.png", @out.EncodeToPNG());
         AssetDatabase.Refresh();
     }
 }
