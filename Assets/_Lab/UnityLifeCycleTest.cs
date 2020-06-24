@@ -16,6 +16,12 @@ public partial class UnityLifeCycleTest : MonoBehaviour
         Debug.LogError("OnEnable::" + gameObject.name);
     }
 
+    private void Main()
+    {
+        Debug.LogError("Main");
+    }
+
+
     private void Start()
     {
         Debug.LogError("Start::" + gameObject.name);
@@ -36,4 +42,5 @@ public partial class UnityLifeCycleTest : MonoBehaviour
         //脚本本disable 依旧能被执行
         Debug.LogError("OnDestroy::" + gameObject.name);
     }
+
 }

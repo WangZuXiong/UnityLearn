@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public partial class Lab : MonoBehaviour
@@ -205,7 +206,7 @@ public partial class Lab : MonoBehaviour
     {
         //用枚举用作Dict的Key时，会有装箱的的操作
         Dictionary<TestEnum, int> keyValuePairs = new Dictionary<TestEnum, int>();
-        
+
 
         //比较合理的方式 不造成装箱的操作
         Dictionary<TestEnum, int> keyValuePairs2 = new Dictionary<TestEnum, int>(new DictEqualityComparer());
@@ -288,27 +289,7 @@ public partial class Lab : MonoBehaviour
         public void smell() { Debug.LogError("嗅觉相当不错！"); }
     }
 
-    public void DisposableTestFunc()
-    {
-        DisposableTest disposableTest = new DisposableTest();
-        //do something
-        disposableTest.Dispose();
 
-
-        using (DisposableTest disposableTest1 = new DisposableTest())
-        {
-            //do something
-        }
-    }
-
-
-    public class DisposableTest : IDisposable
-    {
-        public void Dispose()
-        {
-            Debug.Log("Do Dispose");
-        }
-    }
 }
 
 

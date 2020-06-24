@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public partial class Lab : MonoBehaviour
+public class CopyList : MonoBehaviour
 {
-    private void CopyList()
+    private void CopyListFunc()
     {
         //======================值类型List======================
         //var oldList = new List<int>();

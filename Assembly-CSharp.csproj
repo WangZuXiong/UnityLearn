@@ -63,9 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\_Lab\ConditionTest.cs" />
     <Compile Include="Assets\_Lab\Lab.cs" />
-    <Compile Include="Assets\_Lab\Lab.CSharp.CopyList.cs" />
     <Compile Include="Assets\_Lab\Lab.CSharp.cs" />
     <Compile Include="Assets\_Lab\Lab.Unity.3D.cs" />
     <Compile Include="Assets\_Lab\Lab.Unity.cs" />
@@ -128,6 +126,9 @@
     <Compile Include="Assets\Learn\CinemachineLearn\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Learn\CinemachineLearn\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\Learn\CinemachineLearn\Move.cs" />
+    <Compile Include="Assets\Learn\Csharp API Test\ConditionTest.cs" />
+    <Compile Include="Assets\Learn\Csharp API Test\CopyList.cs" />
+    <Compile Include="Assets\Learn\Csharp API Test\IDisposableTest.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\AbstractFactoryPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\AdapterPattern.cs" />
     <Compile Include="Assets\Learn\DesignPatternLearn\BridgePattern.cs" />

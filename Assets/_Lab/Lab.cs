@@ -70,9 +70,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         //GetHashCodeTest();
 
         //ReturnTest();
-
-
-        DisposableTestFunc();
     }
 
 
