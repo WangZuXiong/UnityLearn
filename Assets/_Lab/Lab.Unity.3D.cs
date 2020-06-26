@@ -9,7 +9,7 @@ public partial class Lab : MonoBehaviour
 
     /// <summary>
     /// 在 unity程序中,实现一个3d空间里子弹以30度角抛射以10为速度抛物线运动击中目标角色
-    /// </summary>
+    /// </summary>  
     void Shoot()
     {
         _bullet.transform.Rotate(Vector3.left, 30f);

@@ -57,11 +57,12 @@ public partial class Lab : MonoBehaviour
     private void CombineMesh()
     {
         var meshFilters = GetComponentsInChildren<MeshFilter>();
+        //结构，用于描述将使用 Mesh.CombineMeshes 组合的网格。
         var combine = new CombineInstance[meshFilters.Length];
         for (int i = 0; i < meshFilters.Length; i++)
         {
-            combine[i].mesh = meshFilters[i].sharedMesh;
-            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+            combine[i].mesh = meshFilters[i].sharedMesh;//返回网格过滤器的共享网格。
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;//localToWorldMatrix
             meshFilters[i].gameObject.SetActive(false);
         }
 

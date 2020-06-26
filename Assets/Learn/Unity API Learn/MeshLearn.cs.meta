@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3c392ca11f141fb45857553711664454
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _bodyMesh: {fileID: 4300000, guid: 99dbd3f2bf9604f458df06e35836eb77, type: 2}
+  - _faceTextAsset: {fileID: 4900000, guid: 6d3333112b339ab48bbea01ce0ff5f49, type: 3}
+  - _chinTextAsset: {fileID: 4900000, guid: 0f1241f2eec03ac4fb3ceb2dbc53e89a, type: 3}
+  - _hairTextAssets: {fileID: 4900000, guid: 87bbcf868896b2d47b1ea080e0eb0272, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
