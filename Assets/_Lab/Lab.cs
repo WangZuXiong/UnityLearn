@@ -72,16 +72,19 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         //ReturnTest();
 
 
-        List<int> vs = new List<int>(10);
+       
 
-        vs.Add(1);
-
-        vs.Clear();
-
-        Debug.Log(vs.Count);
     }
 
 
+
+    void ListCountTest()
+    {
+        List<int> vs = new List<int>(10);
+        vs.Add(1);
+        vs.Clear();
+        Debug.Log(vs.Count);//0
+    }
 
 
     private void Start()
@@ -436,17 +439,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
                 Debug.Log("不在层中");
             }
         }
-
-        Mesh mesh = GetComponent<MeshFilter>().mesh;
-        Vector3[] vertices = mesh.vertices;
-        Vector3[] normals = mesh.normals;
-
-        for (var i = 0; i < vertices.Length; i++)
-        {
-            vertices[i] += normals[i] * Mathf.Sin(Time.time);
-        }
-
-        mesh.vertices = vertices;
     }
 
     public void OnDestroy()

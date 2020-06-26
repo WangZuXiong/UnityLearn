@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Unity.Transforms;
+using UnityEditor;
 using UnityEngine;
 
 public class MeshLearn : MonoBehaviour
@@ -16,7 +18,9 @@ public class MeshLearn : MonoBehaviour
 
     private void Awake()
     {
-        GetComponent<MeshFilter>().mesh = BilidMesh();
+        var mesh = BilidMesh();
+        GetComponent<MeshFilter>().mesh = mesh;
+        SaveMesh(GetComponent<MeshFilter>().mesh);
     }
 
 
@@ -115,4 +119,10 @@ public class MeshLearn : MonoBehaviour
         return tempMesh;
     }
 
+
+    private void SaveMesh(Mesh mesh)
+    {
+        AssetDatabase.CreateAsset(mesh, "Assets/Learn/Unity API Learn/new Mesh.asset");
+        AssetDatabase.Refresh();
+    }
 }
