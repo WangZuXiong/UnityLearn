@@ -210,7 +210,8 @@
     <Compile Include="Assets\Learn\SceneModelAdditiveLearn\SceneLoad.cs" />
     <Compile Include="Assets\Learn\ShaderLearn\ShaderStore\UGUIMaskPro\UGUIMaskComponent.cs" />
     <Compile Include="Assets\Learn\ShaderLearn\ShaderStore\UGUIMaskTest.cs" />
-    <Compile Include="Assets\Learn\Unity API Learn\MeshLearn.cs" />
+    <Compile Include="Assets\Learn\Unity API Learn\CreateMesh\MeshLearn.cs" />
+    <Compile Include="Assets\Learn\Unity API Learn\CreateTexture\TextureLearn.cs" />
     <Compile Include="Assets\Learn\XLuaLearn\LuaService.cs" />
     <Compile Include="Assets\Learn\XLuaLearn\XLua\Examples\01_Helloworld\Helloworld.cs" />
     <Compile Include="Assets\Learn\XLuaLearn\XLua\Examples\02_U3DScripting\LuaBehaviour.cs" />

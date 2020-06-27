@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using Unity.Transforms;
 using UnityEditor;
 using UnityEngine;
 
@@ -20,7 +19,7 @@ public class MeshLearn : MonoBehaviour
     {
         var mesh = BilidMesh();
         GetComponent<MeshFilter>().mesh = mesh;
-        SaveMesh(GetComponent<MeshFilter>().mesh);
+        //SaveMesh(GetComponent<MeshFilter>().mesh);
     }
 
 
