@@ -22,13 +22,9 @@ using System.ComponentModel;
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
-
-
     public LayerMask lm;
-
-
     private WebSocket webSocket;
-    private Student _student;
+    private StudentClass _student;
     public AnimationCurve curve;
     private FileStream fileStream;
     [SerializeField] private List<int> Vs;
@@ -61,23 +57,160 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         }
     }
 
-    private void Awake()
+    private void Start()
     {
-        //ipp_ppi_Test();
+        GCAPITest(0, 1, true);
+    }
 
-        //StringSort();
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
 
-        //GetHashCodeTest();
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
 
-        //ReturnTest();
+        }
+    }
 
-
-       
+    public void OnDestroy()
+    {
 
     }
 
 
+    /// <summary>
+    /// 会产生GC的API
+    /// </summary>
+    /// <param name="arg0"></param>
+    void GCAPITest(params object[] arg0)
+    {
+        using (new ProfilerMarker("Marker_0").Auto())
+        {
+            for (int i = 0; i < 10000; i++)
+            {
+                int x = Convert.ToInt32(arg0[0]);//GC Alloc 0B
+            }
+        };
 
+        using (new ProfilerMarker("Marker_1").Auto())
+        {
+            int y = Convert.ToInt32(arg0[1]);//GC Alloc 0B
+        };
+
+        using (new ProfilerMarker("Marker_2").Auto())
+        {
+            bool isShow = Convert.ToBoolean(arg0[2]);//GC Alloc 0B
+        };
+
+        using (new ProfilerMarker("Marker_3").Auto())
+        {
+            string.Format("{0}", 1);//GC Alloc 76B
+        };
+
+        using (new ProfilerMarker("Marker_4").Auto())
+        {
+            string.Format("{0}", 1.ToString());//GC Alloc 56B
+        };
+
+        using (new ProfilerMarker("Marker_5").Auto())
+        {
+            int x = (int)arg0[0];//GC Alloc 0B
+        };
+
+        using (new ProfilerMarker("Marker_6").Auto())
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Vector2 vector2 = new Vector2(0, 0);//GC Alloc 0B  Time 0ms
+            }
+        };
+
+
+        using (new ProfilerMarker("Marker_7").Auto())
+        {
+            Vector2 vector2;
+            for (int i = 0; i < 100; i++)
+            {
+                vector2 = new Vector2(0, 0);//GC Alloc 0B  Time 0ms
+            }
+        };
+
+
+
+        using (new ProfilerMarker("Marker_8").Auto())
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                StudentClass student = new StudentClass();//GC Alloc 3.1kB  Time 0.06ms
+            }
+        };
+
+
+        using (new ProfilerMarker("Marker_9").Auto())
+        {
+            StudentClass student;
+            for (int i = 0; i < 100; i++)
+            {
+                student = new StudentClass();//GC Alloc 3.1kB  Time 0.01ms
+            }
+        };
+
+
+
+        using (new ProfilerMarker("Marker_10").Auto())
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                StudentStruct student = new StudentStruct();//GC Alloc 0B  Time 0ms
+            }
+        };
+
+
+        using (new ProfilerMarker("Marker_11").Auto())
+        {
+            StudentStruct student;
+            for (int i = 0; i < 100; i++)
+            {
+                student = new StudentStruct();//GC Alloc 0B  Time 0ms
+            }
+        };
+
+
+        using (new ProfilerMarker("Marker_12").Auto())
+        {
+            gameObject.SetActive(false);//GC Alloc 0.6kB  Time 0.35ms
+        };
+
+        using (new ProfilerMarker("Marker_13").Auto())
+        {
+            transform.GetChild(0).GetChild(1);//GC Alloc 0B  Time 0.9ms
+        };
+
+
+        using (new ProfilerMarker("Marker_14").Auto())
+        {
+            var str = transform.name;//GC Alloc 38B
+        };
+
+        using (new ProfilerMarker("Marker_15").Auto())
+        {
+            transform.name = "1";//GC Alloc 0B
+        };
+    }
+
+    private void GCTest()
+    {
+        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        fileStream = null;
+        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+
+        fileStream = null;
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
+    }
     void ListCountTest()
     {
         List<int> vs = new List<int>(10);
@@ -85,17 +218,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         vs.Clear();
         Debug.Log(vs.Count);//0
     }
-
-
-    private void Start()
-    {
-        //Shoot();
-    }
-
-
-
-
-
 
     void EncryptionTest()
     {
@@ -128,335 +250,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.LogError(string.Join(",", bytes));
         var strFromBytes2 = Encoding.UTF8.GetString(bytes);
         Debug.LogError(strFromBytes2);
-    }
-
-
-
-    public int RomanToInt(string s)
-    {
-        var _dict = new Dictionary<char, int>
-        {
-            { 'I', 1 },
-            { 'V', 5 },
-            { 'X', 10 },
-            { 'L', 50 },
-            { 'C', 100 },
-            { 'D', 500 },
-            { 'M', 1000 }
-        };
-
-        var chars = s.ToCharArray();
-
-        if (chars.Length == 1)
-        {
-            return _dict[chars[0]];
-        }
-
-        var result = 0;
-        for (int i = 0; i < chars.Length - 1; i++)
-        {
-            var next = _dict[chars[i + 1]];
-            var current = _dict[chars[i]];
-
-            if (current >= next)
-            {
-                result += current;
-            }
-            else
-            {
-                result += (next - current);
-            }
-        }
-        return result;
-    }
-
-    public string LongestCommonPrefix(string[] strs)
-    {
-        if (strs.Length <= 0 && strs == null)
-        {
-            return string.Empty;
-        }
-        StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < strs[0].Length; i++)
-        {
-            var temp = strs[0][i];
-
-            var count = 0;
-            for (int j = 1; j < strs.Length; j++)
-            {
-                if (strs[j].Length > i && strs[j][i].Equals(temp))
-                {
-                    count++;
-                }
-            }
-            //全部一致
-            if (count == strs.Length - 1)
-            {
-                stringBuilder.Append(temp);
-            }
-            else
-            {
-                return stringBuilder.ToString();
-            }
-        }
-        return stringBuilder.ToString();
-    }
-
-
-    public string CountAndSay(int n)
-    {
-        if (n == 1)
-        {
-            return "1";
-        }
-
-        var last = CountAndSay(n - 1);
-        StringBuilder stringBuilder = new StringBuilder();
-        var count = 0;
-        char temp = last[0];
-        for (int i = 0; i < last.Length; i++)
-        {
-            if (temp.Equals(last[i]))
-            {
-                count++;
-            }
-            else
-            {
-                stringBuilder.Append(count);
-                stringBuilder.Append(temp);
-
-                count = 1;
-                temp = last[i];
-            }
-
-            //如果没有下一个元素
-            if (i >= last.Length - 1)
-            {
-                stringBuilder.Append(count);
-                stringBuilder.Append(temp);
-            }
-        }
-        return stringBuilder.ToString();
-    }
-
-
-    public bool IsValid(string s)
-    {
-        if (s.Length % 2 != 0)
-        {
-            return false;
-        }
-
-        var charStack = new Stack<char>();
-        for (int idx = 0; idx < s.Length; idx++)
-        {
-            if (s[idx] == '(')
-            {
-                charStack.Push(s[idx]);
-            }
-            else if (s[idx] == '[')
-            {
-                charStack.Push(s[idx]);
-            }
-            else if (s[idx] == '{')
-            {
-                charStack.Push(s[idx]);
-            }
-            else if (s[idx] == ')')
-            {
-                if (charStack.Count < 1)
-                {
-                    return false;
-                }
-                if (charStack.Peek() == '(')
-                {
-                    charStack.Pop();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (s[idx] == ']')
-            {
-                if (charStack.Count < 1)
-                {
-                    return false;
-                }
-                if (charStack.Peek() == '[')
-                {
-                    charStack.Pop();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else if (s[idx] == '}')
-            {
-                if (charStack.Count < 1)
-                {
-                    return false;
-                }
-                if (charStack.Peek() == '{')
-                {
-                    charStack.Pop();
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            if (charStack.Count > s.Length - idx - 1)
-            {
-                return false;
-            }
-        }
-        if (charStack.Count > 0)
-        {
-            return false;
-        }
-        return true;
-    }
-
-    /// <summary>
-    /// 返回char列表的最后一个元素
-    /// </summary>
-    /// <param name="charList"></param>
-    /// <returns></returns>
-    private char GetLastChar(List<char> charList)
-    {
-
-        return charList[charList.Count - 1];
-    }
-
-
-    public bool IsPalindrome(int x)
-    {
-        // 特殊情况：
-        // 如上所述，当 x < 0 时，x 不是回文数。
-        // 同样地，如果数字的最后一位是 0，为了使该数字为回文，
-        // 则其第一位数字也应该是 0
-        // 只有 0 满足这一属性
-        if (x < 0 || (x % 10 == 0 && x != 0))
-        {
-            return false;
-        }
-
-        int revertedNumber = 0;
-        while (x > revertedNumber)
-        {
-            revertedNumber = revertedNumber * 10 + x % 10;
-            x /= 10;
-        }
-
-        // 当数字长度为奇数时，我们可以通过 revertedNumber/10 去除处于中位的数字。
-        // 例如，当输入为 12321 时，在 while 循环的末尾我们可以得到 x = 12，revertedNumber = 123，
-        // 由于处于中位的数字不影响回文（它总是与自己相等），所以我们可以简单地将其去除。
-        return x == revertedNumber || x == revertedNumber / 10;
-    }
-
-
-
-
-
-
-
-    public class Cow
-    {
-        public static int count;
-
-
-        static Cow()
-        {
-            count++;
-        }
-    }
-
-
-
-    class A
-    {
-        public A()
-        {
-            Debug.Log("构造A");
-        }
-
-        ~A()
-        {
-            Debug.Log("clear");
-        }
-    }
-    [SerializeField]
-    private GameObject _temp;
-
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            //Destroy(GameObjectMenmoryTest.Instance.gameObject);
-            //GameObjectMenmoryTest.Instance = null;
-            //Resources.UnloadUnusedAssets();
-
-            //bullet.transform.Rotate(Vector3.left, 30f);
-            //bullet.velocity = new Vector3(0, 0, 10);
-            //bullet.AddForce(new Vector3(0, 0, 30), ForceMode.Impulse);
-        }
-
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            //Debug.ClearDeveloperConsole();
-
-            Debug.Log("-1 & -1 = " + (-1 & -1));
-            Debug.Log("-1 & 0  = " + (-1 & 0));
-            Debug.Log("-1 & 1  = " + (-1 & 1));
-
-            Debug.Log("0 & -1 = " + (0 & -1));
-            Debug.Log("0 & 0  = " + (0 & 0));
-            Debug.Log("0 & 1  = " + (0 & 1));
-
-            Debug.Log("1 & -1 = " + (1 & -1));
-            Debug.Log("1 & 0  = " + (1 & 0));
-            Debug.Log("1 & 1  = " + (1 & 1));
-
-
-            Debug.Log("123 & -1 = " + (123 & -1)); //1111011 -1 = 
-
-            Debug.Log("lm value::" + lm.value);
-            //Debug.Log("lm name::" + LayerMask.LayerToName(lm.value));
-            Debug.Log("gameObject layer::" + gameObject.layer);
-
-
-            Debug.Log(lm.value + ":" + gameObject.layer + ":" + (lm.value & gameObject.layer));
-            if ((lm.value & (int)Mathf.Pow(2, gameObject.layer)) == (int)Mathf.Pow(2, gameObject.layer))
-            {
-                Debug.Log("在层中");
-            }
-            else
-            {
-                Debug.Log("不在层中");
-            }
-        }
-    }
-
-    public void OnDestroy()
-    {
-
-    }
-
-
-    private void GCTest()
-    {
-        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-        fileStream = null;
-        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
-
-        fileStream = null;
-        GC.Collect();
-        GC.WaitForPendingFinalizers();
-        fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
     }
 
     private void ReadSprites()
@@ -513,173 +306,144 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.LogErrorFormat("Func2");
     }
 
+    ///// <summary>
+    ///// 把所有的语言包按照模块名称写到多个
+    ///// </summary>
+    ///// <param name="json"></param>
+    //private void WriteAllLanguageInTexts(string json)
+    //{
+    //    Dictionary<string, string> languageDict = new Dictionary<string, string>();
+
+    //    var jsonArray = JSONNode.Parse(json);
+
+    //    foreach (KeyValuePair<string, JSONNode> temp in (JSONClass)jsonArray)
+    //    {
+    //        if (languageDict.ContainsKey(temp.Key))
+    //        {
+    //            Debug.LogWarning("Duplicate string: " + temp.Key);
+    //        }
+    //        else
+    //        {
+    //            languageDict.Add(temp.Key, temp.Value);
+    //        }
+    //    }
+
+    //    Debug.LogError("languageDict.Count:" + languageDict.Count);
 
 
+    //    var enumerator = languageDict.GetEnumerator();
+    //    var keyValuePairs = new Dictionary<string, Dictionary<string, string>>();
+
+    //    var content = string.Empty;
+    //    while (enumerator.MoveNext())
+    //    {
+    //        string key = enumerator.Current.Key;
+    //        string value = enumerator.Current.Value;
+    //        //业务模块名称
+    //        string moduleName = key.Substring(0, key.IndexOf("/") + 1);
+    //        moduleName = moduleName.Replace("/", "");
+    //        if (!keyValuePairs.ContainsKey(moduleName))
+    //        {
+    //            var temp = new Dictionary<string, string>();
+    //            keyValuePairs.Add(moduleName, temp);
+    //        }
+    //        keyValuePairs[moduleName].Add(key, value);
+    //    }
 
 
-    /// <summary>
-    /// 把所有的语言包按照模块名称写到多个
-    /// </summary>
-    /// <param name="json"></param>
-    private void WriteAllLanguageInTexts(string json)
-    {
-        Dictionary<string, string> languageDict = new Dictionary<string, string>();
+    //    //写入本地
+    //    string localPath = @"C:\Users\admin\Desktop\Language";
+    //    int count = 0;
+    //    foreach (var item in keyValuePairs)
+    //    {
+    //        count += item.Value.Count;
+    //        Language language = new Language();
+    //        language.languageItems = new List<LanguageItem>();
+    //        foreach (var item1 in item.Value)
+    //        {
+    //            LanguageItem languageItem = new LanguageItem(item1.Key, item1.Value);
+    //            language.languageItems.Add(languageItem);
+    //        }
 
-        var jsonArray = JSONNode.Parse(json);
+    //        content = JsonUtility.ToJson(language, true);
 
-        foreach (KeyValuePair<string, JSONNode> temp in (JSONClass)jsonArray)
-        {
-            if (languageDict.ContainsKey(temp.Key))
-            {
-                Debug.LogWarning("Duplicate string: " + temp.Key);
-            }
-            else
-            {
-                languageDict.Add(temp.Key, temp.Value);
-            }
-        }
+    //        string fileName = item.Key + ".json";
+    //        FileUtility.WriteTextToLaocal(localPath, fileName, content);
+    //    }
+    //    Debug.LogError("按照业务模块划分之后的：" + count);
 
-        Debug.LogError("languageDict.Count:" + languageDict.Count);
-
-
-        var enumerator = languageDict.GetEnumerator();
-        var keyValuePairs = new Dictionary<string, Dictionary<string, string>>();
-
-        var content = string.Empty;
-        while (enumerator.MoveNext())
-        {
-            string key = enumerator.Current.Key;
-            string value = enumerator.Current.Value;
-            //业务模块名称
-            string moduleName = key.Substring(0, key.IndexOf("/") + 1);
-            moduleName = moduleName.Replace("/", "");
-            if (!keyValuePairs.ContainsKey(moduleName))
-            {
-                var temp = new Dictionary<string, string>();
-                keyValuePairs.Add(moduleName, temp);
-            }
-            keyValuePairs[moduleName].Add(key, value);
-        }
+    //}
 
 
-        //写入本地
-        string localPath = @"C:\Users\admin\Desktop\Language";
-        int count = 0;
-        foreach (var item in keyValuePairs)
-        {
-            count += item.Value.Count;
-            Language language = new Language();
-            language.languageItems = new List<LanguageItem>();
-            foreach (var item1 in item.Value)
-            {
-                LanguageItem languageItem = new LanguageItem(item1.Key, item1.Value);
-                language.languageItems.Add(languageItem);
-            }
+    ///// <summary>
+    ///// 把所有的语言包写到一个文本中
+    ///// </summary>
+    ///// <param name="json"></param>
+    //private void WriteAllLanguageInOneText(string json)
+    //{
+    //    Dictionary<string, string> languageDict = new Dictionary<string, string>();
 
-            content = JsonUtility.ToJson(language, true);
+    //    var jsonArray = JSONNode.Parse(json);
 
-            string fileName = item.Key + ".json";
-            FileUtility.WriteTextToLaocal(localPath, fileName, content);
-        }
-        Debug.LogError("按照业务模块划分之后的：" + count);
+    //    foreach (KeyValuePair<string, JSONNode> temp in (JSONClass)jsonArray)
+    //    {
+    //        if (languageDict.ContainsKey(temp.Key))
+    //        {
+    //            Debug.LogWarning("Duplicate string: " + temp.Key);
+    //        }
+    //        else
+    //        {
+    //            languageDict.Add(temp.Key, temp.Value);
+    //        }
+    //    }
 
-    }
-
-
-    /// <summary>
-    /// 把所有的语言包写到一个文本中
-    /// </summary>
-    /// <param name="json"></param>
-    private void WriteAllLanguageInOneText(string json)
-    {
-        Dictionary<string, string> languageDict = new Dictionary<string, string>();
-
-        var jsonArray = JSONNode.Parse(json);
-
-        foreach (KeyValuePair<string, JSONNode> temp in (JSONClass)jsonArray)
-        {
-            if (languageDict.ContainsKey(temp.Key))
-            {
-                Debug.LogWarning("Duplicate string: " + temp.Key);
-            }
-            else
-            {
-                languageDict.Add(temp.Key, temp.Value);
-            }
-        }
-
-        Debug.LogError("languageDict.Count:" + languageDict.Count);
+    //    Debug.LogError("languageDict.Count:" + languageDict.Count);
 
 
-        var enumerator = languageDict.GetEnumerator();
-        var keyValuePairs = new Dictionary<string, Dictionary<string, string>>();
+    //    var enumerator = languageDict.GetEnumerator();
+    //    var keyValuePairs = new Dictionary<string, Dictionary<string, string>>();
 
-        var content = string.Empty;
-        while (enumerator.MoveNext())
-        {
-            string key = enumerator.Current.Key;
-            string value = enumerator.Current.Value;
-            //业务模块名称
-            string moduleName = key.Substring(0, key.IndexOf("/") + 1);
-            if (!keyValuePairs.ContainsKey(moduleName))
-            {
-                var temp = new Dictionary<string, string>();
-                keyValuePairs.Add(moduleName, temp);
-            }
-            keyValuePairs[moduleName].Add(key, value);
-        }
-        Root root = new Root();
-        root.languages = new List<Language>();
-        int count = 0;
-        foreach (var item in keyValuePairs)
-        {
-            count += item.Value.Count;
-            Language language = new Language();
-            language.languageItems = new List<LanguageItem>();
-            foreach (var item1 in item.Value)
-            {
-                LanguageItem languageItem = new LanguageItem(item1.Key, item1.Value);
-                language.languageItems.Add(languageItem);
-            }
-            root.languages.Add(language);
-            //continue;
-        }
-        Debug.LogError("按照业务模块划分之后的：" + count);
+    //    var content = string.Empty;
+    //    while (enumerator.MoveNext())
+    //    {
+    //        string key = enumerator.Current.Key;
+    //        string value = enumerator.Current.Value;
+    //        //业务模块名称
+    //        string moduleName = key.Substring(0, key.IndexOf("/") + 1);
+    //        if (!keyValuePairs.ContainsKey(moduleName))
+    //        {
+    //            var temp = new Dictionary<string, string>();
+    //            keyValuePairs.Add(moduleName, temp);
+    //        }
+    //        keyValuePairs[moduleName].Add(key, value);
+    //    }
+    //    Root root = new Root();
+    //    root.languages = new List<Language>();
+    //    int count = 0;
+    //    foreach (var item in keyValuePairs)
+    //    {
+    //        count += item.Value.Count;
+    //        Language language = new Language();
+    //        language.languageItems = new List<LanguageItem>();
+    //        foreach (var item1 in item.Value)
+    //        {
+    //            LanguageItem languageItem = new LanguageItem(item1.Key, item1.Value);
+    //            language.languageItems.Add(languageItem);
+    //        }
+    //        root.languages.Add(language);
+    //        //continue;
+    //    }
+    //    Debug.LogError("按照业务模块划分之后的：" + count);
 
-        content = JsonUtility.ToJson(root, transform);
+    //    content = JsonUtility.ToJson(root, transform);
 
-        //写入本地
-        string localPath = @"C:\Users\admin\Desktop\Language";
-        string fileName = "NewLanguage.json";
+    //    //写入本地
+    //    string localPath = @"C:\Users\admin\Desktop\Language";
+    //    string fileName = "NewLanguage.json";
 
-        FileUtility.WriteTextToLaocal(localPath, fileName, content);
-    }
+    //    FileUtility.WriteTextToLaocal(localPath, fileName, content);
+    //}
 
-    [Serializable]
-    public class Root
-    {
-        public List<Language> languages;
-    }
-
-    [Serializable]
-    public class Language
-    {
-        public List<LanguageItem> languageItems;
-    }
-
-    [Serializable]
-    public class LanguageItem
-    {
-        public string Key;
-        public string Value;
-
-
-        public LanguageItem(string key, string value)
-        {
-            Key = key;
-            Value = value;
-        }
-    }
 
     [ContextMenu("Play")]
 
@@ -717,158 +481,10 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.Log(1111);
     }
 
-
-    /// <summary>
-    /// 朗母达表达式排序
-    /// </summary>
-    private void LongmudaSort()
-    {
-        //var list = new List<Student>
-        //    {
-        //        new Student (10,160),
-        //        new Student (20,170),
-        //        new Student (20,150)
-        //    };
-
-        //for (int i = 0; i < list.Count; i++)
-        //{
-        //    Debug.Log(list[i].ToString());
-        //}
-
-        //Debug.LogError("==============");
-
-        //按照年龄排序
-        //如果年龄一致的话则按照身高排序
-
-        //list.Sort((item1, item2) =>
-        //{
-        //    if (item1.Age == item2.Age)
-        //    {
-        //        return item1.Height.CompareTo(item2.Height);
-        //    }
-        //    return item1.Age.CompareTo(item2.Age);
-        //});
-
-        ////权重大的排前面
-        //list.Sort((item1, item2) => item1.Age.CompareTo(item2.Age) * 2 + item1.Height.CompareTo(item2.Height));
-
-
-        ////list.AddRange(new List<Student>());
-        //for (int i = 0; i < list.Count; i++)
-        //{
-        //    Debug.Log(list[i].ToString());
-        //}
-
-
-
-        List<Tuple<int, int>> tmp = new List<Tuple<int, int>>()
-        {
-            new Tuple<int,int>(2,1),
-            new Tuple<int,int>(53,1),
-            new Tuple<int,int>(12,1),
-            new Tuple<int,int>(22,3),
-            new Tuple<int,int>(1,2),
-        };
-
-        //先按照Item2升序排列 Item2相同的情况下在按照Item1降序排列
-        //tmp.Sort((x, y) =>
-        //(x.Item1.CompareTo(y.Item1) * -1
-        //+ x.Item2.CompareTo(y.Item2) * 2));
-
-        //for (int i = 0; i < tmp.Count; i++)
-        //{
-        //    Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
-        //}
-        //53,1
-        //12,1
-        //2,1
-        //1,2
-        //22,3
-
-
-        //先按照Item2降序排列 Item2相同的情况下在按照Item1降序排列
-        // tmp.Sort((x, y) =>
-        //-(x.Item1.CompareTo(y.Item1)
-        //+ x.Item2.CompareTo(y.Item2) * 2));
-        // for (int i = 0; i < tmp.Count; i++)
-        // {
-        //     Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
-        // }
-        //22,3
-        //1,2
-        //53,1
-        //12,1
-        //2,1
-
-
-        //先按照Item2升序排列 Item2相同的情况下在按照Item1升序排列
-        // tmp.Sort((x, y) =>
-        //(x.Item1.CompareTo(y.Item1) * 1
-        //+ x.Item2.CompareTo(y.Item2) * 2));
-        // for (int i = 0; i < tmp.Count; i++)
-        // {
-        //     Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
-        // }
-        //2,1
-        //12,1
-        //53,1
-        //1,2
-        //22,3
-
-
-
-        //先按照Item2升序排列 Item2相同的情况下在按照Item1降序排列
-        // tmp.Sort((x, y) =>
-        //(y.Item1.CompareTo(x.Item1) * 1
-        //+ x.Item2.CompareTo(y.Item2) * 2));
-        // for (int i = 0; i < tmp.Count; i++)
-        // {
-        //     Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
-        // }
-        //53,1
-        //12,1
-        //2,1
-        //1,2
-        //22,3
-
-
-        //先按照Item2降序排列 Item2相同的情况下在按照Item1降序排列
-        tmp.Sort((x, y) =>
-       (y.Item1.CompareTo(x.Item1) * 1
-       + y.Item2.CompareTo(x.Item2) * 2));
-        for (int i = 0; i < tmp.Count; i++)
-        {
-            Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
-        }
-        //22,3
-        //1,2
-        //53,1
-        //12,1
-        //2,1
-    }
-
-    /// <summary>
-    /// 向右操作运算符
-    /// 向左操作运算符
-    /// </summary>
-    private void OperatorTest()
-    {
-        int m = 8;
-        Debug.LogError(m >> 1);//十进制转化为二进制 8 = 1000 ，1向右边移动1位，0100，即4
-        Debug.LogError(m >> 2);//十进制转化为二进制 8 = 1000 ，1向右边移动2位，0010，即2
-        Debug.LogError(m >> 3);//十进制转化为二进制 8 = 1000 ，1向右边移动3位，0001，即1
-
-        int n = 2;
-        Debug.LogError(n << 1);//十进制转化为二进制 2 = 10 ，1向左边移动1位，100，即4
-        Debug.LogError(n << 2);//十进制转化为二进制 2 = 10 ，1向左边移动2位，1000，即8
-        Debug.LogError(n << 3);//十进制转化为二进制 2 = 10 ，1向左边移动3位，10000，即16
-    }
-
     private void Texture2DTest()
     {
         Texture2D texture2D = Resources.Load<Texture2D>("");
-        texture2D.GetPixel(1, 1);   //返回坐标处的像素颜色
-                                    //可用于不规则的点击区域判断
+        texture2D.GetPixel(1, 1);   //返回坐标处的像素颜色  //可用于不规则的点击区域判断
     }
 
     private bool CheckInputPositionIsInRect(RectTransform rectTransform)

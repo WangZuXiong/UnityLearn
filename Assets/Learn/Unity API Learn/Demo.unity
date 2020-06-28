@@ -1010,6 +1010,7 @@ GameObject:
   - component: {fileID: 2049732248}
   - component: {fileID: 2049732249}
   - component: {fileID: 2049732250}
+  - component: {fileID: 2049732251}
   m_Layer: 0
   m_Name: BootStart
   m_TagString: Untagged
@@ -1047,6 +1048,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _meshBuilder: {fileID: 2049732248}
   _textureBuilder: {fileID: 1315008591}
+  _matrilxTex: {fileID: 4900000, guid: 6fee0bf7e4f3d4d489b72da089babf96, type: 3}
 --- !u!23 &2049732250
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1084,6 +1086,14 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!33 &2049732251
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2049732247}
+  m_Mesh: {fileID: 0}
 --- !u!4 &2049732252
 Transform:
   m_ObjectHideFlags: 0

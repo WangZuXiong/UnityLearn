@@ -40,7 +40,6 @@ public partial class Lab : MonoBehaviour
         Debug.Log(sphere.InverseTransformPoint(cube.position));
     }
 
-
     private void RenderMaterialTest()
     {
         GetComponent<Renderer>().material.color = Color.white * UnityEngine.Random.Range(0, 1f);
@@ -98,7 +97,6 @@ public partial class Lab : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-
     /// <summary>
     /// 屏幕截图
     /// </summary>
@@ -117,4 +115,5 @@ public partial class Lab : MonoBehaviour
         //RenderTexture.GetTemporary这个api要和RenderTexture.ReleaseTemporary 配套使用否则会内存泄漏
         //RenderTexture.ReleaseTemporary(renderTexture);
     }
+
 }

@@ -105,10 +105,10 @@ public partial class Lab : MonoBehaviour
         Debug.Log("www hash code:" + str2.GetHashCode());
 
 
-        Student student1 = new Student();
+        StudentClass student1 = new StudentClass();
         student1.Name = "1";
 
-        Student student2 = new Student();
+        StudentClass student2 = new StudentClass();
         student2.Name = "1";
 
         Debug.Log("student1== student2   " + (student1 == student2));
@@ -164,39 +164,187 @@ public partial class Lab : MonoBehaviour
         string str2 = strQueue.Peek();
     }
 
+    /// <summary>
+    /// 朗母达表达式排序
+    /// </summary>
+    private void LongmudaSort()
+    {
+        //var list = new List<Student>
+        //    {
+        //        new Student (10,160),
+        //        new Student (20,170),
+        //        new Student (20,150)
+        //    };
 
-    public class Student
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    Debug.Log(list[i].ToString());
+        //}
+
+        //Debug.LogError("==============");
+
+        //按照年龄排序
+        //如果年龄一致的话则按照身高排序
+
+        //list.Sort((item1, item2) =>
+        //{
+        //    if (item1.Age == item2.Age)
+        //    {
+        //        return item1.Height.CompareTo(item2.Height);
+        //    }
+        //    return item1.Age.CompareTo(item2.Age);
+        //});
+
+        ////权重大的排前面
+        //list.Sort((item1, item2) => item1.Age.CompareTo(item2.Age) * 2 + item1.Height.CompareTo(item2.Height));
+
+
+        ////list.AddRange(new List<Student>());
+        //for (int i = 0; i < list.Count; i++)
+        //{
+        //    Debug.Log(list[i].ToString());
+        //}
+
+
+
+        List<Tuple<int, int>> tmp = new List<Tuple<int, int>>()
+        {
+            new Tuple<int,int>(2,1),
+            new Tuple<int,int>(53,1),
+            new Tuple<int,int>(12,1),
+            new Tuple<int,int>(22,3),
+            new Tuple<int,int>(1,2),
+        };
+
+        //先按照Item2升序排列 Item2相同的情况下在按照Item1降序排列
+        //tmp.Sort((x, y) =>
+        //(x.Item1.CompareTo(y.Item1) * -1
+        //+ x.Item2.CompareTo(y.Item2) * 2));
+
+        //for (int i = 0; i < tmp.Count; i++)
+        //{
+        //    Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
+        //}
+        //53,1
+        //12,1
+        //2,1
+        //1,2
+        //22,3
+
+
+        //先按照Item2降序排列 Item2相同的情况下在按照Item1降序排列
+        // tmp.Sort((x, y) =>
+        //-(x.Item1.CompareTo(y.Item1)
+        //+ x.Item2.CompareTo(y.Item2) * 2));
+        // for (int i = 0; i < tmp.Count; i++)
+        // {
+        //     Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
+        // }
+        //22,3
+        //1,2
+        //53,1
+        //12,1
+        //2,1
+
+
+        //先按照Item2升序排列 Item2相同的情况下在按照Item1升序排列
+        // tmp.Sort((x, y) =>
+        //(x.Item1.CompareTo(y.Item1) * 1
+        //+ x.Item2.CompareTo(y.Item2) * 2));
+        // for (int i = 0; i < tmp.Count; i++)
+        // {
+        //     Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
+        // }
+        //2,1
+        //12,1
+        //53,1
+        //1,2
+        //22,3
+
+
+
+        //先按照Item2升序排列 Item2相同的情况下在按照Item1降序排列
+        // tmp.Sort((x, y) =>
+        //(y.Item1.CompareTo(x.Item1) * 1
+        //+ x.Item2.CompareTo(y.Item2) * 2));
+        // for (int i = 0; i < tmp.Count; i++)
+        // {
+        //     Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
+        // }
+        //53,1
+        //12,1
+        //2,1
+        //1,2
+        //22,3
+
+        //先按照Item2降序排列 Item2相同的情况下在按照Item1降序排列
+        tmp.Sort((x, y) =>
+       (y.Item1.CompareTo(x.Item1) * 1
+       + y.Item2.CompareTo(x.Item2) * 2));
+        for (int i = 0; i < tmp.Count; i++)
+        {
+            Debug.LogError(tmp[i].Item1 + "," + tmp[i].Item2);
+        }
+        //22,3
+        //1,2
+        //53,1
+        //12,1
+        //2,1
+    }
+
+    /// <summary>
+    /// 向右操作运算符
+    /// 向左操作运算符
+    /// </summary>
+    private void OperatorTest()
+    {
+        int m = 8;
+        Debug.LogError(m >> 1);//十进制转化为二进制 8 = 1000 ，1向右边移动1位，0100，即4
+        Debug.LogError(m >> 2);//十进制转化为二进制 8 = 1000 ，1向右边移动2位，0010，即2
+        Debug.LogError(m >> 3);//十进制转化为二进制 8 = 1000 ，1向右边移动3位，0001，即1
+
+        int n = 2;
+        Debug.LogError(n << 1);//十进制转化为二进制 2 = 10 ，1向左边移动1位，100，即4
+        Debug.LogError(n << 2);//十进制转化为二进制 2 = 10 ，1向左边移动2位，1000，即8
+        Debug.LogError(n << 3);//十进制转化为二进制 2 = 10 ，1向左边移动3位，10000，即16
+    }
+
+
+    public struct StudentStruct
+    {
+        public int Age;
+        public int Height;
+        public string Name;
+    }
+
+
+    public class StudentClass
     {
         public int Age;
         public int Height;
         public string Name;
 
-        public Student()
-        {
 
-        }
+        //public override bool Equals(object obj)
+        //{
+        //    return Name == ((Student)obj).Name;
+        //}
 
+        //public override int GetHashCode()
+        //{
+        //    return Name.GetHashCode();
+        //}
 
-        public override bool Equals(object obj)
-        {
-            return Name == ((Student)obj).Name;
-        }
+        //public Student(int age, int height)
+        //{
+        //    Age = age;
+        //    Height = height;
+        //}
 
-        public override int GetHashCode()
-        {
-            return Name.GetHashCode();
-        }
-
-        public Student(int age, int height)
-        {
-            Age = age;
-            Height = height;
-        }
-
-        public override string ToString()
-        {
-            return ("Age:" + Age + " Height:" + Height);
-        }
+        //public override string ToString()
+        //{
+        //    return ("Age:" + Age + " Height:" + Height);
+        //}
     }
 
     /// <summary>

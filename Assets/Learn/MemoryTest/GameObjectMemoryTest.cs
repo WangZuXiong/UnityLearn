@@ -6,12 +6,19 @@ using UnityEngine.UI;
 
 public class GameObjectMemoryTest : MonoBehaviour
 {
-    public static GameObjectMemoryTest Instance { get; set; }
+    //public static GameObjectMemoryTest Instance { get; set; }
 
+    public Texture2D  Texture2D;
+    public RawImage RawImage;
     private void Awake()
     {
-        Instance = this;
-        _img = transform.Find("Image").GetComponent<Image>();
+        //Instance = this;
+        //_img = transform.Find("Image").GetComponent<Image>();
+
+
+        Texture2D = Resources.Load<Texture2D>("ATM");
+
+        RawImage.texture = Texture2D;
     }
 
 
@@ -82,7 +89,8 @@ public class GameObjectMemoryTest : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
 
-
+            Resources.UnloadAsset(Texture2D);
+        
             //Destroy(_staticInstance.gameObject);
             //Resources.UnloadUnusedAssets();
 
@@ -108,7 +116,8 @@ public class GameObjectMemoryTest : MonoBehaviour
         {
             //销毁之后调用resources.unloadUnusedAssets之后能将texture充内存中卸载
             //Destroy(_temp);
-            //Resources.UnloadUnusedAssets();
+            Resources.UnloadUnusedAssets();
+
         }
 
     }
