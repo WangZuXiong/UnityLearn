@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class TextureLearn : MonoBehaviour
+public class TextureBuilder : MonoBehaviour
 {
     [SerializeField]
     private Texture _baseTexture;
@@ -13,10 +13,9 @@ public class TextureLearn : MonoBehaviour
     private Sprite _numberSprite;
     [SerializeField]
     private Sprite[] _nameSprites;
-    [SerializeField]
-    private MeshRenderer _meshRenderer;
 
-    private void Awake()
+
+    public Texture2D GetTexture()
     {
         var baseRawImg = transform.Find("Base").GetComponent<RawImage>();
         baseRawImg.texture = _baseTexture;
@@ -41,6 +40,6 @@ public class TextureLearn : MonoBehaviour
         texture2D.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0, false);
         texture2D.Apply(false, true);
 
-        _meshRenderer.material.SetTexture("_MainTex", texture2D);
+        return texture2D;
     }
 }

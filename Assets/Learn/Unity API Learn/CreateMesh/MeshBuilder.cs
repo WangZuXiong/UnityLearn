@@ -4,7 +4,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public class MeshLearn : MonoBehaviour
+public class MeshBuilder : MonoBehaviour
 {
     [SerializeField]
     private Mesh _bodyMesh;
@@ -15,15 +15,7 @@ public class MeshLearn : MonoBehaviour
     [SerializeField]
     private TextAsset _hairTextAssets;
 
-    private void Awake()
-    {
-        var mesh = BilidMesh();
-        GetComponent<MeshFilter>().mesh = mesh;
-        //SaveMesh(GetComponent<MeshFilter>().mesh);
-    }
-
-
-    private Mesh BilidMesh()
+    public Mesh BilidMesh()
     {
         List<Vector3> tempVertices = new List<Vector3>();
         List<Vector3> tempNormals = new List<Vector3>();
@@ -119,7 +111,7 @@ public class MeshLearn : MonoBehaviour
     }
 
 
-    private void SaveMesh(Mesh mesh)
+    public void SaveMesh(Mesh mesh)
     {
         AssetDatabase.CreateAsset(mesh, "Assets/Learn/Unity API Learn/new Mesh.asset");
         AssetDatabase.Refresh();
