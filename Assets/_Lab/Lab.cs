@@ -59,7 +59,8 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
-        GCAPITest(0, 1, true);
+        //GCAPITest(0, 1, true);
+
     }
 
     private void Update()
@@ -79,6 +80,29 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     }
 
+    void ValueRefTest()
+    {
+
+        string str1 = "1";//str1 ---> new string("1")
+        string str2 = str1;//str2 --> str1传递引用 
+        str2 = "2";//str2 --> new string("2") 传引用，str2指向一个新的字符串，str1没有改变
+        Debug.Log(str1);//1
+        //但是string又有值传递的效果，这bai是因为string是常量，不能更改
+
+        StudentClass studentClass1 = new StudentClass();
+        studentClass1.Age = 1;
+        StudentClass studentClass2 = studentClass1;
+        studentClass2.Age = 2;
+        Debug.Log(studentClass1.Age);//2
+
+
+        StudentStruct studentStruct1 = new StudentStruct();
+        studentStruct1.Age = 1;
+
+        StudentStruct studentStruct2 = studentStruct1;
+        studentStruct2.Age = 2;
+        Debug.Log(studentStruct1.Age);//3
+    }
 
     /// <summary>
     /// 会产生GC的API
