@@ -18,6 +18,7 @@ using UnityEngine.Networking;
 using System.Collections;
 using System.Threading;
 using System.ComponentModel;
+using XLua.CSObjectWrap;
 
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
@@ -57,11 +58,47 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         }
     }
 
+
+    public GameObject Original;
+
+
     private void Start()
     {
-        //GCAPITest(0, 1, true);
+        GCAPITest(1, 1, true);
 
+
+        List<int> tempList = new List<int>();
+
+        for (int i = 0; i < 1000; i++)
+        {
+            tempList.Add(i);
+        }
+        //using (new ProfilerMarker("ListRemoveAdvance").Auto())
+        //{
+        //    UnityUtility.ListRemoveAdvance(tempList, 1);//288b 2.25ms
+        //}
+
+        using (new ProfilerMarker("ListRemove").Auto())
+        {
+            tempList.Remove(1);//0 b 0.7ms
+        }
+
+
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            Debug.Log(tempList[i]);
+        }
     }
+
+    private void StructTest()
+    {
+        //类使用前必须new关键字实例化，Struct不需要
+        Vector2 vector2;
+        vector2.x = 1;
+        vector2.y = 1;
+        Debug.Log(vector2.ToString());//(1.0, 1.0)
+    }
+
 
     private void Update()
     {
@@ -73,6 +110,27 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         {
 
         }
+    }
+
+    /// <summary>
+    /// 判断两个矩形是否相交
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    private bool IsIntersect(Rect a, Rect b)
+    {
+        /*  
+        public RectTransform A;
+        public RectTransform B;
+        Rect a = new Rect(A.anchoredPosition.x, A.anchoredPosition.y, A.rect.width, A.rect.height);
+        Rect b = new Rect(B.anchoredPosition.x, B.anchoredPosition.y, B.rect.width, B.rect.height);
+        Debug.Log(a.Overlaps(b, true) + "===" + a.Overlaps(b, false) + "=====" + IsIntersect(a, b));
+         */
+        return b.xMax > a.xMin
+            && b.xMin < a.xMax
+            && b.yMax > a.yMin
+            && b.yMin < a.yMax;
     }
 
     public void OnDestroy()
@@ -209,7 +267,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         using (new ProfilerMarker("Marker_13").Auto())
         {
-            transform.GetChild(0).GetChild(1);//GC Alloc 0B  Time 0.9ms
+            //transform.GetChild(0);//GC Alloc 0B  Time 0.9ms
         };
 
 
@@ -221,6 +279,25 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         using (new ProfilerMarker("Marker_15").Auto())
         {
             transform.name = "1";//GC Alloc 0B
+        };
+
+        using (new ProfilerMarker("Marker_16").Auto())
+        {
+            Resources.Load<Texture>("ATM");// 50b
+        };
+
+        using (new ProfilerMarker("Marker_17").Auto())
+        {
+            GameObject.Instantiate(Original);//3.6kb  2ms
+        };
+
+
+        using (new ProfilerMarker("Marker_GetComponent").Auto())
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                var lab = GetComponent<Lab>();//
+            }
         };
     }
 

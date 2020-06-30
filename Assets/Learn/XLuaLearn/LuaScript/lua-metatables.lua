@@ -29,9 +29,9 @@ getmetatable(myTable) --这回返回mymetatable
 local a = {}
 local b = setmetatable({},{__index = a})
 a.i = 10
-print(b.i)
+print(b.i)--10
 b.i = 20
-print(a.i)
+print(a.i)--10
 ]]
 
 

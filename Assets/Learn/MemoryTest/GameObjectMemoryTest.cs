@@ -6,23 +6,22 @@ using UnityEngine.UI;
 
 public class GameObjectMemoryTest : MonoBehaviour
 {
-    public static GameObjectMemoryTest Instance;
-    private Action action;
+    
+ 
+    //非静态成员变量
+    //private Image _img;
+    //静态成员变量
+    private Image _img;
 
     private void Awake()
     {
-        Instance = this;
-        action = () =>
-        {
-            var texture = Resources.Load<Texture2D>("ATM");
-        };
-
-        action.Invoke();
+        _img = transform.Find("Image").GetComponent<Image>();
     }
+
 
     private void OnDestroy()
     {
-        Resources.UnloadUnusedAssets();
+    
     }
 
 
@@ -30,7 +29,8 @@ public class GameObjectMemoryTest : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            Resources.UnloadUnusedAssets();
+            
+
         }
         else if (Input.GetMouseButtonDown(2))
         {
@@ -38,4 +38,7 @@ public class GameObjectMemoryTest : MonoBehaviour
         }
 
     }
+
+    
 }
+
