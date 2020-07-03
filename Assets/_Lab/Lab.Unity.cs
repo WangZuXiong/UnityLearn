@@ -116,4 +116,57 @@ public partial class Lab : MonoBehaviour
         //RenderTexture.ReleaseTemporary(renderTexture);
     }
 
+
+
+    //声明一个协程
+    public IEnumerator Count(int i)
+    {
+        while (true)
+        {
+            i++;
+            Debug.Log(i);
+            yield return null;
+        }
+    }
+
+    //开启协程的方式1
+    void Start1()
+    {
+        StartCoroutine("Count", 0);
+    }
+    //停止协程的方式1
+    void Stop1()
+    {
+        StopCoroutine("Count");
+    }
+
+    //开启协程的方式2
+    IEnumerator routine;
+    void Start2()
+    {
+        routine = Count(0);
+        StartCoroutine(routine);
+    }
+    //停止协程的方式2
+    void Stop2()
+    {
+        StopCoroutine(coroutine);
+    }
+
+    //开启协程的方式3
+    Coroutine coroutine;
+    void Start3()
+    {
+        coroutine = StartCoroutine(Count(0));
+    }
+
+    //停止协程的方式3
+    void Stop3()
+    {
+        StopCoroutine(coroutine);
+    }
+
+
+
+
 }

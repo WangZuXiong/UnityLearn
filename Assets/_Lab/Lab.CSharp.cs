@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Cinemachine.Utility;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using UnityEngine;
 
 public partial class Lab : MonoBehaviour
@@ -307,6 +309,55 @@ public partial class Lab : MonoBehaviour
         Debug.LogError(n << 1);//十进制转化为二进制 2 = 10 ，1向左边移动1位，100，即4
         Debug.LogError(n << 2);//十进制转化为二进制 2 = 10 ，1向左边移动2位，1000，即8
         Debug.LogError(n << 3);//十进制转化为二进制 2 = 10 ，1向左边移动3位，10000，即16
+    }
+
+    /// <summary>
+    /// 反射程序集，调用其中的静态函数
+    /// </summary>
+    public void LoadAssemblyInvokeStaticMethod()
+    {
+        string assemblyPath = @"E:\wangzuxiong\Unity Project\UnityLearn\Library\ScriptAssemblies\Assembly-CSharp.dll";
+        string className = "Lab";
+        string methodName = "TestStaticMethod";
+        Assembly assembly = Assembly.LoadFile(assemblyPath);
+        Type type = assembly.GetType(className);
+        MethodInfo methodInfo = type.GetMethod(methodName);
+        methodInfo.Invoke(null, new object[] { 1 });
+    }
+
+    public static void TestStaticMethod(int x)
+    {
+        Debug.Log(x);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void LoadAssemblyInvokeMethod()
+    {
+        string assemblyPath = @"E:\wangzuxiong\Unity Project\UnityLearn\Library\ScriptAssemblies\Assembly-CSharp.dll";
+        string className = "Lab";
+        string methodName = "TestStaticMethod";
+        Assembly assembly = Assembly.LoadFile(assemblyPath);
+        Type type = assembly.GetType(className);
+
+      
+
+
+        
+
+    
+        //MethodInfo methodInfo = type.GetMethod(methodName);
+        //methodInfo.Invoke(null, new object[] { 1 });
+
+        var instance = Activator.CreateInstance(type);
+        (instance as type.AccessInternalField).TestMethod(1);
+    }
+
+
+    public  void TestMethod(int x)
+    {
+        Debug.Log(x);
     }
 
 

@@ -13,8 +13,11 @@ public class GameObjectMemoryTest : MonoBehaviour
     //静态成员变量
     private Image _img;
 
+
+    public static GameObjectMemoryTest Intsance;
     private void Awake()
     {
+        Intsance = this;
         _img = transform.Find("Image").GetComponent<Image>();
     }
 

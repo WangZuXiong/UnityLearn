@@ -19,6 +19,8 @@ using System.Collections;
 using System.Threading;
 using System.ComponentModel;
 using XLua.CSObjectWrap;
+using UnityEngine.Assertions.Must;
+using System.Xml.Serialization;
 
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
@@ -59,24 +61,29 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     }
 
 
-    public GameObject Original;
+    public GameObject Temp;
 
 
     private void Start()
     {
-        GCAPITest(1, 1, true);
+        //GCAPITest(1, 1, true);
 
 
+        LoadAssemblyInvokeMethod();
+    }
+
+    private void TestMyListRemove()
+    {
         List<int> tempList = new List<int>();
 
         for (int i = 0; i < 1000; i++)
         {
             tempList.Add(i);
         }
-        //using (new ProfilerMarker("ListRemoveAdvance").Auto())
-        //{
-        //    UnityUtility.ListRemoveAdvance(tempList, 1);//288b 2.25ms
-        //}
+        using (new ProfilerMarker("ListRemoveAdvance").Auto())
+        {
+            UnityUtility.ListRemoveAdvance(tempList, 1);//288b 2.25ms
+        }
 
         using (new ProfilerMarker("ListRemove").Auto())
         {
@@ -89,6 +96,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
             Debug.Log(tempList[i]);
         }
     }
+
 
     private void StructTest()
     {
@@ -104,11 +112,14 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     {
         if (Input.GetMouseButtonDown(1))
         {
+            Destroy(Temp);
+            Resources.UnloadUnusedAssets();
 
+            Debug.Log(">>>>> UnloadUnusedAssets");
         }
         else if (Input.GetMouseButtonDown(0))
         {
-
+            Stop3();
         }
     }
 
@@ -288,7 +299,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         using (new ProfilerMarker("Marker_17").Auto())
         {
-            GameObject.Instantiate(Original);//3.6kb  2ms
+            GameObject.Instantiate(Temp);//3.6kb  2ms
         };
 
 
@@ -298,6 +309,11 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
             {
                 var lab = GetComponent<Lab>();//
             }
+        };
+
+        using (new ProfilerMarker("Marker_Destroy").Auto())
+        {
+            Destroy(Temp);//0.6kb 0.42ms
         };
     }
 
