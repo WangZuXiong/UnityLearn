@@ -331,7 +331,7 @@ public partial class Lab : MonoBehaviour
     }
 
     /// <summary>
-    /// 
+    /// 反射程序集，调用其中的非静态函数
     /// </summary>
     public void LoadAssemblyInvokeMethod()
     {
@@ -340,18 +340,9 @@ public partial class Lab : MonoBehaviour
         string methodName = "TestStaticMethod";
         Assembly assembly = Assembly.LoadFile(assemblyPath);
         Type type = assembly.GetType(className);
-
-      
-
-
-        
-
-    
-        //MethodInfo methodInfo = type.GetMethod(methodName);
-        //methodInfo.Invoke(null, new object[] { 1 });
-
         var instance = Activator.CreateInstance(type);
-        (instance as type.AccessInternalField).TestMethod(1);
+        MethodInfo methodInfo = type.GetMethod(methodName);
+        methodInfo.Invoke(instance, new object[] { 1 });
     }
 
 
