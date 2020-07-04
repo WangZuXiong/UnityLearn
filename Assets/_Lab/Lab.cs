@@ -69,7 +69,31 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         //GCAPITest(1, 1, true);
 
 
-        LoadAssemblyInvokeMethod();
+        //LoadAssemblyInvokeMethod();
+    }
+
+
+    private int FindSecondMaxNum(int[] vs)
+    {
+        var max = int.MinValue;
+        var secondMax = int.MinValue;
+
+        for (int i = 0; i < vs.Length; i++)
+        {
+            if (vs[i] > max)
+            {
+                secondMax = max;
+                max = vs[i];
+            }
+            else
+            {
+                if (vs[i] > secondMax)
+                {
+                    secondMax = vs[i];
+                }
+            }
+        }
+        return secondMax;
     }
 
     private void TestMyListRemove()
@@ -108,8 +132,19 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     }
 
 
+    public Vector3 target;
+    public float speed;
+
+
+
     private void Update()
     {
+        if (Vector3.Distance(transform.position, target) > 1)
+        {
+            transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
+        }
+
+
         if (Input.GetMouseButtonDown(1))
         {
             Destroy(Temp);
