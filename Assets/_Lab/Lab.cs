@@ -1,76 +1,26 @@
-﻿using SimpleJSON;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.WebSockets;
-using System.Reflection;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.U2D;
 using UnityEngine.UI;
-using System.Linq;
-using UnityEngine.Profiling;
-using Unity.Profiling;
-using UnityEditor;
-using System.Text;
-using UnityEngine.Networking;
-using System.Collections;
-using System.Threading;
-using System.ComponentModel;
-using XLua.CSObjectWrap;
-using UnityEngine.Assertions.Must;
-using System.Xml.Serialization;
 
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
-    public LayerMask lm;
-    private WebSocket webSocket;
-    private StudentClass _student;
-    public AnimationCurve curve;
-    private FileStream fileStream;
-    [SerializeField] private List<int> Vs;
-
-    [SerializeField]
-    private Image _image;
-    [SerializeField]
-    private RawImage _rawImage;
-    [SerializeField]
-    public int X = 111;
-    [SerializeField]
-    public Lab RefLab;
-    public GameObject Cube;
-    public Texture2D texture2D;
-    public Transform Canvas;
-    public Vector3 _vector3;
-    public Matrix4x4 _matrix4X4;
-
     public int _tempValue;
-    public int TempValue
-    {
-        get
-        {
-            return _tempValue;
-        }
-
-        set
-        {
-            _tempValue = value;
-        }
-    }
-
-
-    public GameObject Temp;
-
 
     private void Start()
     {
-        //GCAPITest(1, 1, true);
-
-
-        //LoadAssemblyInvokeMethod();
+        Debug.Log(Mathf.Tan(Mathf.Deg2Rad * 30));
     }
+
+
 
 
     private int FindSecondMaxNum(int[] vs)
@@ -141,22 +91,44 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     {
         if (Vector3.Distance(transform.position, target) > 1)
         {
-            transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
+            // 1
+            //transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
+
+            // 2
+            //transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+
+            //3
+            //Vector3 translation = (target - transform.position).normalized;
+            //transform.Translate(translation * speed * Time.deltaTime);
+
+            //4
+            //transform.GetComponent<Rigidbody>().MovePosition(target);
+
+            //5
+            //Vector3 translation = (target - transform.position).normalized;
+            //transform.GetComponent<Rigidbody>().velocity = translation * speed * Time.deltaTime;
+
+
+
         }
+
 
 
         if (Input.GetMouseButtonDown(1))
         {
-            Destroy(Temp);
-            Resources.UnloadUnusedAssets();
+            BulletBehaviour();
 
-            Debug.Log(">>>>> UnloadUnusedAssets");
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            Stop3();
+            transform.position = Vector3.zero;
+            transform.rotation = Quaternion.identity;
         }
+
     }
+    [SerializeField]
+    private float _force = 500;
+
 
     /// <summary>
     /// 判断两个矩形是否相交
@@ -334,7 +306,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         using (new ProfilerMarker("Marker_17").Auto())
         {
-            GameObject.Instantiate(Temp);//3.6kb  2ms
+            //GameObject.Instantiate(Temp);//3.6kb  2ms
         };
 
 
@@ -348,12 +320,13 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         using (new ProfilerMarker("Marker_Destroy").Auto())
         {
-            Destroy(Temp);//0.6kb 0.42ms
+            //Destroy(Temp);//0.6kb 0.42ms
         };
     }
 
     private void GCTest()
     {
+        FileStream fileStream;
         fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
         fileStream = null;
         fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);

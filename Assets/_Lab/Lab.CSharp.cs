@@ -97,6 +97,24 @@ public partial class Lab : MonoBehaviour
         Debug.LogError(string.Join(",", vs));
     }
 
+    private void As_Test()
+    {
+
+        Animal dog = new Dog();
+
+        Debug.Log(dog is Animal);//True
+
+        Dog dog1 = new Dog();
+
+        Animal animal = dog1 as Animal;//多余的转换
+        Debug.Log(animal == null);//False
+
+        Animal animal1 = dog1 as Animal;//多余的转换
+        Debug.Log(animal == null);//False
+
+        Dog dog2 = animal as Dog;//向下转型
+        Debug.Log(dog2 == null);//False
+    }
 
     void GetHashCodeTest()
     {
