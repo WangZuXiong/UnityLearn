@@ -17,11 +17,11 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
-        Debug.Log(Mathf.Tan(Mathf.Deg2Rad * 30));
+        Debug.Log(Mathf.Tan(Mathf.Deg2Rad * 30));//30*Π/180
+
+
+        
     }
-
-
-
 
     private int FindSecondMaxNum(int[] vs)
     {
@@ -116,8 +116,10 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         if (Input.GetMouseButtonDown(1))
         {
-            BulletBehaviour();
+            //BulletBehaviour();
 
+
+            
         }
         else if (Input.GetMouseButtonDown(0))
         {
