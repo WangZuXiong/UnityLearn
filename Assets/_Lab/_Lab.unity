@@ -432,11 +432,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2101468433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a8461a94771b9c4685035dea6f621f3, type: 3}
+  m_Script: {fileID: 11500000, guid: a924fce614d779a47a26892ba3847f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tempValue: 0
-  target: {x: 0, y: 0, z: 0}
-  speed: 0
-  _force: 500
-  _bullet: {fileID: 0}

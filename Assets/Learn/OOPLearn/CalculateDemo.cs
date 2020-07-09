@@ -1,6 +1,7 @@
-﻿public class OOPLearn
-{
+﻿using UnityEngine;
 
+public class CalculateDemo : MonoBehaviour
+{
     public abstract class Calculate
     {
         public int Num1;
@@ -25,8 +26,6 @@
         }
     }
 
-
-
     /// <summary>
     /// 
     /// </summary>
@@ -47,13 +46,11 @@
         return calculate;
     }
 
-
-    public void Main(int num1, int num2, string operation)
+    public void Main1(int num1, int num2, string operation)
     {
         Calculate calculate = GetCalculate(operation);
         calculate.Num1 = num1;
         calculate.Num2 = num2;
         var result = calculate.Compute();
     }
-
 }
