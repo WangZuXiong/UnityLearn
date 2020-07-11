@@ -1,4 +1,4 @@
-﻿Shader "Hidden/4.ShaderFragment"
+﻿Shader "ShaderLearn/7.RiverDemo"//片段着色器的uv偏移
 {
     Properties
     {
@@ -41,9 +41,17 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
+                //fixed4 col = tex2D(_MainTex, i.uv);//i.uv 表示贴图的uv
+                //fixed4 col = tex2D(_MainTex, (0.5,0.5));//这取的是贴图的中心点
+
+                //_Time		自关卡加载以来的时间 (t/20, t, t*2, t*3)，用于将着色器中的内容动画化。
+                float2 tempUv = i.uv;
+                tempUv.x += _Time.y;
+                tempUv.y += _Time.y;
+
+                fixed4 col = tex2D(_MainTex, tempUv);
                 // just invert the colors
-                col.rgb = 1 - col.rgb;
+                //col.rgb = 1 - col.rgb;
                 return col;
             }
             ENDCG

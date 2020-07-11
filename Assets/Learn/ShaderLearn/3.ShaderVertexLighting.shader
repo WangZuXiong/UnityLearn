@@ -5,7 +5,6 @@
         _TestColor ("TestColor", Color) = (1,1,1,1)
         _Shininess ("光泽度数字", Range(0.01,1)) = 0.7 
         _SpecularColor ("镜面反射颜色",Color) = (1,1,1,1)
-        _MainTex ("Main Texture", 2D) = "white"  {}
     }
     SubShader
     {
@@ -37,11 +36,6 @@
             //此命令将镜面反射光照添加到着色器通道的末尾，因此镜面反射光照不受纹理影响。仅当使用 Lighting On 时才有效。
             SeparateSpecular On
 
-
-            SetTexture [_MainTex]
-            {
-                Combine texture * primary DOUBLE, texture * primary
-            }
         }
     }
 }
