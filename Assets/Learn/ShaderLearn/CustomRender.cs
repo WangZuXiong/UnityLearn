@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 屏幕后期特效
+/// </summary>
 public class CustomRender : MonoBehaviour
 {
     [SerializeField]
