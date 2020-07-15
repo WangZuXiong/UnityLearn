@@ -14,7 +14,7 @@
             Stencil 
             {
                 Ref 2
-                Comp Equal
+                Comp Equal//仅渲染参考值等于缓冲区值的像素。
             }
 
             CGPROGRAM

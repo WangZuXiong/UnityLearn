@@ -14,7 +14,7 @@
             Stencil 
             {
                 Ref 2
-                Comp NotEqual
+                Comp NotEqual//仅渲染参考值不同于缓冲区值的像素。
             }
 
             CGPROGRAM
