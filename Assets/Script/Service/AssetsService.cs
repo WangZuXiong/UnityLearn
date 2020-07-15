@@ -42,7 +42,7 @@ public class AssetsService : MonoBehaviour
             //Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero, 1f);
             //texture = null;
             action?.Invoke(texture);
-            
+
             if (cache)
             {
                 //写入本地
@@ -56,6 +56,33 @@ public class AssetsService : MonoBehaviour
         handler.Dispose();
     }
 
+    public Texture Texture;
+
+    public IEnumerator DownTexture(string url, bool cache)
+    {
+        //如果本地存在
+        //...
+        UnityWebRequest request = new UnityWebRequest(url);
+        DownloadHandlerTexture handler = new DownloadHandlerTexture(true);
+        request.downloadHandler = handler;
+        yield return request.SendWebRequest();
+
+        if (string.IsNullOrEmpty(request.error))
+        {
+            Texture = handler.texture;
+
+            if (cache)
+            {
+                //写入本地
+            }
+        }
+        else
+        {
+            Debug.LogError("DownTexture Error");
+        }
+        request.Dispose();
+        handler.Dispose();
+    }
 
     public IEnumerator DownAssetBundle<T>(string resName, string url) where T : UnityEngine.Object
     {

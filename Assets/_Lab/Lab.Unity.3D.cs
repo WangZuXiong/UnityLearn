@@ -32,4 +32,22 @@ public partial class Lab : MonoBehaviour
         Vector3 force = new Vector3(0, Mathf.Tan(Mathf.Deg2Rad * 30), 1).normalized;
         cube.AddComponent<Rigidbody>().AddForce(force * _force);
     }
+
+    /// <summary>
+    /// 角度和弧度之间的关系
+    /// </summary>
+    void DegAndRad()
+    {
+
+        //角度：degree
+        //弧度：radian
+
+        //角度——>弧度   Mathf.Deg2Rad = (float)Math.PI / 180f
+
+        //角度30转化为弧度     Mathf.Deg2Rad * 30 即 (30 * Math.PI) / 180 = 0.52
+
+        //弧度——>角度   Mathf.Rad2Deg = 57.29578f = 180 / Math.PI
+
+        //弧度0.52转化为角度       Mathf.Rad2Deg * 0.52 即 (0.52 * 180) / Math.PI = 29.8
+    }
 }

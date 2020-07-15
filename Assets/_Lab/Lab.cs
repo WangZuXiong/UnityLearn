@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Unity.Profiling;
@@ -17,10 +18,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
-        Debug.Log(Mathf.Tan(Mathf.Deg2Rad * 30));//30*Π/180
-
-
-        
+      
     }
 
     private int FindSecondMaxNum(int[] vs)
@@ -119,7 +117,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
             //BulletBehaviour();
 
 
-            
+
         }
         else if (Input.GetMouseButtonDown(0))
         {
@@ -581,32 +579,11 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.Log(222);
     }
 
-    static Task GetData()
-    {
-        Debug.Log(000);
-        return null;
-    }
-
-    static Task<T> GetData<T>(int a)
-    {
-        Debug.Log(111);
-        return null;
-    }
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         //throw new System.NotImplementedException();
     }
 
-    public async Task SetAsync()
-    {
-        Debug.Log(00000000000000);
-
-
-        await Task.Delay(4 * 1000);
-
-        Debug.Log(1111);
-    }
 
     private void Texture2DTest()
     {

@@ -39,17 +39,17 @@ public class TextureMemoryTest : MonoBehaviour
         //- 需要对Image.sprite或者RawImage.texture置空，置空之后下载下来的texture没有引用之后调用Resources.UnloadUnusedAssets才能被unload。不是对Image或者RawImage置空
 
         //_img = transform.Find("Image").GetComponent<Image>();
-        var path = "http://192.168.1.243:8082/basketball/my_team_logo/dh6.png";
+        //var path = "http://192.168.1.243:8082/basketball/my_team_logo/dh6.png";
 
         //StartCoroutine(AssetsService.Instance.DownTexture(path, false, (t) =>
         //{
         //    //transform.Find("Image").GetComponent<Image>().sprite = t;
         //    _tempSprite = t;
         //}));
-        StartCoroutine(AssetsService.Instance.DownTexture(path, false, (t) =>
-        {
-            _tempTexture = t;
-        }));
+        //StartCoroutine(AssetsService.Instance.DownTexture(path, false, (t) =>
+        //{
+        //    _tempTexture = t;
+        //}));
         //_tempTexture = Resources.Load<Texture>("ATM");
 
 
@@ -63,7 +63,37 @@ public class TextureMemoryTest : MonoBehaviour
 
         //_cubeOriginal = Resources.Load<GameObject>("Cube");
         //Instantiate(Resources.Load<GameObject>("Cube"), transform);
+
+
+
+        //InitImage();
+
+        InitImageAdvance();
     }
+
+
+    private void InitImage()
+    {
+        var path = "http://192.168.1.243:8082/basketball/my_team_logo/dh6.png";
+
+        StartCoroutine(AssetsService.Instance.DownTexture(path, false, (t) =>
+        {
+            GetComponent<RawImage>().texture = t;
+        }));
+    }
+
+
+    private async void InitImageAdvance()
+    {
+        var path = "http://192.168.1.243:8082/basketball/my_team_logo/dh6.png";
+
+        //await AwaitExtensions.GetAwaiter(AssetsService.Instance.DownTexture(path, false));
+
+        //GetComponent<RawImage>().texture = AssetsService.Instance.Texture;
+    }
+
+
+
 
 
     private void Update()
