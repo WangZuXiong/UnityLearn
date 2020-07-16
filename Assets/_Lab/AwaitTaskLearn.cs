@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -41,4 +43,23 @@ public class AwaitTaskLearn : MonoBehaviour
         Debug.Log(contents);
         return contents.Length;
     }
+
+
+    private IEnumerator enumerator()
+    {
+        yield return new WaitForUpdate();
+    }
+}
+
+
+
+public class MyClass : IAsyncResult
+{
+    public object AsyncState => throw new NotImplementedException();
+
+    public WaitHandle AsyncWaitHandle => throw new NotImplementedException();
+
+    public bool CompletedSynchronously => throw new NotImplementedException();
+
+    public bool IsCompleted => throw new NotImplementedException();
 }

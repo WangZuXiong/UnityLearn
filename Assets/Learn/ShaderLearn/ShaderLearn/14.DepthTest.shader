@@ -6,8 +6,8 @@
     }
     SubShader
     {
-        // No culling or depth
-        Cull Off ZWrite Off ZTest Always
+        ZWrite Off
+        ZTest Always
 
         //ZWrite On //是否将要渲染的物体写入深度缓冲区（GBuffer）
         //ZWrite Off //不往深度缓冲区写入深度值
@@ -23,6 +23,18 @@
         //ZWrite On    ZTest不通过   该像素的深度不能写入深度缓存   该颜色不会写入颜色缓存
         //ZWrite Off   ZTest通过     该像素的深度不能写入深度缓存   该颜色会写入颜色缓存
         //ZWrite Off   ZTest不通过   该像素的深度不能写入深度缓存   该颜色不会写入颜色缓存
+
+
+        //Offset Factor,Util 这个指令是做微调的
+        //允许使用两个参数指定深度偏移：_factor_ 和 units。
+        //Factor 相对于多边形的 X 或 Y 缩放最大 Z 斜率，而 units 缩放最小可分辨深度缓冲区值。
+        //因此可强制将一个多边形绘制在另一个多边形上，尽管它们实际上位于相同位置。例如，Offset 0, -1 将多边形拉近摄像机并忽略多边形的斜率，而  Offset -1, -1 在观察掠射角时进一步拉近多边形。
+
+
+
+
+
+
         Pass
         {
             CGPROGRAM

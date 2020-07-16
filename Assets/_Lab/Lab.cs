@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.ResourceManagement;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
@@ -568,16 +567,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     //    FileUtility.WriteTextToLaocal(localPath, fileName, content);
     //}
-
-
-    [ContextMenu("Play")]
-
-    public async static void GetInfoAsync()
-    {
-        await GetData();
-        await GetData<int>(1);
-        Debug.Log(222);
-    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
