@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Unity.Profiling;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.ResourceManagement;
@@ -17,9 +18,13 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
-      
+        TimeSpan now = new TimeSpan(DateTime.Now.Ticks);
+        TimeSpan temp= new TimeSpan(new DateTime(1970, 1, 1).Ticks);
+        TimeSpan result = now.Subtract(temp);
+        Debug.Log(result.Days);
     }
 
+  
     private int FindSecondMaxNum(int[] vs)
     {
         var max = int.MinValue;
