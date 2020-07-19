@@ -9,7 +9,9 @@
         // No culling or depth
         //Cull Off ZWrite Off ZTest Always
         //Blend SrcAlpha OneMinusSrcAlpha 
-        
+
+        //BlendOp Min
+        BlendOp Max
         Pass
         {
             CGPROGRAM
@@ -58,4 +60,11 @@
     Blend OneMinusDstColor One // 软加法
     Blend DstColor Zero // 乘法
     Blend DstColor SrcColor // 2x 乘法
+
+
+    BlendOp 指定将要渲染的像素和GBuffer里面的像素进行逻辑运算
+    当这个指令存在，Blend 这个指令就会被忽略
+
+    BlendOp Op：不将混合颜色相加，而是对它们执行不同的操作。
+    BlendOp OpColor, OpAlpha：同上，但是对颜色 (RGB) 通道和 Alpha (A) 通道使用不同的混合操作。
 */
