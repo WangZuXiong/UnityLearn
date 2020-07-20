@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TestMaterial
-  m_Shader: {fileID: 4800000, guid: a4b46e58862bf0a43a95928f2d4cb3f9, type: 3}
+  m_Shader: {fileID: 4800000, guid: 0c2539f59bb6b8742b06a2293f2d2657, type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -20,7 +20,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 64b5cb8d0be820d4ab43e2694db02a75, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Bumpmap:
+        m_Texture: {fileID: 2800000, guid: 3b5b7be0f2332c24f89a2af018daa62d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 8900000, guid: 64411067c1fca944181ab19917fd3309, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Detail:
+        m_Texture: {fileID: 2800000, guid: 3b5b7be0f2332c24f89a2af018daa62d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 2b9d11ae541357c44b84bb3d9537bbb0, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -62,6 +74,7 @@ Material:
     m_Floats:
     - _ARange: 1
     - _AlphaCut: 0.276
+    - _Amount: -0.04
     - _BumpScale: 1
     - _ColorMask: 15
     - _Cutoff: 0.5
@@ -79,6 +92,7 @@ Material:
     - _Offeset: 0
     - _OffesetWithNormal: -0.34
     - _Parallax: 0.02
+    - _RimPower: 3.72
     - _Scale: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -95,7 +109,11 @@ Material:
     - _UseUIAlphaClip: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Albedo: {r: 1, g: 0.1416246, b: 0, a: 1}
+    - _Color: {r: 1, g: 0, b: 0.012341499, a: 1}
+    - _ColorTint: {r: 0, g: 0.7416246, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FogColor: {r: 0, g: 1, b: 0.099999905, a: 1}
     - _LineColor: {r: 0.01234436, g: 1, b: 0, a: 1}
+    - _RimColor: {r: 0.29411352, g: 0.9056604, b: 0.18369527, a: 1}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}

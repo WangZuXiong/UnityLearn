@@ -24,7 +24,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         Debug.Log(result.Days);
     }
 
-  
+
     private int FindSecondMaxNum(int[] vs)
     {
         var max = int.MinValue;

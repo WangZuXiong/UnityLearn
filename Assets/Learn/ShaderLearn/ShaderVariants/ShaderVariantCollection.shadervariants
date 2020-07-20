@@ -37,3 +37,9 @@ ShaderVariantCollection:
         passType: 0
       - keywords: CC D GG
         passType: 0
+  - first: {fileID: 4800000, guid: aad89b4eab95d024286655eaf5bacec2, type: 3}
+    second:
+      variants: []
+  - first: {fileID: 4800000, guid: b9cd18904ec6d844fbefcf7258fe563e, type: 3}
+    second:
+      variants: []
