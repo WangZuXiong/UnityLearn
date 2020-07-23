@@ -22,6 +22,9 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         TimeSpan temp= new TimeSpan(new DateTime(1970, 1, 1).Ticks);
         TimeSpan result = now.Subtract(temp);
         Debug.Log(result.Days);
+
+
+        Func();
     }
 
 
@@ -595,5 +598,16 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         var temp = new Rect(x, y, width, height);
         return temp.Contains(Input.mousePosition);
+    }
+
+
+    public Transform A;
+    public Transform B;
+
+
+    [ContextMenu("Test")]
+    private void Func()
+    {
+
     }
 }

@@ -38,6 +38,16 @@ public partial class Lab : MonoBehaviour
 
         Debug.Log(cube.InverseTransformPoint(sphere.position));
         Debug.Log(sphere.InverseTransformPoint(cube.position));
+
+
+
+        //将位置从世界空间转换到局部空间。
+        //Debug.Log(A.InverseTransformPoint(B.position));
+        //Debug.Log(A.TransformPoint(B.localPosition));
+
+        //将向量从世界空间变换到局部空间。
+        //Debug.Log(A.InverseTransformVector(B.position));//(849.0, 375.0, 0.0)    (375.0, -849.0, 0.0)
+        //Debug.Log(A.TransformVector(B.localPosition));
     }
 
     private void RenderMaterialTest()
