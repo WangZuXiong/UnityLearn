@@ -4,7 +4,7 @@
 
 //下面是一个根据与屏幕中心的距离应用雾效色调的着色器。
 //此着色器将顶点修改器与自定义顶点数据 (fog) 和最终颜色修改器组合在一起。用于前向渲染附加通道时，雾效需要淡化为黑色。此示例将解决这一问题并检查是否有 UNITY_PASS_FORWARDADD。
-Shader "Custom/13"
+Shader "SurfaceShaderExamples/13.FogViaFinalColor"
 {
     Properties
     {

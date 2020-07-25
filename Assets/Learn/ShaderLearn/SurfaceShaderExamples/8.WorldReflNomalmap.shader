@@ -1,5 +1,5 @@
 ﻿//如果您想做一些受法线贴图影响的反射，需要稍微复杂一些：需要将 INTERNAL_DATA 添加到 Input 结构，并使用 WorldReflectionVector 函数在写入法线输出后计算每像素反射矢量。
-Shader "Custom/8.WorldReflNomalmap"
+Shader "SurfaceShaderExamples/8.WorldReflNomalmap"
 {
     Properties
     {

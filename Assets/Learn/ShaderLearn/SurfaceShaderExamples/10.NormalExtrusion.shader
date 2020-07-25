@@ -3,7 +3,7 @@
 //这可用于程序化动画和沿法线挤出等操作。
 //表面着色器编译指令 vertex:functionName 将用于此目的，其中的一个函数采用 inout appdata_full 参数。
 //以下着色器沿着法线按照材质中指定的量移动顶点：
-Shader "Custom/10.NormalExtrusion"
+Shader "SurfaceShaderExamples/10.NormalExtrusion"
 {
     Properties
     {

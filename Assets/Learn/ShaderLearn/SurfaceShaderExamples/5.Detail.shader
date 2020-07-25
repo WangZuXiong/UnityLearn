@@ -1,6 +1,6 @@
 ﻿//细节纹理
 //为获得不同效果，让我们添加一个与基础纹理结合的细节纹理。细节纹理通常在材质中使用相同的 UV，但使用不同平铺，因此我们需要使用不同的输入 UV 坐标。
-Shader "Custom/Detail"
+Shader "SurfaceShaderExamples/Detail"
 {
     Properties
     {

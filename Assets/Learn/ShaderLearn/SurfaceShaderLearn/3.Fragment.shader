@@ -13,6 +13,8 @@
         Tags { "RenderType"="Opaque" }
         LOD 200
 
+        Cull Off
+
         CGPROGRAM
         #pragma surface surf Lambert
 
@@ -41,6 +43,10 @@
             */
 
         };
+
+        UNITY_INSTANCING_BUFFER_START(Props)
+           
+        UNITY_INSTANCING_BUFFER_END(Props)
 
         void surf (Input IN, inout SurfaceOutput o)
         {

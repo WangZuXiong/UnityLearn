@@ -1,6 +1,6 @@
 ﻿//屏幕空间中的细节纹理
 //屏幕空间中的细节纹理对于士兵头部模型没有实际意义，但是在这里可用于说明如何使用内置的 screenPos 输入：
-Shader "Custom/6.ScreenPos"
+Shader "SurfaceShaderExamples/6.ScreenPos"
 {
     Properties
     {

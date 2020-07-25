@@ -1,6 +1,6 @@
 ﻿//通过世界空间位置进行的切片
 //下面的着色器通过丢弃几乎水平的环形中的像素来对游戏对象“切片”。为实现此效果，它使用了基于像素世界位置的 Cg/HLSL 函数 clip()。我们将使用内置的表面着色器变量 worldPos。
-Shader "Custom/9.Slices"
+Shader "SurfaceShaderExamples/9.Slices"
 {
     Properties
     {

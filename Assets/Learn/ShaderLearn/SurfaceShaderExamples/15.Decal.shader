@@ -3,7 +3,7 @@
 //贴花在延迟渲染中特别有用，因为贴花在照亮之前会改变 G 缓冲区，因此可以节省开销。
 
 //在常规情况下，贴花应该在不透明对象之后渲染，并且不应该是阴影投射物，如以下示例中的 ShaderLab“Tags”中所示。
-Shader "Custom/15.Decal"
+Shader "SurfaceShaderExamples/15.Decal"
 {
     Properties
     {

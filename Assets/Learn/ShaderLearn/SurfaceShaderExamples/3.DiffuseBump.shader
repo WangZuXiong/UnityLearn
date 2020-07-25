@@ -1,5 +1,5 @@
 ﻿//法线贴图
-Shader "Custom/DiffuseBump"
+Shader "SurfaceShaderExamples/DiffuseBump"
 {
     Properties
     {

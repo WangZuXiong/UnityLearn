@@ -5,7 +5,7 @@
 
 //注意：以这种方式使用的自定义输入成员不得包含以“uv”开头的名称，否则它们将无法正常工作。
 //下面的示例定义了一个在顶点函数中计算的自定义 float3 customColor 成员：
-Shader "Custom/11.CustomVertexData"
+Shader "SurfaceShaderExamples/11.CustomVertexData"
 {
     Properties
     {

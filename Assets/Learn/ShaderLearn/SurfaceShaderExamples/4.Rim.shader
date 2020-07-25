@@ -1,5 +1,5 @@
 ﻿//边缘光照
-Shader "Custom/Rim"
+Shader "SurfaceShaderExamples/Rim"
 {
     Properties
     {

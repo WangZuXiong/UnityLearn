@@ -34,7 +34,7 @@
             o.Albedo =  tex2D (_MainTex, IN.uv_MainTex).rgb;
             float3 tempNormal = UnpackNormal(tex2D (_NormalTex, IN.uv_NormalTex));
             o.Normal = tempNormal;
-            o.Emission = (1 - dot(IN.viewDir,clamp(tempNormal,0,1))) * _LinePower * _Color;//1-x 取反
+            //o.Emission = (1 - dot(IN.viewDir,clamp(tempNormal,0,1))) * _LinePower * _Color;//1-x 取反
 
             o.Emission =  pow((1 - dot(IN.viewDir,clamp(tempNormal,0,1))),_LinePower) * _Color;
 

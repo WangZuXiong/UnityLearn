@@ -1,4 +1,4 @@
-﻿Shader "SurfaceShaderLearn/Vertex"//顶点着色器
+﻿Shader "SurfaceShaderLearn/2.Vertex"//顶点着色器
 {
     Properties
     {

@@ -2,7 +2,7 @@
 //可以使用“最终颜色修改器”函数来修改着色器计算的最终颜色。
 //表面着色器编译指令 finalcolor:functionName 将用于此目的，其中的一个函数采用 Input IN, SurfaceOutput o, inout fixed4 color 参数。
 //下面是一个简单的着色器，它将色调应用于最终颜色。这与仅对表面反照率颜色应用色调不同：此色调还会影响来自光照贴图、光照探针和类似额外来源的任何颜色。
-Shader "Custom/12.TintFinalColor"
+Shader "SurfaceShaderExamples/12.TintFinalColor"
 {
     Properties
     {

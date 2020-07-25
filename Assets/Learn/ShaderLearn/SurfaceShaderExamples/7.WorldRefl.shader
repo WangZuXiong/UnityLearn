@@ -1,6 +1,6 @@
 ﻿//立方体贴图反射
 //下面的着色器将使用内置 worldRefl 输入来进行立方体贴图反射。它与内置的反射/漫射着色器非常类似：
-Shader "Custom/7.WorldRefl"
+Shader "SurfaceShaderExamples/7.WorldRefl"
 {
     Properties
     {

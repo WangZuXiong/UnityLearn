@@ -1,5 +1,5 @@
 ﻿//线性雾效
-Shader "Custom/14.LinearFog"
+Shader "SurfaceShaderExamples/14.LinearFog"
 {
     Properties
     {
