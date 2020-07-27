@@ -12,10 +12,9 @@
         Pass
         {
             CGPROGRAM
-            #pragma vertex vert     //定义一个顶点着色器的入口函数
-            #pragma fragment frag       //定义一个片段着色器的入口函数
-
-            #include "UnityCG.cginc"        //引入库 D:\Unity\2018.4.0f1\Editor\Data\CGIncludes\UnityCG.cginc
+            #pragma vertex vert         //#pragma vertex name 表示代码包含给定函数中的顶点程序（此处为 __vert__）。   //定义一个顶点着色器的入口函数
+            #pragma fragment frag       //#pragma fragment name 表示代码包含给定函数中的片元程序（此处为 __frag__）。 //定义一个片段着色器的入口函数
+            #include "UnityCG.cginc"    //编译之后的指令只是普通的 Cg/HLSL 代码。我们首先包含一个内置 include 文件：   //引入库 D:\Unity\2018.4.0f1\Editor\Data\CGIncludes\UnityCG.cginc
 
             struct appdata
             {
