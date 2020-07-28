@@ -76,7 +76,7 @@ public class TextureMemoryTest : MonoBehaviour
     {
         var path = "http://192.168.1.243:8082/basketball/my_team_logo/dh6.png";
 
-        StartCoroutine(AssetsService.Instance.DownTexture(path, false, (t) =>
+        StartCoroutine(LoadAssetManager.Instance.DownTexture(path, false, (t) =>
         {
             GetComponent<RawImage>().texture = t;
         }));
