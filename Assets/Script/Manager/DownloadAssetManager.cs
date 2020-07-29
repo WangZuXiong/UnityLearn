@@ -19,6 +19,8 @@ public class DownloadAssetManager
         }
     }
 
+    private DownloadAssetManager() { }
+
     public IEnumerator DownloadText(string url, Action<string> successCallback, Action errorCallback)
     {
         using (UnityWebRequest uwr = UnityWebRequest.Get(url))
@@ -73,6 +75,7 @@ public class DownloadAssetManager
 
             using (UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(url, config.Version, 0))
             {
+                uwr.timeout = 5;
                 yield return uwr.SendWebRequest();
 
                 if (uwr.isNetworkError || uwr.isHttpError)
