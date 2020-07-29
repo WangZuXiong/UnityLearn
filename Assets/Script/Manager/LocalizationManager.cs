@@ -81,23 +81,23 @@ public class LocalizationManager
     /// <param name="module">模块</param>
     private void LoadLanguage(Module module)
     {
-        string path = BASTEPATH + module.ToString() + "/" + "ChineseSimplified";
-        TextAsset textAsset = LoadAssetManager.Instance.LoadAsset<TextAsset>(path);
-        if (textAsset == null)
-        {
-            Debug.LogError("确实语言配置文件:" + path);
-            return;
-        }
-        LanguageList languageList = JsonUtility.FromJson<LanguageList>(textAsset.ToString());
+        //string path = BASTEPATH + module.ToString() + "/" + "ChineseSimplified";
+        //TextAsset textAsset = DownloadAssetManager.Instance.LoadAsset<TextAsset>(path);
+        //if (textAsset == null)
+        //{
+        //    Debug.LogError("确实语言配置文件:" + path);
+        //    return;
+        //}
+        //LanguageList languageList = JsonUtility.FromJson<LanguageList>(textAsset.ToString());
 
-        Dictionary<string, string> dict = new Dictionary<string, string>();
-        for (int i = 0; i < languageList.languages.Count; i++)
-        {
-            string key = languageList.languages[i].key;
-            string value = languageList.languages[i].value;
-            dict.Add(key, value);
-        }
-        _languageDict.Add(module, dict);
+        //Dictionary<string, string> dict = new Dictionary<string, string>();
+        //for (int i = 0; i < languageList.languages.Count; i++)
+        //{
+        //    string key = languageList.languages[i].key;
+        //    string value = languageList.languages[i].value;
+        //    dict.Add(key, value);
+        //}
+        //_languageDict.Add(module, dict);
     }
 
     public void Clear()

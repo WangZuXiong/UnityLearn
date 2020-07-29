@@ -10,6 +10,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.ResourceManagement;
 using UnityEngine.U2D;
 using UnityEngine.UI;
+using static DownloadAssetManager;
 
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
@@ -19,12 +20,29 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     private void Start()
     {
         TimeSpan now = new TimeSpan(DateTime.Now.Ticks);
-        TimeSpan temp= new TimeSpan(new DateTime(1970, 1, 1).Ticks);
+        TimeSpan temp = new TimeSpan(new DateTime(1970, 1, 1).Ticks);
         TimeSpan result = now.Subtract(temp);
         Debug.Log(result.Days);
-
-
         Func();
+
+
+        AssetConfig assetConfig = new AssetConfig();
+        assetConfig.BaseUrl = "http://192.168.1.243:8082/basketball";
+        assetConfig.RelativeUrl = "theme_activity/configure/Android";
+        assetConfig.FileName = "3";
+        assetConfig.Version = 3;
+
+
+        MonoObject.Instance.StartCoroutine(DownloadAssetManager.Instance.DownloadAssetBundle(assetConfig, (t) =>
+        {
+            GameObject.Instantiate(t.LoadAllAssets<GameObject>()[0], transform);
+        }, null));
+
+        var path = "http://192.168.1.243:8082/basketball/theme_activity/configure/ThemeActivityConfig_1.json";
+        MonoObject.Instance.StartCoroutine(DownloadAssetManager.Instance.DownloadText(path, (t) =>
+        {
+            Debug.Log(t);
+        }, null));
     }
 
 
@@ -94,37 +112,12 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, target) > 1)
-        {
-            // 1
-            //transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
-
-            // 2
-            //transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-
-            //3
-            //Vector3 translation = (target - transform.position).normalized;
-            //transform.Translate(translation * speed * Time.deltaTime);
-
-            //4
-            //transform.GetComponent<Rigidbody>().MovePosition(target);
-
-            //5
-            //Vector3 translation = (target - transform.position).normalized;
-            //transform.GetComponent<Rigidbody>().velocity = translation * speed * Time.deltaTime;
-
-
-
-        }
-
+        //Move();
 
 
         if (Input.GetMouseButtonDown(1))
         {
             //BulletBehaviour();
-
-
-
         }
         else if (Input.GetMouseButtonDown(0))
         {

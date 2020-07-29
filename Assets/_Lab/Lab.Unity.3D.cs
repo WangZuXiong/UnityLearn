@@ -50,4 +50,40 @@ public partial class Lab : MonoBehaviour
 
         //弧度0.52转化为角度       Mathf.Rad2Deg * 0.52 即 (0.52 * 180) / Math.PI = 29.8
     }
+
+
+    void Move()
+    {
+        if (Vector3.Distance(transform.position, target) > 1)
+        {
+            // 1
+            //transform.position = Vector3.Lerp(transform.position, target, speed * Time.deltaTime);
+
+            // 2
+            //transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+
+            //3
+            //Vector3 translation = (target - transform.position).normalized;
+            //transform.Translate(translation * speed * Time.deltaTime);
+
+            //4
+            //transform.GetComponent<Rigidbody>().MovePosition(target);
+
+            //5
+            //Vector3 translation = (target - transform.position).normalized;
+            //transform.GetComponent<Rigidbody>().velocity = translation * speed * Time.deltaTime;
+
+            //匀变速直线运动
+            _t += Time.deltaTime;
+            transform.position = transform.position + new Vector3(_speed * _t + 0.5f * _a * Mathf.Pow(_t, 2), 0, 0);
+        }
+    }
+
+
+    [SerializeField]
+    private float _speed;
+    [SerializeField]
+    private float _a;
+    [SerializeField]
+    private float _t;
 }

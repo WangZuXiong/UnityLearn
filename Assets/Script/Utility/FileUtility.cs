@@ -29,7 +29,7 @@ public class FileUtility
 
     public static void WriteTextToLocal1(string path, string fileName, string content)
     {
-        File.WriteAllText(path, content);
+        File.WriteAllText(path + "/" + fileName, content);
     }
 }
 

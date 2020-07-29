@@ -1,14 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using EditorFramework;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UGUIAdvance : MonoBehaviour
+public class EditorTool : MonoBehaviour
 {
 
-    [MenuItem("GameObject/UI/Image_NoRaycastTarget")]
-    static void CreatImage()
+    [MenuItem("GameObject/UI/Custom Image")]
+    static void CreatCustomImage()
     {
         if (Selection.activeTransform)
         {
@@ -24,26 +27,8 @@ public class UGUIAdvance : MonoBehaviour
         }
     }
 
-    [MenuItem("GameObject/UI/Image", true)]
-    static void CreatNoRaycastTargetImage()
-    {
-        if (Selection.activeTransform)
-        {
-            if (Selection.activeTransform.GetComponentInParent<Canvas>())
-            {
-                GameObject go = new GameObject("Image", typeof(Image));
-                go.GetComponent<Image>().raycastTarget = false;
-                go.transform.SetParent(Selection.activeTransform);
-                go.transform.localScale = Vector3.one;
-                go.transform.localPosition = Vector3.zero;
-                go.layer = Selection.activeTransform.gameObject.layer;
-            }
-        }
-    }
-
-
-    [MenuItem("GameObject/UI/Text_NoRaycastTarget")]
-    static void CreatText()
+    [MenuItem("GameObject/UI/Custom Text")]
+    static void CreateCustomText()
     {
         if (Selection.activeTransform)
         {
@@ -64,8 +49,8 @@ public class UGUIAdvance : MonoBehaviour
         }
     }
 
-    [MenuItem("GameObject/Copy Path", false, 21)]
-    static void OutputNodePath2()
+    [MenuItem("GameObject/Copy Transform Path", false, 21)]
+    static void CopyTransformPath()
     {
         Transform selectedTransform = Selection.activeTransform;
         string prefabRoot = selectedTransform.GetNodePath();
@@ -91,7 +76,7 @@ public class UGUIAdvance : MonoBehaviour
         for (int i = 0; i < btns.Length; i++)
         {
             var path = GetTransformFullPath(temp, btns[i].transform);
-            var str = string.Format("Button {0} = transform.Find(\"{1}\").GetComponent<Button>();", btns[i].transform.name, path);
+            var str = string.Format("Button {0} = transform.Find(\"{1}\").GetComponent<Button>();\n{0}.onClick.AddListener(On{0}Click);", btns[i].transform.name, path);
             vs.Add(str);
         }
         var result = string.Join("\n", vs.ToArray());
@@ -102,6 +87,14 @@ public class UGUIAdvance : MonoBehaviour
         };
         textEditor.OnFocus();
         textEditor.Copy();
+    }
+
+    [MenuItem("Tools/Find Target Prefabs")]
+    static void FindTargetPrefabs()
+    {
+        var path = Application.dataPath + "/Resources";
+        var outputPaths = Directory.GetFiles(path, "*.prefab", SearchOption.AllDirectories);
+        FileUtility.WriteTextToLocal1(Application.dataPath, "PrefabsPaths.txt", string.Join("\n", outputPaths.ToArray()));
     }
 
 
