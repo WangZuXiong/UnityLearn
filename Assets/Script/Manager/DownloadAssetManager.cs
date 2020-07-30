@@ -5,23 +5,28 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class DownloadAssetManager
+public static class DownloadAssetManager
 {
-    private static DownloadAssetManager _instance;
-    public static DownloadAssetManager Instance
+    private static DownloadAssetImpl _downloadAssetImpl = new DownloadAssetImpl();
+
+    public static void DownloadAssetBundleAsync(AssetBundleConfig config, Action<AssetBundle> successCallback, Action errorCallback)
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new DownloadAssetManager();
-            }
-            return _instance;
-        }
+        MonoObject.Instance.StartCoroutine(_downloadAssetImpl.DownloadAssetBundle(config, successCallback, errorCallback));
     }
 
-    private DownloadAssetManager() { }
+    public static void DownloadTextAsync(string url, Action<string> successCallback, Action errorCallback)
+    {
+        MonoObject.Instance.StartCoroutine(_downloadAssetImpl.DownloadText(url, successCallback, errorCallback));
+    }
 
+    public static void DownloadTextureAsync(string url, Action<Texture2D> successCallback, Action errorCallback)
+    {
+        MonoObject.Instance.StartCoroutine(_downloadAssetImpl.DownloadTexture(url, successCallback, errorCallback));
+    }
+}
+
+public class DownloadAssetImpl
+{
     public IEnumerator DownloadText(string url, Action<string> successCallback, Action errorCallback)
     {
         using (UnityWebRequest uwr = UnityWebRequest.Get(url))
@@ -60,13 +65,8 @@ public class DownloadAssetManager
         }
     }
 
-
-
-
-
     //Caching 类用于管理使用 UnityWebRequestAssetBundle.GetAssetBundle() 下载的缓存 AssetBundle。
-
-    public IEnumerator DownloadAssetBundle(AssetConfig config, Action<AssetBundle> successCallback, Action errorCallback)
+    public IEnumerator DownloadAssetBundle(AssetBundleConfig config, Action<AssetBundle> successCallback, Action errorCallback)
     {
         var cachePath = string.Format("{0}/{1}", Application.persistentDataPath, config.RelativeUrl);
 
@@ -100,7 +100,6 @@ public class DownloadAssetManager
         }
     }
 
-
     private bool TryGetCacheByPath(string path, out Cache cache)
     {
         if (!Directory.Exists(path))
@@ -129,17 +128,17 @@ public class DownloadAssetManager
         cache = tempCache;
         return true;
     }
-
-
-    public struct AssetConfig
-    {
-        public string BaseUrl;
-        public string RelativeUrl;
-        public string FileName;
-        public uint Version;
-    }
 }
 
+
+
+public struct AssetBundleConfig
+{
+    public string BaseUrl;
+    public string RelativeUrl;
+    public string FileName;
+    public uint Version;
+}
 
 /*
         CachedAssetBundle cachedAssetBundle = new CachedAssetBundle();

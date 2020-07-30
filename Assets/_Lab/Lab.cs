@@ -10,14 +10,23 @@ using UnityEngine.EventSystems;
 using UnityEngine.ResourceManagement;
 using UnityEngine.U2D;
 using UnityEngine.UI;
-using static DownloadAssetManager;
+using UnityEngine.AddressableAssets;
+using System.Threading.Tasks;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using System.Collections;
 
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
     public int _tempValue;
-    SpriteAtlas _spriteAtlas;
-    private async void Start()
+    private void Start()
+    {
+        //[RuntimeInitializeOnLoadMethod]
+        //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+
+    }
+
+    void LoadAssetbundle()
     {
         //AssetConfig assetConfig = new AssetConfig();
         //assetConfig.BaseUrl = "http://192.168.1.243:8082/basketball";
@@ -28,13 +37,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         //Assets\StreamingAssets
         //\StreamingAssets
 
-
-
-
-
-
-
-        AssetConfig manifestBundle = new AssetConfig
+        AssetBundleConfig manifestBundle = new AssetBundleConfig
         {
             BaseUrl = @"E:\wangzuxiong\Unity Project\UnityLearn\Assets",
             RelativeUrl = "StreamingAssets",
@@ -42,20 +45,15 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
             Version = 1
         };
 
-        MonoObject.Instance.StartCoroutine(DownloadAssetManager.Instance.DownloadAssetBundle(manifestBundle, (t) =>
+        DownloadAssetManager.DownloadAssetBundleAsync(manifestBundle, (t) =>
         {
             AssetBundleManifest manifest = t.LoadAsset<AssetBundleManifest>("image");
 
             Debug.Log(manifest == null);
             Debug.Log(string.Join("\n", manifest.GetAllDependencies("image")));
-        }, null));
+        }, null);
 
-
-
-
-
-
-        AssetConfig spriteAtlas = new AssetConfig
+        AssetBundleConfig spriteAtlas = new AssetBundleConfig
         {
             BaseUrl = @"E:\wangzuxiong\Unity Project\UnityLearn\Assets",
             RelativeUrl = "StreamingAssets",
@@ -63,9 +61,9 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
             Version = 1
         };
 
-        MonoObject.Instance.StartCoroutine(DownloadAssetManager.Instance.DownloadAssetBundle(spriteAtlas, (sa) =>
+        DownloadAssetManager.DownloadAssetBundleAsync(spriteAtlas, (sa) =>
         {
-            AssetConfig image = new AssetConfig
+            AssetBundleConfig image = new AssetBundleConfig
             {
                 BaseUrl = @"E:\wangzuxiong\Unity Project\UnityLearn\Assets",
                 RelativeUrl = "StreamingAssets",
@@ -73,20 +71,20 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
                 Version = 1
             };
 
-            MonoObject.Instance.StartCoroutine(DownloadAssetManager.Instance.DownloadAssetBundle(image, (t) =>
+            DownloadAssetManager.DownloadAssetBundleAsync(image, (t) =>
             {
                 GameObject.Instantiate(t.LoadAllAssets<GameObject>()[0], transform);
-            }, null));
-        }, null));
+            }, null);
+        }, null);
 
 
 
 
         //var path = "http://192.168.1.243:8082/basketball/theme_activity/configure/ThemeActivityConfig_1.json";
-        //MonoObject.Instance.StartCoroutine(DownloadAssetManager.Instance.DownloadText(path, (t) =>
+        //DownloadAssetManager.DownloadAssetBundleAsync(path, (t) =>
         //{
         //    Debug.Log(t);
-        //}, null));
+        //}, null);
     }
 
 

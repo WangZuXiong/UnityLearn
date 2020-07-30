@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 315f3d4772364ef48b975b13deefdbce
+  m_SerializeEntries:
+  - m_GUID: 736e89f5f2e49de4b85b6d06deade4f7
+    m_Address: Assets/RawResources/Prefabs/Image.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 4002113627044894133, guid: 736e89f5f2e49de4b85b6d06deade4f7,
+      type: 3}
+    m_TargetAsset: {fileID: 4002113627044894133, guid: 736e89f5f2e49de4b85b6d06deade4f7,
+      type: 3}
+  - m_GUID: f81553f3272398d40a4fd8dec128a477
+    m_Address: Assets/RawResources/Textures/atm (2).jpg
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: f81553f3272398d40a4fd8dec128a477, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: f81553f3272398d40a4fd8dec128a477, type: 3}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 9bcb4f43422c49a4b9f46ede9c8963a6, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 077b083fd459d6848ba806f54c2b74ec, type: 2}
+    - {fileID: 11400000, guid: 55060e3cfeff5844dac5574d78354c2e, type: 2}
