@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -59,15 +60,17 @@ public class DownloadAssetManager
         }
     }
 
+
+
+
+
     //Caching 类用于管理使用 UnityWebRequestAssetBundle.GetAssetBundle() 下载的缓存 AssetBundle。
 
     public IEnumerator DownloadAssetBundle(AssetConfig config, Action<AssetBundle> successCallback, Action errorCallback)
     {
-        Debug.Log(Application.persistentDataPath);
-
         var cachePath = string.Format("{0}/{1}", Application.persistentDataPath, config.RelativeUrl);
 
-        if (Path2Cache(cachePath, out Cache cache))
+        if (TryGetCacheByPath(cachePath, out Cache cache))
         {
             Caching.currentCacheForWriting = cache;
 
@@ -98,21 +101,32 @@ public class DownloadAssetManager
     }
 
 
-    private bool Path2Cache(string path, out Cache cache)
+    private bool TryGetCacheByPath(string path, out Cache cache)
     {
         if (!Directory.Exists(path))
             Directory.CreateDirectory(path);
 
-        Cache newCache = Caching.AddCache(path);
+        List<string> cachePaths = new List<string>();
+        Caching.GetAllCachePaths(cachePaths);
+        Cache tempCache;
+
+        if (cachePaths.Contains(path))
+        {
+            tempCache = Caching.GetCacheByPath(path);
+        }
+        else
+        {
+            tempCache = Caching.AddCache(path);
+        }
 
         //Make sure your new Cache is valid
-        if (!newCache.valid)
+        if (!tempCache.valid)
         {
             cache = new Cache();
             return false;
         }
 
-        cache = newCache;
+        cache = tempCache;
         return true;
     }
 

@@ -30,41 +30,16 @@ SpriteAtlas:
       enableTightPacking: 1
     variantMultiplier: 1
     packables:
-    - {fileID: 102900000, guid: 31a832797d296714381a2a312d457b86, type: 3}
-    totalSpriteSurfaceArea: 389944
-    bindAsDefault: 0
+    - {fileID: 2800000, guid: 6413f14d0dca5514ebca00513f7352a4, type: 3}
+    - {fileID: 21300000, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
+    totalSpriteSurfaceArea: 270244
+    bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
-  - {fileID: 21300000, guid: dbe12cf01ee826e47b99f6b4e5e8ab19, type: 3}
   - {fileID: 21300000, guid: 6413f14d0dca5514ebca00513f7352a4, type: 3}
-  - {fileID: 21300022, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300020, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300024, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300004, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300006, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
   - {fileID: 21300000, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300002, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300012, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300014, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300008, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300010, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300016, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
-  - {fileID: 21300018, guid: 5dc6ddfd8c71848488138f06efaf9aae, type: 3}
   m_PackedSpriteNamesToIndex:
-  - MaskCircle
   - Texture_A
-  - atm (1)_11
-  - atm (1)_10
-  - atm (1)_12
-  - atm (1)_2
-  - atm (1)_3
   - atm (1)_0
-  - atm (1)_1
-  - atm (1)_6
-  - atm (1)_7
-  - atm (1)_4
-  - atm (1)_5
-  - atm (1)_8
-  - atm (1)_9
   m_Tag: SpriteAtlas
   m_IsVariant: 0

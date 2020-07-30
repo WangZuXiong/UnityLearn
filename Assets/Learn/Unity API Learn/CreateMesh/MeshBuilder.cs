@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -110,10 +111,12 @@ public class MeshBuilder : MonoBehaviour
         return tempMesh;
     }
 
-
+    //[Conditional("UNITY_EDITOR")]
     public void SaveMesh(Mesh mesh)
     {
+#if UNITY_EDITOR
         AssetDatabase.CreateAsset(mesh, "Assets/Learn/Unity API Learn/new Mesh.asset");
         AssetDatabase.Refresh();
+#endif
     }
 }
