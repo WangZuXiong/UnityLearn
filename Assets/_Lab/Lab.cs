@@ -4,26 +4,21 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Unity.Profiling;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.ResourceManagement;
 using UnityEngine.U2D;
 using UnityEngine.UI;
-using UnityEngine.AddressableAssets;
-using System.Threading.Tasks;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using System.Collections;
 
-//[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
-    public int _tempValue;
     private void Start()
     {
-        //[RuntimeInitializeOnLoadMethod]
-        //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+        LoadAssetbundle();
+    }
 
+    private void Print()
+    {
+        Debug.Log(Time.realtimeSinceStartup.ToString());
     }
 
     void LoadAssetbundle()
@@ -37,21 +32,21 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         //Assets\StreamingAssets
         //\StreamingAssets
 
-        AssetBundleConfig manifestBundle = new AssetBundleConfig
-        {
-            BaseUrl = @"E:\wangzuxiong\Unity Project\UnityLearn\Assets",
-            RelativeUrl = "StreamingAssets",
-            FileName = "image.manifest",
-            Version = 1
-        };
+        //AssetBundleConfig manifestBundle = new AssetBundleConfig
+        //{
+        //    BaseUrl = @"E:\wangzuxiong\Unity Project\UnityLearn\Assets",
+        //    RelativeUrl = "StreamingAssets",
+        //    FileName = "image.manifest",
+        //    Version = 1
+        //};
 
-        DownloadAssetManager.DownloadAssetBundleAsync(manifestBundle, (t) =>
-        {
-            AssetBundleManifest manifest = t.LoadAsset<AssetBundleManifest>("image");
+        //DownloadAssetManager.DownloadAssetBundleAsync(manifestBundle, (t) =>
+        //{
+        //    AssetBundleManifest manifest = t.LoadAsset<AssetBundleManifest>("image");
 
-            Debug.Log(manifest == null);
-            Debug.Log(string.Join("\n", manifest.GetAllDependencies("image")));
-        }, null);
+        //    Debug.Log(manifest == null);
+        //    Debug.Log(string.Join("\n", manifest.GetAllDependencies("image")));
+        //}, null);
 
         AssetBundleConfig spriteAtlas = new AssetBundleConfig
         {
@@ -76,7 +71,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
                 GameObject.Instantiate(t.LoadAllAssets<GameObject>()[0], transform);
             }, null);
         }, null);
-
 
 
 
@@ -159,7 +153,8 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         if (Input.GetMouseButtonDown(1))
         {
-            //BulletBehaviour();
+            DownloadAssetManager.ReleaseAllAssetBundle();
+            Resources.UnloadUnusedAssets();
         }
         else if (Input.GetMouseButtonDown(0))
         {
