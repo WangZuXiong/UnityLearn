@@ -30,7 +30,7 @@
 			Blend SrcAlpha OneMinusSrcAlpha
 			CGPROGRAM
 			#pragma vertex vert
-			#pragma fragment frag
+			//#pragma fragment frag
 			#pragma multi_compile _ AR_MODE_ON
 			#include "UnityCG.cginc"
 			#include "Lighting.cginc"
@@ -91,8 +91,8 @@
 				float4 worldPos = mul(skinTransform, v.vertex);
 				float3 worldNormal = mul(skinTransform, v.normal);
 #ifdef AR_MODE_ON
-		        worldPos = mul(_StadiumTRS, worldPos);
-		        worldNormal = mul(_StadiumTRS, worldNormal);
+		        //worldPos = mul(_StadiumTRS, worldPos);
+		        //worldNormal = mul(_StadiumTRS, worldNormal);
 #endif
 				o.vertex = mul(UNITY_MATRIX_VP, worldPos);
 				o.worldNormal = worldNormal;

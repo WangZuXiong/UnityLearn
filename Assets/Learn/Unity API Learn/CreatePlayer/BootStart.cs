@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace unity
 {
@@ -9,8 +10,6 @@ namespace unity
         private MeshBuilder _meshBuilder;
         [SerializeField]
         private TextureBuilder _textureBuilder;
-        [SerializeField]
-        private TextAsset _matrilxTex;
 
         private void Awake()
         {
@@ -24,47 +23,80 @@ namespace unity
             meshRenderer.material.SetTexture("_MainTex", texture2D);
         }
 
+        private Matrix4x4 Str2Matrix(string str)
+        {
+            var floatStr = str.Split('\t');
+
+            Matrix4x4 matrix4X4 = new Matrix4x4
+            {
+                m00 = float.Parse(floatStr[0]),
+                m01 = float.Parse(floatStr[1]),
+                m02 = float.Parse(floatStr[2]),
+                m03 = float.Parse(floatStr[3]),
+
+                m10 = float.Parse(floatStr[4]),
+                m11 = float.Parse(floatStr[5]),
+                m12 = float.Parse(floatStr[6]),
+                m13 = float.Parse(floatStr[7]),
+
+                m20 = float.Parse(floatStr[8]),
+                m21 = float.Parse(floatStr[9]),
+                m22 = float.Parse(floatStr[10]),
+                m23 = float.Parse(floatStr[11]),
+
+                m30 = float.Parse(floatStr[12]),
+                m31 = float.Parse(floatStr[13]),
+                m32 = float.Parse(floatStr[14]),
+                m33 = float.Parse(floatStr[15])
+            };
+
+            return matrix4X4;
+        }
 
 
         private void Update()
         {
-      
-            //set shader matrix4x4
-
-            Matrix4x4[] matrix4X4s = new Matrix4x4[17];
-
-            var tempList = _matrilxTex.ToString().Split('@');
-            for (int i = 0; i < tempList.Length; i++)
+            if (Input.GetMouseButtonDown(1))
             {
-                var str = tempList[i].Split(',');
-                Matrix4x4 matrix4X4 = new Matrix4x4();
-
-                matrix4X4.m00 = float.Parse(str[0]);
-                matrix4X4.m01 = float.Parse(str[1]);
-                matrix4X4.m02 = float.Parse(str[2]);
-                matrix4X4.m03 = float.Parse(str[3]);
-
-                matrix4X4.m10 = float.Parse(str[4]);
-                matrix4X4.m11 = float.Parse(str[5]);
-                matrix4X4.m12 = float.Parse(str[6]);
-                matrix4X4.m13 = float.Parse(str[7]);
-
-                matrix4X4.m20 = float.Parse(str[8]);
-                matrix4X4.m21 = float.Parse(str[9]);
-                matrix4X4.m22 = float.Parse(str[10]);
-                matrix4X4.m23 = float.Parse(str[11]);
-
-                matrix4X4.m30 = float.Parse(str[12]);
-                matrix4X4.m31 = float.Parse(str[13]);
-                matrix4X4.m32 = float.Parse(str[14]);
-                matrix4X4.m33 = float.Parse(str[15]);
-
-                Debug.Log(matrix4X4.ToString());
-
-                matrix4X4s[i] = matrix4X4;
+                StartCoroutine(PlayAnimation());
             }
-            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
-            meshRenderer.material.SetMatrixArray("_skeletalMatrix", matrix4X4s);
+        }
+
+        private IEnumerator PlayAnimation()
+        {
+            TextAsset[] textAssets = Resources.LoadAll<TextAsset>("Matrixs");
+            for (int i = 0; i < textAssets.Length; i++)
+            {
+                var text = textAssets[i].text;
+
+                var strs = text.Split('\n');
+
+                List<Matrix4x4> matrixs = new List<Matrix4x4>();
+                for (int j = 0; j < strs.Length;)
+                {
+                    if (string.IsNullOrEmpty(strs[j]))
+                    {
+                        j++;
+                        continue;
+                    }
+
+                    List<string> temp = new List<string>
+                    {
+                        strs[j],
+                        strs[j + 1],
+                        strs[j + 2],
+                        strs[j + 3]
+                    };
+                    j += 4;
+
+                    matrixs.Add(Str2Matrix(string.Join("\t", temp)));
+                }
+             
+
+                GetComponent<MeshRenderer>().material.SetMatrixArray("_SkeletonMatrices", matrixs.ToArray());
+                Debug.Log("play" + textAssets[i].name);
+                yield return new WaitForSeconds(0.5f);
+            }
         }
     }
 }
