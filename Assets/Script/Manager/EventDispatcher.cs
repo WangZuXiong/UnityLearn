@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class EventDispatcher 
+public static class EventDispatcher 
 {
     public static Dictionary<string, Delegate> DelegateDict = new Dictionary<string, Delegate>();
 

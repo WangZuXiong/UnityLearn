@@ -16,7 +16,7 @@ public class LanguageEditor : Editor
         //Debug.LogError("OnInspectorGUI");
 
         LanguageText temp = target as LanguageText;
-        var value = LocalizationManager.Instance.GetString(temp.Key);
+        var value = LocalizationManager.GetString(temp.Key);
         if (!string.IsNullOrEmpty(value))
         {
             temp.GetComponent<Text>().text = value;

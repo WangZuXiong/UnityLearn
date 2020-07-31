@@ -76,40 +76,36 @@ public class DownloadAssetImpl
         if (_assetBundleDict.TryGetValue(config, out AssetBundle assetBundle))
         {
             successCallback?.Invoke(assetBundle);
-            yield return null;
+            yield break;
         }
-        else
+
+        var cachePath = string.Format("{0}/{1}", Application.persistentDataPath, config.RelativeUrl);
+
+        if (!TryGetCacheByPath(cachePath, out Cache cache))
         {
-            var cachePath = string.Format("{0}/{1}", Application.persistentDataPath, config.RelativeUrl);
+            errorCallback?.Invoke();
+            yield break;
+        }
 
-            if (TryGetCacheByPath(cachePath, out Cache cache))
+        Caching.currentCacheForWriting = cache;
+
+        var url = string.Format("{0}/{1}/{2}", config.BaseUrl, config.RelativeUrl, config.FileName);
+
+        using (UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(url, config.Version, 0))
+        {
+            uwr.timeout = 5;
+            yield return uwr.SendWebRequest();
+
+            if (uwr.isNetworkError || uwr.isHttpError)
             {
-                Caching.currentCacheForWriting = cache;
-
-                var url = string.Format("{0}/{1}/{2}", config.BaseUrl, config.RelativeUrl, config.FileName);
-
-                using (UnityWebRequest uwr = UnityWebRequestAssetBundle.GetAssetBundle(url, config.Version, 0))
-                {
-                    uwr.timeout = 5;
-                    yield return uwr.SendWebRequest();
-
-                    if (uwr.isNetworkError || uwr.isHttpError)
-                    {
-                        Debug.Log(uwr.error);
-                        errorCallback?.Invoke();
-                    }
-                    else
-                    {
-                        AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(uwr);
-                        successCallback?.Invoke(bundle);
-                        _assetBundleDict.Add(config, bundle);
-                    }
-                }
+                Debug.Log(uwr.error);
+                errorCallback?.Invoke();
             }
             else
             {
-                errorCallback?.Invoke();
-                yield return null;
+                AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(uwr);
+                successCallback?.Invoke(bundle);
+                _assetBundleDict.Add(config, bundle);
             }
         }
     }
@@ -148,7 +144,7 @@ public class DownloadAssetImpl
 
     public void Release(AssetBundle assetBundle)
     {
-
+        
     }
 
     public void ReleaseAll()

@@ -9,7 +9,7 @@ public class LanguageText : MonoBehaviour
 
     private void Awake()
     {
-        GetComponent<Text>().text = LocalizationManager.Instance.GetString(Key);
+        GetComponent<Text>().text = LocalizationManager.GetString(Key);
     }
 }
 
