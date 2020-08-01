@@ -1,0 +1,19 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class {0}View : MonoBehaviour
+{
+	//成员变量
+	{1}
+
+ 	private void Awake()
+    {
+        //成员变量赋值
+        {2}
+    } 
+
+    //函数监听
+    {3}
+}

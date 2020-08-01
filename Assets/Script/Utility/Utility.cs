@@ -181,7 +181,7 @@ public static class Utility
         }
         nodenames.Reverse();
 
-        return string.Join(".", nodenames.ToArray());
+        return string.Join("/", nodenames.ToArray());
     }
 
     public static bool Execute<T>(this EventHandler<T> self, object sender, T e) where T : EventArgs

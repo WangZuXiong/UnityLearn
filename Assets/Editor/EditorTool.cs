@@ -54,39 +54,10 @@ public class EditorTool : MonoBehaviour
     {
         Transform selectedTransform = Selection.activeTransform;
         string prefabRoot = selectedTransform.GetNodePath();
-        prefabRoot = prefabRoot.Replace(".", "/");
         int index = prefabRoot.IndexOf("/");
         prefabRoot = prefabRoot.Remove(0, index + 1);
         // 复制粘贴到剪贴板
         GUIUtility.systemCopyBuffer = prefabRoot;
-    }
-
-    [MenuItem("GameObject/Gen Code", false, 22)]
-    static void GenCode()
-    {
-        var temp = Selection.activeTransform;
-        if (temp == null)
-        {
-            return;
-        }
-
-        var btns = temp.GetComponentsInChildren<Button>(true);
-
-        List<string> vs = new List<string>();
-        for (int i = 0; i < btns.Length; i++)
-        {
-            var path = GetTransformFullPath(temp, btns[i].transform);
-            var str = string.Format("Button {0} = transform.Find(\"{1}\").GetComponent<Button>();\n{0}.onClick.AddListener(On{0}Click);", btns[i].transform.name, path);
-            vs.Add(str);
-        }
-        var result = string.Join("\n", vs.ToArray());
-
-        TextEditor textEditor = new TextEditor
-        {
-            text = result
-        };
-        textEditor.OnFocus();
-        textEditor.Copy();
     }
 
     [MenuItem("Tools/Find Target Prefabs")]
@@ -98,19 +69,6 @@ public class EditorTool : MonoBehaviour
     }
 
 
-    private static string GetTransformFullPath(Transform parent, Transform target)
-    {
-        List<string> vs = new List<string>();
 
-
-        while (target.parent != null && !target.parent.Equals(parent))
-        {
-            vs.Add(target.name);
-            target = target.parent;
-        }
-        vs.Reverse();
-
-        return string.Join("/", vs.ToArray());
-    }
 }
 

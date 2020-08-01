@@ -98,14 +98,21 @@ public class DownloadAssetImpl
 
             if (uwr.isNetworkError || uwr.isHttpError)
             {
-                Debug.Log(uwr.error);
+                Debug.Log(uwr.error + "\n" + url);
                 errorCallback?.Invoke();
             }
             else
             {
                 AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(uwr);
-                successCallback?.Invoke(bundle);
-                _assetBundleDict.Add(config, bundle);
+                if (bundle != null)
+                {
+                    successCallback?.Invoke(bundle);
+                    _assetBundleDict.Add(config, bundle);
+                }
+                else
+                {
+                    errorCallback?.Invoke();
+                }
             }
         }
     }
@@ -144,7 +151,7 @@ public class DownloadAssetImpl
 
     public void Release(AssetBundle assetBundle)
     {
-        
+
     }
 
     public void ReleaseAll()

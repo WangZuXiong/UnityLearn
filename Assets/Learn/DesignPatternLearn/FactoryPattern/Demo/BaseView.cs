@@ -2,24 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseView : MonoBehaviour
+namespace DesignPatternLearn.FactoryPattern
 {
-    protected string _viewName;
-
-
-
-    public virtual void Show()
+    public class BaseView : MonoBehaviour
     {
-        gameObject.SetActive(true);
-        transform.localPosition = Vector3.zero;
-        transform.localScale = Vector3.one;
+        protected string _viewName;
+
+
+
+        public virtual void Show()
+        {
+            gameObject.SetActive(true);
+            transform.localPosition = Vector3.zero;
+            transform.localScale = Vector3.one;
+        }
+
+        public virtual void Hide()
+        {
+            transform.localScale = Vector3.zero;
+            Destroy(gameObject);
+        }
+
+
     }
-
-    public virtual void Hide()
-    {
-        transform.localScale = Vector3.zero;
-        Destroy(gameObject);
-    }
-
-
 }

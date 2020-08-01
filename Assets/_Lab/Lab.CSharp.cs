@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 
 public partial class Lab : MonoBehaviour
 {
@@ -360,10 +361,19 @@ public partial class Lab : MonoBehaviour
         methodInfo.Invoke(instance, new object[] { 1 });
     }
 
-
-    public  void TestMethod(int x)
+    public void TestMethod(int x)
     {
         Debug.Log(x);
+    }
+
+
+    public void GetCustomType()
+    {
+        Type type = Type.GetType("");
+        transform.GetComponent(type);
+        gameObject.AddComponent(type);
+
+        transform.GetComponent(typeof(Button));
     }
 
 

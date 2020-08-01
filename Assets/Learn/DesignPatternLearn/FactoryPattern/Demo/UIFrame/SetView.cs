@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using ui.set;
+using DesignPatternLearn.FactoryPattern;
+
+
 public class SetView : BaseView
 {
     private Toggle _toggleSFX;

@@ -50,7 +50,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         AssetBundleConfig spriteAtlas = new AssetBundleConfig
         {
-            BaseUrl = @"E:\wangzuxiong\Unity Project\UnityLearn\Assets",
+            BaseUrl = Application.dataPath,
             RelativeUrl = "StreamingAssets",
             FileName = "spriteatlas",
             Version = 1
@@ -60,7 +60,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         {
             AssetBundleConfig image = new AssetBundleConfig
             {
-                BaseUrl = @"E:\wangzuxiong\Unity Project\UnityLearn\Assets",
+                BaseUrl = Application.dataPath,
                 RelativeUrl = "StreamingAssets",
                 FileName = "image",
                 Version = 1

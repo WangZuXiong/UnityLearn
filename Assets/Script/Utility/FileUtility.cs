@@ -24,12 +24,12 @@ public class FileUtility
         streamWriter.WriteLine(content);
         streamWriter.Close();
         streamWriter.Dispose();
-    }
 
+    }
 
     public static void WriteTextToLocal1(string path, string fileName, string content)
     {
-        File.WriteAllText(path + "/" + fileName, content);
+        File.WriteAllText(Path.Combine(path, fileName), content);
     }
 }
 

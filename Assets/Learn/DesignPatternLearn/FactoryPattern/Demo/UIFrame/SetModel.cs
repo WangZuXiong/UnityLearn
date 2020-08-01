@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ui.set
+namespace DesignPatternLearn.FactoryPattern
 {
     public delegate void OnValueChangeHandle(SetModel setModel);
 
