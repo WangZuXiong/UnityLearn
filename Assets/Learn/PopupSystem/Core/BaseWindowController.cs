@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BaseWindowController : MonoBehaviour
+public abstract class BaseWindowController : MonoBehaviour
 {
     [Tooltip("勾选后，将使用遮罩背景")]
     public bool UseMask = true;
@@ -22,30 +23,55 @@ public class BaseWindowController : MonoBehaviour
         _btnClose = GetBtnClose();
         if (_btnClose != null)
         {
-            _btnClose.onClick.AddListener(OnBtnClose);
+            _btnClose.onClick.AddListener(OnBtnCloseClick);
         }
     }
 
-    private void Start()
+    protected virtual void OnBtnCloseClick()
     {
-
+        float tweenDuration = PlayFadeOutTween();
+        Invoke("Close", tweenDuration);
     }
 
-    protected virtual void OnEnable()
+    protected virtual void Close()
     {
-        //tween
-    }
-
-    protected virtual void OnBtnClose()
-    {
-        //tween
         PopupSystem.Instance.CloseCurrentPopup();
         Resources.UnloadUnusedAssets();
     }
 
-    private Button GetBtnClose()
+    protected virtual Button GetBtnClose()
     {
         return transform.Find("BtnClose").GetComponent<Button>();
     }
+
+    /// <summary>
+    /// 淡入动画
+    /// </summary>
+    /// <returns>动画时长 secondsDelay</returns>
+    protected virtual float PlayFadeInTween()
+    {
+        //tween
+        return 0;
+    }
+
+    /// <summary>
+    /// 淡出动画
+    /// </summary>
+    /// <returns>动画时长 secondsDelay</returns>
+    protected virtual float PlayFadeOutTween()
+    {
+        //tween
+        return 0;
+    }
+
+    /// <summary>
+    /// 注册事件监听
+    /// </summary>
+    protected abstract void AddEvent();
+
+    /// <summary>
+    /// 注销事件监听
+    /// </summary>
+    protected abstract void RemoveEvent();
 
 }

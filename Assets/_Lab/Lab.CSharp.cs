@@ -134,7 +134,6 @@ public partial class Lab : MonoBehaviour
         Debug.Log("student1.GetHashCode()==student2.GetHashCode()  " + (student1.GetHashCode() == student2.GetHashCode()));
     }
 
-
     void ReturnTest()
     {
         Debug.Log("1");
@@ -361,6 +360,12 @@ public partial class Lab : MonoBehaviour
         methodInfo.Invoke(instance, new object[] { 1 });
     }
 
+
+    public void MyInvoke(object obj, string methodName, params object[] vs)
+    {
+        obj.GetType().GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.IgnoreCase).Invoke(obj, vs);
+    }
+
     public void TestMethod(int x)
     {
         Debug.Log(x);
@@ -412,6 +417,11 @@ public partial class Lab : MonoBehaviour
         //{
         //    return ("Age:" + Age + " Height:" + Height);
         //}
+
+        public void Say(string str)
+        {
+            Debug.Log("==>" + str);
+        }
     }
 
     /// <summary>

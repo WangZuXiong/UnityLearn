@@ -15,6 +15,9 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     {
         GameObject.DontDestroyOnLoad(gameObject);
         LoadSceneManager.LoadSceneAsync("Test Scene", Print);
+
+        StudentClass studentClass = new StudentClass();
+        MyInvoke(studentClass, "Say", new object[] { "hhahah" });
     }
 
 

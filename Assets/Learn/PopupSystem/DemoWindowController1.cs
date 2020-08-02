@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class DemoWindowController1 : BaseWindowController
 {
+    protected override void AddEvent()
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    protected override void RemoveEvent()
+    {
+        //throw new System.NotImplementedException();
+    }
 
     void Start()
     {
