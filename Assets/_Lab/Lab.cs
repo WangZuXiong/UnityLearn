@@ -13,12 +13,15 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
     private void Start()
     {
-        LoadAssetbundle();
+        GameObject.DontDestroyOnLoad(gameObject);
+        LoadSceneManager.LoadSceneAsync("Test Scene", Print);
     }
 
-    private void Print()
+
+    private void Print(float p)
     {
-        Debug.Log(Time.realtimeSinceStartup.ToString());
+        Debug.Log(p);
+        //Debug.Log(Time.realtimeSinceStartup.ToString());
     }
 
     void LoadAssetbundle()
@@ -153,8 +156,10 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         if (Input.GetMouseButtonDown(1))
         {
-            DownloadAssetManager.ReleaseAllAssetBundle();
-            Resources.UnloadUnusedAssets();
+            LoadSceneManager.UnloadSceneAsync("Test Scene", ()=> 
+            {
+                Debug.Log("UnloadSceneAsync");
+            });
         }
         else if (Input.GetMouseButtonDown(0))
         {
