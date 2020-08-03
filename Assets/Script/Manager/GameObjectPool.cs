@@ -4,29 +4,26 @@ using UnityEngine;
 public class GameObjectPool<T> where T : Component
 {
     private Stack<T> _stack;
-    private GameObject _original;
+    private T _original;
     private Transform _parent;
     private int _index = 0;
-
-
-    private Dictionary<int, GameObject> _gameObjectDict = new Dictionary<int, GameObject>();
+    private List<T> _compontents = new List<T>();
 
     private T Create()
     {
-        var gameObject = GameObject.Instantiate(_original, _parent);
-        gameObject.name = string.Format("{0}_{1}", _original.name, _index++.ToString());
-        T t = gameObject.transform.GetComponent<T>();
-        if (t == null)
-        {
-            t = gameObject.AddComponent<T>();
-        }
-        _gameObjectDict.Add(t.GetInstanceID(), gameObject);
+        T t = GameObject.Instantiate(_original, _parent);
+        t.gameObject.name = string.Format("{0}_{1}", _original.name, _index++.ToString());
+        _compontents.Add(t);
         return t;
     }
 
 
-    public GameObjectPool(GameObject original, int capacity)
+    public GameObjectPool(T original, int capacity)
     {
+        if (original == null)
+        {
+            throw new System.Exception(typeof(T).ToString() + " == null ");
+        }
         _stack = new Stack<T>();
         _original = original;
         _parent = new GameObject(string.Format("[{0} Pool]", _original.name)).transform;
@@ -39,23 +36,29 @@ public class GameObjectPool<T> where T : Component
 
     public void Clear()
     {
-        foreach (var item in _gameObjectDict)
+        for (int i = 0; i < _compontents.Count; i++)
         {
-            GameObject.Destroy(item.Value);
+            GameObject.Destroy(_compontents[i].gameObject);
         }
         GameObject.Destroy(_parent.gameObject);
-        _gameObjectDict.Clear();
+        _compontents.Clear();
         _stack.Clear();
         _original = null;
     }
 
-    public void ReleaseGameObject(T t)
+    public void Release(T t)
     {
-        if (_gameObjectDict.TryGetValue(t.GetInstanceID(), out GameObject go))
+        t.transform.position = Vector3.zero;
+        t.transform.SetParent(_parent);
+        _stack.Push(t);
+
+    }
+
+    public void ReleaseAll()
+    {
+        for (int i = 0; i < _compontents.Count; i++)
         {
-            go.transform.position = Vector3.zero;
-            go.transform.SetParent(_parent);
-            _stack.Push(t);
+            Release(_compontents[i]);
         }
     }
 
