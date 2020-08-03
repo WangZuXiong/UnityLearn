@@ -12,11 +12,11 @@ using UnityEngine.UI;
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
 
-    GameObjectPool<GameObject> gameObjectPool;
+    GameObjectPool<Test1> gameObjectPool;
 
     private void Start()
     {
-        gameObjectPool = new GameObjectPool<GameObject>(Resources.Load<GameObject>("Cube"), 3);
+        gameObjectPool = new GameObjectPool<Test1>(Resources.Load<GameObject>("Cube"), 3);
     }
 
     private void Update()
@@ -29,7 +29,10 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            //GameObject gameObject = GameObject.Find("");
+            gameObjectPool.ReleaseGameObject(transform.GetChild(0).GetComponent<Test1>());
+        }
+        else if (Input.GetMouseButtonDown(2))
+        {
             gameObjectPool.Clear();
         }
 

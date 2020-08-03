@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class GameObjectPool<T> where T : Object
+public class GameObjectPool<T> where T : Component
 {
     private Stack<T> _stack;
-    private T _original;
+    private GameObject _original;
     private Transform _parent;
     private int _index = 0;
 
@@ -13,13 +13,19 @@ public class GameObjectPool<T> where T : Object
 
     private T Create()
     {
-        var temp = GameObject.Instantiate(_original, _parent);
-        temp.name = string.Format("{0}_{1}", _original.name, _index++.ToString());
-        return temp;
+        var gameObject = GameObject.Instantiate(_original, _parent);
+        gameObject.name = string.Format("{0}_{1}", _original.name, _index++.ToString());
+        T t = gameObject.transform.GetComponent<T>();
+        if (t == null)
+        {
+            t = gameObject.AddComponent<T>();
+        }
+        _gameObjectDict.Add(t.GetInstanceID(), gameObject);
+        return t;
     }
 
 
-    public GameObjectPool(T original, int capacity)
+    public GameObjectPool(GameObject original, int capacity)
     {
         _stack = new Stack<T>();
         _original = original;
@@ -33,21 +39,24 @@ public class GameObjectPool<T> where T : Object
 
     public void Clear()
     {
-        for (int i = 0; i < _stack.Count; i++)
+        foreach (var item in _gameObjectDict)
         {
-            //GameObject go = _stack.Pop() as GameObject;
-            GameObject.Destroy(_stack.Pop());
+            GameObject.Destroy(item.Value);
         }
         GameObject.Destroy(_parent.gameObject);
+        _gameObjectDict.Clear();
         _stack.Clear();
         _original = null;
     }
 
     public void ReleaseGameObject(T t)
     {
-        GameObject go = t as GameObject;
-        go.transform.SetParent(_parent);
-        _stack.Push(t);
+        if (_gameObjectDict.TryGetValue(t.GetInstanceID(), out GameObject go))
+        {
+            go.transform.position = Vector3.zero;
+            go.transform.SetParent(_parent);
+            _stack.Push(t);
+        }
     }
 
     public T GetGameObject()
