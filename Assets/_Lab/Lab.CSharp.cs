@@ -160,10 +160,34 @@ public partial class Lab : MonoBehaviour
         int num = strStack.Count;
         //Pop出栈，返回栈顶的元素 并且删除
         string str1 = strStack.Pop();
-        //Peek返回栈顶的元素 不删除
+        //popPeek返回栈顶的元素 不删除
         string str2 = strStack.Peek();
 
         strStack.Clear();
+
+
+
+
+        Stack<int> vs = new Stack<int>(1);
+        vs.Push(1);
+        vs.Push(2);
+        vs.Push(3);
+
+        //Debug.Log("Count:" + vs.Count.ToString());//Count:3
+        //Debug.Log(vs.Pop());//3
+        //Debug.Log("Count:" + vs.Count.ToString());//Count:2
+        //Debug.Log(vs.Pop());//2
+        //Debug.Log("Count:" + vs.Count.ToString());//Count:1
+        //Debug.Log(vs.Pop());//1
+        //Debug.Log(vs.Pop());//InvalidOperationException: Stack empty.
+
+        Debug.Log("Count:" + vs.Count.ToString());//Count:3
+        Debug.Log(vs.Peek());//3
+        Debug.Log("Count:" + vs.Count.ToString());//Count:3
+        Debug.Log(vs.Peek());//3
+        Debug.Log("Count:" + vs.Count.ToString());//Count:3
+        Debug.Log(vs.Peek());//3
+        Debug.Log(vs.Peek());//3
     }
 
     void QueueTest()

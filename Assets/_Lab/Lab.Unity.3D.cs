@@ -54,6 +54,8 @@ public partial class Lab : MonoBehaviour
 
     void Move()
     {
+        var target = Vector3.zero;
+
         if (Vector3.Distance(transform.position, target) > 1)
         {
             // 1

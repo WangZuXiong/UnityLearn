@@ -11,13 +11,33 @@ using UnityEngine.UI;
 
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
+
+    GameObjectPool<GameObject> gameObjectPool;
+
     private void Start()
     {
-        GameObject.DontDestroyOnLoad(gameObject);
-        LoadSceneManager.LoadSceneAsync("Test Scene", Print);
+        gameObjectPool = new GameObjectPool<GameObject>(Resources.Load<GameObject>("Cube"), 3);
+    }
 
-        StudentClass studentClass = new StudentClass();
-        MyInvoke(studentClass, "Say", new object[] { "hhahah" });
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            var go = gameObjectPool.GetGameObject();
+            go.transform.SetParent(transform);
+            go.transform.localPosition = new Vector3(index++, 0, 0) * 2;
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            //GameObject gameObject = GameObject.Find("");
+            gameObjectPool.Clear();
+        }
+
+    }
+
+    public void OnDestroy()
+    {
+
     }
 
 
@@ -150,27 +170,10 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     public Vector3 target;
     public float speed;
 
+    public int index;
 
 
-    private void Update()
-    {
-        //Move();
 
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            LoadSceneManager.UnloadSceneAsync("Test Scene", ()=> 
-            {
-                Debug.Log("UnloadSceneAsync");
-            });
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            transform.position = Vector3.zero;
-            transform.rotation = Quaternion.identity;
-        }
-
-    }
     [SerializeField]
     private float _force = 500;
 
@@ -196,10 +199,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
             && b.yMin < a.yMax;
     }
 
-    public void OnDestroy()
-    {
 
-    }
 
     void ValueRefTest()
     {
@@ -381,6 +381,8 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         GC.WaitForPendingFinalizers();
         fileStream = new FileStream(Application.streamingAssetsPath + "/1.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);
     }
+
+
     void ListCountTest()
     {
         List<int> vs = new List<int>(10);

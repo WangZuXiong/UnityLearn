@@ -1,14 +1,14 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 class RuntimeInitialize
 {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void OnBeforeSceneLoadRuntimeMethod()
     {
-        //Debug.Log("Before first Scene loaded");
+        Debug.Log("Before first Scene loaded");
 
         //做一些配置上的设置
+        PlayAudioManager.Init(1, 1);
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
