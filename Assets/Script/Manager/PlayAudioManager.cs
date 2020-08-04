@@ -9,9 +9,8 @@ public static class PlayAudioManager
         _playAudioImpl = new PlayAudioImpl(bgmVolume, sfxVolume);
     }
 
-    public static void PlaySFX(string path)
+    public static void PlaySFX(AudioClip audioClip)
     {
-        AudioClip audioClip = Resources.Load<AudioClip>(path);
         _playAudioImpl.PlaySFX(audioClip);
     }
 }

@@ -112,19 +112,57 @@ public partial class Lab : MonoBehaviour
     /// </summary>
     private void RenderTextureLab()
     {
-        RenderTexture renderTexture = RenderTexture.GetTemporary(Screen.width, Screen.height, 0);
-        renderTexture.filterMode = FilterMode.Bilinear;
-        RenderTexture.active = renderTexture;
-        Camera camera = Camera.main;
-        camera.targetTexture = renderTexture;
-        camera.Render();
-        RawImage rawImage = transform.Find("RawImage").GetComponent<RawImage>();
-        rawImage.texture = renderTexture;
-        RenderTexture.active = null;
-        camera.targetTexture = null;
+        //RenderTexture renderTexture = RenderTexture.GetTemporary(Screen.width, Screen.height, 0);
+        //renderTexture.filterMode = FilterMode.Bilinear;
+        //RenderTexture.active = renderTexture;
+        //Camera camera = Camera.main;
+        //camera.targetTexture = renderTexture;
+        //camera.Render();
+        //RawImage rawImage = transform.Find("RawImage").GetComponent<RawImage>();
+        //rawImage.texture = renderTexture;
+        //RenderTexture.active = null;
+        //camera.targetTexture = null;
         //RenderTexture.GetTemporary这个api要和RenderTexture.ReleaseTemporary 配套使用否则会内存泄漏
         //RenderTexture.ReleaseTemporary(renderTexture);
+
+
+
+        //ScreenCapture.CaptureScreenshot(path);
+
+
+
+
+        //int width = Screen.width;
+        //int height = Screen.height;
+        //Rect rect = new Rect(0, 0, width, height);
+        //Texture2D texture2D = new Texture2D(width, height, TextureFormat.ARGB32, false);
+        //texture2D.ReadPixels(rect, width, height);
+        //texture2D.Apply();
+        //GameObject gameObject = new GameObject("RawImage", typeof(RawImage));
+        //gameObject.GetComponent<RawImage>().texture = texture2D;
+
+
+
+        StartCoroutine(enumerator());
     }
+
+
+    public IEnumerator enumerator()
+    {
+        //解决：错误提示的内容是ReadPixels只能在系统框架缓冲区读取，否则就会出错，
+        //意思应该是从要等摄像机渲染完，再从帧上截图，经测试可以在以下两个地方运行。
+        yield return new WaitForEndOfFrame();
+
+        int width = Screen.width;
+        int height = Screen.height;
+        Rect rect = new Rect(0, 0, width, height);
+        Texture2D texture2D = new Texture2D(width, height, TextureFormat.ARGB32, false);
+        texture2D.ReadPixels(rect, 0, 0);
+        texture2D.Apply();
+        GameObject gameObject = new GameObject("RawImage", typeof(RawImage));
+        gameObject.GetComponent<RawImage>().texture = texture2D;
+    }
+
 
 
 
@@ -175,8 +213,4 @@ public partial class Lab : MonoBehaviour
     {
         StopCoroutine(coroutine);
     }
-
-
-
-
 }

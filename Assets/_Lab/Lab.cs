@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,21 +10,28 @@ using UnityEngine.EventSystems;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
+
+
+
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
 
-    GameObjectPool<Test1> gameObjectPool;
+    ComponentPool<Test1> gameObjectPool;
+
+    public AudioClip audioClip;
 
     private void Start()
     {
-        gameObjectPool = new GameObjectPool<Test1>(Resources.Load<Test1>("Cube"), 3);
     }
+
+
+
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))
         {
-            var go = gameObjectPool.GetGameObject();
+            var go = gameObjectPool.Get();
             go.transform.SetParent(transform);
             go.transform.localPosition = new Vector3(index++, 0, 0) * 2;
         }
