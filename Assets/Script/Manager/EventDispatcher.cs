@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public static class EventDispatcher 
 {
-    public static Dictionary<string, Delegate> DelegateDict = new Dictionary<string, Delegate>();
+    private static readonly Dictionary<string, Delegate> _delegateDict = new Dictionary<string, Delegate>();
 
     /// <summary>
     /// 添加事件
@@ -17,9 +17,9 @@ public static class EventDispatcher
             throw new Exception("事件为空：" + actionName);
         }
 
-        if (DelegateDict.ContainsKey(actionName))
+        if (_delegateDict.ContainsKey(actionName))
         {
-            Delegate temp = DelegateDict[actionName];
+            Delegate temp = _delegateDict[actionName];
 
             if (!temp.GetType().Equals(action.GetType()))
             {
@@ -28,11 +28,11 @@ public static class EventDispatcher
 
             Delegate delegates = Delegate.Combine(temp, action);
 
-            DelegateDict[actionName] = delegates;
+            _delegateDict[actionName] = delegates;
         }
         else
         {
-            DelegateDict.Add(actionName, action);
+            _delegateDict.Add(actionName, action);
         }
     }
 
@@ -49,9 +49,9 @@ public static class EventDispatcher
             throw new Exception("事件为空：" + actionName);
         }
 
-        if (DelegateDict.ContainsKey(actionName))
+        if (_delegateDict.ContainsKey(actionName))
         {
-            Delegate temp = DelegateDict[actionName];
+            Delegate temp = _delegateDict[actionName];
 
             if (!temp.GetType().Equals(action.GetType()))
             {
@@ -59,11 +59,11 @@ public static class EventDispatcher
             }
 
             Delegate delegates = Delegate.Combine(temp, action);
-            DelegateDict[actionName] = delegates;
+            _delegateDict[actionName] = delegates;
         }
         else
         {
-            DelegateDict.Add(actionName, action);
+            _delegateDict.Add(actionName, action);
         }
     }
 
@@ -73,12 +73,12 @@ public static class EventDispatcher
     /// <param name="actionName">事件名称</param>
     public static void TriggerListener(string actionName)
     {
-        if (!DelegateDict.ContainsKey(actionName))
+        if (!_delegateDict.ContainsKey(actionName))
         {
             throw new Exception("不存在该事件：" + actionName);
         }
 
-        Delegate[] delegates = DelegateDict[actionName].GetInvocationList();
+        Delegate[] delegates = _delegateDict[actionName].GetInvocationList();
 
         for (int i = 0; i < delegates.Length; i++)
         {
@@ -89,12 +89,12 @@ public static class EventDispatcher
 
     public static void TriggerListener<T>(string actionName, T t)
     {
-        if (!DelegateDict.ContainsKey(actionName))
+        if (!_delegateDict.ContainsKey(actionName))
         {
             throw new Exception("不存在该事件：" + actionName);
         }
 
-        Delegate[] delegates = DelegateDict[actionName].GetInvocationList();
+        Delegate[] delegates = _delegateDict[actionName].GetInvocationList();
 
         for (int i = 0; i < delegates.Length; i++)
         {
@@ -112,19 +112,19 @@ public static class EventDispatcher
     /// <param name="actionName"></param>
     public static void RemoveListtener(string actionName)
     {
-        if (!DelegateDict.ContainsKey(actionName))
+        if (!_delegateDict.ContainsKey(actionName))
         {
             throw new Exception("不存在该事件：" + actionName);
         }
-        Delegate[] delegates = DelegateDict[actionName].GetInvocationList();
+        Delegate[] delegates = _delegateDict[actionName].GetInvocationList();
 
         for (int i = 0; i < delegates.Length; i++)
         {
             delegates[i] = null;
         }
 
-        Delegate.RemoveAll(DelegateDict[actionName], DelegateDict[actionName]);
-        DelegateDict.Remove(actionName);
+        Delegate.RemoveAll(_delegateDict[actionName], _delegateDict[actionName]);
+        _delegateDict.Remove(actionName);
     }
 
     /// <summary>
@@ -134,34 +134,34 @@ public static class EventDispatcher
     /// <param name="action"></param>
     public static void RemoveListtener(string actionName, Action action)
     {
-        if (!DelegateDict.ContainsKey(actionName))
+        if (!_delegateDict.ContainsKey(actionName))
         {
             throw new Exception("不存在该事件：" + actionName);
         }
-        DelegateDict[actionName] = Delegate.Remove(DelegateDict[actionName], action);
+        _delegateDict[actionName] = Delegate.Remove(_delegateDict[actionName], action);
 
-        if (DelegateDict[actionName] == null)
+        if (_delegateDict[actionName] == null)
         {
-            DelegateDict.Remove(actionName);
+            _delegateDict.Remove(actionName);
         }
     }
 
     public static void RemoveListtener<T>(string actionName, Action<T> action)
     {
-        if (!DelegateDict.ContainsKey(actionName))
+        if (!_delegateDict.ContainsKey(actionName))
         {
             throw new Exception("不存在该事件：" + actionName);
         }
-        if (!DelegateDict[actionName].GetType().Equals(action.GetType()))
+        if (!_delegateDict[actionName].GetType().Equals(action.GetType()))
         {
-            throw new Exception("参数类型不对应：" + actionName + "_" + DelegateDict[actionName].GetType() + "_" + action.GetType());
+            throw new Exception("参数类型不对应：" + actionName + "_" + _delegateDict[actionName].GetType() + "_" + action.GetType());
         }
 
-        DelegateDict[actionName] = (Action<T>)Delegate.Remove(DelegateDict[actionName], action);
+        _delegateDict[actionName] = (Action<T>)Delegate.Remove(_delegateDict[actionName], action);
 
-        if (DelegateDict[actionName] == null)
+        if (_delegateDict[actionName] == null)
         {
-            DelegateDict.Remove(actionName);
+            _delegateDict.Remove(actionName);
         }
     }
 
@@ -170,13 +170,13 @@ public static class EventDispatcher
     /// </summary>
     public static void Clear()
     {
-        var enumerator = DelegateDict.GetEnumerator();
+        var enumerator = _delegateDict.GetEnumerator();
         while (enumerator.MoveNext())
         {
             Delegate temp = enumerator.Current.Value;
             temp = Delegate.RemoveAll(temp, temp);
             temp = null;
         }
-        DelegateDict.Clear();
+        _delegateDict.Clear();
     }
 }

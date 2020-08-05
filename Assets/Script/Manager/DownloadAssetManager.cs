@@ -11,17 +11,17 @@ public static class DownloadAssetManager
 
     public static void DownloadTextAsync(string url, Action<string> successCallback, Action errorCallback)
     {
-        MonoObject.Instance.StartCoroutine(_downloadAssetImpl.DownloadText(url, successCallback, errorCallback));
+        SimpleCoroutineManager.Instance.StartCoroutine(_downloadAssetImpl.DownloadText(url, successCallback, errorCallback));
     }
 
     public static void DownloadTextureAsync(string url, Action<Texture2D> successCallback, Action errorCallback)
     {
-        MonoObject.Instance.StartCoroutine(_downloadAssetImpl.DownloadTexture(url, successCallback, errorCallback));
+        SimpleCoroutineManager.Instance.StartCoroutine(_downloadAssetImpl.DownloadTexture(url, successCallback, errorCallback));
     }
 
     public static void DownloadAssetBundleAsync(AssetBundleConfig config, Action<AssetBundle> successCallback, Action errorCallback)
     {
-        MonoObject.Instance.StartCoroutine(_downloadAssetImpl.DownloadAssetBundle(config, successCallback, errorCallback));
+        SimpleCoroutineManager.Instance.StartCoroutine(_downloadAssetImpl.DownloadAssetBundle(config, successCallback, errorCallback));
     }
 
     public static void ReleaseAllAssetBundle()
@@ -158,6 +158,12 @@ public class DownloadAssetImpl
     {
         foreach (var ab in _assetBundleDict)
         {
+            //忽略常驻内存的
+            if (ab.Key)
+            {
+                continue;
+            }
+
             ab.Value.Unload(true);
         }
         _assetBundleDict.Clear();

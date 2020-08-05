@@ -15,12 +15,12 @@ public static class LoadSceneManager
 
     public static void LoadSceneAsync(string sceneName, OnLoadSceneAsync onLoadSceneAsync)
     {
-        MonoObject.Instance.StartCoroutine(_loadSceneImpl.LoadSceneAsync(sceneName, onLoadSceneAsync));
+        SimpleCoroutineManager.Instance.StartCoroutine(_loadSceneImpl.LoadSceneAsync(sceneName, onLoadSceneAsync));
     }
 
     public static void UnloadSceneAsync(string sceneName, OnUnloadSceneCompleted onUnloadSceneCompleted)
     {
-        MonoObject.Instance.StartCoroutine(_loadSceneImpl.UnloadSceneAsync(sceneName, onUnloadSceneCompleted));
+        SimpleCoroutineManager.Instance.StartCoroutine(_loadSceneImpl.UnloadSceneAsync(sceneName, onUnloadSceneCompleted));
     }
 }
 

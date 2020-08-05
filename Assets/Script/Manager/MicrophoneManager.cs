@@ -2,7 +2,7 @@
 
 public static class MicrophoneManager
 {
-    private static MicrophoneImpl _microphoneImpl = new MicrophoneImpl();
+    private static readonly MicrophoneImpl _microphoneImpl = new MicrophoneImpl();
 }
 
 public class MicrophoneImpl

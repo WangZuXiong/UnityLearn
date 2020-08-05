@@ -1,18 +1,18 @@
 ﻿using UnityEngine;
 
-public class MonoObject : MonoBehaviour
+public class SimpleCoroutineManager : MonoBehaviour
 {
 
-    private static MonoObject _insatnce;
+    private static SimpleCoroutineManager _insatnce;
 
-    public static MonoObject Instance
+    public static SimpleCoroutineManager Instance
     {
         get
         {
             if (_insatnce == null)
             {
                 GameObject gameObject = new GameObject("[MonoObject]");
-                _insatnce = gameObject.AddComponent<MonoObject>();
+                _insatnce = gameObject.AddComponent<SimpleCoroutineManager>();
                 DontDestroyOnLoad(gameObject);
             }
 
@@ -21,5 +21,5 @@ public class MonoObject : MonoBehaviour
     }
 
 
-    private MonoObject() { }
+    private SimpleCoroutineManager() { }
 }

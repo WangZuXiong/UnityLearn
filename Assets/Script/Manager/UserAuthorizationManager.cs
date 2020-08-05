@@ -22,7 +22,7 @@ public class UserAuthorizationImpl
 
     public UserAuthorizationImpl()
     {
-        MonoObject.Instance.StartCoroutine(RequestUserAuthorization());
+        SimpleCoroutineManager.Instance.StartCoroutine(RequestUserAuthorization());
     }
 
     IEnumerator RequestUserAuthorization()

@@ -9,6 +9,18 @@ class RuntimeInitialize
 
         //做一些配置上的设置
         PlayAudioManager.Init(1, 1);
+
+
+        //DownloadAssetManager.DownloadAssetBundleAsync(new AssetBundleConfig(), (t) =>
+        //{
+        //    var languageJson = t.LoadAsset<TextAsset>("LanguageConfig").text;
+        //    LocalizationManager.InitLanguageDict(languageJson);
+        //}, () => { });
+
+
+
+
+
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
