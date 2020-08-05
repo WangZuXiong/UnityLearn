@@ -1,139 +1,48 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using System.Threading;
-using System.Linq;
+using UnityEngine;
 
 public class Loom : MonoBehaviour
 {
-    public static int maxThreads = 8;
-    static int numThreads;
+    private static Loom _instance;
 
-    private static Loom _current;
-    //private int _count;
-    public static Loom Current
+    public static Loom Instance
     {
         get
         {
-            Initialize();
-            return _current;
+            if (_instance == null)
+            {
+                GameObject gameObject = new GameObject("[Loom]");
+                _instance = gameObject.AddComponent<Loom>();
+                DontDestroyOnLoad(gameObject);
+            }
+            return _instance;
         }
-    }
-
-    void Awake()
-    {
-        _current = this;
-        initialized = true;
-    }
-
-    static bool initialized;
-
-    public static void Initialize()
-    {
-        if (!initialized)
-        {
-
-            if (!Application.isPlaying)
-                return;
-            initialized = true;
-            var g = new GameObject("Loom");
-            _current = g.AddComponent<Loom>();
-#if !ARTIST_BUILD
-            UnityEngine.Object.DontDestroyOnLoad(g);
-#endif
-        }
-
     }
     public struct NoDelayedQueueItem
     {
         public Action<object> action;
         public object param;
     }
-
-    private List<NoDelayedQueueItem> _actions = new List<NoDelayedQueueItem>();
     public struct DelayedQueueItem
     {
         public float time;
         public Action<object> action;
         public object param;
     }
-    private List<DelayedQueueItem> _delayed = new List<DelayedQueueItem>();
 
-    List<DelayedQueueItem> _currentDelayed = new List<DelayedQueueItem>();
+    private static readonly int maxThreads = 8;
+    private static int numThreads;
 
-    public static void QueueOnMainThread(Action<object> taction, object tparam)
-    {
-        QueueOnMainThread(taction, tparam, 0f);
-    }
-    public static void QueueOnMainThread(Action<object> taction, object tparam, float time)
-    {
-        if (time != 0)
-        {
-            lock (Current._delayed)
-            {
-                Current._delayed.Add(new DelayedQueueItem { time = Time.time + time, action = taction, param = tparam });
-            }
-        }
-        else
-        {
-            lock (Current._actions)
-            {
-                Current._actions.Add(new NoDelayedQueueItem { action = taction, param = tparam });
-            }
-        }
-    }
+    private readonly List<NoDelayedQueueItem> _actions = new List<NoDelayedQueueItem>();
+    private readonly List<NoDelayedQueueItem> _currentActions = new List<NoDelayedQueueItem>();
 
-    public static Thread RunAsync(Action a)
-    {
-        Initialize();
-        while (numThreads >= maxThreads)
-        {
-            Thread.Sleep(100);
-        }
-        Interlocked.Increment(ref numThreads);
-        ThreadPool.QueueUserWorkItem(RunAction, a);
-        return null;
-    }
-
-    private static void RunAction(object action)
-    {
-        try
-        {
-            ((Action)action)();
-        }
-        catch
-        {
-        }
-        finally
-        {
-            Interlocked.Decrement(ref numThreads);
-        }
-
-    }
+    private readonly List<DelayedQueueItem> _delayed = new List<DelayedQueueItem>();
+    private readonly List<DelayedQueueItem> _currentDelayed = new List<DelayedQueueItem>();
 
 
-    void OnDisable()
-    {
-        if (_current == this)
-        {
-
-            _current = null;
-        }
-    }
-
-
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    List<NoDelayedQueueItem> _currentActions = new List<NoDelayedQueueItem>();
-
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (_actions.Count > 0)
         {
@@ -154,7 +63,12 @@ public class Loom : MonoBehaviour
             lock (_delayed)
             {
                 _currentDelayed.Clear();
-                _currentDelayed.AddRange(_delayed.Where(d => d.time <= Time.time));
+
+                var temp = _delayed.FindAll(d => d.time <= Time.time);
+                if (temp != null)
+                {
+                    _currentDelayed.AddRange(temp);
+                }
                 for (int i = 0; i < _currentDelayed.Count; i++)
                 {
                     _delayed.Remove(_currentDelayed[i]);
@@ -165,6 +79,63 @@ public class Loom : MonoBehaviour
             {
                 _currentDelayed[i].action(_currentDelayed[i].param);
             }
+        }
+    }
+
+    public void QueueOnMainThread(Action<object> taction, object tparam)
+    {
+        QueueOnMainThread(taction, tparam, 0f);
+    }
+
+    public void QueueOnMainThread(Action<object> taction, object tparam, float time)
+    {
+        if (time != 0)
+        {
+            lock (Instance._delayed)
+            {
+                Instance._delayed.Add(new DelayedQueueItem { time = Time.time + time, action = taction, param = tparam });
+            }
+        }
+        else
+        {
+            lock (Instance._actions)
+            {
+                Instance._actions.Add(new NoDelayedQueueItem { action = taction, param = tparam });
+            }
+        }
+    }
+
+    public Thread RunAsync(Action action)
+    {
+        while (numThreads >= maxThreads)
+        {
+            Thread.Sleep(100);
+        }
+        Interlocked.Increment(ref numThreads);
+        ThreadPool.QueueUserWorkItem(RunAction, action);
+
+        //ParameterizedThreadStart parameterizedThreadStart = new ParameterizedThreadStart(RunAction);
+        //Thread thread = new Thread(parameterizedThreadStart);
+        //thread.Name = "Thread 1";
+        //thread.Start(action);
+
+        return null;
+    }
+
+    private void RunAction(object action)
+    {
+        try
+        {
+            Action temp = (Action)action;
+            temp?.Invoke();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError(ex.Message);
+        }
+        finally
+        {
+            Interlocked.Decrement(ref numThreads);
         }
     }
 }

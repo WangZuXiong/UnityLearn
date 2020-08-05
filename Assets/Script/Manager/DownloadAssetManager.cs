@@ -26,7 +26,7 @@ public static class DownloadAssetManager
 
     public static void ReleaseAllAssetBundle()
     {
-        _downloadAssetImpl.ReleaseAll();
+        _downloadAssetImpl.ReleaseAllTempAssetBundles();
     }
 }
 
@@ -73,7 +73,7 @@ public class DownloadAssetImpl
     //Caching 类用于管理使用 UnityWebRequestAssetBundle.GetAssetBundle() 下载的缓存 AssetBundle。
     public IEnumerator DownloadAssetBundle(AssetBundleConfig config, Action<AssetBundle> successCallback, Action errorCallback)
     {
-        if (_assetBundleDict.TryGetValue(config, out AssetBundle assetBundle))
+        if (_tempAssetBundleDict.TryGetValue(config, out AssetBundle assetBundle))
         {
             successCallback?.Invoke(assetBundle);
             yield break;
@@ -107,7 +107,7 @@ public class DownloadAssetImpl
                 if (bundle != null)
                 {
                     successCallback?.Invoke(bundle);
-                    _assetBundleDict.Add(config, bundle);
+                    AddDict(config, bundle);
                 }
                 else
                 {
@@ -147,29 +147,75 @@ public class DownloadAssetImpl
     }
 
 
-    private Dictionary<AssetBundleConfig, AssetBundle> _assetBundleDict = new Dictionary<AssetBundleConfig, AssetBundle>();
+    private Dictionary<AssetBundleConfig, AssetBundle> _tempAssetBundleDict = new Dictionary<AssetBundleConfig, AssetBundle>();
+    private Dictionary<AssetBundleConfig, AssetBundle> _permanentAssetBundleDict = new Dictionary<AssetBundleConfig, AssetBundle>();
+
+    public void AddDict(AssetBundleConfig bundleConfig, AssetBundle assetBundle)
+    {
+        if (bundleConfig.AssetBundleType.Equals(AssetBundleType.Temp))
+        {
+            _tempAssetBundleDict.Add(bundleConfig, assetBundle);
+        }
+        else
+        {
+            _permanentAssetBundleDict.Add(bundleConfig, assetBundle);
+        }
+    }
+
 
     public void Release(AssetBundle assetBundle)
     {
+        assetBundle.Unload(true);
 
+        foreach (var item in _tempAssetBundleDict)
+        {
+            if (item.Value.GetInstanceID().Equals(assetBundle.GetInstanceID()))
+            {
+                _tempAssetBundleDict.Remove(item.Key);
+                return;
+            }
+        }
+
+        foreach (var item in _permanentAssetBundleDict)
+        {
+            if (item.Value.GetInstanceID().Equals(assetBundle.GetInstanceID()))
+            {
+                _permanentAssetBundleDict.Remove(item.Key);
+                return;
+            }
+        }
     }
 
-    public void ReleaseAll()
+    public void ReleaseAllTempAssetBundles()
     {
-        foreach (var ab in _assetBundleDict)
+        foreach (var ab in _tempAssetBundleDict)
         {
-            //忽略常驻内存的
-            if (ab.Key)
-            {
-                continue;
-            }
-
             ab.Value.Unload(true);
         }
-        _assetBundleDict.Clear();
+        _tempAssetBundleDict.Clear();
+    }
+
+    public void ReleaseAllPermanentAssetBundles()
+    {
+        foreach (var ab in _permanentAssetBundleDict)
+        {
+            ab.Value.Unload(true);
+        }
+        _tempAssetBundleDict.Clear();
     }
 }
 
+public enum AssetBundleType
+{
+    /// <summary>
+    /// 临时
+    /// </summary>
+    Temp,
+    /// <summary>
+    /// 常驻内存
+    /// </summary>
+    Permanent
+}
 
 
 public struct AssetBundleConfig
@@ -178,7 +224,16 @@ public struct AssetBundleConfig
     public string RelativeUrl;
     public string FileName;
     public uint Version;
+    public AssetBundleType AssetBundleType;
 
+    public AssetBundleConfig(string baseUrl, string relativeUrl, string fileName, uint version, AssetBundleType assetBundleType)
+    {
+        BaseUrl = baseUrl;
+        RelativeUrl = relativeUrl;
+        FileName = fileName;
+        Version = version;
+        AssetBundleType = assetBundleType;
+    }
 
     public override bool Equals(object obj)
     {

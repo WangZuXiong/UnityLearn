@@ -4,15 +4,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using Unity.Profiling;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.U2D;
 using UnityEngine.UI;
 
-
-
-
+//[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
 
@@ -22,13 +21,44 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
+
+
+        Loom.Instance.RunAsync(() =>
+        {
+            Debug.Log("CurrentThread:" + Thread.CurrentThread.Name);//Thread Pool Worker
+            Debug.Log(1111);
+
+            //GameObject gameObject = new GameObject();
+
+            //线程完成后再主线程中的操作
+            Loom.Instance.QueueOnMainThread((t) =>
+            {
+                Debug.Log("CurrentThread:" + Thread.CurrentThread.Name);//主线程
+                Debug.Log(2222);
+
+            }, null);
+
+        });
+
+        Debug.Log(3333);
+
     }
 
 
-
+    void OnDrawGizmos()
+    {
+        //Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, Vector3.one);
+    }
 
     private void Update()
     {
+
+        Debug.DrawLine(transform.position, transform.position + new Vector3(2, 0, 0), Color.red);
+        Debug.DrawLine(transform.position, transform.position + new Vector3(0, 2, 0), Color.green);
+        Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, 2), Color.blue);
+
+
         if (Input.GetMouseButtonDown(1))
         {
             var go = gameObjectPool.Get();

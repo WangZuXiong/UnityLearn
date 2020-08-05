@@ -34,4 +34,11 @@ class RuntimeInitialize
     {
         //Debug.Log("RuntimeMethodLoad: After first Scene loaded");
     }
+
+    //允许在 Unity 加载时初始化编辑器类方法，无需用户操作。
+    //[UnityEditor.InitializeOnLoadMethod]
+    //static void OnProjectLoadedInEditor()
+    //{
+    //    Debug.Log("Project loaded in Unity Editor");
+    //}
 }
