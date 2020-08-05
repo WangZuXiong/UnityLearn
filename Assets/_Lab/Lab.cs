@@ -154,63 +154,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     }
 
 
-    private int FindSecondMaxNum(int[] vs)
-    {
-        var max = int.MinValue;
-        var secondMax = int.MinValue;
-
-        for (int i = 0; i < vs.Length; i++)
-        {
-            if (vs[i] > max)
-            {
-                secondMax = max;
-                max = vs[i];
-            }
-            else
-            {
-                if (vs[i] > secondMax)
-                {
-                    secondMax = vs[i];
-                }
-            }
-        }
-        return secondMax;
-    }
-
-    private void TestMyListRemove()
-    {
-        List<int> tempList = new List<int>();
-
-        for (int i = 0; i < 1000; i++)
-        {
-            tempList.Add(i);
-        }
-        using (new ProfilerMarker("ListRemoveAdvance").Auto())
-        {
-            Utility.ListRemoveAdvance(tempList, 1);//288b 2.25ms
-        }
-
-        using (new ProfilerMarker("ListRemove").Auto())
-        {
-            tempList.Remove(1);//0 b 0.7ms
-        }
-
-
-        for (int i = 0; i < tempList.Count; i++)
-        {
-            Debug.Log(tempList[i]);
-        }
-    }
-
-
-    private void StructTest()
-    {
-        //类使用前必须new关键字实例化，Struct不需要
-        Vector2 vector2;
-        vector2.x = 1;
-        vector2.y = 1;
-        Debug.Log(vector2.ToString());//(1.0, 1.0)
-    }
 
 
     public Vector3 target;
@@ -247,29 +190,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
 
 
-    void ValueRefTest()
-    {
 
-        string str1 = "1";//str1 ---> new string("1")
-        string str2 = str1;//str2 --> str1传递引用 
-        str2 = "2";//str2 --> new string("2") 传引用，str2指向一个新的字符串，str1没有改变
-        Debug.Log(str1);//1
-        //但是string又有值传递的效果，这bai是因为string是常量，不能更改
-
-        StudentClass studentClass1 = new StudentClass();
-        studentClass1.Age = 1;
-        StudentClass studentClass2 = studentClass1;
-        studentClass2.Age = 2;
-        Debug.Log(studentClass1.Age);//2
-
-
-        StudentStruct studentStruct1 = new StudentStruct();
-        studentStruct1.Age = 1;
-
-        StudentStruct studentStruct2 = studentStruct1;
-        studentStruct2.Age = 2;
-        Debug.Log(studentStruct1.Age);//3
-    }
 
     /// <summary>
     /// 会产生GC的API
@@ -429,46 +350,8 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     }
 
 
-    void ListCountTest()
-    {
-        List<int> vs = new List<int>(10);
-        vs.Add(1);
-        vs.Clear();
-        Debug.Log(vs.Count);//0
-    }
-
-    void EncryptionTest()
-    {
-        var str = "123";
-        var bytes = Encoding.UTF8.GetBytes(str);
-        Debug.LogError(string.Join(",", bytes));
-        var strFromBytes = Encoding.UTF8.GetString(bytes);
-        Debug.LogError(strFromBytes);
 
 
-
-        Debug.LogError("========加密========");
-        //加密
-        for (int i = 0; i < bytes.Length; i++)
-        {
-            bytes[i] ^= 1;
-        }
-        Debug.LogError(string.Join(",", bytes));
-        var strFromBytes1 = Encoding.UTF8.GetString(bytes);
-        Debug.LogError(strFromBytes1);
-
-
-
-        Debug.LogError("========解密========");
-        //解密
-        for (int i = 0; i < bytes.Length; i++)
-        {
-            bytes[i] ^= 1;
-        }
-        Debug.LogError(string.Join(",", bytes));
-        var strFromBytes2 = Encoding.UTF8.GetString(bytes);
-        Debug.LogError(strFromBytes2);
-    }
 
     private void ReadSprites()
     {
@@ -512,16 +395,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         {
             imgs[i].sprite = list[i];
         }
-    }
-
-    private void Func1(string name)
-    {
-        Debug.LogErrorFormat(name);
-    }
-
-    private void Func2(string name)
-    {
-        Debug.LogErrorFormat("Func2");
     }
 
     ///// <summary>
@@ -695,5 +568,35 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     private void Func()
     {
 
+    }
+
+    public void GetCustomType()
+    {
+        Type type = Type.GetType("");
+        transform.GetComponent(type);
+        gameObject.AddComponent(type);
+
+        transform.GetComponent(typeof(Button));
+    }
+}
+
+
+public struct StudentStruct
+{
+    public int Age;
+    public int Height;
+    public string Name;
+}
+
+
+public class StudentClass
+{
+    public int Age;
+    public int Height;
+    public string Name;
+
+    public void Say(string str)
+    {
+        Debug.Log("==>" + str);
     }
 }

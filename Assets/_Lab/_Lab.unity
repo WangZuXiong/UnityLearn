@@ -274,6 +274,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2101468433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e584d3bd2f8a380418c6f35ea2d56aa8, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a8461a94771b9c4685035dea6f621f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClip: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
+  speed: 0
+  index: 0
+  _force: 500
+  A: {fileID: 0}
+  B: {fileID: 0}
+  _bullet: {fileID: 0}
+  _speed: 0
+  _a: 0
+  _t: 0

@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using UnityEngine;
 
-public class AwaitTaskLearn : MonoBehaviour
+public class AwaitTaskLearn 
 {
 
     string _pngUrl = "http://192.168.1.243:8082/basketball/my_team_logo/dh6.png";
@@ -30,7 +29,7 @@ public class AwaitTaskLearn : MonoBehaviour
     public async void AsyncLoadStr()
     {
         string contents = await _httpClient.GetStringAsync(_jsonUrl);
-        Debug.Log(contents);
+        Console.WriteLine(contents);
     }
 
     /// <summary>
@@ -40,7 +39,7 @@ public class AwaitTaskLearn : MonoBehaviour
     public async Task<int> AsyncLoadStrAndReturnStr()
     {
         string contents = await _httpClient.GetStringAsync(_jsonUrl);
-        Debug.Log(contents);
+        Console.WriteLine(contents);
         return contents.Length;
     }
 

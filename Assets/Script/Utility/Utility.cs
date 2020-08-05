@@ -72,35 +72,6 @@ public static class Utility
         return newList;
     }
 
-    /// <summary>
-    /// List Remove Advance 
-    /// 对List排序无要求的情况下
-    /// 可以先将要remove的元素与List尾部的元素交换位置，之后在remove
-    /// 这样就少了整体向后偏移 的一个过程
-    /// 效率能够提高
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <param name="list"></param>
-    /// <param name="value"></param>
-    public static void ListRemoveAdvance<T>(List<T> list, T value) 
-    {
-        if (value.Equals(list[list.Count - 1]))
-        {
-            list.Remove(value);
-            return;
-        }
-
-        int index = list.FindIndex((item) =>
-        {
-            return item.Equals(value);
-        });
-        //将value移到最后
-        var temp = list[index];
-        list[index] = list[list.Count - 1];
-        list[list.Count - 1] = temp;
-
-        list.Remove(value);
-    }
 
 
     /// <summary>
