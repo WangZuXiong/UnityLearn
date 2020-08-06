@@ -1,4 +1,4 @@
-﻿Shader "ShaderLearn/8.LoadingDemo"
+﻿Shader "ShaderLearn/17.ShaderTest"
 {
     Properties
     {

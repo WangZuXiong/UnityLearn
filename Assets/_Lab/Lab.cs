@@ -21,8 +21,21 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Start()
     {
+        ThreadTest();
+        ThreadTest();
+        ThreadTest();
+        ThreadTest();
+        ThreadTest();
+        ThreadTest();
+        ThreadTest();
+        ThreadTest();
+        ThreadTest();
+        ThreadTest();
+        ThreadTest();
+    }
 
-
+    void ThreadTest()
+    {
         Loom.Instance.RunAsync(() =>
         {
             Debug.Log("CurrentThread:" + Thread.CurrentThread.Name);//Thread Pool Worker
@@ -41,7 +54,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         });
 
         Debug.Log(3333);
-
     }
 
 

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEngine;
 
-public class ThreadWithUnity 
+public class ThreadWithUnity : MonoBehaviour
 {
     private enum ActionType
     {
@@ -55,7 +56,7 @@ public class ThreadWithUnity
 
     private void HandleMessage(Message message)
     {
-        Console.WriteLine("CurrentThread:" + Thread.CurrentThread.Name);
+        Debug.Log("CurrentThread:" + Thread.CurrentThread.Name);
 
         switch (message.Type)
         {
