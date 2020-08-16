@@ -14,25 +14,36 @@ using UnityEngine.UI;
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
+    private void Start()
+    {
+
+        SynchronizationContext synchronizationContext = SynchronizationContext.Current;
+
+        Thread thread = new Thread(() =>
+        {
+            Thread.Sleep(2000);
+
+            synchronizationContext.Post(t =>
+            {
+                //可以调用Unity Engine 相关API
+                GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            }, null);
+
+        });
+
+        thread.Start();
+    }
+
+
+
+
+
 
     ComponentPool<Test1> gameObjectPool;
 
     public AudioClip audioClip;
 
-    private void Start()
-    {
-        ThreadTest();
-        ThreadTest();
-        ThreadTest();
-        ThreadTest();
-        ThreadTest();
-        ThreadTest();
-        ThreadTest();
-        ThreadTest();
-        ThreadTest();
-        ThreadTest();
-        ThreadTest();
-    }
+
 
     void ThreadTest()
     {

@@ -72,6 +72,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Bottom: 0.66
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -80,6 +81,7 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Left: 0.754
     - _LinePower: 1
     - _Metallic: 0
     - _Mode: 0
@@ -89,6 +91,7 @@ Material:
     - _OffesetWithNormal: 1
     - _Parallax: 0.02
     - _Rate: 11.36
+    - _Right: 0.88
     - _RimPower: 3
     - _Scale: 1
     - _SmoothnessTextureChannel: 0
@@ -97,6 +100,7 @@ Material:
     - _SpeedX: 1
     - _SpeedY: 1
     - _SrcBlend: 1
+    - _Top: 0.667
     - _UVSec: 0
     - _WorldReflPower: 1
     - _ZWrite: 1
