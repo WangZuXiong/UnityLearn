@@ -1,11 +1,11 @@
 ManifestFileVersion: 0
-CRC: 1602914456
+CRC: 3286717950
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
       Name: image
       Dependencies:
-        Dependency_0: newbundle
+        Dependency_0: spriteatlas
     Info_1:
-      Name: newbundle
+      Name: spriteatlas
       Dependencies: {}

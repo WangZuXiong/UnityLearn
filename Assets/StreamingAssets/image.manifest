@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 2266567181
+CRC: 1561469402
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: df981f19920730bcd5dc4dd92c62938c
+    Hash: bd84ca4fdcb5b1b87121de79c431e1b4
   TypeTreeHash:
     serializedVersion: 2
     Hash: 2c741a59cff4c34c27e0ae4513a21d7f
@@ -24,4 +24,4 @@ ClassTypes:
 Assets:
 - Assets/Resources/Image.prefab
 Dependencies:
-- E:/3DTPGFishing/Assets/StreamingAssets/newbundle
+- E:/wangzuxiong/Unity Project/UnityLearn/Assets/StreamingAssets/spriteatlas

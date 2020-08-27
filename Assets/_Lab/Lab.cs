@@ -16,6 +16,22 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
     private void Start()
     {
+        LoadAssetbundle();
+    }
+
+
+
+
+
+
+    ComponentPool<Test1> gameObjectPool;
+
+    public AudioClip audioClip;
+
+
+
+    void ThreadTest()
+    {
 
         SynchronizationContext synchronizationContext = SynchronizationContext.Current;
 
@@ -32,21 +48,8 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         });
 
         thread.Start();
-    }
 
 
-
-
-
-
-    ComponentPool<Test1> gameObjectPool;
-
-    public AudioClip audioClip;
-
-
-
-    void ThreadTest()
-    {
         Loom.Instance.RunAsync(() =>
         {
             Debug.Log("CurrentThread:" + Thread.CurrentThread.Name);//Thread Pool Worker
