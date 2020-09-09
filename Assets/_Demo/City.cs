@@ -37,7 +37,7 @@ public class City : MonoBehaviour
             Add(team);
 
             collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;      
-            team.ResetPlayerTeamContent();   
+            team.ResetPlayerTeamContent();
         }
     }
 

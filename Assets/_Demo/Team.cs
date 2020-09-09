@@ -28,6 +28,8 @@ public class Team : MonoBehaviour
     /// </summary>
     public int ResideTime;
 
+    private IEnumerator CurrentRoutine;
+
 
     public void SetData(TeamData teamData, Player player)
     {
@@ -39,8 +41,13 @@ public class Team : MonoBehaviour
 
     public void PlayCDAnimation(Action callback, float total)
     {
+        if (CurrentRoutine != null)
+        {
+            StopCoroutine(CurrentRoutine);
+        }
         CD = total;
-        StartCoroutine(CDAnimationCoroutine(callback, total));
+        CurrentRoutine = CDAnimationCoroutine(callback, total);
+        StartCoroutine(CurrentRoutine);
     }
 
     private IEnumerator CDAnimationCoroutine(Action callback, float total)
@@ -156,6 +163,11 @@ public class Team : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (CD > 0)
+        {
+            return;
+        }
+
         var team = collision.transform.GetComponent<Team>();
         if (team == null)
         {
@@ -177,41 +189,39 @@ public class Team : MonoBehaviour
                     collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                     team.ResetPlayerTeamContent();
                 }
-            }
 
-
-            //来之不是同一个player的话就进行PK
-            if (team.Player != Player)
-            {
-                //进入战斗CD状态
-                team.PlayCDAnimation(() =>
+                //来之不是同一个player的话就进行PK
+                if (team.Player != Player)
                 {
-                    //PK
-                    var (winner, loser) = GameManager.TeamPK(this, team);
-                    GameManager.InitScore(winner, loser);
-                    //赢了的留下，输了的回到主球场
-                    var original = loser.City;
-                    loser.Player.MainCity.Add(loser);
-                    //进入战斗结束冷却状态
-                    loser.PlayCDAnimation(null, GameManager.GameConfig.AttackCD);
-                    PlayCDAnimation(() =>
+                    //进入战斗CD状态
+                    team.PlayCDAnimation(() =>
                     {
-                        // 不论输赢，这个City是中立场的话，NPC回到主球场之后5min 这支球队将会返会原来的City
-                        if (!winner.Player.IsNPC)
+                        //PK
+                        var (winner, loser) = GameManager.TeamPK(this, team);
+                        GameManager.InitScore(winner, loser);
+                        //赢了的留下，输了的回到主球场
+                        var original = loser.City;
+                        loser.Player.MainCity.Add(loser);
+                        //进入战斗结束冷却状态
+                        loser.PlayCDAnimation(null, GameManager.GameConfig.AttackCD);
+                        winner.PlayCDAnimation(() =>
                         {
-                            loser.PlayCDAnimation(null, GameManager.GameConfig.NPCTeamReturnCity);
-                            GameUtil.Instance.Delay(GameManager.GameConfig.NPCTeamReturnCity, () =>
+                            // 不论输赢，这个City是中立场的话，NPC回到主球场之后5min 这支球队将会返会原来的City
+                            if (loser.Player.IsNPC)
                             {
-                                //winner 返回主球馆
-                                winner.Player.MainCity.Add(winner);
-                                //loser 返场
-                                original.Add(loser);
-                            });
-                        }
-                    }, GameManager.GameConfig.AttackCD);
-                }, GameManager.GameConfig.TeamPKDuration);
+                                loser.PlayCDAnimation(() =>
+                                {
+                                    //winner 返回主球馆
+                                    winner.Player.MainCity.Add(winner);
+                                    //loser 返场
+                                    original.Add(loser);
+                                }, GameManager.GameConfig.NPCTeamReturnCity);
+                            }
+                        }, GameManager.GameConfig.AttackCD);
+                    }, GameManager.GameConfig.TeamPKDuration);
 
-                PlayCDAnimation(null, GameManager.GameConfig.TeamPKDuration);
+                    PlayCDAnimation(null, GameManager.GameConfig.TeamPKDuration);
+                }
             }
         }
     }

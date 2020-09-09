@@ -1,10 +1,10 @@
 ﻿{
-	"AttackCD": 3.0,
-	"TeamPKDuration": 1.0,
+	"AttackCD": 15.0,
+	"TeamPKDuration": 5.0,
 	"MaxFightingCapacity": 10000,
 	"WinScore": 3,
 	"LoseScore": 1,
-	"NPCTeamReturnCity": 20,
+	"NPCTeamReturnCity": 300.0,
 	"PlayerA": [{
 			"Id": 1,
 			"FightingCapacity": 1000

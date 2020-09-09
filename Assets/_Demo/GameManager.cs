@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Application.runInBackground = true;
         Camera = Camera.main;
     }
 
