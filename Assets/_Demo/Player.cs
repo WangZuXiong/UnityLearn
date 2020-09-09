@@ -1,0 +1,56 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Player : MonoBehaviour
+{
+    public Transform TeamContent;
+    public Team[] Teams;
+    public City MainCity;
+    public int Score;
+    public Text TexScore;
+
+    public bool IsNPC;
+
+    private void Awake()
+    {
+        IsNPC = transform.name.Equals("NPC");
+    }
+
+    public void Init(List<TeamData> teamDatas)
+    {
+        InitTexScore();
+        Teams = GetComponentsInChildren<Team>();
+        for (int i = 0; i < Teams.Length; i++)
+        {
+            Teams[i].SetData(teamDatas[i], this);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        var team = collision.transform.GetComponent<Team>();
+
+        if (team != null && team.Player == this && team.transform.parent != transform)
+        {
+            collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            team.transform.SetParent(TeamContent);
+            team.ResetCityTeamContent();
+
+            if (team.City != null)
+            {
+                team.City.Teams.Remove(team);
+                team.City.InitTexCount();
+            }
+        }
+    }
+
+
+    public void InitTexScore()
+    {
+        TexScore.text = "Score:" + Score.ToString();
+    }
+}
+
+

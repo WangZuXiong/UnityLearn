@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public PlayerModel GetPlayerModel()
     {
         //模拟从网络请求数据，在这里我们直接使用的是游戏对象本身的信息
-        Player player = GameObject.Find("Player").GetComponent<Player>();
+        unitymvc.Player player = GameObject.Find("Player").GetComponent<unitymvc.Player>();
         PlayerModel.PlayerData = player.PlayerData;
         return PlayerModel;
     }

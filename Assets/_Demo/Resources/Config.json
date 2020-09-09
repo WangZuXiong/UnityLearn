@@ -1,0 +1,355 @@
+﻿{
+	"AttackCD": 3.0,
+	"TeamPKDuration": 1.0,
+	"MaxFightingCapacity": 10000,
+	"WinScore": 3,
+	"LoseScore": 1,
+	"NPCTeamReturnCity": 20,
+	"PlayerA": [{
+			"Id": 1,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 2,
+			"FightingCapacity": 10000
+		},
+		{
+			"Id": 3,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 4,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 5,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 6,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 7,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 8,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 9,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 10,
+			"FightingCapacity": 10000
+		},
+		{
+			"Id": 11,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 12,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 13,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 14,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 15,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 16,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 17,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 18,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 19,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 20,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 21,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 22,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 23,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 24,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 25,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 26,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 27,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 28,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 29,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 30,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 31,
+			"FightingCapacity": 10000
+		},
+		{
+			"Id": 32,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 33,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 34,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 35,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 36,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 37,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 38,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 39,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 40,
+			"FightingCapacity": 1000
+		}
+	],
+	"PlayerB": [{
+			"Id": 1,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 2,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 3,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 4,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 5,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 6,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 7,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 8,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 9,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 10,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 11,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 12,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 13,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 14,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 15,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 16,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 17,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 18,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 19,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 20,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 21,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 22,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 23,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 24,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 25,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 26,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 27,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 28,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 29,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 30,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 31,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 32,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 33,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 34,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 35,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 36,
+			"FightingCapacity": 1000
+		},
+		{
+			"Id": 37,
+			"FightingCapacity": 10000
+		},
+		{
+			"Id": 38,
+			"FightingCapacity": 10000
+		},
+		{
+			"Id": 39,
+			"FightingCapacity": 10000
+		},
+		{
+			"Id": 40,
+			"FightingCapacity": 10000
+		}
+	],
+	"NPC": [{
+			"Id": 1,
+			"FightingCapacity": 0
+		},
+		{
+			"Id": 2,
+			"FightingCapacity": 5000
+		},
+		{
+			"Id": 3,
+			"FightingCapacity": 5000
+		},
+		{
+			"Id": 4,
+			"FightingCapacity": 5000
+		},
+		{
+			"Id": 5,
+			"FightingCapacity": 5000
+		},
+		{
+			"Id": 6,
+			"FightingCapacity": 5000
+		}
+	]
+}
