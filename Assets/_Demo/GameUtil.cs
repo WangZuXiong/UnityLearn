@@ -14,14 +14,25 @@ public class GameUtil : MonoBehaviour
         Instance = this;
     }
 
-    public void Delay(float delay, Action callback)
+    public void Delay(Action callback, float delay)
     {
-        StartCoroutine(DelayCoroutine(delay, callback));
+        StartCoroutine(DelayCoroutine(callback, delay));
     }
 
-    IEnumerator DelayCoroutine(float delay, Action callback)
+    IEnumerator DelayCoroutine(Action callback, float delay)
     {
-        yield return new WaitForSeconds(delay);
+        var wfs = new WaitForSeconds(0.1f);
+        while (delay > 0)
+        {
+            yield return wfs;
+            delay -= 0.1f;
+        }
         callback?.Invoke();
+    }
+
+    public void Delay(MonoBehaviour mono, Action callback, float delay)
+    {
+        mono.StopAllCoroutines();
+        mono.StartCoroutine(DelayCoroutine(callback, delay));
     }
 }

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameConfig GameConfig;
 
-    public static Camera Camera;
+    //public static Camera Camera;
 
     public Player A;
     public Player B;
@@ -17,28 +19,74 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Application.runInBackground = true;
-        Camera = Camera.main;
+        //Camera = Camera.main;
     }
 
-    private IEnumerator Start()
+    private void /*IEnumerator*/ Start()
     {
+        var path = Path.Combine(Application.persistentDataPath, "Config.json");
+
+        if (!File.Exists(path))
+        {
+            File.WriteAllText(path, Resources.Load<TextAsset>("Config").text);
+        }
+
+        var json = File.ReadAllText(path);
 
 
+        //var t = Resources.LoadAsync<TextAsset>("Config");
+        //yield return t;
+        //GameConfig = JsonUtility.FromJson<GameConfig>(t.asset.ToString());
 
+        GameConfig = JsonUtility.FromJson<GameConfig>(json);
 
-        var t = Resources.LoadAsync<TextAsset>("Config");
-        yield return t;
-        GameConfig = JsonUtility.FromJson<GameConfig>(t.asset.ToString());
 
         A.Init(GameConfig.PlayerA);
         B.Init(GameConfig.PlayerB);
         NPC.Init(GameConfig.NPC);
 
-        var citys = transform.Find("Content/Neutral").GetComponentsInChildren<City>();
-        for (int i = 0; i < NPC.Teams.Length; i++)
+        var citys = GetComponentsInChildren<City>();
+        var tempIndex = 0;
+        for (int i = 0; i < citys.Length; i++)
         {
-            citys[i].Add(NPC.Teams[i]);
+            if (citys[i].IsNeutral)
+            {
+                citys[i].Add(NPC.Teams[tempIndex++]);
+            }
+            else if (citys[i].IsMainCity)
+            {
+                citys[i].Init();
+            }
         }
+    }
+
+    internal static (Team winner, Team loser) TeamPK(Team team1, Team team2)
+    {
+        var total = team1.TeamData.FightingCapacity + team2.TeamData.FightingCapacity;
+
+        var t = UnityEngine.Random.Range(0, total + 1);
+
+        if (t < team1.TeamData.FightingCapacity)
+        {
+            return (team1, team2);
+        }
+
+        return (team2, team1);
+    }
+
+    public static void InitScore(Team winner, Team loser)
+    {
+        winner.Player.Score += GameConfig.WinScore;
+        winner.Player.InitTexScore();
+        loser.Player.Score -= GameConfig.LoseScore;
+        loser.Player.InitTexScore();
+    }
+
+
+
+    public void ResetGame()
+    {
+        SceneManager.LoadScene("Demo");
     }
 
 
@@ -67,27 +115,4 @@ public class GameManager : MonoBehaviour
 
 
     }
-
-    internal static (Team winner, Team loser) TeamPK(Team team1, Team team2)
-    {
-        var total = team1.TeamData.FightingCapacity + team2.TeamData.FightingCapacity;
-
-        var t = UnityEngine.Random.Range(0, total + 1);
-
-        if (t < team1.TeamData.FightingCapacity)
-        {
-            return (team1, team2);
-        }
-
-        return (team2, team1);
-    }
-
-    public static void InitScore(Team winner, Team loser)
-    {
-        winner.Player.Score += GameConfig.WinScore;
-        winner.Player.InitTexScore();
-        loser.Player.Score -= GameConfig.LoseScore;
-        loser.Player.InitTexScore();
-    }
-
 }

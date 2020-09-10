@@ -29,6 +29,14 @@ public class GameConfig
     /// NPC的球队输了之后的返场时间
     /// </summary>
     public int NPCTeamReturnCity;
+    /// <summary>
+    /// 主城的血量
+    /// </summary>
+    public int MainCityTotalBlood;
+    /// <summary>
+    /// Team 的体能
+    /// </summary>
+    public int TeamEnergy;
 
 
     public List<TeamData> PlayerA;
@@ -36,6 +44,8 @@ public class GameConfig
     public List<TeamData> PlayerB;
 
     public List<TeamData> NPC;
+
+    
 }
 
 [Serializable]

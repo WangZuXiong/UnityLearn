@@ -9,7 +9,10 @@ public class Team : MonoBehaviour
     public TeamData TeamData;
 
     public float CD;
+    public int Energy;
     public Image ImgCD;
+
+    public Color Color;
 
     public Player Player;
     public City City;
@@ -18,6 +21,7 @@ public class Team : MonoBehaviour
 
     public Text TexName;
     public Slider SliderAttack;
+    public Slider SliderEnergy;
 
 
     public bool isIn;
@@ -26,10 +30,16 @@ public class Team : MonoBehaviour
     /// <summary>
     /// 驻留在City上面的时间
     /// </summary>
+    /// 
+
     public int ResideTime;
 
     private IEnumerator CurrentRoutine;
 
+    private void Awake()
+    {
+        SliderEnergy.fillRect.GetComponent<Image>().color = Color;
+    }
 
     public void SetData(TeamData teamData, Player player)
     {
@@ -37,6 +47,8 @@ public class Team : MonoBehaviour
         transform.name = TexName.text = "T." + TeamData.Id.ToString();
         SliderAttack.value = (float)TeamData.FightingCapacity / GameManager.GameConfig.MaxFightingCapacity;
         Player = player;
+        Energy = GameManager.GameConfig.TeamEnergy;
+        SliderEnergy.value = (float)Energy / GameManager.GameConfig.TeamEnergy;
     }
 
     public void PlayCDAnimation(Action callback, float total)
@@ -97,7 +109,9 @@ public class Team : MonoBehaviour
 
     public void OnPointerDown()
     {
-        if (!IsCanOperation || CD > 0)
+        ResideTime = 0;
+
+        if (!IsCanOperation || CD > 0 || Energy <= 0)
         {
             return;
         }
@@ -109,7 +123,7 @@ public class Team : MonoBehaviour
 
     public void OnPointerUp()
     {
-        if (!IsCanOperation || CD > 0)
+        if (!IsCanOperation || CD > 0 || Energy <= 0)
         {
             return;
         }
@@ -126,7 +140,7 @@ public class Team : MonoBehaviour
             ResideTime += 1;
         }
 
-        if (!IsCanOperation || CD > 0)
+        if (!IsCanOperation || CD > 0 || Energy <= 0)
         {
             return;
         }
@@ -159,20 +173,28 @@ public class Team : MonoBehaviour
         ResetContent(true);
     }
 
+    public void ReduceBlood()
+    {
+        Energy--;
+        SliderEnergy.value = (float)Energy / GameManager.GameConfig.TeamEnergy;
+    }
 
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (CD > 0)
-        {
-            return;
-        }
-
         var team = collision.transform.GetComponent<Team>();
         if (team == null)
         {
             return;
         }
+
+        team.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+
+        if (CD > 0 || team.CD > 0 || Energy <= 0)
+        {
+            return;
+        }
+
         //驻留时间较长的就是被攻击的  
         var t = ResideTime > team.ResideTime;
 
@@ -186,7 +208,6 @@ public class Team : MonoBehaviour
                 if (team.transform.parent != City.TeamContent.transform)
                 {
                     City.Add(team);
-                    collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
                     team.ResetPlayerTeamContent();
                 }
 
@@ -194,33 +215,122 @@ public class Team : MonoBehaviour
                 if (team.Player != Player)
                 {
                     //进入战斗CD状态
-                    team.PlayCDAnimation(() =>
+                    team.PlayCDAnimation(OnTeamPKDurationFinsh, GameManager.GameConfig.TeamPKDuration);
+                    PlayCDAnimation(null, GameManager.GameConfig.TeamPKDuration);
+
+                    //战斗结束之后的回调
+                    void OnTeamPKDurationFinsh()
                     {
                         //PK
-                        var (winner, loser) = GameManager.TeamPK(this, team);
+                        (Team winner, Team loser) result = GameManager.TeamPK(this, team);
+
+                        Team winner = result.winner;
+                        Team loser = result.loser;
+
                         GameManager.InitScore(winner, loser);
-                        //赢了的留下，输了的回到主球场
-                        var original = loser.City;
-                        loser.Player.MainCity.Add(loser);
-                        //进入战斗结束冷却状态
-                        loser.PlayCDAnimation(null, GameManager.GameConfig.AttackCD);
-                        winner.PlayCDAnimation(() =>
+                        var pkCity = winner.City;
+
+
+                        //var winnwerOriginalCity = winner.City;
+
+
+                        //在非主城的情况下赢了的留下
+                        if (loser.City.IsMainCity)
                         {
+                            //回去
+                            winner.Player.MainCity.Add(winner);
+                        }
+
+                        //输了的回到主球场
+                        var loserOriginalCity = loser.City;
+                        loser.Player.MainCity.Add(loser);
+
+                        //扣精力
+                        if (!winner.Player.IsNPC)
+                        {
+                            winner.ReduceBlood();
+                        }
+
+                        if (!loser.Player.IsNPC)
+                        {
+                            loser.ReduceBlood();
+                        }
+
+
+                        if (loser.Energy > 0)
+                        {
+                            //进入战斗结束冷却状态
+                            loser.PlayCDAnimation(null, GameManager.GameConfig.AttackCD);
+                        }
+                        else
+                        {
+                            loser.Player.Recovery(loser);
+                        }
+
+                        if (winner.Energy > 0)
+                        {
+                            //进入战斗结束冷却状态
+                            winner.PlayCDAnimation(null, GameManager.GameConfig.AttackCD);
+                        }
+                        else
+                        {
+                            winner.Player.Recovery(winner);
+                        }
+
+                        //进攻冷却时间结束之后的回调
+                        void OnAttackCDFinish()
+                        {
+                            //当前PK的City为中立场
+
+                            //开启倒计时
+
+
+                            //
+
+
+
                             // 不论输赢，这个City是中立场的话，NPC回到主球场之后5min 这支球队将会返会原来的City
-                            if (loser.Player.IsNPC)
+                            //if (loser.Player.IsNPC)
+                            //{
+                            //    loser.PlayCDAnimation(null, GameManager.GameConfig.NPCTeamReturnCity);
+                            //    //city 开启倒计时，5min之后，winner回到主城，city回收原来的npc team
+
+                            //    //5分钟之后 NPC返场
+
+                            //    //loserOriginalCity.NPCTeam
+
+
+                            //    GameUtil.Instance.Delay(loserOriginalCity, () =>
+                            //    {
+                            //        //winner 返回主球馆
+                            //        winner.Player.MainCity.Add(winner);
+                            //        //npc team 返场
+                            //        loserOriginalCity.Add(loserOriginalCity.NPCTeam);
+
+                            //    }, GameManager.GameConfig.NPCTeamReturnCity);
+
+                            //}
+
+
+
+                            if (pkCity.Player.IsNPC)
                             {
-                                loser.PlayCDAnimation(() =>
+                                pkCity.NPCTeam.PlayCDAnimation(null, GameManager.GameConfig.NPCTeamReturnCity);
+
+                                GameUtil.Instance.Delay(pkCity, () =>
                                 {
                                     //winner 返回主球馆
                                     winner.Player.MainCity.Add(winner);
-                                    //loser 返场
-                                    original.Add(loser);
+                                    //npc team 返场
+                                    pkCity.Add(pkCity.NPCTeam);
+
                                 }, GameManager.GameConfig.NPCTeamReturnCity);
                             }
-                        }, GameManager.GameConfig.AttackCD);
-                    }, GameManager.GameConfig.TeamPKDuration);
 
-                    PlayCDAnimation(null, GameManager.GameConfig.TeamPKDuration);
+                        }
+
+                        GameUtil.Instance.Delay(OnAttackCDFinish, GameManager.GameConfig.AttackCD);
+                    }
                 }
             }
         }

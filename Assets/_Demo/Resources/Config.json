@@ -5,6 +5,8 @@
 	"WinScore": 3,
 	"LoseScore": 1,
 	"NPCTeamReturnCity": 300.0,
+	"MainCityTotalBlood": 10,
+	"TeamEnergy": 3,
 	"PlayerA": [{
 			"Id": 1,
 			"FightingCapacity": 1000

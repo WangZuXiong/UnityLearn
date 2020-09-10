@@ -35,14 +35,8 @@ public class Player : MonoBehaviour
         if (team != null && team.Player == this && team.transform.parent != transform)
         {
             collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            team.transform.SetParent(TeamContent);
+            Recovery(team);
             team.ResetCityTeamContent();
-
-            if (team.City != null)
-            {
-                team.City.Teams.Remove(team);
-                team.City.InitTexCount();
-            }
         }
     }
 
@@ -50,6 +44,16 @@ public class Player : MonoBehaviour
     public void InitTexScore()
     {
         TexScore.text = "Score:" + Score.ToString();
+    }
+
+    public void Recovery(Team team)
+    {
+        team.transform.SetParent(TeamContent);
+        if (team.City != null)
+        {
+            team.City.Teams.Remove(team);
+            team.City.InitTexCount();
+        }
     }
 }
 
