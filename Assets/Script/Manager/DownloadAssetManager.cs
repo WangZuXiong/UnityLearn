@@ -7,7 +7,7 @@ using UnityEngine.Networking;
 
 public static class DownloadAssetManager
 {
-    private static DownloadAssetImpl _downloadAssetImpl = new DownloadAssetImpl();
+    private static readonly DownloadAssetImpl _downloadAssetImpl = new DownloadAssetImpl();
 
     public static void DownloadTextAsync(string url, Action<string> successCallback, Action errorCallback)
     {

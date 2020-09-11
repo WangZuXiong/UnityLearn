@@ -315,7 +315,10 @@ public class Team : MonoBehaviour
 
                             if (pkCity.Player.IsNPC)
                             {
-                                pkCity.NPCTeam.PlayCDAnimation(null, GameManager.GameConfig.NPCTeamReturnCity);
+                                if (pkCity.NPCTeam.City != pkCity)
+                                {
+                                    pkCity.NPCTeam.PlayCDAnimation(null, GameManager.GameConfig.NPCTeamReturnCity);
+                                }
 
                                 GameUtil.Instance.Delay(pkCity, () =>
                                 {

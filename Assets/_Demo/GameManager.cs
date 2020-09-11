@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -93,26 +94,39 @@ public class GameManager : MonoBehaviour
     [ContextMenu("Gen Json")]
     public void GenJson()
     {
-        GameConfig = new GameConfig
-        {
-            AttackCD = 15,
-            TeamPKDuration = 5,
-            MaxFightingCapacity = 10000,
+        var uri = string.Format("http://192.168.3.16:6666/allianceC/addOperation?user={0}&operation={1}", "right", "123");
 
-        };
-        GameConfig.PlayerA = new List<TeamData>();
-        for (int i = 1; i <= 40; i++)
-        {
-            GameConfig.PlayerA.Add(new TeamData() { Id = i, FightingCapacity = 1000 }); ;
-        }
+        WebRequestManager.GetRequest(uri, null, null);
 
-        GameConfig.PlayerB = GameConfig.PlayerA;
-        var json = JsonUtility.ToJson(GameConfig, true);
 
-        Debug.Log(json);
+
+
+        var getOperationUri = string.Format("http://192.168.3.16:6666/allianceC/getOperations?user={0}", "right");
+
+        WebRequestManager.GetRequest(getOperationUri, null, null);
+
+        //GameConfig = new GameConfig
+        //{
+        //    AttackCD = 15,
+        //    TeamPKDuration = 5,
+        //    MaxFightingCapacity = 10000,
+
+        //};
+        //GameConfig.PlayerA = new List<TeamData>();
+        //for (int i = 1; i <= 40; i++)
+        //{
+        //    GameConfig.PlayerA.Add(new TeamData() { Id = i, FightingCapacity = 1000 }); ;
+        //}
+
+        //GameConfig.PlayerB = GameConfig.PlayerA;
+        //var json = JsonUtility.ToJson(GameConfig, true);
+
+        //Debug.Log(json);
 
 
 
 
     }
 }
+
+
