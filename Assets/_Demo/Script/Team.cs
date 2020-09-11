@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Team : MonoBehaviour
 {
-    public TeamData TeamData;
+    public TeamConfig TeamConfig;
 
     public float CD;
     public int Energy;
@@ -41,11 +41,11 @@ public class Team : MonoBehaviour
         SliderEnergy.fillRect.GetComponent<Image>().color = Color;
     }
 
-    public void SetData(TeamData teamData, Player player)
+    public void SetData(TeamConfig teamData, Player player)
     {
-        TeamData = teamData;
-        transform.name = TexName.text = "T." + TeamData.Id.ToString();
-        SliderAttack.value = (float)TeamData.FightingCapacity / GameManager.GameConfig.MaxFightingCapacity;
+        TeamConfig = teamData;
+        transform.name = TexName.text = "T." + TeamConfig.Id.ToString();
+        SliderAttack.value = (float)TeamConfig.FightingCapacity / GameManager.GameConfig.MaxFightingCapacity;
         Player = player;
         Energy = GameManager.GameConfig.TeamEnergy;
         SliderEnergy.value = (float)Energy / GameManager.GameConfig.TeamEnergy;

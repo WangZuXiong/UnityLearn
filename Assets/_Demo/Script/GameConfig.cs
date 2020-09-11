@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class GameConfig
+public struct GameConfig
 {
     /// <summary>
     /// team的进攻冷却时间
@@ -37,20 +37,19 @@ public class GameConfig
     /// Team 的体能
     /// </summary>
     public int TeamEnergy;
+    /// <summary>
+    /// 请求间隔
+    /// </summary>
+    public float ReqSpacing;
 
 
-    public List<TeamData> PlayerA;
 
-    public List<TeamData> PlayerB;
+    public List<TeamConfig> PlayerA;
 
-    public List<TeamData> NPC;
+    public List<TeamConfig> PlayerB;
 
-    
+    public List<TeamConfig> NPC;
+
+
 }
 
-[Serializable]
-public struct TeamData
-{
-    public int Id;
-    public int FightingCapacity;
-}

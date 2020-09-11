@@ -8,31 +8,27 @@ public class City : MonoBehaviour
 {
     public int Capacity;
     public int Blood = 10;
-    public Player Player;
-    public Text TexCount;
-    public Text TexBlood;
-    public Slider SliderBlood;
-    //public Button BtnAdd;
-    //public Button BtnReduce;
-    public Transform TeamContent;
-
-    public List<Team> Teams = new List<Team>();
-
-    public Team NPCTeam;
 
     public bool IsMainCity;
     public bool IsNeutral;
 
+
+    public Player Player;
+    public List<Team> Teams = new List<Team>();
+
+
+    public Team NPCTeam;
+    public Text TexCount;
+    public Text TexBlood;
+    public Slider SliderBlood;
+    public Transform TeamContent;
 
     private void Awake()
     {
         IsMainCity = transform.name.Equals("MainCity");
         IsNeutral = transform.name.Equals("NeutralCity");
         InitTexCount();
-        //BtnAdd.onClick.AddListener(OnBtnAddClick);
-        //BtnReduce.onClick.AddListener(OnBtnReduceClick);
     }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -100,50 +96,4 @@ public class City : MonoBehaviour
         TexBlood.text = string.Format("{0}/{1}", Blood.ToString(), GameManager.GameConfig.MainCityTotalBlood.ToString());
         SliderBlood.value = (float)Blood / GameManager.GameConfig.MainCityTotalBlood;
     }
-
-    //private void OnBtnReduceClick()
-    //{
-    //    if (Count > 0)
-    //    {
-    //        Player.TotalCount++;
-    //        Player.TotalText.text = "Total:" + Player.TotalCount.ToString();
-
-    //        Count--;
-    //        TexCount.text = Count.ToString();
-    //    }
-    //}
-
-    //private void OnBtnAddClick()
-    //{
-    //    if (Player.TotalCount > 0)
-    //    {
-    //        Player.TotalCount--;
-    //        Player.TotalText.text = "Total:" + Player.TotalCount.ToString();
-
-    //        Count++;
-    //        TexCount.text = Count.ToString();
-    //    }
-    //}
-
-
-
-    //public Team WinnerTeam;
-
-
-
-    //public void OnNPCTeamReturnCityCallback()
-    //{
-    //    if (WinnerTeam != null)
-    //    {
-    //        //winner 返回主球馆
-    //        WinnerTeam.Player.MainCity.Add(WinnerTeam);
-    //    }
-
-    //    if (NPCTeam != null)
-    //    {
-
-    //        //loser 返场
-    //        Add(NPCTeam);
-    //    }
-    //}
 }

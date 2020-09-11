@@ -101,6 +101,7 @@ MonoBehaviour:
   SliderBlood: {fileID: 3088091387019303912}
   TeamContent: {fileID: 4209625996537913123}
   Teams: []
+  NPCTeam: {fileID: 0}
   IsMainCity: 0
   IsNeutral: 0
 --- !u!61 &1291241408726921432
@@ -698,7 +699,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 7115997680619601234}
   m_HandleRect: {fileID: 0}

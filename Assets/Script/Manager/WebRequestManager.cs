@@ -55,17 +55,17 @@ public class WebRequestImpl
             // Request and wait for the desired page.
             yield return webRequest.SendWebRequest();
 
-            string[] pages = uri.Split('/');
-            int page = pages.Length - 1;
+            //string[] pages = uri.Split('/');
+            //int page = pages.Length - 1;
 
             if (webRequest.isNetworkError)
             {
-                Debug.Log(pages[page] + ": Error: " + webRequest.error);
+                Debug.Log("Error: " + webRequest.error);
                 OnFailCallback?.Invoke();
             }
             else
             {
-                Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                Debug.Log("Received: " + webRequest.downloadHandler.text);
                 OnSuccessCallback?.Invoke(webRequest.downloadHandler.text);
             }
         }

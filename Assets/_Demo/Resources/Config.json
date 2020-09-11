@@ -7,6 +7,7 @@
 	"NPCTeamReturnCity": 300.0,
 	"MainCityTotalBlood": 10,
 	"TeamEnergy": 3,
+	"ReqSpacing": 0.5,
 	"PlayerA": [{
 			"Id": 1,
 			"FightingCapacity": 1000

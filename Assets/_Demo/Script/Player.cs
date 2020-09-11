@@ -7,9 +7,17 @@ public class Player : MonoBehaviour
 {
     public Transform TeamContent;
     public Team[] Teams;
-    public City MainCity;
+
     public int Score;
     public Text TexScore;
+
+
+    public City MainCity;
+    public Dictionary<int, City> CityDict { private set; get; } = new Dictionary<int, City>();
+
+
+    public Dictionary<int, Team> TeamDict { private set; get; } = new Dictionary<int, Team>();
+
 
     public bool IsNPC;
 
@@ -18,13 +26,19 @@ public class Player : MonoBehaviour
         IsNPC = transform.name.Equals("NPC");
     }
 
-    public void Init(List<TeamData> teamDatas)
+    public void Init(List<TeamConfig> teamDatas, List<City> cities)
     {
         InitTexScore();
         Teams = GetComponentsInChildren<Team>();
         for (int i = 0; i < Teams.Length; i++)
         {
             Teams[i].SetData(teamDatas[i], this);
+            TeamDict.Add(teamDatas[i].Id, Teams[i]);
+        }
+
+        for (int i = 0; i < cities.Count; i++)
+        {
+            CityDict.Add(i, cities[i]);
         }
     }
 
