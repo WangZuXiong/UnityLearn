@@ -1,35 +1,29 @@
 ﻿using System;
 
 [Serializable]
-public class Msg
+public class BaseMsg
 {
     public int MsgType;
-    public TeamMoveToCity Body;
 }
-
 
 /// <summary>
 /// 0 - Team 移动到 City
 /// </summary>
-[Serializable]
-public class TeamMoveToCity
+public class TeamMoveToCity : BaseMsg
 {
     public TeamData TeamData;
     public CityData CityData;
 }
 
-
-
-
 [Serializable]
-public class TeamData
+public struct TeamData
 {
     public int PlayerId;
     public int Id;
 }
 
 [Serializable]
-public class CityData
+public struct CityData
 {
     public int PlayerId;
     public int Id;
