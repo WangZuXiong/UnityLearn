@@ -1,10 +1,10 @@
 ﻿using System;
 
 [Serializable]
-public struct Msg
+public class Msg
 {
     public int MsgType;
-    public string Body;
+    public TeamMoveToCity Body;
 }
 
 
@@ -12,7 +12,7 @@ public struct Msg
 /// 0 - Team 移动到 City
 /// </summary>
 [Serializable]
-public struct TeamMoveToCity
+public class TeamMoveToCity
 {
     public TeamData TeamData;
     public CityData CityData;
@@ -21,14 +21,15 @@ public struct TeamMoveToCity
 
 
 
-
-public struct TeamData
+[Serializable]
+public class TeamData
 {
     public int PlayerId;
     public int Id;
 }
 
-public struct CityData
+[Serializable]
+public class CityData
 {
     public int PlayerId;
     public int Id;

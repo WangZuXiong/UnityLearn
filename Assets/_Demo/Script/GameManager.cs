@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public static int OurPlayerId;
     public static int EnemyPlayerId;
 
+    public Transform GameMap;
+
 
     public Dictionary<int, Player> PlayerDict = new Dictionary<int, Player>();
 
@@ -56,7 +58,7 @@ public class GameManager : MonoBehaviour
         var teamNPC = new List<City>();
 
 
-        var citys = GetComponentsInChildren<City>();
+        var citys = GameMap.GetComponentsInChildren<City>();
         var tempIndex = 0;
         for (int i = 0; i < citys.Length; i++)
         {
@@ -137,27 +139,79 @@ public class GameManager : MonoBehaviour
 
         var getOperationUri = string.Format(CMD.GetOperations, groupName);
 
-        WebRequestManager.GetRequest(getOperationUri, (t) =>
+        WebRequestManager.GetRequest(getOperationUri, (msgStrs) =>
         {
-            try
-            {
+            //try
+            //{
 
-            }
-            catch
-            {
 
-            }
-            Msg msg = JsonUtility.FromJson<Msg>(t);
+            //["{\"MsgType\":0,\"Body\":{\"TeamData\":{\"PlayerId\":1,\"Id\":1},\"CityData\":{\"PlayerId\":0,\"Id\":1}}}"]
 
-            switch (msg.MsgType)
+
+            //Debug.Log(msgStrs);
+            //"{\"MsgType\":0,\"Body\":{\"TeamData\":{\"PlayerId\":1,\"Id\":1},\"CityData\":{\"PlayerId\":0,\"Id\":1}}}"
+            //{"MsgType":0,"Body":{"TeamData":{"PlayerId":1,"Id":1},"CityData":{"PlayerId":0,"Id":1}}}
+            //"{\"MsgType\":0,\"Body\":{\"TeamData\":{\"PlayerId\":1,\"Id\":1},\"CityData\":{\"PlayerId\":0,\"Id\":1}}}"
+            //"{\"MsgType\":0,\"Body\":{\"TeamData\":{\"PlayerId\":1,\"Id\":1},\"CityData\":{\"PlayerId\":0,\"Id\":1}}}"
+            //msgStrs = "{\"MsgType\":0,\"Body\":{\"TeamData\":{\"PlayerId\":1,\"Id\":1},\"CityData\":{\"PlayerId\":0,\"Id\":1}}}";
+
+            Debug.Log(msgStrs);
+
+
+            var oldValue = new string(new char[] { '\"', ',', '\"' });
+            var newValue = new string(new char[] { '\"', '@', '\"' });
+
+            msgStrs = msgStrs.Replace(oldValue, newValue);
+            msgStrs = msgStrs.Replace("[", string.Empty).Replace("]", string.Empty);
+
+
+
+
+
+
+            var msgs = msgStrs.Split('@');
+
+
+            for (int i = 0; i < msgs.Length; i++)
             {
-                case 0:
-                    var body = JsonUtility.FromJson<TeamMoveToCity>(msg.Body);
-                    var team = PlayerDict[body.TeamData.PlayerId].TeamDict[body.TeamData.Id];
-                    var city = PlayerDict[body.CityData.PlayerId].CityDict[body.CityData.Id];
-                    city.Add(team);
-                    break;
+                var msgStr = msgs[i];
+
+                if (string.IsNullOrEmpty(msgStr))
+                {
+                    return;
+                }
+
+
+                msgStr = msgStr.Remove(0, 1);
+                msgStr = msgStr.Remove(msgStr.Length - 1, 1);
+                msgStr = msgStr.Replace("\\", "");
+
+
+                Debug.Log(msgStr);
+
+                //{\"MsgType\":0,\"Body\":{\"TeamData\":{\"PlayerId\":1,\"Id\":1},\"CityData\":{\"PlayerId\":0,\"Id\":1}}}
+                //{"MsgType":0,"Body":{"TeamData":{"PlayerId":1,"Id":1},"CityData":{"PlayerId":0,"Id":1}}}
+                Msg msg = JsonUtility.FromJson<Msg>(msgStr);
+
+                switch (msg.MsgType)
+                {
+                    case 0:
+                        var body = msg.Body;
+                        var team = PlayerDict[body.TeamData.PlayerId].TeamDict[body.TeamData.Id];
+                        var city = PlayerDict[body.CityData.PlayerId].CityDict[body.CityData.Id];
+
+                        team.transform.SetParent(city.TeamContent);
+                        city.Add(team);
+                        break;
+                }
             }
+
+            //}
+            //    catch
+            //{
+
+            //}
+
 
 
         }, null);
@@ -172,30 +226,64 @@ public class GameManager : MonoBehaviour
 
 
 
-    public void SendAddOperation<T>(T data) where T : new()
+    public void SendAddOperation(Msg msg)
     {
-        var json = JsonUtility.ToJson(data);
+        var json = JsonUtility.ToJson(msg);
         AddOperation(OurPlayerId.ToString(), json);
     }
 
 
 
 
+    string GetTestMsgStr()
+    {
+        TeamMoveToCity teamMoveToCity = new TeamMoveToCity
+        {
+            CityData = new CityData() { Id = 1, PlayerId = 0 },
+            TeamData = new TeamData() { Id = 1, PlayerId = 1 }
+        };
+        Msg msg = new Msg
+        {
+            MsgType = 0,
+            Body = teamMoveToCity
+        };
+
+
+        var json = JsonUtility.ToJson(msg);
+
+        return json;
+    }
+
+
 
     [ContextMenu("Gen Json")]
     public void GenJson()
     {
-        TeamMoveToCity teamMoveToCity = new TeamMoveToCity();
-
-        teamMoveToCity.CityData = new CityData() { Id = 1, PlayerId = 0 };
-
-        teamMoveToCity.TeamData = new TeamData() { Id = 1, PlayerId = 1 };
-
-        SendAddOperation(teamMoveToCity);
+        var json = GetTestMsgStr();
 
 
-        //var json = JsonUtility.ToJson(data);
-        //AddOperation(.ToString(), json);
+        //SendAddOperation(msg);
+
+
+        Debug.Log(json);
+        Msg msg = JsonUtility.FromJson<Msg>(json);
+
+        switch (msg.MsgType)
+        {
+            case 0:
+                var body = msg.Body;
+                var team = PlayerDict[body.TeamData.PlayerId].TeamDict[body.TeamData.Id];
+                var city = PlayerDict[body.CityData.PlayerId].CityDict[body.CityData.Id];
+                Debug.Log("body.CityData.Id:" + body.CityData.Id);
+                //team.transform.SetParent(city.TeamContent);
+                //city.Add(team);
+                break;
+        }
+
+
+        AddOperation(OurPlayerId.ToString(), json);
+        AddOperation(OurPlayerId.ToString(), json);
+
 
         //GameConfig = new GameConfig
         //{
