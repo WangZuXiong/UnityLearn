@@ -1,14 +1,13 @@
 ﻿{
-	"AttackCD": 15.0,
-	"TeamPKDuration": 5.0,
+	"AttackCD": 1.0,
+	"TeamPKDuration": 1.0,
 	"MaxFightingCapacity": 10000,
 	"WinScore": 3,
 	"LoseScore": 1,
-	"NPCTeamReturnCity": 300.0,
+	"NPCTeamReturnCity": 10.0,
 	"MainCityTotalBlood": 10,
 	"TeamEnergy": 3,
-	"ReqSpacing": 0.5,
-	"PlayerA": [{
+	"ATeamConfig": [{
 			"Id": 1,
 			"FightingCapacity": 1000
 		},
@@ -169,7 +168,7 @@
 			"FightingCapacity": 1000
 		}
 	],
-	"PlayerB": [{
+	"BTeamConfig": [{
 			"Id": 1,
 			"FightingCapacity": 1000
 		},
@@ -330,7 +329,7 @@
 			"FightingCapacity": 10000
 		}
 	],
-	"NPC": [{
+	"NPCTeamConfig": [{
 			"Id": 1,
 			"FightingCapacity": 0
 		},

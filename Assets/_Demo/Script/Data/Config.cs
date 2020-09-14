@@ -41,11 +41,11 @@ public struct Config
     /// </summary>
     public float ReqSpacing;
 
-    public List<TeamConfig> PlayerA;
+    public List<TeamConfig> ATeamConfig;
 
-    public List<TeamConfig> PlayerB;
+    public List<TeamConfig> BTeamConfig;
 
-    public List<TeamConfig> NPC;
+    public List<TeamConfig> NPCTeamConfig;
 }
 
 

@@ -37,47 +37,55 @@ public class GameManager : MonoBehaviour
 
     private void InitData()
     {
-        Player A = transform.Find("CanvasGame/A").GetComponent<Player>();
-        Player B = transform.Find("CanvasGame/B").GetComponent<Player>();
-        Player NPC = transform.Find("CanvasGame/NPC").GetComponent<Player>();
-        Transform GameMap = transform.Find("CanvasGame/Content");
+        Player A = GameObject.Find("CanvasGame/A").GetComponent<Player>();
+        Player B = GameObject.Find("CanvasGame/B").GetComponent<Player>();
+        Player NPC = GameObject.Find("CanvasGame/NPC").GetComponent<Player>();
 
-        GameData.PlayerDict.Add(0, A);
-        GameData.PlayerDict.Add(1, B);
+        GameData.PlayerDict.Add(PlayerNameConstant.PlayerA, A);
+        GameData.PlayerDict.Add(PlayerNameConstant.PlayerB, B);
+        GameData.PlayerDict.Add(PlayerNameConstant.PlayerNPC, NPC);
 
-        var teamA = new List<City>();
-        var teamB = new List<City>();
-        var teamNPC = new List<City>();
+        var teamACities = new List<City>();
+        var teamBCities = new List<City>();
+        var teamNPCCities = new List<City>();
 
+        Transform GameMap = GameObject.Find("CanvasGame/Content").transform;
         var citys = GameMap.GetComponentsInChildren<City>();
-        var tempIndex = 0;
+
         for (int i = 0; i < citys.Length; i++)
         {
-            if (citys[i].IsNeutral)
-            {
-                citys[i].Add(NPC.Teams[tempIndex++]);
-            }
-            else if (citys[i].IsMainCity)
-            {
-                citys[i].InitBlood();
-            }
-
             if (citys[i].Player == A)
             {
-                teamA.Add(citys[i]);
+                teamACities.Add(citys[i]);
             }
             else if (citys[i].Player == B)
             {
-                teamB.Add(citys[i]);
+                teamBCities.Add(citys[i]);
             }
-            else
+            else if (citys[i].Player == NPC)
             {
-                teamNPC.Add(citys[i]);
+                teamNPCCities.Add(citys[i]);
             }
         }
-        A.SetData(0, GameData.Config.PlayerA, teamA);
-        B.SetData(1, GameData.Config.PlayerB, teamB);
-        NPC.SetData(2, GameData.Config.NPC, teamNPC);
+
+
+        A.SetData(PlayerNameConstant.PlayerA, GameData.Config.ATeamConfig, teamACities);
+        B.SetData(PlayerNameConstant.PlayerB, GameData.Config.BTeamConfig, teamBCities);
+        NPC.SetData(PlayerNameConstant.PlayerNPC, GameData.Config.NPCTeamConfig, teamNPCCities);
+
+
+        //将NPC的Team移入中立city
+        var tempIndex = 0;
+        foreach (var item in NPC.CityDict)
+        {
+            var city = item.Value;
+            city.Add(NPC.TeamDict[++tempIndex]);
+        }
+
+        //初始化mian city的血量
+        A.MainCity.InitBlood();
+        B.MainCity.InitBlood();
+
     }
 
     internal static (Team winner, Team loser) TeamPK(Team team1, Team team2)
@@ -106,7 +114,8 @@ public class GameManager : MonoBehaviour
 
         while (true)
         {
-            MessageSender.GetOperations(GameData.EnemyPlayerId.ToString());
+            //MessageSender.GetOperations(GameData.EnemyPlayerId);
+            MessageSender.GetOperations(GameData.OurPlayerName);
             yield return wfs;
         }
     }
@@ -126,14 +135,21 @@ public class GameManager : MonoBehaviour
     //    return json;
     //}
 
+
+    //{"MsgType":2,"Body":[123,34,80,108,97,121,101,114,78,97,109,101,34,58,34,108,101,102,116,34,44,34,73,100,34,58,50,125]}
+    public string str;
     [ContextMenu("Gen Json")]
     public void GenJson()
     {
-        //var json = GetTestMsgStr();
 
-        //Debug.Log(json);
+        var msg = JsonUtility.FromJson<Msg>(str);
 
-        //TeamMoveToCity msg = JsonUtility.FromJson<TeamMoveToCity>(json);
+        Debug.Log(msg.MsgType);
+        var body = System.Text.Encoding.UTF8.GetString(msg.Body.ToArray());
+        var t = JsonUtility.FromJson<TeamNCity>(body);
+        Debug.Log(t.CityData.PlayerName);
+
+
 
         //switch (msg.MsgType)
         //{
@@ -147,15 +163,20 @@ public class GameManager : MonoBehaviour
         //        break;
         //}
 
-        TeamMoveToCity teamMoveToCity = new TeamMoveToCity
-        {
-            MsgType = 0,
-            CityData = new CityData() { Id = 1, PlayerId = 0 },
-            TeamData = new TeamData() { Id = 1, PlayerId = 1 }
-        };
 
+        //BaseMsg baseMsg = new BaseMsg();
 
-        MessageSender.AddOperation(GameData.OurPlayerId.ToString(), teamMoveToCity);
+        //TeamMoveToCity teamMoveToCity = new TeamMoveToCity
+        //{
+        //    CityData = new CityData() { Id = 1, PlayerId = 0 },
+        //    TeamData = new TeamData() { Id = 1, PlayerId = 1 }
+        //};
+
+        //baseMsg.MsgType = 0;
+        //baseMsg.Body = JsonUtility.ToJson(teamMoveToCity);
+        //var msgStr = JsonUtility.ToJson(baseMsg);
+
+        //MessageSender.AddOperation(GameData.OurPlayerId.ToString(), msgStr);
 
 
 

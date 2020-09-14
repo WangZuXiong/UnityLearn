@@ -23,8 +23,16 @@ public class Team : MonoBehaviour
     public Slider SliderEnergy;
 
 
+    public GameObject Mask;
+
+
     public bool isIn;
     public bool IsCanOperation = true;
+
+    /// <summary>
+    /// 操作中
+    /// </summary>
+    public bool IsInOperation = false;
 
     /// <summary>
     /// 驻留在City上面的时间
@@ -53,7 +61,7 @@ public class Team : MonoBehaviour
         TeamData = new TeamData
         {
             Id = config.Id,
-            PlayerId = player.Id
+            PlayerName = player.PlayerName
         };
     }
 
@@ -79,7 +87,6 @@ public class Team : MonoBehaviour
         }
         callback?.Invoke();
     }
-
 
     internal void ResetCityTeamContent()
     {
@@ -117,7 +124,7 @@ public class Team : MonoBehaviour
     {
         ResideTime = 0;
 
-        if (!IsCanOperation || CD > 0 || Energy <= 0)
+        if (!IsCanOperation || CD > 0 || Energy <= 0 || IsInOperation)
         {
             return;
         }
@@ -125,6 +132,9 @@ public class Team : MonoBehaviour
         isIn = true;
 
         ResetContent(false);
+
+
+        //MessageSender.AddOperation(Operation.OnPointerDownTeam, TeamData);
     }
 
     public void OnPointerUp()
@@ -134,9 +144,11 @@ public class Team : MonoBehaviour
             return;
         }
 
-
         isIn = false;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+
+
+        //MessageSender.AddOperation(Operation.OnPointerUpTeam, TeamData);
     }
 
     private void Update()
@@ -171,7 +183,6 @@ public class Team : MonoBehaviour
         }
         transform.localEulerAngles = Vector3.zero;
     }
-
 
     IEnumerator DelayResetContent()
     {

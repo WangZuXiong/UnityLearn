@@ -5,7 +5,9 @@ using UnityEngine;
 public class GameData
 {
     public static Config Config;
-    public static Dictionary<int, Player> PlayerDict = new Dictionary<int, Player>();
-    public static int OurPlayerId;
-    public static int EnemyPlayerId;
+    public static Dictionary<string, Player> PlayerDict = new Dictionary<string, Player>();
+    public static string OurPlayerName = PlayerNameConstant.PlayerA;
+    public static string EnemyPlayerName = PlayerNameConstant.PlayerB;
 }
+
+

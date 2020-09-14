@@ -8,24 +8,24 @@ public class SelectGroupUIBehaviour : MonoBehaviour
     public Toggle Tog0;
     public Toggle Tog1;
     public Button BtnComfirm;
-    public GameObject CanvasGame;
+    public GameUIBehaviour GameUI;
 
     public void OnBtnComfirmClick()
     {
         if (Tog0.isOn)
         {
-            GameData.OurPlayerId = 0;
-            GameData.EnemyPlayerId = 1;
+            GameData.OurPlayerName = PlayerNameConstant.PlayerA;
+            GameData.EnemyPlayerName = PlayerNameConstant.PlayerB;
             gameObject.Hide();
-            CanvasGame.Show();
+            GameUI.Show();
             GameManager.Instance.StartUpdateCoroutine();
         }
         else if (Tog1.isOn)
         {
-            GameData.OurPlayerId = 1;
-            GameData.EnemyPlayerId = 0;
+            GameData.OurPlayerName = PlayerNameConstant.PlayerB;
+            GameData.EnemyPlayerName = PlayerNameConstant.PlayerA;
             gameObject.Hide();
-            CanvasGame.Show();
+            GameUI.Show();
             GameManager.Instance.StartUpdateCoroutine();
         }
     }

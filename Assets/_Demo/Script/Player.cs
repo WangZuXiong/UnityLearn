@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public int Id;
+    public string PlayerName;
 
     public Transform TeamContent;
     public Team[] Teams;
@@ -28,15 +28,15 @@ public class Player : MonoBehaviour
         IsNPC = transform.name.Equals("NPC");
     }
 
-    public void SetData(int id, List<TeamConfig> teamDatas, List<City> cities)
+    public void SetData(string playerName, List<TeamConfig> teamConfigs, List<City> cities)
     {
-        Id = id;
+        PlayerName = playerName;
         InitTexScore();
         Teams = GetComponentsInChildren<Team>();
         for (int i = 0; i < Teams.Length; i++)
         {
-            Teams[i].SetData(teamDatas[i], this);
-            TeamDict.Add(teamDatas[i].Id, Teams[i]);
+            Teams[i].SetData(teamConfigs[i], this);
+            TeamDict.Add(teamConfigs[i].Id, Teams[i]);
         }
 
         for (int i = 0; i < cities.Count; i++)

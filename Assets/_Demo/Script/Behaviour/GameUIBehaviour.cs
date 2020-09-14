@@ -11,4 +11,9 @@ public class GameUIBehaviour : MonoBehaviour
         loser.Player.Score -= GameData.Config.LoseScore;
         loser.Player.InitTexScore();
     }
+
+    public void Show()
+    {
+        GetComponent<Canvas>().enabled = true;
+    }
 }

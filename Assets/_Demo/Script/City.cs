@@ -12,7 +12,6 @@ public class City : MonoBehaviour
     public int Blood = 10;
 
     public bool IsMainCity;
-    public bool IsNeutral;
 
 
     public Player Player;
@@ -28,7 +27,6 @@ public class City : MonoBehaviour
     private void Awake()
     {
         IsMainCity = transform.name.Equals("MainCity");
-        IsNeutral = transform.name.Equals("NeutralCity");
         InitTexCount();
     }
 
@@ -43,6 +41,15 @@ public class City : MonoBehaviour
         if (team != null && team.transform.parent != transform)
         {
             Add(team);
+
+            if (!team.Player.IsNPC)
+            {
+                MessageSender.AddOperation(Operation.TeamMoveToCity, new TeamNCity()
+                {
+                    CityData = CityData,
+                    TeamData = team.TeamData
+                });
+            }
 
             collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             team.ResetPlayerTeamContent();
@@ -64,7 +71,7 @@ public class City : MonoBehaviour
     {
         CityData = new CityData
         {
-            PlayerId = Player.Id,
+            PlayerName = Player.PlayerName,
             Id = id
         };
     }
@@ -88,12 +95,6 @@ public class City : MonoBehaviour
         {
             NPCTeam = team;
         }
-
-        MessageSender.AddOperation(GameData.OurPlayerId.ToString(), new TeamMoveToCity()
-        {
-            CityData = CityData,
-            TeamData = team.TeamData
-        });
     }
 
 
