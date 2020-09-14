@@ -1,28 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
-
-    public static GameConfig GameConfig;
-    public Player A;
-    public Player B;
-    public Player NPC;
-
-    public static int OurPlayerId;
-    public static int EnemyPlayerId;
-
-    public Transform GameMap;
-
-
-    public Dictionary<int, Player> PlayerDict = new Dictionary<int, Player>();
 
     private void Awake()
     {
@@ -32,7 +15,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // load Config
+        InitConfig();
+        InitData();
+    }
+
+    private void InitConfig()
+    {
         var path = Path.Combine(Application.persistentDataPath, "Config.json");
         if (!File.Exists(path))
         {
@@ -44,19 +32,22 @@ public class GameManager : MonoBehaviour
         json = Resources.Load<TextAsset>("Config").text;
 #endif
 
-        GameConfig = JsonUtility.FromJson<GameConfig>(json);
+        GameData.Config = JsonUtility.FromJson<Config>(json);
+    }
 
+    private void InitData()
+    {
+        Player A = transform.Find("CanvasGame/A").GetComponent<Player>();
+        Player B = transform.Find("CanvasGame/B").GetComponent<Player>();
+        Player NPC = transform.Find("CanvasGame/NPC").GetComponent<Player>();
+        Transform GameMap = transform.Find("CanvasGame/Content");
 
-
-
-        //Init
-        PlayerDict.Add(0, A);
-        PlayerDict.Add(1, B);
+        GameData.PlayerDict.Add(0, A);
+        GameData.PlayerDict.Add(1, B);
 
         var teamA = new List<City>();
         var teamB = new List<City>();
         var teamNPC = new List<City>();
-
 
         var citys = GameMap.GetComponentsInChildren<City>();
         var tempIndex = 0;
@@ -65,12 +56,10 @@ public class GameManager : MonoBehaviour
             if (citys[i].IsNeutral)
             {
                 citys[i].Add(NPC.Teams[tempIndex++]);
-
-
             }
             else if (citys[i].IsMainCity)
             {
-                citys[i].Init();
+                citys[i].InitBlood();
             }
 
             if (citys[i].Player == A)
@@ -86,11 +75,9 @@ public class GameManager : MonoBehaviour
                 teamNPC.Add(citys[i]);
             }
         }
-        A.Init(GameConfig.PlayerA, teamA);
-        B.Init(GameConfig.PlayerB, teamB);
-        NPC.Init(GameConfig.NPC, teamNPC);
-
-
+        A.SetData(0, GameData.Config.PlayerA, teamA);
+        B.SetData(1, GameData.Config.PlayerB, teamB);
+        NPC.SetData(2, GameData.Config.NPC, teamNPC);
     }
 
     internal static (Team winner, Team loser) TeamPK(Team team1, Team team2)
@@ -107,15 +94,6 @@ public class GameManager : MonoBehaviour
         return (team2, team1);
     }
 
-    public static void InitScore(Team winner, Team loser)
-    {
-        winner.Player.Score += GameConfig.WinScore;
-        winner.Player.InitTexScore();
-        loser.Player.Score -= GameConfig.LoseScore;
-        loser.Player.InitTexScore();
-    }
-
-
     public void StartUpdateCoroutine()
     {
         SimpleCoroutineManager.Instance.StartCoroutine(UpdateCoroutine());
@@ -124,96 +102,51 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator UpdateCoroutine()
     {
-        var wfs = new WaitForSeconds(GameConfig.ReqSpacing);
+        var wfs = new WaitForSeconds(GameData.Config.ReqSpacing);
 
         while (true)
         {
-            ReqGetOperations(EnemyPlayerId.ToString());
+            MessageSender.GetOperations(GameData.EnemyPlayerId.ToString());
             yield return wfs;
         }
     }
 
+    //string GetTestMsgStr()
+    //{
+    //    TeamMoveToCity teamMoveToCity = new TeamMoveToCity
+    //    {
+    //        MsgType = 0,
+    //        CityData = new CityData() { Id = 1, PlayerId = 0 },
+    //        TeamData = new TeamData() { Id = 1, PlayerId = 1 }
+    //    };
 
-    private void ReqGetOperations(string groupName)
+
+    //    var json = JsonUtility.ToJson(teamMoveToCity);
+
+    //    return json;
+    //}
+
+    [ContextMenu("Gen Json")]
+    public void GenJson()
     {
+        //var json = GetTestMsgStr();
 
-        var getOperationUri = string.Format(CMD.GetOperations, groupName);
+        //Debug.Log(json);
 
-        WebRequestManager.GetRequest(getOperationUri, (msgStrs) =>
-        {
-            try
-            {
-                var oldValue = new string(new char[] { '\"', ',', '\"' });
-                var newValue = new string(new char[] { '\"', '@', '\"' });
+        //TeamMoveToCity msg = JsonUtility.FromJson<TeamMoveToCity>(json);
 
-                msgStrs = msgStrs.Replace(oldValue, newValue);
-                msgStrs = msgStrs.Replace("[", string.Empty).Replace("]", string.Empty);
+        //switch (msg.MsgType)
+        //{
+        //    case 0:
+        //        var body = msg;
+        //        var team = GameData.PlayerDict[body.TeamData.PlayerId].TeamDict[body.TeamData.Id];
+        //        var city = GameData.PlayerDict[body.CityData.PlayerId].CityDict[body.CityData.Id];
 
-                var msgs = msgStrs.Split('@');
+        //        team.transform.SetParent(city.TeamContent);
+        //        city.Add(team);
+        //        break;
+        //}
 
-
-                for (int i = 0; i < msgs.Length; i++)
-                {
-                    var msgStr = msgs[i];
-
-                    if (string.IsNullOrEmpty(msgStr))
-                    {
-                        return;
-                    }
-
-
-                    msgStr = msgStr.Remove(0, 1);
-                    msgStr = msgStr.Remove(msgStr.Length - 1, 1);
-                    msgStr = msgStr.Replace("\\", ""); 
-
-
-                    Debug.Log(msgStr);
-                    TeamMoveToCity msg = JsonUtility.FromJson<TeamMoveToCity>(msgStr);
-
-                    switch (msg.MsgType)
-                    {
-                        case 0:
-                            var body = msg;
-                            var team = PlayerDict[body.TeamData.PlayerId].TeamDict[body.TeamData.Id];
-                            var city = PlayerDict[body.CityData.PlayerId].CityDict[body.CityData.Id];
-
-                            team.transform.SetParent(city.TeamContent);
-                            city.Add(team);
-                            break;
-                    }
-                }
-
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e);
-            }
-
-
-
-        }, null);
-    }
-
-
-    private void AddOperation(string groupName, string dataStr)
-    {
-        var uri = string.Format(CMD.AddOperation, groupName, dataStr);
-        WebRequestManager.GetRequest(uri, null, null);
-    }
-
-
-
-    public void SendAddOperation(BaseMsg msg)
-    {
-        var json = JsonUtility.ToJson(msg);
-        AddOperation(OurPlayerId.ToString(), json);
-    }
-
-
-
-
-    string GetTestMsgStr()
-    {
         TeamMoveToCity teamMoveToCity = new TeamMoveToCity
         {
             MsgType = 0,
@@ -222,37 +155,8 @@ public class GameManager : MonoBehaviour
         };
 
 
-        var json = JsonUtility.ToJson(teamMoveToCity);
+        MessageSender.AddOperation(GameData.OurPlayerId.ToString(), teamMoveToCity);
 
-        return json;
-    }
-
-
-
-    [ContextMenu("Gen Json")]
-    public void GenJson()
-    {
-        var json = GetTestMsgStr();
-
-        Debug.Log(json);
-
-        TeamMoveToCity msg = JsonUtility.FromJson<TeamMoveToCity>(json);
-
-        switch (msg.MsgType)
-        {
-            case 0:
-                var body = msg;
-                var team = PlayerDict[body.TeamData.PlayerId].TeamDict[body.TeamData.Id];
-                var city = PlayerDict[body.CityData.PlayerId].CityDict[body.CityData.Id];
-
-                team.transform.SetParent(city.TeamContent);
-                city.Add(team);
-                break;
-        }
-
-
-        AddOperation(OurPlayerId.ToString(), json);
-        AddOperation(OurPlayerId.ToString(), json);
 
 
         //GameConfig = new GameConfig
@@ -273,8 +177,6 @@ public class GameManager : MonoBehaviour
 
         //Debug.Log(json);
     }
-
-
 
 }
 

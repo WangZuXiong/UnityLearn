@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SelectGroupUI : MonoBehaviour
+public class SelectGroupUIBehaviour : MonoBehaviour
 {
     public Toggle Tog0;
     public Toggle Tog1;
@@ -14,16 +14,16 @@ public class SelectGroupUI : MonoBehaviour
     {
         if (Tog0.isOn)
         {
-            GameManager.OurPlayerId = 0;
-            GameManager.EnemyPlayerId = 1;
+            GameData.OurPlayerId = 0;
+            GameData.EnemyPlayerId = 1;
             gameObject.Hide();
             CanvasGame.Show();
             GameManager.Instance.StartUpdateCoroutine();
         }
         else if (Tog1.isOn)
         {
-            GameManager.OurPlayerId = 1;
-            GameManager.EnemyPlayerId = 0;
+            GameData.OurPlayerId = 1;
+            GameData.EnemyPlayerId = 0;
             gameObject.Hide();
             CanvasGame.Show();
             GameManager.Instance.StartUpdateCoroutine();

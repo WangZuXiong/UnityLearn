@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 [Serializable]
-public struct GameConfig
+public struct Config
 {
     /// <summary>
     /// team的进攻冷却时间
@@ -42,14 +41,19 @@ public struct GameConfig
     /// </summary>
     public float ReqSpacing;
 
-
-
     public List<TeamConfig> PlayerA;
 
     public List<TeamConfig> PlayerB;
 
     public List<TeamConfig> NPC;
-
-
 }
 
+
+
+
+[Serializable]
+public struct TeamConfig
+{
+    public int Id;
+    public int FightingCapacity;
+}

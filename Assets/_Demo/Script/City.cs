@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class City : MonoBehaviour
 {
+    public CityData CityData;
+
     public int Capacity;
     public int Blood = 10;
 
@@ -55,13 +57,16 @@ public class City : MonoBehaviour
                 //回去
                 team.Player.MainCity.Add(team);
             }
-
         }
     }
 
-    public void Init()
+    public void SetData(int id)
     {
-        InitBlood();
+        CityData = new CityData
+        {
+            PlayerId = Player.Id,
+            Id = id
+        };
     }
 
 
@@ -83,17 +88,23 @@ public class City : MonoBehaviour
         {
             NPCTeam = team;
         }
+
+        MessageSender.AddOperation(GameData.OurPlayerId.ToString(), new TeamMoveToCity()
+        {
+            CityData = CityData,
+            TeamData = team.TeamData
+        });
     }
+
 
     public void InitTexCount()
     {
         TexCount.text = string.Format("{0}/{1}", Teams.Count.ToString(), Capacity.ToString());
     }
 
-
-    void InitBlood()
+    internal void InitBlood()
     {
-        TexBlood.text = string.Format("{0}/{1}", Blood.ToString(), GameManager.GameConfig.MainCityTotalBlood.ToString());
-        SliderBlood.value = (float)Blood / GameManager.GameConfig.MainCityTotalBlood;
+        TexBlood.text = string.Format("{0}/{1}", Blood.ToString(), GameData.Config.MainCityTotalBlood.ToString());
+        SliderBlood.value = (float)Blood / GameData.Config.MainCityTotalBlood;
     }
 }

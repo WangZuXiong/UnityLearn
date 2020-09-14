@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SystemUI : MonoBehaviour
+public class SystemUIBehaviour : MonoBehaviour
 {
     public void RestartGame()
     {

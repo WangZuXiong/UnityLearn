@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class Team : MonoBehaviour
 {
     public TeamConfig TeamConfig;
+    public TeamData TeamData;
 
     public float CD;
     public int Energy;
@@ -16,8 +17,6 @@ public class Team : MonoBehaviour
 
     public Player Player;
     public City City;
-
-
 
     public Text TexName;
     public Slider SliderAttack;
@@ -41,14 +40,21 @@ public class Team : MonoBehaviour
         SliderEnergy.fillRect.GetComponent<Image>().color = Color;
     }
 
-    public void SetData(TeamConfig teamData, Player player)
+    public void SetData(TeamConfig config, Player player)
     {
-        TeamConfig = teamData;
+        TeamConfig = config;
         transform.name = TexName.text = "T." + TeamConfig.Id.ToString();
-        SliderAttack.value = (float)TeamConfig.FightingCapacity / GameManager.GameConfig.MaxFightingCapacity;
+        SliderAttack.value = (float)TeamConfig.FightingCapacity / GameData.Config.MaxFightingCapacity;
         Player = player;
-        Energy = GameManager.GameConfig.TeamEnergy;
-        SliderEnergy.value = (float)Energy / GameManager.GameConfig.TeamEnergy;
+        Energy = GameData.Config.TeamEnergy;
+        SliderEnergy.value = (float)Energy / GameData.Config.TeamEnergy;
+
+
+        TeamData = new TeamData
+        {
+            Id = config.Id,
+            PlayerId = player.Id
+        };
     }
 
     public void PlayCDAnimation(Action callback, float total)
@@ -176,7 +182,7 @@ public class Team : MonoBehaviour
     public void ReduceBlood()
     {
         Energy--;
-        SliderEnergy.value = (float)Energy / GameManager.GameConfig.TeamEnergy;
+        SliderEnergy.value = (float)Energy / GameData.Config.TeamEnergy;
     }
 
 
@@ -215,8 +221,8 @@ public class Team : MonoBehaviour
                 if (team.Player != Player)
                 {
                     //进入战斗CD状态
-                    team.PlayCDAnimation(OnTeamPKDurationFinsh, GameManager.GameConfig.TeamPKDuration);
-                    PlayCDAnimation(null, GameManager.GameConfig.TeamPKDuration);
+                    team.PlayCDAnimation(OnTeamPKDurationFinsh, GameData.Config.TeamPKDuration);
+                    PlayCDAnimation(null, GameData.Config.TeamPKDuration);
 
                     //战斗结束之后的回调
                     void OnTeamPKDurationFinsh()
@@ -227,7 +233,7 @@ public class Team : MonoBehaviour
                         Team winner = result.winner;
                         Team loser = result.loser;
 
-                        GameManager.InitScore(winner, loser);
+                        GameUIBehaviour.InitScore(winner, loser);
                         var pkCity = winner.City;
 
 
@@ -260,7 +266,7 @@ public class Team : MonoBehaviour
                         if (loser.Energy > 0)
                         {
                             //进入战斗结束冷却状态
-                            loser.PlayCDAnimation(null, GameManager.GameConfig.AttackCD);
+                            loser.PlayCDAnimation(null, GameData.Config.AttackCD);
                         }
                         else
                         {
@@ -270,7 +276,7 @@ public class Team : MonoBehaviour
                         if (winner.Energy > 0)
                         {
                             //进入战斗结束冷却状态
-                            winner.PlayCDAnimation(null, GameManager.GameConfig.AttackCD);
+                            winner.PlayCDAnimation(null, GameData.Config.AttackCD);
                         }
                         else
                         {
@@ -317,7 +323,7 @@ public class Team : MonoBehaviour
                             {
                                 if (pkCity.NPCTeam.City != pkCity)
                                 {
-                                    pkCity.NPCTeam.PlayCDAnimation(null, GameManager.GameConfig.NPCTeamReturnCity);
+                                    pkCity.NPCTeam.PlayCDAnimation(null, GameData.Config.NPCTeamReturnCity);
                                 }
 
                                 GameUtil.Instance.Delay(pkCity, () =>
@@ -327,12 +333,12 @@ public class Team : MonoBehaviour
                                     //npc team 返场
                                     pkCity.Add(pkCity.NPCTeam);
 
-                                }, GameManager.GameConfig.NPCTeamReturnCity);
+                                }, GameData.Config.NPCTeamReturnCity);
                             }
 
                         }
 
-                        GameUtil.Instance.Delay(OnAttackCDFinish, GameManager.GameConfig.AttackCD);
+                        GameUtil.Instance.Delay(OnAttackCDFinish, GameData.Config.AttackCD);
                     }
                 }
             }

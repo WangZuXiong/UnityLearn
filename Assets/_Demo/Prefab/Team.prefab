@@ -593,9 +593,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fc36ecb46cfd924abba24bc6194b80f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TeamData:
+  TeamConfig:
     Id: 0
     FightingCapacity: 0
+  TeamData:
+    PlayerId: 0
+    Id: 0
   CD: 0
   Energy: 0
   ImgCD: {fileID: 1716346833076701853}
