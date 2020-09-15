@@ -124,7 +124,7 @@ public class Team : MonoBehaviour
     {
         ResideTime = 0;
 
-        if (!IsCanOperation || CD > 0 || Energy <= 0 || IsInOperation/* || !Player.PlayerName.Equals(GameData.OurPlayerName)*/)
+        if (!IsCanOperation || CD > 0 || Energy <= 0 || IsInOperation || !Player.PlayerName.Equals(GameData.OurPlayerName))
         {
             return;
         }
