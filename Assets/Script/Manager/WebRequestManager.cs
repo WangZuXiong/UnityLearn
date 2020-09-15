@@ -57,6 +57,8 @@ public class WebRequestImpl
             if (webRequest.isNetworkError)
             {
                 Debug.Log("Error: " + webRequest.error);
+                Debug.Log(uri);
+
                 OnFailCallback?.Invoke();
             }
             else

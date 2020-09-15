@@ -5,8 +5,8 @@ using UnityEngine;
 
 public struct CMD
 {
-    public const string GetOperations = "http://192.168.3.16:6666/allianceC/getOperations?user={0}";
-    public const string AddOperation = "http://192.168.3.16:6666/allianceC/addOperation?user={0}";
+    public const string GetOperations = "http://192.168.3.16:5555/allianceC/getOperations?user={0}";
+    public const string AddOperation = "http://192.168.3.16:5555/allianceC/addOperation?user={0}";
 }
 
 public class MessageSender
@@ -20,7 +20,7 @@ public class MessageSender
         var msg = new Msg
         {
             MsgType = msgType,
-            Body = new List<byte>(Encoding.UTF8.GetBytes(JsonUtility.ToJson(body)))
+            Body = Encoding.UTF8.GetBytes(JsonUtility.ToJson(body))//new List<byte>()
         };
         var msgStr = JsonUtility.ToJson(msg);
 

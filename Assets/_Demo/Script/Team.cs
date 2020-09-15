@@ -124,7 +124,7 @@ public class Team : MonoBehaviour
     {
         ResideTime = 0;
 
-        if (!IsCanOperation || CD > 0 || Energy <= 0 || IsInOperation)
+        if (!IsCanOperation || CD > 0 || Energy <= 0 || IsInOperation/* || !Player.PlayerName.Equals(GameData.OurPlayerName)*/)
         {
             return;
         }
@@ -135,6 +135,7 @@ public class Team : MonoBehaviour
 
 
         MessageSender.AddOperation(Operation.OnPointerDownTeam, TeamData);
+        Mask.Show();
     }
 
     public void OnPointerUp()
@@ -149,6 +150,7 @@ public class Team : MonoBehaviour
 
 
         MessageSender.AddOperation(Operation.OnPointerUpTeam, TeamData);
+        Mask.Hide();
     }
 
     private void Update()
@@ -190,7 +192,7 @@ public class Team : MonoBehaviour
         ResetContent(true);
     }
 
-    public void ReduceBlood()
+    public void ReduceEnergy()
     {
         Energy--;
         SliderEnergy.value = (float)Energy / GameData.Config.TeamEnergy;
@@ -199,6 +201,12 @@ public class Team : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (IsInOperation)
+        {
+            return;
+        }
+
+
         var team = collision.transform.GetComponent<Team>();
         if (team == null)
         {
@@ -225,6 +233,15 @@ public class Team : MonoBehaviour
                 if (team.transform.parent != City.TeamContent.transform)
                 {
                     City.Add(team);
+
+                    if (!team.Player.IsNPC)
+                    {
+                        MessageSender.AddOperation(Operation.TeamMoveToCity, new TeamNCity()
+                        {
+                            CityData = City.CityData,
+                            TeamData = team.TeamData
+                        });
+                    }
                     team.ResetPlayerTeamContent();
                 }
 
@@ -234,6 +251,20 @@ public class Team : MonoBehaviour
                     //进入战斗CD状态
                     team.PlayCDAnimation(OnTeamPKDurationFinsh, GameData.Config.TeamPKDuration);
                     PlayCDAnimation(null, GameData.Config.TeamPKDuration);
+
+                    MessageSender.AddOperation(Operation.PlaysCDAnimation, new TwoTeamNFloat()
+                    {
+                        A = new TeamNFloat()
+                        {
+                            TeamData = team.TeamData,
+                            F = GameData.Config.TeamPKDuration
+                        },
+                        B = new TeamNFloat()
+                        {
+                            TeamData = TeamData,
+                            F = GameData.Config.TeamPKDuration
+                        }
+                    });
 
                     //战斗结束之后的回调
                     void OnTeamPKDurationFinsh()
@@ -248,7 +279,11 @@ public class Team : MonoBehaviour
                         var pkCity = winner.City;
 
 
-                        //var winnwerOriginalCity = winner.City;
+                        MessageSender.AddOperation(Operation.TeamPK, new TwoTeamData()
+                        {
+                            ATeamData = winner.TeamData,
+                            BTeamData = loser.TeamData
+                        });
 
 
                         //在非主城的情况下赢了的留下
@@ -256,28 +291,45 @@ public class Team : MonoBehaviour
                         {
                             //回去
                             winner.Player.MainCity.Add(winner);
+
+                            MessageSender.AddOperation(Operation.TeamMoveToCity, new TeamNCity()
+                            {
+                                CityData = winner.Player.MainCity.CityData,
+                                TeamData = winner.TeamData
+                            });
                         }
 
                         //输了的回到主球场
-                        var loserOriginalCity = loser.City;
                         loser.Player.MainCity.Add(loser);
+                        MessageSender.AddOperation(Operation.TeamMoveToCity, new TeamNCity()
+                        {
+                            CityData = loser.Player.MainCity.CityData,
+                            TeamData = loser.TeamData
+                        });
 
                         //扣精力
                         if (!winner.Player.IsNPC)
                         {
-                            winner.ReduceBlood();
+                            winner.ReduceEnergy();
+                            MessageSender.AddOperation(Operation.ReduceEnergy, winner.TeamData);
                         }
 
                         if (!loser.Player.IsNPC)
                         {
-                            loser.ReduceBlood();
+                            loser.ReduceEnergy();
+                            MessageSender.AddOperation(Operation.ReduceEnergy, loser.TeamData);
                         }
-
 
                         if (loser.Energy > 0)
                         {
                             //进入战斗结束冷却状态
                             loser.PlayCDAnimation(null, GameData.Config.AttackCD);
+
+                            MessageSender.AddOperation(Operation.PlayCDAnimation, new TeamNFloat()
+                            {
+                                TeamData = loser.TeamData,
+                                F = GameData.Config.AttackCD
+                            });
                         }
                         else
                         {
@@ -288,6 +340,12 @@ public class Team : MonoBehaviour
                         {
                             //进入战斗结束冷却状态
                             winner.PlayCDAnimation(null, GameData.Config.AttackCD);
+
+                            MessageSender.AddOperation(Operation.PlayCDAnimation, new TeamNFloat()
+                            {
+                                TeamData = winner.TeamData,
+                                F = GameData.Config.AttackCD
+                            });
                         }
                         else
                         {
@@ -297,44 +355,17 @@ public class Team : MonoBehaviour
                         //进攻冷却时间结束之后的回调
                         void OnAttackCDFinish()
                         {
-                            //当前PK的City为中立场
-
-                            //开启倒计时
-
-
-                            //
-
-
-
-                            // 不论输赢，这个City是中立场的话，NPC回到主球场之后5min 这支球队将会返会原来的City
-                            //if (loser.Player.IsNPC)
-                            //{
-                            //    loser.PlayCDAnimation(null, GameManager.GameConfig.NPCTeamReturnCity);
-                            //    //city 开启倒计时，5min之后，winner回到主城，city回收原来的npc team
-
-                            //    //5分钟之后 NPC返场
-
-                            //    //loserOriginalCity.NPCTeam
-
-
-                            //    GameUtil.Instance.Delay(loserOriginalCity, () =>
-                            //    {
-                            //        //winner 返回主球馆
-                            //        winner.Player.MainCity.Add(winner);
-                            //        //npc team 返场
-                            //        loserOriginalCity.Add(loserOriginalCity.NPCTeam);
-
-                            //    }, GameManager.GameConfig.NPCTeamReturnCity);
-
-                            //}
-
-
-
                             if (pkCity.Player.IsNPC)
                             {
                                 if (pkCity.NPCTeam.City != pkCity)
                                 {
                                     pkCity.NPCTeam.PlayCDAnimation(null, GameData.Config.NPCTeamReturnCity);
+
+                                    MessageSender.AddOperation(Operation.PlayCDAnimation, new TeamNFloat()
+                                    {
+                                        TeamData = pkCity.NPCTeam.TeamData,
+                                        F = GameData.Config.NPCTeamReturnCity
+                                    });
                                 }
 
                                 GameUtil.Instance.Delay(pkCity, () =>
@@ -343,6 +374,20 @@ public class Team : MonoBehaviour
                                     winner.Player.MainCity.Add(winner);
                                     //npc team 返场
                                     pkCity.Add(pkCity.NPCTeam);
+
+
+                                    MessageSender.AddOperation(Operation.TeamMoveToCity, new TeamNCity()
+                                    {
+                                        CityData = winner.Player.MainCity.CityData,
+                                        TeamData = winner.TeamData
+                                    });
+
+                                    MessageSender.AddOperation(Operation.TeamMoveToCity, new TeamNCity()
+                                    {
+                                        CityData = pkCity.CityData,
+                                        TeamData = pkCity.NPCTeam.TeamData
+                                    });
+
 
                                 }, GameData.Config.NPCTeamReturnCity);
                             }

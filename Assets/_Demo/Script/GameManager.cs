@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         var teamBCities = new List<City>();
         var teamNPCCities = new List<City>();
 
-        Transform GameMap = GameObject.Find("CanvasGame/Content").transform;
+        Transform GameMap = GameObject.Find("CanvasGame").transform;
         var citys = GameMap.GetComponentsInChildren<City>();
 
         for (int i = 0; i < citys.Length; i++)
@@ -79,6 +79,10 @@ public class GameManager : MonoBehaviour
         foreach (var item in NPC.CityDict)
         {
             var city = item.Value;
+            if (city.IsMainCity)
+            {
+                continue;
+            }
             city.Add(NPC.TeamDict[++tempIndex]);
         }
 
@@ -106,7 +110,6 @@ public class GameManager : MonoBehaviour
     {
         SimpleCoroutineManager.Instance.StartCoroutine(UpdateCoroutine());
     }
-
 
     private IEnumerator UpdateCoroutine()
     {

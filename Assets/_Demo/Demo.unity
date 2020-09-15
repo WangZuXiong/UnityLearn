@@ -9082,7 +9082,6 @@ GameObject:
   - component: {fileID: 806185287}
   - component: {fileID: 806185286}
   - component: {fileID: 806185290}
-  - component: {fileID: 806185291}
   m_Layer: 5
   m_Name: CanvasGame
   m_TagString: Untagged
@@ -9175,18 +9174,6 @@ RectTransform:
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &806185290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 806185285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d334f173b4cfe56469c8417c7ebed81c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &806185291
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24939,8 +24926,13 @@ PrefabInstance:
     - target: {fileID: 3608748419394646587, guid: 8c7e9924c7efc4e409be56648089d08f,
         type: 3}
       propertyPath: m_Name
-      value: City
+      value: MainCity
       objectReference: {fileID: 0}
+    - target: {fileID: 2006184583329807785, guid: 8c7e9924c7efc4e409be56648089d08f,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 7239084904860658976}
     - target: {fileID: 3608748419394646584, guid: 8c7e9924c7efc4e409be56648089d08f,
         type: 3}
       propertyPath: m_LocalPosition.x

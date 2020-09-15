@@ -7,6 +7,7 @@ public class SystemUIBehaviour : MonoBehaviour
 {
     public void RestartGame()
     {
+        SimpleCoroutineManager.Instance.StopAllCoroutines();
         SceneManager.LoadScene("Demo");
     }
 }

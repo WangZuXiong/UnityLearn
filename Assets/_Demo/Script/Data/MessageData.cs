@@ -6,29 +6,51 @@ using System.Collections.Generic;
 
 
 [Serializable]
-public class TeamData
+public struct TeamData
 {
     public string PlayerName;
     public int Id;
 }
 
 [Serializable]
-public class CityData
+public struct CityData
 {
     public string PlayerName;
     public int Id;
 }
 
 [Serializable]
-public class Msg
+public struct Msg
 {
     public int MsgType;
-    public List<byte> Body;
+    public byte[] Body;
 }
 
 [Serializable]
-public class TeamNCity
+public struct TeamNCity
 {
     public TeamData TeamData;
     public CityData CityData;
+}
+
+
+[Serializable]
+public struct TwoTeamData
+{
+    public TeamData ATeamData;
+    public TeamData BTeamData;
+}
+
+[Serializable]
+public struct TwoTeamNFloat
+{
+    public TeamNFloat A;
+    public TeamNFloat B;
+}
+
+[Serializable]
+public struct TeamNFloat
+{
+    public TeamData TeamData;
+    public float F;
 }

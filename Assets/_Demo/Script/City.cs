@@ -63,6 +63,12 @@ public class City : MonoBehaviour
 
                 //回去
                 team.Player.MainCity.Add(team);
+
+                MessageSender.AddOperation(Operation.TeamMoveToCity, new TeamNCity()
+                {
+                    CityData = team.Player.MainCity.CityData,
+                    TeamData = team.TeamData
+                });
             }
         }
     }
