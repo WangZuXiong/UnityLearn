@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         Player A = GameObject.Find("CanvasGame/A").GetComponent<Player>();
         Player B = GameObject.Find("CanvasGame/B").GetComponent<Player>();
         Player NPC = GameObject.Find("CanvasGame/NPC").GetComponent<Player>();
-
+        GameData.PlayerDict.Clear();
         GameData.PlayerDict.Add(PlayerNameConstant.PlayerA, A);
         GameData.PlayerDict.Add(PlayerNameConstant.PlayerB, B);
         GameData.PlayerDict.Add(PlayerNameConstant.PlayerNPC, NPC);
@@ -114,8 +114,8 @@ public class GameManager : MonoBehaviour
 
         while (true)
         {
-            //MessageSender.GetOperations(GameData.EnemyPlayerId);
-            MessageSender.GetOperations(GameData.OurPlayerName);
+            MessageSender.GetOperations(GameData.EnemyPlayerName);
+            //MessageSender.GetOperations(GameData.OurPlayerName);
             yield return wfs;
         }
     }
@@ -137,17 +137,17 @@ public class GameManager : MonoBehaviour
 
 
     //{"MsgType":2,"Body":[123,34,80,108,97,121,101,114,78,97,109,101,34,58,34,108,101,102,116,34,44,34,73,100,34,58,50,125]}
-    public string str;
+    //public string str;
     [ContextMenu("Gen Json")]
     public void GenJson()
     {
 
-        var msg = JsonUtility.FromJson<Msg>(str);
+        //var msg = JsonUtility.FromJson<Msg>(str);
 
-        Debug.Log(msg.MsgType);
-        var body = System.Text.Encoding.UTF8.GetString(msg.Body.ToArray());
-        var t = JsonUtility.FromJson<TeamNCity>(body);
-        Debug.Log(t.CityData.PlayerName);
+        //Debug.Log(msg.MsgType);
+        //var body = System.Text.Encoding.UTF8.GetString(msg.Body.ToArray());
+        //var t = JsonUtility.FromJson<TeamNCity>(body);
+        //Debug.Log(t.CityData.PlayerName);
 
 
 

@@ -134,7 +134,7 @@ public class Team : MonoBehaviour
         ResetContent(false);
 
 
-        //MessageSender.AddOperation(Operation.OnPointerDownTeam, TeamData);
+        MessageSender.AddOperation(Operation.OnPointerDownTeam, TeamData);
     }
 
     public void OnPointerUp()
@@ -148,7 +148,7 @@ public class Team : MonoBehaviour
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
 
 
-        //MessageSender.AddOperation(Operation.OnPointerUpTeam, TeamData);
+        MessageSender.AddOperation(Operation.OnPointerUpTeam, TeamData);
     }
 
     private void Update()

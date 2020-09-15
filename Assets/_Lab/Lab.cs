@@ -79,11 +79,9 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
-
-        Debug.DrawLine(transform.position, transform.position + new Vector3(2, 0, 0), Color.red);
-        Debug.DrawLine(transform.position, transform.position + new Vector3(0, 2, 0), Color.green);
-        Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, 2), Color.blue);
-
+        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(2, 0, 0), Color.red);
+        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(0, 2, 0), Color.green);
+        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, 2), Color.blue);
 
         if (Input.GetMouseButtonDown(1))
         {

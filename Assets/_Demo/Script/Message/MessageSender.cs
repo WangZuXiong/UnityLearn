@@ -33,55 +33,52 @@ public class MessageSender
         var getOperationUri = string.Format(CMD.GetOperations, groupName);
 
 
-        MessageHandler messageHandler = new MessageHandler();
         WebRequestManager.Get(getOperationUri, (msgStrs) =>
         {
-            //try
-            //{
-            var oldValue = new string(new char[] { '\"', ',', '\"' });
-            var newValue = new string(new char[] { '\"', '@', '\"' });
-
-            msgStrs = msgStrs.Replace(oldValue, newValue);
-            //msgStrs = msgStrs.Replace("[", string.Empty).Replace("]", string.Empty);
-
-
-            msgStrs = msgStrs.Remove(0, 1);
-            msgStrs = msgStrs.Remove(msgStrs.Length - 1, 1);
-
-
-            var msgs = msgStrs.Split('@');
-
-            for (int i = 0; i < msgs.Length; i++)
+            try
             {
-                var msgStr = msgs[i];
+                var oldValue = new string(new char[] { '\"', ',', '\"' });
+                var newValue = new string(new char[] { '\"', '@', '\"' });
 
-                if (string.IsNullOrEmpty(msgStr))
+                msgStrs = msgStrs.Replace(oldValue, newValue);
+                //msgStrs = msgStrs.Replace("[", string.Empty).Replace("]", string.Empty);
+
+
+                msgStrs = msgStrs.Remove(0, 1);
+                msgStrs = msgStrs.Remove(msgStrs.Length - 1, 1);
+
+
+                var msgs = msgStrs.Split('@');
+
+                for (int i = 0; i < msgs.Length; i++)
                 {
-                    return;
+                    var msgStr = msgs[i];
+
+                    if (string.IsNullOrEmpty(msgStr))
+                    {
+                        return;
+                    }
+
+                    msgStr = msgStr.Remove(0, 1);
+                    msgStr = msgStr.Remove(msgStr.Length - 1, 1);
+                    msgStr = msgStr.Replace("\\", "");
+
+                    //Debug.Log(msgStr);
+
+                    //var msg = JsonUtility.FromJson<Msg>(msgStr);
+
+                    //Debug.Log(msg.MsgType);
+                    //var body = System.Text.Encoding.UTF8.GetString(msg.Body.ToArray());
+                    //var t = JsonUtility.FromJson<TeamNCity>(body);
+                    //Debug.Log(t.CityData.PlayerName);
+
+                    MessageHandler.HandleMsg(msgStr);
                 }
-
-                msgStr = msgStr.Remove(0, 1);
-                msgStr = msgStr.Remove(msgStr.Length - 1, 1);
-                msgStr = msgStr.Replace("\\", "");
-
-                Debug.Log(msgStr);
-
-
-
-                var msg = JsonUtility.FromJson<Msg>(msgStr);
-
-                Debug.Log(msg.MsgType);
-                var body = System.Text.Encoding.UTF8.GetString(msg.Body.ToArray());
-                var t = JsonUtility.FromJson<TeamNCity>(body);
-                Debug.Log(t.CityData.PlayerName);
-
-                messageHandler.HandleMsg(msgStrs);
             }
-            //}
-            //catch (Exception e)
-            //{
-            //    Debug.Log(e);
-            //}
+            catch (Exception e)
+            {
+                Debug.Log(e);
+            }
         }, null);
     }
 

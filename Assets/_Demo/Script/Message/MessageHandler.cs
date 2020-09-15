@@ -1,27 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 using UnityEngine;
 
-public class MessageHandler
+public  class MessageHandler
 {
-    internal void HandleMsg(string msgStr)
+    internal static void HandleMsg(string msgStr)
     {
-
-
         var msg = JsonUtility.FromJson<Msg>(msgStr);
-
-        Debug.Log(msg.MsgType);
-        var body = System.Text.Encoding.UTF8.GetString(msg.Body.ToArray());
-        var t = JsonUtility.FromJson<TeamNCity>(body);
-        Debug.Log(t.CityData.PlayerName);
-
-
-
-
-        //var msg = JsonUtility.FromJson<Msg>(msgStr);
-        //var body = Encoding.UTF8.GetString(msg.Body.ToArray());
+        var body = Encoding.UTF8.GetString(msg.Body.ToArray());
 
         switch ((Operation)msg.MsgType)
         {
@@ -33,10 +18,10 @@ public class MessageHandler
 
     static void HandleTeamMoveToCity(TeamNCity data)
     {
-        //var team = GameData.PlayerDict[data.TeamData.PlayerName].TeamDict[data.TeamData.Id];
-        //var city = GameData.PlayerDict[data.TeamData.PlayerName].CityDict[data.CityData.Id];
-        var team = GameData.PlayerDict["right"].TeamDict[data.TeamData.Id];
-        var city = GameData.PlayerDict["right"].CityDict[data.CityData.Id];
+        var team = GameData.PlayerDict[data.TeamData.PlayerName].TeamDict[data.TeamData.Id];
+        var city = GameData.PlayerDict[data.TeamData.PlayerName].CityDict[data.CityData.Id];
+        //var team = GameData.PlayerDict["right"].TeamDict[data.TeamData.Id];
+        //var city = GameData.PlayerDict["right"].CityDict[data.CityData.Id];
 
         team.transform.SetParent(city.TeamContent);
         city.Add(team);
@@ -44,6 +29,7 @@ public class MessageHandler
 
     static void HandlePointerUpTeam(TeamData data)
     {
+        //data.PlayerName = "right"; 
         var team = GameData.PlayerDict[data.PlayerName].TeamDict[data.Id];
         team.IsInOperation = false;
         team.Mask.Hide();
@@ -51,6 +37,7 @@ public class MessageHandler
 
     static void HandlePointerDownTeam(TeamData data)
     {
+        //data.PlayerName = "right";
         var team = GameData.PlayerDict[data.PlayerName].TeamDict[data.Id];
         team.IsInOperation = true;
         team.Mask.Show();
