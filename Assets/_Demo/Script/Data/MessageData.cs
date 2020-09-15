@@ -54,3 +54,11 @@ public struct TeamNFloat
     public TeamData TeamData;
     public float F;
 }
+
+
+[Serializable]
+public struct CityNFloat
+{
+    public CityData CityData;
+    public float F;
+}

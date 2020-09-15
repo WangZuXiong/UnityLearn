@@ -9,7 +9,7 @@ public class City : MonoBehaviour
     public CityData CityData;
 
     public int Capacity;
-    public int Blood = 10;
+    public int Blood;
 
     public bool IsMainCity;
 
@@ -58,8 +58,14 @@ public class City : MonoBehaviour
             if (IsMainCity && team.Player != Player)
             {
                 //扣血
-                Blood--;
+                Blood -= GameData.Config.CityBlood;
                 InitBlood();
+
+                MessageSender.AddOperation(Operation.UpdateCityBlood, new CityNFloat()
+                {
+                    CityData = CityData,
+                    F = Blood
+                });
 
                 //回去
                 team.Player.MainCity.Add(team);
@@ -73,8 +79,10 @@ public class City : MonoBehaviour
         }
     }
 
-    public void SetData(int id)
+    public void SetData(int id, int totalBlood)
     {
+
+        Blood = totalBlood;
         CityData = new CityData
         {
             PlayerName = Player.PlayerName,
@@ -111,7 +119,7 @@ public class City : MonoBehaviour
 
     internal void InitBlood()
     {
-        TexBlood.text = string.Format("{0}/{1}", Blood.ToString(), GameData.Config.MainCityTotalBlood.ToString());
-        SliderBlood.value = (float)Blood / GameData.Config.MainCityTotalBlood;
+        TexBlood.text = string.Format("{0}/{1}", Blood.ToString(), GameData.Config.CityTotalBlood.ToString());
+        SliderBlood.value = (float)Blood / GameData.Config.CityTotalBlood;
     }
 }

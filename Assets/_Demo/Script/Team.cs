@@ -192,9 +192,9 @@ public class Team : MonoBehaviour
         ResetContent(true);
     }
 
-    public void ReduceEnergy()
+    public void ReduceEnergy(int temp)
     {
-        Energy--;
+        Energy -= temp;
         SliderEnergy.value = (float)Energy / GameData.Config.TeamEnergy;
     }
 
@@ -275,14 +275,23 @@ public class Team : MonoBehaviour
                         Team winner = result.winner;
                         Team loser = result.loser;
 
-                        GameUIBehaviour.InitScore(winner, loser);
+                        winner.Player.Score += GameData.Config.WinScore;
+                        winner.Player.InitTexScore();
+                        loser.Player.Score -= GameData.Config.LoseScore;
+                        loser.Player.InitTexScore();
+
                         var pkCity = winner.City;
 
-
-                        MessageSender.AddOperation(Operation.TeamPK, new TwoTeamData()
+                        MessageSender.AddOperation(Operation.UpdateTeamScore, new TeamNFloat()
                         {
-                            ATeamData = winner.TeamData,
-                            BTeamData = loser.TeamData
+                            TeamData = winner.TeamData,
+                            F = winner.Player.Score
+                        });
+
+                        MessageSender.AddOperation(Operation.UpdateTeamScore, new TeamNFloat()
+                        {
+                            TeamData = loser.TeamData,
+                            F = loser.Player.Score
                         });
 
 
@@ -310,14 +319,22 @@ public class Team : MonoBehaviour
                         //扣精力
                         if (!winner.Player.IsNPC)
                         {
-                            winner.ReduceEnergy();
-                            MessageSender.AddOperation(Operation.ReduceEnergy, winner.TeamData);
+                            winner.ReduceEnergy(GameData.Config.WinEnergy);
+                            MessageSender.AddOperation(Operation.ReduceEnergy, new TeamNFloat()
+                            {
+                                TeamData = winner.TeamData,
+                                F = GameData.Config.WinEnergy
+                            });
                         }
 
                         if (!loser.Player.IsNPC)
                         {
-                            loser.ReduceEnergy();
-                            MessageSender.AddOperation(Operation.ReduceEnergy, loser.TeamData);
+                            loser.ReduceEnergy(GameData.Config.LoseEnergy);
+                            MessageSender.AddOperation(Operation.ReduceEnergy, new TeamNFloat()
+                            {
+                                TeamData = loser.TeamData,
+                                F = GameData.Config.LoseEnergy
+                            });
                         }
 
                         if (loser.Energy > 0)
@@ -387,11 +404,32 @@ public class Team : MonoBehaviour
                                         CityData = pkCity.CityData,
                                         TeamData = pkCity.NPCTeam.TeamData
                                     });
-
-
                                 }, GameData.Config.NPCTeamReturnCity);
-                            }
 
+
+                                //每间隔10s winner 加积分
+                                void AddPlayerScore()
+                                {
+                                    GameUtil.Instance.Delay(() =>
+                                    {
+                                        winner.Player.Score += GameData.Config.InNeutralScore;
+                                        winner.Player.InitTexScore();
+
+                                        MessageSender.AddOperation(Operation.UpdateTeamScore, new TeamNFloat()
+                                        {
+                                            TeamData = winner.TeamData,
+                                            F = winner.Player.Score
+                                        });
+
+                                        if (winner.City == pkCity)
+                                        {
+                                            AddPlayerScore();
+                                        }
+                                    }, GameData.Config.InNeutralTime);
+                                }
+
+                                AddPlayerScore();
+                            }
                         }
 
                         GameUtil.Instance.Delay(OnAttackCDFinish, GameData.Config.AttackCD);

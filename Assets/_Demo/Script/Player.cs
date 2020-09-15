@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
         for (int i = 0; i < cities.Count; i++)
         {
             CityDict.Add(i, cities[i]);
-            cities[i].SetData(i);
+            cities[i].SetData(i, GameData.Config.CityTotalBlood);
         }
     }
 

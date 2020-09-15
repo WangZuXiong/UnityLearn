@@ -5,9 +5,14 @@
 	"WinScore": 3,
 	"LoseScore": 1,
 	"NPCTeamReturnCity": 10.0,
-	"MainCityTotalBlood": 10,
 	"TeamEnergy": 3,
+	"WinEnergy": 1,
+	"LoseEnergy": 2,
 	"ReqSpacing": 0.5,
+	"InNeutralScore": 1,
+	"InNeutralTime": 1,
+	"CityTotalBlood": 10,
+	"CityBlood": 1,
 	"ATeamConfig": [{
 			"Id": 1,
 			"FightingCapacity": 1000

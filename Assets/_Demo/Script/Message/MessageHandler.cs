@@ -16,15 +16,23 @@ public class MessageHandler
             case Operation.OnPointerDownTeam: HandlePointerDownTeam(JsonUtility.FromJson<TeamData>(body)); break;
             case Operation.PlaysCDAnimation: Handle2PlayCDAnimation(JsonUtility.FromJson<TwoTeamNFloat>(body)); break;
             case Operation.PlayCDAnimation: HandlePlayCDAnimation(JsonUtility.FromJson<TeamNFloat>(body)); break;
-            case Operation.TeamPK: HandleTeamPK(JsonUtility.FromJson<TwoTeamData>(body)); break;
-            case Operation.ReduceEnergy: HandleReduceEnergy(JsonUtility.FromJson<TeamData>(body)); break;
+            case Operation.UpdateTeamScore: HandleUpdateTeamScore(JsonUtility.FromJson<TeamNFloat>(body)); break;
+            case Operation.ReduceEnergy: HandleReduceEnergy(JsonUtility.FromJson<TeamNFloat>(body)); break;
+            case Operation.UpdateCityBlood: HandleUpdateCityBlood(JsonUtility.FromJson<CityNFloat>(body)); break;
         }
     }
 
-    private static void HandleReduceEnergy(TeamData data)
+    private static void HandleUpdateCityBlood(CityNFloat data)
     {
-        var team = GameData.PlayerDict[data.PlayerName].TeamDict[data.Id];
-        team.ReduceEnergy();
+        var city = GameData.PlayerDict[data.CityData.PlayerName].CityDict[data.CityData.Id];
+        city.Blood = (int)data.F;
+        city.InitBlood();
+    }
+
+    private static void HandleReduceEnergy(TeamNFloat data)
+    {
+        var team = GameData.PlayerDict[data.TeamData.PlayerName].TeamDict[data.TeamData.Id];
+        team.ReduceEnergy((int)data.F);
     }
 
     private static void HandlePlayCDAnimation(TeamNFloat data)
@@ -33,11 +41,11 @@ public class MessageHandler
         player.PlayCDAnimation(null, data.F);
     }
 
-    private static void HandleTeamPK(TwoTeamData data)
+    private static void HandleUpdateTeamScore(TeamNFloat data)
     {
-        var winner = GameData.PlayerDict[data.ATeamData.PlayerName].TeamDict[data.ATeamData.Id];
-        var loser = GameData.PlayerDict[data.BTeamData.PlayerName].TeamDict[data.BTeamData.Id];
-        GameUIBehaviour.InitScore(winner, loser);
+        var team = GameData.PlayerDict[data.TeamData.PlayerName].TeamDict[data.TeamData.Id];
+        team.Player.Score = (int)data.F;
+        team.Player.InitTexScore();
     }
 
     private static void Handle2PlayCDAnimation(TwoTeamNFloat data)

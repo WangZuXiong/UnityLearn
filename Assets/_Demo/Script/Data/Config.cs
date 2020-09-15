@@ -29,17 +29,37 @@ public struct Config
     /// </summary>
     public int NPCTeamReturnCity;
     /// <summary>
-    /// 主城的血量
-    /// </summary>
-    public int MainCityTotalBlood;
-    /// <summary>
     /// Team 的体能
     /// </summary>
     public int TeamEnergy;
     /// <summary>
+    /// winner扣除的体能
+    /// </summary>
+    public int WinEnergy;
+    /// <summary>
+    /// loser扣除的体能
+    /// </summary>
+    public int LoseEnergy;
+    /// <summary>
     /// 请求间隔
     /// </summary>
     public float ReqSpacing;
+    /// <summary>
+    /// 占领中立场是每间隔InNeutralTime s获得的积分
+    /// </summary>
+    public int InNeutralScore;
+    /// <summary>
+    /// 
+    /// </summary>
+    public int InNeutralTime;
+    /// <summary>
+    /// City 的总血量
+    /// </summary>
+    public int CityTotalBlood;
+    /// <summary>
+    /// City 收到攻击是扣除的血量
+    /// </summary>
+    public int CityBlood;
 
     public List<TeamConfig> ATeamConfig;
 

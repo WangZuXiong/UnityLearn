@@ -29,11 +29,15 @@ public enum Operation
     /// </summary>
     PlayCDAnimation,
     /// <summary>
-    /// PK
+    /// Team 分数变化
     /// </summary>
-    TeamPK,
+    UpdateTeamScore,    
     /// <summary>
     /// 扣除精力
     /// </summary>
-    ReduceEnergy
+    ReduceEnergy,
+    /// <summary>
+    /// 扣除血量
+    /// </summary>
+    UpdateCityBlood
 }
