@@ -19,7 +19,15 @@ public class MessageHandler
             case Operation.UpdateTeamScore: HandleUpdateTeamScore(JsonUtility.FromJson<TeamNFloat>(body)); break;
             case Operation.ReduceEnergy: HandleReduceEnergy(JsonUtility.FromJson<TeamNFloat>(body)); break;
             case Operation.UpdateCityBlood: HandleUpdateCityBlood(JsonUtility.FromJson<CityNFloat>(body)); break;
+            case Operation.PlayerRecoveryTeam: HandlePlayerRecoveryTeam(JsonUtility.FromJson<TeamData>(body)); break;
         }
+    }
+
+    private static void HandlePlayerRecoveryTeam(TeamData data)
+    {
+        var player = GameData.PlayerDict[data.PlayerName];
+        var team = player.TeamDict[data.Id];
+        player.Recovery(team);
     }
 
     private static void HandleUpdateCityBlood(CityNFloat data)
@@ -37,8 +45,8 @@ public class MessageHandler
 
     private static void HandlePlayCDAnimation(TeamNFloat data)
     {
-        var player = GameData.PlayerDict[data.TeamData.PlayerName].TeamDict[data.TeamData.Id];
-        player.PlayCDAnimation(null, data.F);
+        var team = GameData.PlayerDict[data.TeamData.PlayerName].TeamDict[data.TeamData.Id];
+        team.PlayCDAnimation(null, data.F);
     }
 
     private static void HandleUpdateTeamScore(TeamNFloat data)

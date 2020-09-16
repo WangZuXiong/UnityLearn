@@ -52,6 +52,7 @@ public class City : MonoBehaviour
             }
 
             collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+            team.transform.localScale = Vector3.one;
             team.ResetPlayerTeamContent();
 
 
@@ -75,6 +76,28 @@ public class City : MonoBehaviour
                     CityData = team.Player.MainCity.CityData,
                     TeamData = team.TeamData
                 });
+
+
+                team.Player.Score += GameData.Config.MainCityScore;
+                team.Player.InitTexScore();
+                MessageSender.AddOperation(Operation.UpdateTeamScore, new TeamNFloat()
+                {
+                    TeamData = team.TeamData,
+                    F = team.Player.Score
+                });
+
+                team.ReduceEnergy(GameData.Config.MainCityEnergy);
+                MessageSender.AddOperation(Operation.ReduceEnergy, new TeamNFloat()
+                {
+                    TeamData = team.TeamData,
+                    F = GameData.Config.MainCityEnergy
+                });
+
+                if (team.Energy <= 0)
+                {
+                    team.Player.Recovery(team);
+                    MessageSender.AddOperation(Operation.PlayerRecoveryTeam, team.TeamData);
+                }
             }
         }
     }

@@ -132,10 +132,10 @@ public class Team : MonoBehaviour
         isIn = true;
 
         ResetContent(false);
-
-
         MessageSender.AddOperation(Operation.OnPointerDownTeam, TeamData);
         Mask.Show();
+
+        transform.localScale = Vector3.one * 0.6f;
     }
 
     public void OnPointerUp()
@@ -212,8 +212,9 @@ public class Team : MonoBehaviour
         {
             return;
         }
-
+     
         team.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        team.transform.localScale = Vector3.one;
 
         if (CD > 0 || team.CD > 0 || Energy <= 0)
         {
@@ -351,6 +352,7 @@ public class Team : MonoBehaviour
                         else
                         {
                             loser.Player.Recovery(loser);
+                            MessageSender.AddOperation(Operation.PlayerRecoveryTeam, loser.TeamData);
                         }
 
                         if (winner.Energy > 0)
@@ -367,6 +369,7 @@ public class Team : MonoBehaviour
                         else
                         {
                             winner.Player.Recovery(winner);
+                            MessageSender.AddOperation(Operation.PlayerRecoveryTeam, winner.TeamData);
                         }
 
                         //进攻冷却时间结束之后的回调

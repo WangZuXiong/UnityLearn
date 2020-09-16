@@ -39,5 +39,9 @@ public enum Operation
     /// <summary>
     /// 扣除血量
     /// </summary>
-    UpdateCityBlood
+    UpdateCityBlood,
+    /// <summary>
+    /// Player 回收 Team
+    /// </summary>
+    PlayerRecoveryTeam
 }

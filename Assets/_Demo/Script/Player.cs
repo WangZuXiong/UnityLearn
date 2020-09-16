@@ -54,6 +54,8 @@ public class Player : MonoBehaviour
         {
             collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             Recovery(team);
+            MessageSender.AddOperation(Operation.PlayerRecoveryTeam, team.TeamData);
+            team.transform.localScale = Vector3.one;
             team.ResetCityTeamContent();
         }
     }

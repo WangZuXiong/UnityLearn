@@ -17,11 +17,11 @@ public struct Config
     /// </summary>
     public int MaxFightingCapacity;
     /// <summary>
-    /// 赢了+几分
+    /// Player Winner加分
     /// </summary>
     public int WinScore;
     /// <summary>
-    /// 
+    /// Player Loser扣分
     /// </summary>
     public int LoseScore;
     /// <summary>
@@ -29,15 +29,15 @@ public struct Config
     /// </summary>
     public int NPCTeamReturnCity;
     /// <summary>
-    /// Team 的体能
+    /// Team的总体能
     /// </summary>
     public int TeamEnergy;
     /// <summary>
-    /// winner扣除的体能
+    /// Team Winner扣除的体能
     /// </summary>
     public int WinEnergy;
     /// <summary>
-    /// loser扣除的体能
+    /// Team Loser扣除的体能
     /// </summary>
     public int LoseEnergy;
     /// <summary>
@@ -53,13 +53,21 @@ public struct Config
     /// </summary>
     public int InNeutralTime;
     /// <summary>
-    /// City 的总血量
+    /// Main City 总血量
     /// </summary>
     public int CityTotalBlood;
     /// <summary>
-    /// City 收到攻击是扣除的血量
+    /// Main City 遭受攻击时扣除血量
     /// </summary>
     public int CityBlood;
+    /// <summary>
+    /// 进攻对方Main City获得的积分
+    /// </summary>
+    public int MainCityScore;
+    /// <summary>
+    /// 进攻对方Main City扣除的体能
+    /// </summary>
+    public int MainCityEnergy;
 
     public List<TeamConfig> ATeamConfig;
 

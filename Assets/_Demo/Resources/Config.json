@@ -10,9 +10,11 @@
 	"LoseEnergy": 2,
 	"ReqSpacing": 0.5,
 	"InNeutralScore": 1,
-	"InNeutralTime": 1,
+	"InNeutralTime": 10,
 	"CityTotalBlood": 10,
 	"CityBlood": 1,
+	"MainCityScore": 1,
+	"MainCityEnergy": 1,
 	"ATeamConfig": [{
 			"Id": 1,
 			"FightingCapacity": 1000
