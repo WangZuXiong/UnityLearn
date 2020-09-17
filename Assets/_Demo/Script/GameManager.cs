@@ -94,11 +94,12 @@ public class GameManager : MonoBehaviour
 
     internal static (Team winner, Team loser) TeamPK(Team team1, Team team2)
     {
-        var total = team1.TeamConfig.FightingCapacity + team2.TeamConfig.FightingCapacity;
+        var temp = Mathf.Pow(team1.TeamConfig.FightingCapacity, 2);
+        var total = temp + Mathf.Pow(team2.TeamConfig.FightingCapacity, 2);
 
-        var t = UnityEngine.Random.Range(0, total + 1);
+        var t = Random.Range(0, total + 1);
 
-        if (t < team1.TeamConfig.FightingCapacity)
+        if (t < temp)
         {
             return (team1, team2);
         }
