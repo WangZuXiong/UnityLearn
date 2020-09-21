@@ -52,10 +52,9 @@ public class Player : MonoBehaviour
 
         if (team != null && team.Player == this && team.transform.parent != transform)
         {
-            collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
             Recovery(team);
             MessageSender.AddOperation(Operation.PlayerRecoveryTeam, team.TeamData);
-            team.transform.localScale = Vector3.one;
+            team.ResetStyle();
             team.ResetCityTeamContent();
         }
     }

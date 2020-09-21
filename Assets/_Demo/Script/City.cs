@@ -55,11 +55,8 @@ public class City : MonoBehaviour
                     TeamData = team.TeamData
                 });
             }
-
-            collision.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-            team.transform.localScale = Vector3.one;
+            team.ResetStyle();
             team.ResetPlayerTeamContent();
-
             if (CD <= 0 && IsMainCity && team.Player != Player)
             {
                 //扣血

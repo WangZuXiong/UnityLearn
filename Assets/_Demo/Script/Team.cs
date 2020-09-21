@@ -24,8 +24,6 @@ public class Team : MonoBehaviour
 
 
     public GameObject Mask;
-
-
     public bool isIn;
     public bool IsCanOperation = true;
 
@@ -106,6 +104,24 @@ public class Team : MonoBehaviour
         }
     }
 
+    internal void ResetStyle()
+    {
+        transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        transform.localScale = Vector3.one;
+
+        var raycast = GetComponent<GraphicRaycaster>();
+        var canvas = GetComponent<Canvas>();
+
+        if (raycast != null)
+        {
+            Destroy(raycast);
+        }
+        if (canvas != null)
+        {
+            Destroy(canvas);
+        }
+    }
+
     void ResetContent(bool enable)
     {
         if (transform.GetComponentInParent<Player>() != null)
@@ -124,7 +140,12 @@ public class Team : MonoBehaviour
     {
         ResideTime = 0;
 
+#if UNITY_EDITOR
+        if (!IsCanOperation || CD > 0 || Energy <= 0 || IsInOperation)
+#else
         if (!IsCanOperation || CD > 0 || Energy <= 0 || IsInOperation || !Player.PlayerName.Equals(GameData.OurPlayerName))
+#endif
+
         {
             return;
         }
@@ -136,6 +157,8 @@ public class Team : MonoBehaviour
         Mask.Show();
 
         transform.localScale = Vector3.one * 0.6f;
+        gameObject.AddComponent<Canvas>().sortingOrder = 100;
+        gameObject.AddComponent<GraphicRaycaster>();
     }
 
     public void OnPointerUp()
@@ -190,6 +213,7 @@ public class Team : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         ResetContent(true);
+        ResetStyle();
     }
 
     public void ReduceEnergy(int temp)
@@ -212,9 +236,8 @@ public class Team : MonoBehaviour
         {
             return;
         }
-     
-        team.transform.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        team.transform.localScale = Vector3.one;
+
+        team.ResetStyle();
 
         if (CD > 0 || team.CD > 0 || Energy <= 0)
         {

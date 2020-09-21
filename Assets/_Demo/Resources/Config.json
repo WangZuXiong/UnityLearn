@@ -5,9 +5,9 @@
 	"WinScore": 3,
 	"LoseScore": 1,
 	"NPCTeamReturnCity": 10.0,
-	"TeamEnergy": 1,
+	"TeamEnergy": 3,
 	"WinEnergy": 1,
-	"LoseEnergy": 3,
+	"LoseEnergy": 2,
 	"ReqSpacing": 0.5,
 	"InNeutralScore": 1,
 	"InNeutralTime": 10,
@@ -18,7 +18,7 @@
 	"MainCityAttackCD": 10,
 	"ATeamConfig": [{
 			"Id": 1,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 2,
@@ -26,31 +26,31 @@
 		},
 		{
 			"Id": 3,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 4,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 5,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 6,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 7,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 8,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 9,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 10,
@@ -58,39 +58,39 @@
 		},
 		{
 			"Id": 11,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 12,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 13,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 14,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 15,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 16,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 17,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 18,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 19,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 20,
@@ -179,103 +179,103 @@
 	],
 	"BTeamConfig": [{
 			"Id": 1,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 2,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 3,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 4,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 5,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 6,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 7,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 8,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 9,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 10,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 11,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 12,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 13,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 14,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 15,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 16,
-			"FightingCapacity": 1000
+			"FightingCapacity": 10000
 		},
 		{
 			"Id": 17,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 18,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 19,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 20,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 21,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 22,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 23,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 24,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 25,
-			"FightingCapacity": 1000
+			"FightingCapacity": 0
 		},
 		{
 			"Id": 26,
