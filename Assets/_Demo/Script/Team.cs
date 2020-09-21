@@ -332,14 +332,6 @@ public class Team : MonoBehaviour
                             });
                         }
 
-                        //输了的回到主球场
-                        loser.Player.MainCity.Add(loser);
-                        MessageSender.AddOperation(Operation.TeamMoveToCity, new TeamNCity()
-                        {
-                            CityData = loser.Player.MainCity.CityData,
-                            TeamData = loser.TeamData
-                        });
-
                         //扣精力
                         if (!winner.Player.IsNPC)
                         {
@@ -363,6 +355,14 @@ public class Team : MonoBehaviour
 
                         if (loser.Energy > 0)
                         {
+                            //输了的回到主球场
+                            loser.Player.MainCity.Add(loser);
+                            MessageSender.AddOperation(Operation.TeamMoveToCity, new TeamNCity()
+                            {
+                                CityData = loser.Player.MainCity.CityData,
+                                TeamData = loser.TeamData
+                            });
+
                             //进入战斗结束冷却状态
                             loser.PlayCDAnimation(null, GameData.Config.AttackCD);
 
