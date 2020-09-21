@@ -20,7 +20,14 @@ public class MessageHandler
             case Operation.ReduceEnergy: HandleReduceEnergy(JsonUtility.FromJson<TeamNFloat>(body)); break;
             case Operation.UpdateCityBlood: HandleUpdateCityBlood(JsonUtility.FromJson<CityNFloat>(body)); break;
             case Operation.PlayerRecoveryTeam: HandlePlayerRecoveryTeam(JsonUtility.FromJson<TeamData>(body)); break;
+            case Operation.OnMainCityBeAttack: HandleMainCityBeAttack(JsonUtility.FromJson<CityNFloat>(body)); break;
         }
+    }
+
+    private static void HandleMainCityBeAttack(CityNFloat data)
+    {
+        var city = GameData.PlayerDict[data.CityData.PlayerName].CityDict[data.CityData.Id];
+        city.PlayCDAnimation(null, data.F);
     }
 
     private static void HandlePlayerRecoveryTeam(TeamData data)

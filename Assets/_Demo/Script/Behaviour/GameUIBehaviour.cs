@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,8 +21,8 @@ public class GameUIBehaviour : MonoBehaviour
         builder.Append(string.Format("Main City 遭受攻击时扣除血量：{0}\n", GameData.Config.CityBlood.ToString()));
         builder.Append(string.Format("进攻对方Main City获得的积分：{0}\n", GameData.Config.MainCityScore.ToString()));
         builder.Append(string.Format("进攻对方Main City扣除的体能：{0}\n", GameData.Config.MainCityEnergy.ToString()));
-        builder.Append(string.Format("占领中立场加积分速度：{0}/{1}s", GameData.Config.InNeutralScore.ToString(),GameData.Config.InNeutralTime.ToString()));
-
+        builder.Append(string.Format("占领中立场加积分速度：{0}/{1}s\n", GameData.Config.InNeutralScore.ToString(),GameData.Config.InNeutralTime.ToString()));
+        builder.Append(string.Format("Main City 被攻击的CD：{0}s", GameData.Config.MainCityAttackCD.ToString()));
         _text.text = builder.ToString();
     }
 }

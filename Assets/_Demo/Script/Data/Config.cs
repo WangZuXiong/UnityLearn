@@ -68,6 +68,10 @@ public struct Config
     /// 进攻对方Main City扣除的体能
     /// </summary>
     public int MainCityEnergy;
+    /// <summary>
+    /// Main City 被攻击的CD
+    /// </summary>
+    public int MainCityAttackCD;
 
     public List<TeamConfig> ATeamConfig;
 

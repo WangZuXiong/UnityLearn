@@ -43,5 +43,9 @@ public enum Operation
     /// <summary>
     /// Player 回收 Team
     /// </summary>
-    PlayerRecoveryTeam
+    PlayerRecoveryTeam,
+    /// <summary>
+    /// Main City 被攻击
+    /// </summary>
+    OnMainCityBeAttack
 }

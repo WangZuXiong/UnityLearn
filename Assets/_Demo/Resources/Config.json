@@ -15,6 +15,7 @@
 	"CityBlood": 1,
 	"MainCityScore": 1,
 	"MainCityEnergy": 1,
+	"MainCityAttackCD": 10,
 	"ATeamConfig": [{
 			"Id": 1,
 			"FightingCapacity": 1000

@@ -11,7 +11,12 @@ public class City : MonoBehaviour
     public int Capacity;
     public int Blood;
 
+    private float CD;
+    public Image ImgCD;
+
     public bool IsMainCity;
+
+    private IEnumerator CurrentRoutine;
 
 
     public Player Player;
@@ -55,8 +60,7 @@ public class City : MonoBehaviour
             team.transform.localScale = Vector3.one;
             team.ResetPlayerTeamContent();
 
-
-            if (IsMainCity && team.Player != Player)
+            if (CD <= 0 && IsMainCity && team.Player != Player)
             {
                 //扣血
                 Blood -= GameData.Config.CityBlood;
@@ -98,6 +102,13 @@ public class City : MonoBehaviour
                     team.Player.Recovery(team);
                     MessageSender.AddOperation(Operation.PlayerRecoveryTeam, team.TeamData);
                 }
+                PlayCDAnimation(null, GameData.Config.MainCityAttackCD);
+
+                MessageSender.AddOperation(Operation.OnMainCityBeAttack, new CityNFloat()
+                {
+                    F = GameData.Config.MainCityAttackCD,
+                    CityData = CityData
+                });
             }
         }
     }
@@ -144,5 +155,29 @@ public class City : MonoBehaviour
     {
         TexBlood.text = string.Format("{0}/{1}", Blood.ToString(), GameData.Config.CityTotalBlood.ToString());
         SliderBlood.value = (float)Blood / GameData.Config.CityTotalBlood;
+    }
+
+
+    internal void PlayCDAnimation(Action callback, float total)
+    {
+        if (CurrentRoutine != null)
+        {
+            StopCoroutine(CurrentRoutine);
+        }
+        CD = total;
+        CurrentRoutine = CDAnimationCoroutine(callback, total);
+        StartCoroutine(CurrentRoutine);
+    }
+
+    private IEnumerator CDAnimationCoroutine(Action callback, float total)
+    {
+        var wfs = new WaitForSeconds(0.1f);
+        while (CD > 0)
+        {
+            yield return wfs;
+            CD -= 0.1f;
+            ImgCD.fillAmount = CD / total;
+        }
+        callback?.Invoke();
     }
 }
