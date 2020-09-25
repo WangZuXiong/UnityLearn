@@ -14,20 +14,125 @@ using UnityEngine.UI;
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
+
+    public GameObject tips;
+
+    public float _space = 0.5f;
     private void Start()
     {
-        LoadAssetbundle();
+        //LoadAssetbundle();
+
+        GetComponent<Button>().onClick.AddListener(() =>
+        {
+            if (!tips.gameObject.activeSelf)
+            {
+                if (Time.realtimeSinceStartup - temp > _space)
+                {
+                    tips.gameObject.SetActive(true);
+                }
+                else
+                {
+                    Debug.LogError("Button onClick");
+                    Debug.LogError(Time.realtimeSinceStartup);
+                }
+            }
+        });
+    }
+
+    float temp;
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (tips.gameObject.activeSelf)
+            {
+                tips.gameObject.SetActive(false);
+                temp = Time.realtimeSinceStartup;
+                Debug.LogError("GetMouseButtonDown");
+                Debug.LogError(temp);
+            }
+        }
+
+
+        //if (Input.GetMouseButtonUp(0))
+        //{
+        //    Debug.LogError("GetMouseButtonUp");
+        //}
+
+        return;
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            RectTransform r = GetComponent<RectTransform>();
+
+            var xMin = r.anchoredPosition.x + r.rect.x;
+            var xMax = xMin + r.rect.width;
+            var yMin = r.anchoredPosition.y + r.rect.x;
+
+
+            Debug.LogError(r.anchoredPosition);
+            Debug.LogError(r.rect);
+
+
+            var x = 0.5f * Screen.width + transform.position.x - r.pivot.x * r.rect.width;
+
+            var y = 0.5f * Screen.height + r.anchoredPosition.y - r.pivot.y * r.rect.height; ;
+
+
+            Rect rect = new Rect(x, y, r.rect.width, r.rect.height);
+
+            Debug.LogError(rect);
+            Debug.LogError(Input.mousePosition);
+
+            Debug.LogError(rect.Contains(Input.mousePosition));
+        }
+
+        return;
+        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(2, 0, 0), Color.red);
+        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(0, 2, 0), Color.green);
+        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, 2), Color.blue);
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            var go = gameObjectPool.Get();
+            go.transform.SetParent(transform);
+            go.transform.localPosition = new Vector3(index++, 0, 0) * 2;
+        }
+        else if (Input.GetMouseButtonDown(0))
+        {
+            gameObjectPool.Release(transform.GetChild(0).GetComponent<Test1>());
+        }
+        else if (Input.GetMouseButtonDown(2))
+        {
+            gameObjectPool.Clear();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            gameObjectPool.ReleaseAll();
+        }
+
     }
 
 
 
 
 
+    void OnDrawGizmos()
+    {
+        //Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position, Vector3.one);
+    }
+    public void OnDestroy()
+    {
+
+    }
 
     ComponentPool<Test1> gameObjectPool;
 
     public AudioClip audioClip;
-
 
 
     void ThreadTest()
@@ -71,44 +176,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     }
 
 
-    void OnDrawGizmos()
-    {
-        //Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(transform.position, Vector3.one);
-    }
 
-    private void Update()
-    {
-        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(2, 0, 0), Color.red);
-        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(0, 2, 0), Color.green);
-        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, 2), Color.blue);
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            var go = gameObjectPool.Get();
-            go.transform.SetParent(transform);
-            go.transform.localPosition = new Vector3(index++, 0, 0) * 2;
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            gameObjectPool.Release(transform.GetChild(0).GetComponent<Test1>());
-        }
-        else if (Input.GetMouseButtonDown(2))
-        {
-            gameObjectPool.Clear();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            gameObjectPool.ReleaseAll();
-        }
-
-    }
-
-    public void OnDestroy()
-    {
-
-    }
 
 
     private void Print(float p)

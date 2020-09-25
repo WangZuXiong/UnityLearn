@@ -3,9 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Serialization;
 
 public class City : MonoBehaviour
 {
+    [SerializeField]
+    [FormerlySerializedAs("T")]
+    private int m_T;
+
+    public int T { get; set; }
+
     public CityData CityData;
 
     public int Capacity;

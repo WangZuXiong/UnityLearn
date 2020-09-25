@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class CanvasRebuild : MonoBehaviour
 {
 
-    IList<ICanvasElement> m_LayoutRebuildQueue;
-    IList<ICanvasElement> m_GraphicRebuildQueue;
+    IList<ICanvasElement> m_LayoutRebuildQueue;//Layout
+    IList<ICanvasElement> m_GraphicRebuildQueue;//Graphic
 
     private void Awake()
     {
@@ -32,7 +32,7 @@ public class CanvasRebuild : MonoBehaviour
             var rebuild = m_LayoutRebuildQueue[j];
             if (ObjectValidForUpdate(rebuild))
             {
-                Debug.LogFormat("{0}引起{1}网格重建", rebuild.transform.name, rebuild.transform.GetComponent<Graphic>().canvas.name);
+                Debug.LogFormat("{0}引起{1}网格重建   Layout", rebuild.transform.name, rebuild.transform.GetComponent<Graphic>().canvas.name);
             }
         }
 
@@ -41,7 +41,7 @@ public class CanvasRebuild : MonoBehaviour
             var element = m_GraphicRebuildQueue[j];
             if (ObjectValidForUpdate(element))
             {
-                Debug.LogFormat("{0}引起{1}网格重建", element.transform.name, element.transform.GetComponent<Graphic>().canvas.name);
+                Debug.LogFormat("{0}引起{1}网格重建   Graphic", element.transform.name, element.transform.GetComponent<Graphic>().canvas.name);
             }
         }
     }
