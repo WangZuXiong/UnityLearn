@@ -22,36 +22,46 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     {
         //LoadAssetbundle();
 
-        GetComponent<Button>().onClick.AddListener(() =>
-        {
-            if (!tips.gameObject.activeSelf)
-            {
-                if (Time.realtimeSinceStartup - temp > _space)
-                {
-                    tips.gameObject.SetActive(true);
-                }
-                else
-                {
-                    Debug.LogError("Button onClick");
-                    Debug.LogError(Time.realtimeSinceStartup);
-                }
-            }
-        });
+
     }
 
     float temp;
 
     private void Update()
     {
+
+
+        //RectTransformUtility.RectangleContainsScreenPoint(,);
+
+
+
         if (Input.GetMouseButtonDown(0))
         {
-            if (tips.gameObject.activeSelf)
-            {
-                tips.gameObject.SetActive(false);
-                temp = Time.realtimeSinceStartup;
-                Debug.LogError("GetMouseButtonDown");
-                Debug.LogError(temp);
-            }
+            Vector3[] fourCornersArray = new Vector3[4];
+            RectTransform rectTransform = GetComponent<RectTransform>();
+            rectTransform.GetWorldCorners(fourCornersArray);
+
+            var pos = Input.mousePosition;
+            bool isInRect =
+                pos.x >= fourCornersArray[0].x &&
+                pos.x <= fourCornersArray[2].x &&
+                pos.y >= fourCornersArray[0].y &&
+                pos.y <= fourCornersArray[2].y;
+
+
+            Debug.LogError(isInRect);
+
+            //var t = GetComponent<RectTransform>();
+            //Debug.LogError(t.rect);
+
+            //Rect rect = new Rect(
+            //    t.anchoredPosition.x + t.rect.x + Screen.width * 0.5f,
+            //    t.anchoredPosition.y + t.rect.y + Screen.height * 0.5f,
+            //    t.sizeDelta.x,
+            //    t.sizeDelta.y);
+
+            //Debug.LogError(rect);
+
         }
 
 
