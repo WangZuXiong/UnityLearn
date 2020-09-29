@@ -21,8 +21,11 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     private void Start()
     {
         //LoadAssetbundle();
+        Debug.Log("1111", gameObject);
 
 
+
+        ProfilerDemo();
     }
 
     float temp;

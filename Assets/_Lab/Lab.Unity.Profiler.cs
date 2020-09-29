@@ -5,8 +5,29 @@ using UnityEngine;
 
 public partial class Lab : MonoBehaviour
 {
+    StudentClass studentClass;
+    StudentStruct studentStruct;
     private void ProfilerDemo()
     {
+        using (new ProfilerMarker("Class Marker").Auto())
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                studentClass = new StudentClass();
+            }
+        }
+
+
+        using (new ProfilerMarker("Struct Marker").Auto())
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                studentStruct = new StudentStruct();
+            }
+        }
+
+        return;
+
         //var dict = new Dictionary<int, int>();
 
         //for (int i = 0; i < 1000; i++)
