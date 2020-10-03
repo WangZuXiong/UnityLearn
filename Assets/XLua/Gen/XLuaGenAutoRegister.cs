@@ -106,6 +106,15 @@ namespace XLua.CSObjectWrap
             translator.DelayWrapLoader(typeof(UnityEngine.Debug), UnityEngineDebugWrap.__Register);
         
         
+            translator.DelayWrapLoader(typeof(LuaPerfect.ObjectRef), LuaPerfectObjectRefWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(LuaPerfect.ObjectItem), LuaPerfectObjectItemWrap.__Register);
+        
+        
+            translator.DelayWrapLoader(typeof(LuaPerfect.ObjectFormater), LuaPerfectObjectFormaterWrap.__Register);
+        
+        
             translator.DelayWrapLoader(typeof(Tutorial.BaseClass), TutorialBaseClassWrap.__Register);
         
         
@@ -165,9 +174,11 @@ namespace XLua.CSObjectWrap
         
             translator.DelayWrapLoader(typeof(UnityEngine.Networking.UnityWebRequest), UnityEngineNetworkingUnityWebRequestWrap.__Register);
         
-        
-        
         }
+        
+        
+        
+        
         
         static void Init(LuaEnv luaenv, ObjectTranslator translator)
         {

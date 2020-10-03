@@ -20,3 +20,20 @@ function max(num1,num2 )
 
 	return result
 end
+
+
+
+function foo()
+	
+	local spriteAtlas = CS.AssetBundleConfig
+	spriteAtlas.BaseUrl = Application.dataPath,
+	spriteAtlas.RelativeUrl = "StreamingAssets"
+	spriteAtlas.FileName = "spriteatlas"
+	spriteAtlas.Version = 1
+
+	CS.DownloadAssetManager.DownloadAssetBundleAsync(spriteAtlas, function(ab)
+		//do something
+	end, nil)
+end
+
+

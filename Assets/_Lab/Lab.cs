@@ -32,11 +32,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
-
-
         //RectTransformUtility.RectangleContainsScreenPoint(,);
-
-
 
         if (Input.GetMouseButtonDown(0))
         {

@@ -48,7 +48,10 @@
 	</assembly>
 
 	<assembly fullname="Assembly-CSharp">
-	    <type fullname="Tutorial.BaseClass" preserve="all"/>
+	    <type fullname="LuaPerfect.ObjectRef" preserve="all"/>
+		<type fullname="LuaPerfect.ObjectItem" preserve="all"/>
+		<type fullname="LuaPerfect.ObjectFormater" preserve="all"/>
+		<type fullname="Tutorial.BaseClass" preserve="all"/>
 		<type fullname="Tutorial.TestEnum" preserve="all"/>
 		<type fullname="Tutorial.DerivedClass" preserve="all"/>
 		<type fullname="Tutorial.ICalc" preserve="all"/>
