@@ -56,10 +56,10 @@ namespace foo
         /// </summary>
         ~AssetRefComponent()
         {
-            if (!string.IsNullOrEmpty(AssetPath))
-            {
-                Debug.LogError("AssetRefComponent : " + m_debugNodePath + " : 没有正确释放资源引用计数 : " + AssetPath);
-            }
+            //if (!string.IsNullOrEmpty(AssetPath))
+            //{
+            //    Debug.LogError("AssetRefComponent : " + m_debugNodePath + " : 没有正确释放资源引用计数 : " + AssetPath);
+            //}
         }
 #endif
 

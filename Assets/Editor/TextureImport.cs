@@ -18,7 +18,7 @@ public class TextureImport : AssetPostprocessor
                 format = TextureImporterFormat.ASTC_RGBA_4x4
             };
             importer.SetPlatformTextureSettings(settings);
-            Debug.LogError(assetPath);
+ 
         }
     }
 }
