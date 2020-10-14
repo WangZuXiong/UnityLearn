@@ -26,6 +26,39 @@ public class AssetBundleTest : MonoBehaviour
         _path1 = Application.dataPath + "/" + _path1;
         _path2 = Application.dataPath + "/" + _path2;
 
+
+        AssetBundleConfig spriteAtlas = new AssetBundleConfig
+        {
+            BaseUrl = Application.dataPath,
+            RelativeUrl = "StreamingAssets",
+            FileName = "spriteatlas",
+            Version = 1
+        };
+
+        DownloadAssetManager.DownloadAssetBundleAsync(spriteAtlas, (sa) =>
+        {
+            AssetBundleConfig image = new AssetBundleConfig
+            {
+                BaseUrl = Application.dataPath,
+                RelativeUrl = "StreamingAssets",
+                FileName = "image",
+                Version = 1
+            };
+
+            DownloadAssetManager.DownloadAssetBundleAsync(image, (t) =>
+            {
+                GameObject.Instantiate(t.LoadAllAssets<GameObject>()[0], transform);
+
+                t.Unload(false);
+
+                Debug.LogError(t == null);
+                t.Unload(true);
+
+            }, null);
+        }, null);
+
+
+
         //LoadAssetBundle.Instance.LoadAssetBundleAsync<GameObject>(_name1, _path1, (t) =>
         //{
         //    Instantiate(t, _root);
