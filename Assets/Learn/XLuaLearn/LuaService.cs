@@ -23,7 +23,7 @@ public class LuaService : MonoBehaviour
 
     private void OnDisable()
     {
-        _luaEnv.DoString("require 'LuaDispose'");
+        //_luaEnv.DoString("require 'LuaDispose'");
     }
 
     private void OnDestroy()
@@ -31,6 +31,9 @@ public class LuaService : MonoBehaviour
         _luaEnv.Dispose();
     }
 
+    /// <summary>
+    /// 仅调试是调用
+    /// </summary>
     internal void ReLoadLuaScript()
     {
         Start();

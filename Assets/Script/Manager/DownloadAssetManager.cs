@@ -147,8 +147,8 @@ public class DownloadAssetImpl
     }
 
 
-    private Dictionary<AssetBundleConfig, AssetBundle> _tempAssetBundleDict = new Dictionary<AssetBundleConfig, AssetBundle>();
-    private Dictionary<AssetBundleConfig, AssetBundle> _permanentAssetBundleDict = new Dictionary<AssetBundleConfig, AssetBundle>();
+    private readonly Dictionary<AssetBundleConfig, AssetBundle> _tempAssetBundleDict = new Dictionary<AssetBundleConfig, AssetBundle>();
+    private readonly Dictionary<AssetBundleConfig, AssetBundle> _permanentAssetBundleDict = new Dictionary<AssetBundleConfig, AssetBundle>();
 
     public void AddDict(AssetBundleConfig bundleConfig, AssetBundle assetBundle)
     {

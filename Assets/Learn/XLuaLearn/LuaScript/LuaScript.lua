@@ -1,23 +1,18 @@
 local util = require 'util'
-local test1 = require 'NewFolder/test1'
 
-util.hotfix_ex(CS.XLuaLoad,'Play',function(self)
-
-	self:Play()
-	--print("123123")
-
-	print(">>>>>>>> main")
-	require 'main'
+xlua.hotfix(CS.XLuaTest1,"Foo",nil)
+util.hotfix_ex(CS.XLuaTest1,"Foo",function(self)
+	self:Foo()
+	print("Foo Lua")
 end)
 
 
-xlua.hotfix(CS.XLuaLoad,'Play1',function(self)	
+xlua.hotfix(CS.XLuaTest1,"Foo1",function(self, t)
+	
+	print(t * 100)
 
-	--print(">>>Play1")
-end)
-
-xlua.private_accessible(CS.XLuaLoad)--可以访问XLuaLoad中的非public变量
-xlua.hotfix(CS.XLuaLoad,'Awake',function(self)
-
-	print("lua:"..self._dict[1][1])
+	local dict  = self._dict
+	for k,v in pairs(dict) do
+		print(k,v)
+	end
 end)

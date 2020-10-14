@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1846935845728936655}
   - component: {fileID: 315468005580138104}
   - component: {fileID: 6826619465976781502}
+  - component: {fileID: 114076708702224486}
+  - component: {fileID: 114345071849255716}
   m_Layer: 5
   m_Name: RawImage
   m_TagString: Untagged
@@ -65,10 +67,37 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Texture: {fileID: 2800000, guid: 2b9d11ae541357c44b84bb3d9537bbb0, type: 3}
+  m_Texture: {fileID: 0}
   m_UVRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
+--- !u!114 &114076708702224486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8433493018652235416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad80085d25036c4f8d3e32ee4d86370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114345071849255716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8433493018652235416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d70d5698e04b5164cb2ebe6569526457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AssetPath: http://192.168.1.243:8082/basketball/eye_fast_chips/1/1/1.png
+  AssetTypeName: Sprite
+  PropertyName: 
