@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [ExecuteInEditMode]
-public class Test1 : MonoBehaviour
+public class TestImgMask : MonoBehaviour
 {
     [SerializeField]
     private Vector2 _pos;

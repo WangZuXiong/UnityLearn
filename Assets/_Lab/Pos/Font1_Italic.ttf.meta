@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 02db87418d0ad86489dc6375772d1b1b
+timeCreated: 1472564680
+licenseType: Pro
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: MF MingHei
+  fontNames:
+  - Font1_Italic
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6f1010931546b0f4eb8757ce2427c53d, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
