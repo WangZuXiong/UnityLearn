@@ -163,7 +163,17 @@ public partial class Lab : MonoBehaviour
         gameObject.GetComponent<RawImage>().texture = texture2D;
     }
 
+    public void InvokeRepeatingTest()
+    {
 
+        //~                 InvokeRepeating还能生效？
+        //Deactive脚本所挂在的gameObject      能
+        //脚本被disable                    能
+        //destroy 脚本所挂在的gameObject  不能
+
+
+        Debug.Log("Foo");
+    }
 
 
     //声明一个协程

@@ -26,6 +26,9 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
 
         ProfilerDemo();
+
+ 
+        InvokeRepeating("Foo", 0, 1);
     }
 
     float temp;

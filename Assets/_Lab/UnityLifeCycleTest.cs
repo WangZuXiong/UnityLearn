@@ -13,6 +13,7 @@ public partial class UnityLifeCycleTest : MonoBehaviour
 
     private void OnEnable()
     {
+        //即使是Active父节点 还是能回调
         Debug.LogError("OnEnable::" + gameObject.name);
     }
 
@@ -34,6 +35,7 @@ public partial class UnityLifeCycleTest : MonoBehaviour
 
     private void OnDisable()
     {
+        //即使是Deactive父节点 还是能回调
         Debug.LogError("OnDisable::" + gameObject.name);
     }
 
