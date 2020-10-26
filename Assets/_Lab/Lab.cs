@@ -20,21 +20,18 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     public float _space = 0.5f;
     private void Start()
     {
-        //LoadAssetbundle();
-        Debug.Log("1111", gameObject);
+    
 
 
-
-        ProfilerDemo();
-
- 
-        InvokeRepeating("Foo", 0, 1);
+        //ProfilerDemo();
     }
 
     float temp;
 
     private void Update()
     {
+        Debug.Log(transform.position);
+        Debug.Log(transform.localPosition);
         //RectTransformUtility.RectangleContainsScreenPoint(,);
 
         if (Input.GetMouseButtonDown(0))
@@ -114,7 +111,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            gameObjectPool.Release(transform.GetChild(0).GetComponent<Test1>());
+            gameObjectPool.Release(transform.GetChild(0).GetComponent<MonoBehaviour>());
         }
         else if (Input.GetMouseButtonDown(2))
         {
@@ -142,7 +139,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     }
 
-    ComponentPool<Test1> gameObjectPool;
+    ComponentPool<MonoBehaviour> gameObjectPool;
 
     public AudioClip audioClip;
 
