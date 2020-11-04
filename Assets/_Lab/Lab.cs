@@ -14,24 +14,27 @@ using UnityEngine.UI;
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
-
+    public Transform T1;
+    public Transform T2;
     public GameObject tips;
-
     public float _space = 0.5f;
+
+
+
     private void Start()
     {
-    
+        Vector3 p1 = T1.InverseTransformPoint(T2.position);
 
 
-        //ProfilerDemo();
+        Debug.Log(p1);
     }
 
     float temp;
 
     private void Update()
     {
-        Debug.Log(transform.position);
-        Debug.Log(transform.localPosition);
+        //Debug.Log(transform.position);
+        //Debug.Log(transform.localPosition);
         //RectTransformUtility.RectangleContainsScreenPoint(,);
 
         if (Input.GetMouseButtonDown(0))

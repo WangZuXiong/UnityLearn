@@ -25,7 +25,7 @@ public class PosTest : MonoBehaviour
 
         //GetComponentsInChildren<LayoutGroup>();
 
-        lines.SetLine(target1, target2);
+        lines.SetLine(target1, target2, Vector3.zero, 1 / 0.9f);
 
         //lines.SetLine(target1.position, target2.position, new Vector2(159, 50));
 
