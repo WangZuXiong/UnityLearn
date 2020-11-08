@@ -18,10 +18,14 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     public GameObject tips;
 
     public float _space = 0.5f;
+
+    public Plane plane;
+
     private void Start()
     {
-    
+        //Plane plane = new Plane(Vector3.up, Vector3.zero);
 
+        Destroy(gameObject,)
 
         //ProfilerDemo();
     }
@@ -30,8 +34,8 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
-        Debug.Log(transform.position);
-        Debug.Log(transform.localPosition);
+        //Debug.Log(transform.position);
+        //Debug.Log(transform.localPosition);
         //RectTransformUtility.RectangleContainsScreenPoint(,);
 
         if (Input.GetMouseButtonDown(0))
