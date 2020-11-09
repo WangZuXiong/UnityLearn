@@ -17,75 +17,92 @@ public class ClickScreenIgnoreSelfArea : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    //会受到canvas rander model 的影响
-
-        //    //canvas rander model = screen space - overlay [only]
-        //    //Vector3[] fourCornersArray = new Vector3[4];
-        //    //RectTransform rectTransform = GetComponent<RectTransform>();
-        //    //rectTransform.GetWorldCorners(fourCornersArray);
-
-        //    //var pos = Input.mousePosition;
-        //    //bool isInRect =
-        //    //    pos.x >= fourCornersArray[0].x &&
-        //    //    pos.x <= fourCornersArray[2].x &&
-        //    //    pos.y >= fourCornersArray[0].y &&
-        //    //    pos.y <= fourCornersArray[2].y;
-        //    //Debug.LogError(isInRect);
-
-        //    //canvas rander model = screen space - camera || canvas rander model = world space
-        //    Vector3[] fourCornersArray = new Vector3[4];
-        //    RectTransform rectTransform = GetComponent<RectTransform>();
-        //    rectTransform.GetWorldCorners(fourCornersArray);
-
-        //    bool isInRect = false;
-        //    Plane plane = new Plane(fourCornersArray[0], fourCornersArray[1], fourCornersArray[2]);
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //    if (plane.Raycast(ray, out float enter))
-        //    {
-        //        var pos = ray.GetPoint(enter);
-
-        //        isInRect = pos.x >= fourCornersArray[0].x &&
-        //                  pos.x <= fourCornersArray[2].x &&
-        //                  pos.y >= fourCornersArray[0].y &&
-        //                  pos.y <= fourCornersArray[2].y;
-        //    }
-
-        //    Debug.LogError(isInRect);
-        //}
-
-        //return;
-
-
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            ////会受到transform 的缩放 的影响
-            //RectTransform r = GetComponent<RectTransform>();
-            //var x = 0.5f * Screen.width + r.anchoredPosition.x - r.pivot.x * r.rect.width;
-            //var y = 0.5f * Screen.height + r.anchoredPosition.y - r.pivot.y * r.rect.height;
-            //Rect rect = new Rect(x, y, r.rect.width, r.rect.height);
-            //Debug.LogError(rect.Contains(Input.mousePosition));
+            //    //会受到canvas rander model 的影响
+
+            //    //canvas rander model = screen space - overlay [only]
+            //    //Vector3[] fourCornersArray = new Vector3[4];
+            //    //RectTransform rectTransform = GetComponent<RectTransform>();
+            //    //rectTransform.GetWorldCorners(fourCornersArray);
+
+            //    //var pos = Input.mousePosition;
+            //    //bool isInRect =
+            //    //    pos.x >= fourCornersArray[0].x &&
+            //    //    pos.x <= fourCornersArray[2].x &&
+            //    //    pos.y >= fourCornersArray[0].y &&
+            //    //    pos.y <= fourCornersArray[2].y;
+            //    //Debug.LogError(isInRect);
 
 
-            //canvas rander model = screen space - overlay [only]
-            RectTransform r = GetComponent<RectTransform>();
+
+
+
+
+
+
+            //canvas rander model = screen space - camera || canvas rander model = world space
             Vector3[] fourCornersArray = new Vector3[4];
-            r.GetWorldCorners(fourCornersArray);
+            RectTransform rectTransform = GetComponent<RectTransform>();
+            rectTransform.GetWorldCorners(fourCornersArray);
 
-            //1 2
-            //0 3
-            var width = Mathf.Abs(fourCornersArray[3].x - fourCornersArray[0].x);
-            var height = Mathf.Abs(fourCornersArray[1].y - fourCornersArray[0].y);
+            bool isInRect = false;
+            Plane plane = new Plane(fourCornersArray[0], fourCornersArray[1], fourCornersArray[2]);
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (plane.Raycast(ray, out float enter))
+            {
+                var pos = ray.GetPoint(enter);
 
-            var x = 0.5f * Screen.width + r.anchoredPosition.x - r.pivot.x * width;
-            var y = 0.5f * Screen.height + r.anchoredPosition.y - r.pivot.y * height; ;
+                //1     2
+                //  pos
+                //0     3
+                isInRect = Vector3.Cross(pos - fourCornersArray[0], fourCornersArray[1] - fourCornersArray[0]).z > 0
+                        && Vector3.Cross(pos - fourCornersArray[1], fourCornersArray[2] - fourCornersArray[1]).z > 0
+                        && Vector3.Cross(pos - fourCornersArray[2], fourCornersArray[3] - fourCornersArray[2]).z > 0
+                        && Vector3.Cross(pos - fourCornersArray[3], fourCornersArray[0] - fourCornersArray[3]).z > 0;
 
-  
+                Debug.DrawLine(pos, fourCornersArray[1], Color.red);
+                Debug.DrawLine(fourCornersArray[2], fourCornersArray[1], Color.red);
 
 
-            Rect rect = new Rect(x, y, width, height);
-            Debug.LogError(rect.Contains(Input.mousePosition));
+            }
+
+
+
+            Debug.LogError(isInRect);
+
+
+
+
+
+
+
+            //    ////会受到transform 的缩放 的影响
+            //    //RectTransform r = GetComponent<RectTransform>();
+            //    //var x = 0.5f * Screen.width + r.anchoredPosition.x - r.pivot.x * r.rect.width;
+            //    //var y = 0.5f * Screen.height + r.anchoredPosition.y - r.pivot.y * r.rect.height;
+            //    //Rect rect = new Rect(x, y, r.rect.width, r.rect.height);
+            //    //Debug.LogError(rect.Contains(Input.mousePosition));
+
+
+            //    //canvas rander model = screen space - overlay [only]
+            //    RectTransform r = GetComponent<RectTransform>();
+            //    Vector3[] fourCornersArray = new Vector3[4];
+            //    r.GetWorldCorners(fourCornersArray);
+
+            //    //1 2
+            //    //0 3
+            //    var width = Mathf.Abs(fourCornersArray[3].x - fourCornersArray[0].x);
+            //    var height = Mathf.Abs(fourCornersArray[1].y - fourCornersArray[0].y);
+
+            //    var x = 0.5f * Screen.width + r.anchoredPosition.x - r.pivot.x * width;
+            //    var y = 0.5f * Screen.height + r.anchoredPosition.y - r.pivot.y * height; ;
+
+
+
+
+            //    Rect rect = new Rect(x, y, width, height);
+            //    Debug.LogError(rect.Contains(Input.mousePosition));
         }
     }
 

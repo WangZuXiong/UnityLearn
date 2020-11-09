@@ -25,7 +25,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     {
         //Plane plane = new Plane(Vector3.up, Vector3.zero);
 
-        Destroy(gameObject,)
+        //Destroy(gameObject,)
 
         //ProfilerDemo();
     }
