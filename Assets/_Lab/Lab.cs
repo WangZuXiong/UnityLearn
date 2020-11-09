@@ -14,19 +14,20 @@ using UnityEngine.UI;
 //[ExecuteInEditMode]
 public partial class Lab : MonoBehaviour, IPointerEnterHandler
 {
-    public Transform T1;
-    public Transform T2;
+
     public GameObject tips;
+
     public float _space = 0.5f;
 
-
+    public Plane plane;
 
     private void Start()
     {
-        Vector3 p1 = T1.InverseTransformPoint(T2.position);
+        //Plane plane = new Plane(Vector3.up, Vector3.zero);
 
+        Destroy(gameObject,)
 
-        Debug.Log(p1);
+        //ProfilerDemo();
     }
 
     float temp;

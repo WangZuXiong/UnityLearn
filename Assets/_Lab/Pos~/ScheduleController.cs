@@ -190,7 +190,7 @@ public class ScheduleController : MonoBehaviour
                 //}
 
 
-                lines.SetLine(target1, target2, Vector3.zero, 3);
+                lines.SetLine(target1, target2);
                 LineDict.Add(lines.name, lines);
             }
         }
