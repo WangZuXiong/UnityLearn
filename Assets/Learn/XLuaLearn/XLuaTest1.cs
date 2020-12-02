@@ -19,21 +19,35 @@ public class XLuaTest1 : MonoBehaviour
         {
             //重新load
             LuaService.Instance.ReLoadLuaScript();
-            Foo();
-             Foo1(999);
+            //Foo();
+            Foo1(999);
+
+            //Foo(1);
+            //Foo("1");
         }
     }
-
-
 
     private void Foo()
     {
         Debug.LogError("Foo C#");
     }
 
-
     private void Foo1(int t)
     {
         Debug.LogError(t.ToString() + "Foo1 C#");
+    }
+
+
+    //热更重载函数 test
+
+    public void Foo(int x)
+    {
+        Debug.Log(x);
+    }
+
+
+    public void Foo(string x)
+    {
+        Debug.Log(x);
     }
 }

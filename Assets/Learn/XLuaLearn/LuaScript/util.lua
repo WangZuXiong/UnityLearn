@@ -89,6 +89,7 @@ local function auto_id_map()
                 local f = type(v) == 'function' and v or nil
                 for _, id in ipairs(map_info_of_methods or {}) do
                     CS.XLua.HotfixDelegateBridge.Set(id, f)
+					print("id:"..id)
                 end
                 --CS.XLua.HotfixDelegateBridge.Set(
             end

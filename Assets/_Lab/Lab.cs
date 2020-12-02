@@ -21,6 +21,8 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     public Plane plane;
 
+
+    public Color color;
     private void Start()
     {
         //Plane plane = new Plane(Vector3.up, Vector3.zero);
@@ -28,12 +30,18 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         //Destroy(gameObject,)
 
         //ProfilerDemo();
+
+
+       
     }
 
     float temp;
 
     private void Update()
     {
+        //GetComponent<Renderer>().material.SetColor("_LineColor", color);//material(instance)
+        GetComponent<Renderer>().sharedMaterial.SetColor("_LineColor", color);//material
+
         UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(2, 0, 0), Color.red);
         UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(0, 2, 0), Color.green);
         UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, 2), Color.blue);
