@@ -1,3 +1,0 @@
-E:/wangzuxiong/Unity Project/UnityLearn/Assets/Resources\Cube.prefab
-E:/wangzuxiong/Unity Project/UnityLearn/Assets/Resources\Image.prefab
-E:/wangzuxiong/Unity Project/UnityLearn/Assets/Resources\RawImage.prefab

@@ -17,14 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 315f3d4772364ef48b975b13deefdbce
   m_SerializeEntries:
-  - m_GUID: 736e89f5f2e49de4b85b6d06deade4f7
-    m_Address: Assets/RawResources/Prefabs/Image.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    m_MainAsset: {fileID: 4002113627044894133, guid: 736e89f5f2e49de4b85b6d06deade4f7,
-      type: 3}
-    m_TargetAsset: {fileID: 4002113627044894133, guid: 736e89f5f2e49de4b85b6d06deade4f7,
-      type: 3}
   - m_GUID: f81553f3272398d40a4fd8dec128a477
     m_Address: Assets/RawResources/Textures/atm (2).jpg
     m_ReadOnly: 0
