@@ -9,11 +9,11 @@ public class TextureHelper : EditorWindow
     private string _inputPath;
     private bool _isToBigger = false;
 
-    [MenuItem("Tools/SimpleTool/TextureHelper")]
+    [MenuItem("Tools/SimpleTool/裁剪or补齐 Texture")]
     private static void Init()
     {
         var window = GetWindow(typeof(TextureHelper), false);
-        window.titleContent = new GUIContent("Texture Helper");
+        window.titleContent = new GUIContent("裁剪/补齐 Texture");
         window.Show();
     }
 
@@ -40,19 +40,22 @@ public class TextureHelper : EditorWindow
             GUILayout.Box(miniTex, GUILayout.Width(miniTex.width / scale), GUILayout.Height(100));
 
             GUILayout.BeginHorizontal();
-            if (GUILayout.Toggle(_isToBigger, new GUIContent("变大"), GUILayout.MinWidth(80), GUILayout.MaxWidth(100)))
-            {
-                _isToBigger = true;
-            }
-            if (GUILayout.Toggle(!_isToBigger, new GUIContent("变小"), GUILayout.MinWidth(80), GUILayout.MaxWidth(100)))
+            if (GUILayout.Toggle(!_isToBigger, new GUIContent("裁剪（变小）"), GUILayout.MinWidth(80), GUILayout.MaxWidth(100)))
             {
                 _isToBigger = false;
             }
+            if (GUILayout.Toggle(_isToBigger, new GUIContent("补齐（变大）"), GUILayout.MinWidth(80), GUILayout.MaxWidth(100)))
+            {
+                _isToBigger = true;
+            }
             GUILayout.EndHorizontal();
 
-            GUILayout.Label(string.Format("转换前: {0} x {1}", sourceTexture2D.width.ToString(), sourceTexture2D.height.ToString()));
+            var index = _inputPath.LastIndexOf('/');
+            var fileName = _inputPath.Substring(index + 1, _inputPath.Length - index - 1);
+            GUILayout.Label(string.Format("文件名：{0}", fileName));
+            GUILayout.Label(string.Format("处理前: {0} x {1}", sourceTexture2D.width.ToString(), sourceTexture2D.height.ToString()));
             (int width, int height) after = _isToBigger ? SizeCeiling((sourceTexture2D.width, sourceTexture2D.height)) : SizeFloor((sourceTexture2D.width, sourceTexture2D.height));
-            GUILayout.Label(string.Format("转换后: {0} x {1}", after.width.ToString(), after.height.ToString()));
+            GUILayout.Label(string.Format("处理后: {0} x {1}", after.width.ToString(), after.height.ToString()));
 
             GUILayout.BeginHorizontal();
             if (GUILayout.Button(new GUIContent("保存(覆盖)"), GUILayout.MinWidth(80), GUILayout.MaxWidth(100)))
@@ -63,12 +66,11 @@ public class TextureHelper : EditorWindow
                 bytes = Texture2D2Bytes(newTexture2D, isJpg);
                 Save(bytes, _inputPath);
                 EditorUtility.DisplayDialog("Tips", "保存成功", "好的");
+                AssetDatabase.Refresh();
             }
 
             if (GUILayout.Button(new GUIContent("另存为"), GUILayout.MinWidth(80), GUILayout.MaxWidth(100)))
             {
-                var index = _inputPath.LastIndexOf('/');
-                var fileName = _inputPath.Substring(index + 1, _inputPath.Length - index - 1);
                 fileName = fileName.ToLower().Replace(".jpg", string.Empty).Replace(".png", string.Empty);
                 var tempPath = EditorUtility.SaveFilePanel("图片另存为", _inputPath, fileName + "_new", "png,jpg");
 
@@ -80,12 +82,13 @@ public class TextureHelper : EditorWindow
                     bytes = Texture2D2Bytes(newTexture2D, isJpg);
                     Save(bytes, tempPath);
                     EditorUtility.DisplayDialog("Tips", "保存成功", "好的");
+                    AssetDatabase.Refresh();
                 }
             }
             GUILayout.EndHorizontal();
 
             GUI.color = new Color(1.0f, 0.95f, 0.8f, 1.0f);
-            GUILayout.Label("示例：5x5的图片\"变大\"之后是8x8;\"变小\"之后是4x4");
+            GUILayout.Label("示例：5x5的图片\"补齐\"之后是8x8;\"裁剪\"之后是4x4");
         }
     }
 

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5834b5087d578d24c926ce20cd31e6d6, type: 3}
-  m_Name: spriteatlas_ContentUpdateGroupSchema
+  m_Name: Test_ContentUpdateGroupSchema
   m_EditorClassIdentifier: 
-  m_Group: {fileID: 11400000, guid: a53b9b99c926c2e4b90655e3aaacede2, type: 2}
-  m_StaticContent: 1
+  m_Group: {fileID: 11400000, guid: 877641aa30beccf4098f89862fc02da2, type: 2}
+  m_StaticContent: 0

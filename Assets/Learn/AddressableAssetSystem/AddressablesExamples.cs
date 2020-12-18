@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -6,72 +8,75 @@ using UnityEngine.UI;
 
 public class AddressablesExamples : MonoBehaviour
 {
-    void Start()
-    {
-        Start3();
+    [SerializeField]
+    private GameObject _instance;
 
-        Start0();
+    //[SerializeField]
+    //private AssetReference _asset;
+
+    async void Start()
+    {
+        ////1
+        //_asset.LoadAssetAsync<GameObject>().Completed += OnLoadedCompleted;
+
+        ////2
+        //AsyncOperationHandle<GameObject> handle1 = _asset.LoadAssetAsync<GameObject>();
+        //GameObject original = await handle1.Task;
+        //_instance = Instantiate(original);
+
+        ////3
+        //GameObject handle2 = await _asset.LoadAssetAsync<GameObject>().Task;
+        //_instance = Instantiate(handle2);
+
+        ////4
+        //_asset.InstantiateAsync().Completed += OnInstantiatedCompleted;
+
+        ////5
+        //AsyncOperationHandle<GameObject> handle3 = _asset.InstantiateAsync();
+        //_instance = await handle3.Task;
+
+        //6
+        await Addressables.InstantiateAsync("Cube").Task;
+        await Addressables.InstantiateAsync("Cube 1").Task;
+
+        //for (int i = 0; i < 10; i++)
+        //{
+        //    var cube = await Addressables.InstantiateAsync("Cube 1").Task;
+        //    cube.transform.localPosition = new Vector3(i, 0, 0);
+        //}
+
+
+        //IEnumerable enumerable = new object[] { "Cube Texture", "Test Label 1" };
+        //IList<Texture2D> textures = await Addressables.LoadAssetsAsync<Texture2D>(enumerable, (t) =>
+        //{
+        //    t.name = "1";
+        //}, Addressables.MergeMode.None, true).Task;
+
+        //_instance.GetComponent<Renderer>().material.mainTexture = textures[0];
+    }
+
+    private void OnInstantiatedCompleted(AsyncOperationHandle<GameObject> obj)
+    {
+        _instance = obj.Result;
+    }
+
+    private void OnLoadedCompleted(AsyncOperationHandle<GameObject> obj)
+    {
+        _instance = Instantiate(obj.Result);
+    }
+
+    private void OnDestroy()
+    {
+        //_asset.ReleaseInstance(_instance);
     }
 
 
-    void Start0()
+    private void Update()
     {
-        Addressables.InstantiateAsync("Assets/RawResources/Prefabs/Image.prefab");
-
-        Addressables.LoadAssetAsync<GameObject>("Assets/RawResources/Prefabs/Image.prefab").Completed += OnCompleted;
-
-        Addressables.LoadAssetAsync<Texture2D>("Assets/RawResources/Textures/Texture_A.png").Completed += (t) =>
+        if (Input.GetMouseButtonDown(1))
         {
-            if (t.Status == AsyncOperationStatus.Succeeded)
-            {
-                gameObject.AddComponent<RawImage>().texture = t.Result;
-            }
-        };
-
-    }
-
-    private void OnCompleted(AsyncOperationHandle<GameObject> obj)
-    {
-        GameObject gameObject = obj.Result;
-        GameObject.Instantiate(gameObject, transform);
-    }
-
-
-    public IEnumerator Start1()
-    {
-        AsyncOperationHandle<Texture2D> handle = Addressables.LoadAssetAsync<Texture2D>("mytexture");
-        yield return handle;
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-            Texture2D texture = handle.Result;
-            // The texture is ready for use.
-            // ...
-            // Release the asset after its use:
-            Addressables.Release(handle);
-        }
-    }
-
-
-    public async void Start2()
-    {
-        //Addressables.LoadAssetsAsync
-        AsyncOperationHandle<Texture2D> handle = Addressables.LoadAssetAsync<Texture2D>("mytexture");
-        await handle.Task;
-        // The task is complete. Be sure to check the Status is successful before storing the Result.
-    }
-
-
-    public async void Start3()
-    {
-        var handle = Addressables.InstantiateAsync("Assets/RawResources/Prefabs/Image.prefab");
-        await handle.Task;
-        if (handle.Status == AsyncOperationStatus.Succeeded)
-        {
-
-        }
-        else if (handle.Status == AsyncOperationStatus.Failed)
-        {
-            
+            Addressables.ReleaseInstance(_instance);
+            //Addressables.Release(_asset);
         }
     }
 }

@@ -75,7 +75,22 @@ public static class Debug
 
     public static void LogErrorFormat(Object context, string format, params object[] args)
     {
-        UnityEngine.Debug.LogErrorFormat(context, format, args);     
+        UnityEngine.Debug.LogErrorFormat(context, format, args);
+    }
+
+    public static void DrawLine(Vector3 start, Vector3 end)
+    {
+        UnityEngine.Debug.DrawLine(start, end);
+    }
+
+    public static void DrawLine(Vector3 start, Vector3 end, Color color)
+    {
+        UnityEngine.Debug.DrawLine(start, end, color);
+    }
+
+    public static void LogException(System.Exception exception)
+    {
+        UnityEngine.Debug.LogException(exception);
     }
 }
 #endif
