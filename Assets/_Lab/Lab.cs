@@ -31,8 +31,17 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         //ProfilerDemo();
 
+        StartCoroutine(Print());
+    }
 
-       
+
+    IEnumerator Print()
+    {
+        while (true)
+        {
+            Debug.LogError(1);
+            yield return new WaitForSeconds(1);
+        }
     }
 
     float temp;

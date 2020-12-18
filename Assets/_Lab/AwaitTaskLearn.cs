@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 
-public class AwaitTaskLearn 
+public class AwaitTaskLearn : MonoBehaviour
 {
 
     string _pngUrl = "http://192.168.1.243:8082/basketball/my_team_logo/dh6.png";
@@ -20,7 +22,7 @@ public class AwaitTaskLearn
         var t1 = Task<int>.Run(() => { return 1; });
         var t2 = Task.Run(() => { return 1; });
 
-
+        Foo1();
     }
 
     /// <summary>
@@ -47,6 +49,22 @@ public class AwaitTaskLearn
     private IEnumerator enumerator()
     {
         yield return new WaitForUpdate();
+    }
+
+    private string str;
+
+    async Task Foo()
+    {
+        var go = Addressables.InstantiateAsync("Assets/RawResources/Prefabs/Image.prefab");
+        await go.Task;
+        str = "123";
+    }
+
+    public async void Foo1()
+    {
+        await Foo();
+
+        Debug.Log(str);
     }
 }
 

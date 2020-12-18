@@ -54,6 +54,7 @@ public class AddressablesExamples : MonoBehaviour
 
     public async void Start2()
     {
+        //Addressables.LoadAssetsAsync
         AsyncOperationHandle<Texture2D> handle = Addressables.LoadAssetAsync<Texture2D>("mytexture");
         await handle.Task;
         // The task is complete. Be sure to check the Status is successful before storing the Result.
