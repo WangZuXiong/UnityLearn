@@ -31,9 +31,27 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         //ProfilerDemo();
 
-        StartCoroutine(Print());
+        //StartCoroutine(Print());
+
+        Test();
     }
 
+    [ContextMenu("Test")]
+    private void Test()
+    {
+        //自身SetActive(false)
+        //          gameObject.activeSelf = false gameObject.activeInHierarchy = false
+        //自身SetActive(true) 父节点SetActive(false)
+        //          gameObject.activeSelf = false gameObject.activeInHierarchy = false
+
+        //The local active state of this GameObject. (Read Only)
+        //这个游戏对象的本地活动状态。(只读)
+        Debug.LogError(gameObject.activeSelf);
+
+        //Defines whether the GameObject is active in the Scene.
+        //定义游戏对象在场景中是否处于活动状态。
+        Debug.LogError(gameObject.activeInHierarchy);
+    }
 
     IEnumerator Print()
     {
@@ -48,6 +66,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
+        return;
         //GetComponent<Renderer>().material.SetColor("_LineColor", color);//material(instance)
         GetComponent<Renderer>().sharedMaterial.SetColor("_LineColor", color);//material
 
@@ -616,12 +635,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     public Transform A;
     public Transform B;
 
-
-    [ContextMenu("Test")]
-    private void Func()
-    {
-
-    }
 
     public void GetCustomType()
     {
