@@ -33,7 +33,21 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         //StartCoroutine(Print());
 
-        Test();
+        //Test();
+
+        StartCoroutine("Debug1");
+    }
+
+
+
+
+    IEnumerator Debug1()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(1);
+            Debug.LogError(1);
+        }
     }
 
     [ContextMenu("Test")]
