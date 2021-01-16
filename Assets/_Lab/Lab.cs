@@ -23,6 +23,8 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
 
     public Color color;
+
+    [ContextMenu("Start")]
     private void Start()
     {
         //Plane plane = new Plane(Vector3.up, Vector3.zero);
@@ -658,6 +660,28 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         transform.GetComponent(typeof(Button));
     }
+
+
+
+    /// <summary>
+    /// 枚举器
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Enumerator()
+    {
+        yield return null;
+    }
+
+    /// <summary>
+    /// IEnumerable 可枚举的 实现这个接口就可以使用foreach遍历
+    /// </summary>
+    class TestA : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
 
 
@@ -668,10 +692,42 @@ public struct StudentStruct
     public string Name;
 }
 
+public class GetFieldByAttribute
+{
+    void FOO()
+    {
+        Type type = typeof(StudentClass);
+        object[] vs = type.GetCustomAttributes(typeof(AttributeTest), false);
+        foreach (var item in vs)
+        {
+            if (item is Attribute)
+            {
+                AttributeTest attribute = item as AttributeTest;
+                int value = attribute.Value;
+            }
+        }
+
+    }
+
+
+}
+
+
+public class AttributeTest : Attribute
+{
+
+    public int Value;
+    public AttributeTest(int t)
+    {
+        Value = t;
+    }
+}
 
 public class StudentClass
 {
+    [AttributeTest(1)]
     public int Age;
+    [AttributeTest(1)]
     public int Height;
     public string Name;
 
