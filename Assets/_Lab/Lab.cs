@@ -23,6 +23,8 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
 
     public Color color;
+
+    [ContextMenu("Start")]
     private void Start()
     {
         //Plane plane = new Plane(Vector3.up, Vector3.zero);
@@ -31,9 +33,36 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         //ProfilerDemo();
 
-        //StartCoroutine(Print());
     }
 
+
+
+
+    IEnumerator Debug1()
+    {
+        while (true)
+        {
+            yield return new WaitForSecondsRealtime(1);
+            Debug.LogError(1);
+        }
+    }
+
+    [ContextMenu("Test")]
+    private void Test()
+    {
+        //自身SetActive(false)
+        //          gameObject.activeSelf = false gameObject.activeInHierarchy = false
+        //自身SetActive(true) 父节点SetActive(false)
+        //          gameObject.activeSelf = false gameObject.activeInHierarchy = false
+
+        //The local active state of this GameObject. (Read Only)
+        //这个游戏对象的本地活动状态。(只读)
+        Debug.LogError(gameObject.activeSelf);
+
+        //Defines whether the GameObject is active in the Scene.
+        //定义游戏对象在场景中是否处于活动状态。
+        Debug.LogError(gameObject.activeInHierarchy);
+    }
 
     IEnumerator Print()
     {
@@ -48,14 +77,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
-        /*
-         内网账号中心：
-        accountServer=
-        国内外网账号中心
-        accountServer=
-        国外外网账号中心：
-        accountServer=https://acc.k2twonline.com
-         */
 
         var data = "12132";
         if (Input.GetMouseButtonDown(1))
@@ -608,12 +629,6 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     public Transform B;
 
 
-    [ContextMenu("Test")]
-    private void Func()
-    {
-
-    }
-
     public void GetCustomType()
     {
         Type type = Type.GetType("");
@@ -621,6 +636,28 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
         gameObject.AddComponent(type);
 
         transform.GetComponent(typeof(Button));
+    }
+
+
+
+    /// <summary>
+    /// 枚举器
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Enumerator()
+    {
+        yield return null;
+}
+
+    /// <summary>
+    /// IEnumerable 可枚举的 实现这个接口就可以使用foreach遍历
+    /// </summary>
+    class TestA : IEnumerable
+    {
+        public IEnumerator GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
@@ -632,10 +669,42 @@ public struct StudentStruct
     public string Name;
 }
 
+public class GetFieldByAttribute
+{
+    void FOO()
+    {
+        Type type = typeof(StudentClass);
+        object[] vs = type.GetCustomAttributes(typeof(AttributeTest), false);
+        foreach (var item in vs)
+        {
+            if (item is Attribute)
+            {
+                AttributeTest attribute = item as AttributeTest;
+                int value = attribute.Value;
+            }
+        }
+
+    }
+
+
+}
+
+
+public class AttributeTest : Attribute
+{
+
+    public int Value;
+    public AttributeTest(int t)
+    {
+        Value = t;
+    }
+}
 
 public class StudentClass
 {
+    [AttributeTest(1)]
     public int Age;
+    [AttributeTest(1)]
     public int Height;
     public string Name;
 
