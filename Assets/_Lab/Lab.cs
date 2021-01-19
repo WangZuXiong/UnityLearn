@@ -31,7 +31,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
         //ProfilerDemo();
 
-        StartCoroutine(Print());
+        //StartCoroutine(Print());
     }
 
 
@@ -48,33 +48,24 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
 
     private void Update()
     {
-        //GetComponent<Renderer>().material.SetColor("_LineColor", color);//material(instance)
-        GetComponent<Renderer>().sharedMaterial.SetColor("_LineColor", color);//material
+        /*
+         内网账号中心：
+        accountServer=
+        国内外网账号中心
+        accountServer=
+        国外外网账号中心：
+        accountServer=https://acc.k2twonline.com
+         */
 
-        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(2, 0, 0), Color.red);
-        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(0, 2, 0), Color.green);
-        UnityEngine.Debug.DrawLine(transform.position, transform.position + new Vector3(0, 0, 2), Color.blue);
-
+        var data = "12132";
         if (Input.GetMouseButtonDown(1))
         {
-            var go = gameObjectPool.Get();
-            go.transform.SetParent(transform);
-            go.transform.localPosition = new Vector3(index++, 0, 0) * 2;
+            WebRequestManager.Put("http://192.168.1.114:8087/pushC/checkToken", data, (t) => { }, null);
         }
         else if (Input.GetMouseButtonDown(0))
         {
-            gameObjectPool.Release(transform.GetChild(0).GetComponent<MonoBehaviour>());
+            WebRequestManager.Put("https://acc.nbabm.com/pushC/checkToken", data, (t) => { }, null);
         }
-        else if (Input.GetMouseButtonDown(2))
-        {
-            gameObjectPool.Clear();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            gameObjectPool.ReleaseAll();
-        }
-
     }
 
 

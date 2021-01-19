@@ -16,7 +16,13 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 7261e06a29cd65d49b03c4deea8751f2
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 8f87cbd0ef0317e4ba235c6e525ef4e8
+    m_Address: Assets/RawResources/Textures/BgRanking.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 2800000, guid: 8f87cbd0ef0317e4ba235c6e525ef4e8, type: 3}
+    m_TargetAsset: {fileID: 2800000, guid: 8f87cbd0ef0317e4ba235c6e525ef4e8, type: 3}
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 9bcb4f43422c49a4b9f46ede9c8963a6, type: 2}
   m_SchemaSet:

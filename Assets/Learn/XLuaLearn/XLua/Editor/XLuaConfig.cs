@@ -184,6 +184,7 @@ public static class XLuaConfig
         typeof(SkinnedMeshRenderer),
         typeof(Renderer),
         typeof(WWW),
+        typeof(WaitForSeconds),
         typeof(Light),
         typeof(Mathf),
         typeof(UnityWebRequest),

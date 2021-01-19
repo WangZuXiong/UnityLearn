@@ -20,6 +20,11 @@ public static class WebRequestManager
         SimpleCoroutineManager.Instance.StartCoroutine(_webRequestImpl.Get(uri, OnSuccessCallback, OnFailCallback));
     }
 
+    public static void Put(string uri, string data, Action<string> OnSuccessCallback, Action OnFailCallback)
+    {
+        SimpleCoroutineManager.Instance.StartCoroutine(_webRequestImpl.Put(uri, data, OnSuccessCallback, OnFailCallback));
+    }
+
     public static void Post(string uri, string postData, Action<string> OnSuccessCallback, Action OnFailCallback)
     {
         SimpleCoroutineManager.Instance.StartCoroutine(_webRequestImpl.Post(uri, postData, OnSuccessCallback, OnFailCallback));
@@ -51,6 +56,28 @@ public class WebRequestImpl
     public IEnumerator Get(string uri, Action<string> OnSuccessCallback, Action OnFailCallback)
     {
         using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        {
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log("Error: " + webRequest.error);
+                Debug.Log(uri);
+
+                OnFailCallback?.Invoke();
+            }
+            else
+            {
+                Debug.Log("Received: " + webRequest.downloadHandler.text);
+                OnSuccessCallback?.Invoke(webRequest.downloadHandler.text);
+            }
+        }
+    }
+
+    public IEnumerator Put(string uri, string data, Action<string> OnSuccessCallback, Action OnFailCallback)
+    {
+        byte[] databyte = System.Text.Encoding.UTF8.GetBytes(data);
+        using (UnityWebRequest webRequest = UnityWebRequest.Put(uri, databyte))
         {
             yield return webRequest.SendWebRequest();
 
