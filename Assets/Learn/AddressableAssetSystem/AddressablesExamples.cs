@@ -13,12 +13,14 @@ public class AddressablesExamples : MonoBehaviour
     //[SerializeField]
     //private AssetReference _asset;
 
-    AsyncOperationHandle handle;
-    AsyncOperationHandle handle1;
-    AsyncOperationHandle handle2;
+    public AsyncOperationHandle handle;
+    public AsyncOperationHandle handle1;
+    public AsyncOperationHandle handle2;
 
 
-    GameObject cube;
+    public GameObject cube;
+
+    public Texture2D texture;
 
     async void Start()
     {
@@ -96,8 +98,9 @@ public class AddressablesExamples : MonoBehaviour
         //transform.Find("Image").GetComponent<Image>().sprite = sp;
 
         //Addressable 加载图集中的一张精灵 会把整张图集的内存加到内存里面么?
-        handle = Addressables.LoadAssetAsync<Sprite>("Assets/RawResources/Textures/CommonUI.png[1]");
-        await handle.Task;
+        //TODO
+        //handle = Addressables.LoadAssetAsync<Sprite>("Assets/RawResources/Textures/CommonUI.png[1]");
+        //await handle.Task;
 
 
 
@@ -127,17 +130,79 @@ public class AddressablesExamples : MonoBehaviour
 
 
         //InstantiateAsync的结果都是唯一的实例，回收 hanle1 不会吧handle2 回收掉吧？
-        handle1 = Addressables.InstantiateAsync("Cube 1");
-        await handle1.Task;
+        //不会 instance 和handle 一一对应，回收handle就会把对应的instance回收掉
+        //handle1 = Addressables.InstantiateAsync("Cube 1");
+        //await handle1.Task;
 
-        handle2 = Addressables.InstantiateAsync("Cube 1");
-        await handle2.Task;
+        //handle2 = Addressables.InstantiateAsync("Cube 1");
+        //await handle2.Task;
 
 
-        //回收了Asset 再去回收它的handle  回收了instance 再去回收它的handle 会报错么？
+        //InstantiateAsync一个GameObject，先回收GameObject再回收Handle/先回收Handle再回收GameObject 会报错么？
+        //先Addressables.ReleaseInstance GameObject再Addressables.Release Handle 报错  Exception: Attempting to use an invalid operation handle
+        //先Addressables.Release Handle 再 Addressables.ReleaseInstance GameObject 不报错
+
+        //var handle = Addressables.InstantiateAsync("Cube 1");
+        //cube = await handle.Task;
+        //handle1 = handle;
+
+
+        //LoadAssetAsync一个Asset，先回收Asset再回收Handle/先回收Handle再回收Asset 会报错么？
+        //先Addressables.Release Asset 再 Addressables.Release Handle 不报错
+        //先Addressables.Release Handle 再 Addressables.Release Asset 报错Addressables.Release was called on an object that Addressables was not previously aware of.  Thus nothing is being released
+
+        //var key1 = "Assets/RawResources/Textures/BgRanking.png";
+        //var handle = Addressables.LoadAssetAsync<Texture2D>(key1);
+        //texture = await handle.Task;
+        //handle1 = handle;
+
+
+
+        //LoadAssetAsync 一个图，暂存起来，把handle回收，那么暂存起来的图还在么
+        //还在 
+        //var key1 = "Assets/RawResources/Textures/BgRanking.png";
+        //AsyncOperationHandle<Texture2D> asyncOperationHandle = Addressables.LoadAssetAsync<Texture2D>(key1);
+        //texture = await asyncOperationHandle.Task;
+        //handle = asyncOperationHandle;
+
+
+        //LoadAssetAsync 一个TextAsset，转为Ojb暂存起来，把TextAsset回收，那么Ojb还在么
+        //TODO
+
+
+        //InstantiaceAsync 一个GameObject  A(A嵌套b)	假如ReleaseInstance b 再 ReleaseInstance A 会有啥现象   
+        // Addressables.ReleaseInstance b 无反应
+        //var handle = Addressables.InstantiateAsync("Cube");
+        //cube = await handle.Task;
+
+
+        //批量下载AssetBundle
+        List<string> arrQuestions = new List<string>()
+        {
+            "Assets/RawResources/Textures/CommonUI.png",
+            "Assets/RawResources/Textures/atm (1).png"
+        };
+
+        var handle11 = Addressables.LoadAssetsAsync<Texture2D>(arrQuestions, OnDownloadQuestionsCategoryComplete, Addressables.MergeMode.Union);
+        handle11.Completed += OnDownloadQuestionsComplete;
+        await handle11.Task;
 
     }
 
+    private void OnDownloadQuestionsCategoryComplete(Texture2D obj)
+    {
+        UnityEngine.Debug.Log(obj.name);
+    }
+
+    private void OnDownloadQuestionsComplete(AsyncOperationHandle<IList<Texture2D>> listAssets)
+    {
+        UnityEngine.Debug.Log("OnDownloadQuestionsComplete");
+        foreach (var item in listAssets.Result)
+        {
+            UnityEngine.Debug.Log(item.name);
+        }
+
+    }
 
     private async Task Instatiate()
     {
@@ -202,12 +267,12 @@ public class AddressablesExamples : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Addressables.Release(handle1);
+            Addressables.ReleaseInstance(cube.transform.Find("Cube 1").gameObject);
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            Addressables.Release(handle2);
+            Addressables.Release(texture);
 
             //Addressables.Release(transform.Find("Raw Image 1").GetComponent<RawImage>().texture);
 
@@ -220,6 +285,8 @@ public class AddressablesExamples : MonoBehaviour
 
         if (Input.GetMouseButtonDown(2))
         {
+            Addressables.ReleaseInstance(cube);
+
             //AddressableAssetManager.ReleaseAll();
 
 
