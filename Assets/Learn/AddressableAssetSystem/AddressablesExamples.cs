@@ -13,6 +13,13 @@ public class AddressablesExamples : MonoBehaviour
     //[SerializeField]
     //private AssetReference _asset;
 
+    AsyncOperationHandle handle;
+    AsyncOperationHandle handle1;
+    AsyncOperationHandle handle2;
+
+
+    GameObject cube;
+
     async void Start()
     {
         //IEnumerable enumerable = new object[] { "Cube Texture", "Test Label 1" };
@@ -89,7 +96,9 @@ public class AddressablesExamples : MonoBehaviour
         //transform.Find("Image").GetComponent<Image>().sprite = sp;
 
         //Addressable 加载图集中的一张精灵 会把整张图集的内存加到内存里面么?
-        await Addressables.LoadAssetAsync<Sprite>("Assets/RawResources/Textures/CommonUI.png[1]").Task;
+        handle = Addressables.LoadAssetAsync<Sprite>("Assets/RawResources/Textures/CommonUI.png[1]");
+        await handle.Task;
+
 
 
         //Addressables.LoadAssetAsync A  Addressables.LoadAssetAsync A 第一次个第二次的耗时是一样的么？Addressables.LoadAssetAsync 会不会缓存？
@@ -105,6 +114,43 @@ public class AddressablesExamples : MonoBehaviour
         //{
         //    Foo1();
         //}
+
+
+
+        //InitializeAsync 指向唯一操作的AsyncOperationHandle  那么循环10次 他们都需要耗时么
+        //第一次耗时1000ms 第二次耗时3  之后耗时0ms
+        //for (int i = 0; i < 10; i++)
+        //{
+        //    await Instatiate();
+        //}
+
+
+
+        //InstantiateAsync的结果都是唯一的实例，回收 hanle1 不会吧handle2 回收掉吧？
+        handle1 = Addressables.InstantiateAsync("Cube 1");
+        await handle1.Task;
+
+        handle2 = Addressables.InstantiateAsync("Cube 1");
+        await handle2.Task;
+
+
+        //回收了Asset 再去回收它的handle  回收了instance 再去回收它的handle 会报错么？
+
+    }
+
+
+    private async Task Instatiate()
+    {
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+
+
+        await Addressables.InstantiateAsync("Cube 1").Task;
+
+
+        stopwatch.Stop();
+        UnityEngine.Debug.LogError(stopwatch.ElapsedMilliseconds);
+
     }
 
 
@@ -130,16 +176,15 @@ public class AddressablesExamples : MonoBehaviour
 
 
         await Addressables.LoadAssetAsync<Texture2D>("Assets/RawResources/Textures/CommonUI.png").Task;
-     
-   
+
+
         stopwatch.Stop();
         UnityEngine.Debug.LogError(stopwatch.ElapsedMilliseconds);
     }
 
 
 
-    AsyncOperationHandle handle;
-    GameObject cube;
+
 
     [SerializeField]
     private string _key = "Assets/RawResources/Textures/BgRanking.png";
@@ -155,14 +200,20 @@ public class AddressablesExamples : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Addressables.Release(handle1);
+        }
 
         if (Input.GetMouseButtonDown(1))
         {
+            Addressables.Release(handle2);
+
             //Addressables.Release(transform.Find("Raw Image 1").GetComponent<RawImage>().texture);
 
             //AddressableAssetManager.ReleaseByKey(_key);
 
-            Addressables.Release(handle);
+            //Addressables.Release(handle);
 
         }
 
@@ -172,7 +223,7 @@ public class AddressablesExamples : MonoBehaviour
             //AddressableAssetManager.ReleaseAll();
 
 
-            Addressables.ReleaseInstance(cube);
+            //Addressables.ReleaseInstance(cube);
         }
     }
 }
