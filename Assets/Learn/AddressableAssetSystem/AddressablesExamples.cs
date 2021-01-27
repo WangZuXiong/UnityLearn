@@ -266,6 +266,30 @@ public class AddressablesExamples : MonoBehaviour
 
 
 
+    private void OnGUI()
+    {
+        if (GUILayout.Button("Resources.UnloadUnusedAssets()"))
+        {
+            Resources.UnloadUnusedAssets();
+        }
+
+        if (GUILayout.Button("Addressables.Release(handle)"))
+        {
+            Addressables.Release(handle);
+        }
+
+        if (GUILayout.Button("Addressables.Release(handle1)"))
+        {
+            Addressables.Release(handle1);
+        }
+
+        if (GUILayout.Button("Addressables.Release(handle2)"))
+        {
+            Addressables.Release(handle2);
+        }
+    }
+
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -292,7 +316,7 @@ public class AddressablesExamples : MonoBehaviour
 
         if (Input.GetMouseButtonDown(2))
         {
-            Resources.UnloadUnusedAssets();
+            //Resources.UnloadUnusedAssets();
 
             //Addressables.ReleaseInstance(cube);
 
