@@ -10,8 +10,11 @@ using UnityEngine.UI;
 
 public class AddressablesExamples : MonoBehaviour
 {
-    //[SerializeField]
-    //private AssetReference _asset;
+
+    [SerializeField]
+    private AssetReference _asset;
+    [SerializeField]
+    private AssetLabelReference _lable;
 
     public AsyncOperationHandle handle;
     public AsyncOperationHandle handle1;
@@ -98,9 +101,11 @@ public class AddressablesExamples : MonoBehaviour
         //transform.Find("Image").GetComponent<Image>().sprite = sp;
 
         //Addressable 加载图集中的一张精灵 会把整张图集的内存加到内存里面么?
-        //TODO
-        //handle = Addressables.LoadAssetAsync<Sprite>("Assets/RawResources/Textures/CommonUI.png[1]");
-        //await handle.Task;
+        //是的
+        //var handleSp = Addressables.LoadAssetAsync<Sprite>("Assets/RawResources/Textures/CommonUI.png[1]");
+        //transform.Find("Image").GetComponent<Image>().sprite = await handleSp.Task;
+
+        //handle = handleSp;
 
 
 
@@ -177,15 +182,20 @@ public class AddressablesExamples : MonoBehaviour
 
 
         //批量下载AssetBundle
-        List<string> arrQuestions = new List<string>()
-        {
-            "Assets/RawResources/Textures/CommonUI.png",
-            "Assets/RawResources/Textures/atm (1).png"
-        };
+        //List<string> arrQuestions = new List<string>()
+        //{
+        //    "Assets/RawResources/Textures/CommonUI.png",
+        //    "Assets/RawResources/Textures/atm (1).png"
+        //};
 
-        var handle11 = Addressables.LoadAssetsAsync<Texture2D>(arrQuestions, OnDownloadQuestionsCategoryComplete, Addressables.MergeMode.Union);
-        handle11.Completed += OnDownloadQuestionsComplete;
-        await handle11.Task;
+        //var handle11 = Addressables.LoadAssetsAsync<Texture2D>(arrQuestions, OnDownloadQuestionsCategoryComplete, Addressables.MergeMode.Union);
+        //handle11.Completed += OnDownloadQuestionsComplete;
+        //await handle11.Task;
+
+        //查询接口
+        //Addressables.LoadResourceLocationsAsync(,)
+
+        //Addressables.InitializeAsync
 
     }
 
@@ -218,8 +228,6 @@ public class AddressablesExamples : MonoBehaviour
 
     }
 
-
-
     private async void Foo1()
     {
         Stopwatch stopwatch = new Stopwatch();
@@ -233,7 +241,6 @@ public class AddressablesExamples : MonoBehaviour
         UnityEngine.Debug.LogError(stopwatch.ElapsedMilliseconds);
     }
 
-
     private async Task Foo()
     {
         Stopwatch stopwatch = new Stopwatch();
@@ -246,10 +253,6 @@ public class AddressablesExamples : MonoBehaviour
         stopwatch.Stop();
         UnityEngine.Debug.LogError(stopwatch.ElapsedMilliseconds);
     }
-
-
-
-
 
     [SerializeField]
     private string _key = "Assets/RawResources/Textures/BgRanking.png";
@@ -267,12 +270,16 @@ public class AddressablesExamples : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Addressables.ReleaseInstance(cube.transform.Find("Cube 1").gameObject);
+            Addressables.Release(cube.transform.Find("Cube 1").gameObject);
         }
 
         if (Input.GetMouseButtonDown(1))
         {
-            Addressables.Release(texture);
+            //transform.Find("Image").GetComponent<Image>().sprite = null;
+            Destroy(transform.Find("Image").gameObject);
+            
+            
+
 
             //Addressables.Release(transform.Find("Raw Image 1").GetComponent<RawImage>().texture);
 
@@ -285,7 +292,9 @@ public class AddressablesExamples : MonoBehaviour
 
         if (Input.GetMouseButtonDown(2))
         {
-            Addressables.ReleaseInstance(cube);
+            Resources.UnloadUnusedAssets();
+
+            //Addressables.ReleaseInstance(cube);
 
             //AddressableAssetManager.ReleaseAll();
 
@@ -293,4 +302,7 @@ public class AddressablesExamples : MonoBehaviour
             //Addressables.ReleaseInstance(cube);
         }
     }
+
+
+    
 }

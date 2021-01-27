@@ -515,6 +515,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6726e6d33f04e84caedf1377072cc82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _asset:
+    m_AssetGUID: 
+    m_SubObjectName: 
+    m_SubObjectType: 
+  _lable:
+    m_LabelString: 
+  cube: {fileID: 0}
+  texture: {fileID: 0}
   _key: Assets/RawResources/Textures/BgRanking.png
   _index: 0
   _original: {fileID: 0}
@@ -601,6 +609,7 @@ GameObject:
   - component: {fileID: 2018174686}
   - component: {fileID: 2018174688}
   - component: {fileID: 2018174687}
+  - component: {fileID: 2018174689}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -664,3 +673,15 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018174685}
   m_CullTransparentMesh: 0
+--- !u!114 &2018174689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2018174685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e918b2fbbac35c46bfa671d99673941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
