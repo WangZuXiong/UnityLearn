@@ -16,9 +16,9 @@ public class AddressablesExamples : MonoBehaviour
     [SerializeField]
     private AssetLabelReference _lable;
 
-    public AsyncOperationHandle handle;
-    public AsyncOperationHandle handle1;
-    public AsyncOperationHandle handle2;
+    public static AsyncOperationHandle handle;
+    public static AsyncOperationHandle handle1;
+    public static AsyncOperationHandle handle2;
 
 
     public GameObject cube;
@@ -192,6 +192,11 @@ public class AddressablesExamples : MonoBehaviour
         //handle11.Completed += OnDownloadQuestionsComplete;
         //await handle11.Task;
 
+
+        //直接Destroy 不Release Handle 之后再Resources.UnloadUnusedAsset这样内存能被回收么
+        //不会的
+
+
         //查询接口
         //Addressables.LoadResourceLocationsAsync(,)
 
@@ -294,7 +299,7 @@ public class AddressablesExamples : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Addressables.Release(cube.transform.Find("Cube 1").gameObject);
+            //Addressables.Release(cube.transform.Find("Cube 1").gameObject);
         }
 
         if (Input.GetMouseButtonDown(1))
