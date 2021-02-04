@@ -63,10 +63,11 @@ public class AssetMgr : IDisposable
 
 
 
-    public Task<IList<T>> LoadAssetsAsync<T>(string key)
+    public Task<IList<T>> LoadAssetsAsync<T>(List<string> keys)
     {
         Action<T> callback = null;
-        var handle = Addressables.LoadAssetsAsync(key, callback, true);
+        var handle = Addressables.LoadAssetsAsync(keys, callback, Addressables.MergeMode.Union);
+       //var handle = Addressables.LoadAssetsAsync(keys, callback, true);
         _loadAssetHandleCollect.Add(handle);
         return handle.Task;
     }

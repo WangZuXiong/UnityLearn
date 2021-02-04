@@ -185,15 +185,15 @@ public class AddressablesExamples : MonoBehaviour
 
 
         //批量下载AssetBundle
-        //List<string> arrQuestions = new List<string>()
-        //{
-        //    "Assets/RawResources/Textures/CommonUI.png",
-        //    "Assets/RawResources/Textures/atm (1).png"
-        //};
+        List<string> arrQuestions = new List<string>()
+        {
+            "Assets/RawResources/Textures/CommonUI.png",
+            "Assets/RawResources/Textures/atm (1).png"
+        };
 
-        //var handle11 = Addressables.LoadAssetsAsync<Texture2D>(arrQuestions, OnDownloadQuestionsCategoryComplete, Addressables.MergeMode.Union);
-        //handle11.Completed += OnDownloadQuestionsComplete;
-        //await handle11.Task;
+        var handle11 = Addressables.LoadAssetsAsync<Texture2D>(arrQuestions, OnDownloadQuestionsCategoryComplete, Addressables.MergeMode.Union);
+        handle11.Completed += OnDownloadQuestionsComplete;
+        await handle11.Task;
 
 
         //直接Destroy 不Release Handle 之后再Resources.UnloadUnusedAsset这样内存能被回收么
@@ -212,15 +212,22 @@ public class AddressablesExamples : MonoBehaviour
         //cube = await t.Task;
 
 
-        cube = await _assetMgr.InstantiateAsync("Assets/RawResources/Cube.prefab");
+        //cube = await _assetMgr.InstantiateAsync("Assets/RawResources/Cube.prefab");
 
+        //await Task.Delay(2000);
 
-        await Task.Delay(2000);
+        //var clip = await _assetMgr.LoadAssetAsync<AudioClip>("Audio");
 
-        var clip = await _assetMgr.LoadAssetAsync<AudioClip>("Audio");
+        //cube.AddComponent<AudioSource>().clip = clip;
 
+        var list = new List<string>()
+        {
+            "Assets/RawResources/Textures/CommonUI.png[1]",
+            "Assets/RawResources/Textures/CommonUI.png[2]"
+        };
 
-        cube.AddComponent<AudioSource>().clip = clip;
+        var sprite = await _assetMgr.LoadAssetsAsync<Sprite>(list);
+        UnityEngine.Debug.LogError(sprite.Count);
     }
 
     private void OnDownloadQuestionsCategoryComplete(Texture2D obj)
