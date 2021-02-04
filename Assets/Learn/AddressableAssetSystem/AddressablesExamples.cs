@@ -21,6 +21,9 @@ public class AddressablesExamples : MonoBehaviour
     public static AsyncOperationHandle handle2;
 
 
+
+    private AssetMgr _assetMgr = new AssetMgr();
+
     public GameObject cube;
 
     public Texture2D texture;
@@ -202,6 +205,22 @@ public class AddressablesExamples : MonoBehaviour
 
         //Addressables.InitializeAsync
 
+
+        //Addressables.Release was called on an object that Addressables was not previously aware of.  Thus nothing is being released
+
+        //var t = Addressables.InstantiateAsync("Assets/RawResources/Cube.prefab");
+        //cube = await t.Task;
+
+
+        cube = await _assetMgr.InstantiateAsync("Assets/RawResources/Cube.prefab");
+
+
+        await Task.Delay(2000);
+
+        var clip = await _assetMgr.LoadAssetAsync<AudioClip>("Audio");
+
+
+        cube.AddComponent<AudioSource>().clip = clip;
     }
 
     private void OnDownloadQuestionsCategoryComplete(Texture2D obj)
@@ -292,6 +311,17 @@ public class AddressablesExamples : MonoBehaviour
         {
             Addressables.Release(handle2);
         }
+
+        if (GUILayout.Button("Release clip"))
+        {
+            Addressables.Release(cube.GetComponent<AudioSource>().clip);
+        }
+
+
+        if (GUILayout.Button("Asset Release"))
+        {
+            _assetMgr.Release();
+        }
     }
 
 
@@ -306,8 +336,8 @@ public class AddressablesExamples : MonoBehaviour
         {
             //transform.Find("Image").GetComponent<Image>().sprite = null;
             Destroy(transform.Find("Image").gameObject);
-            
-            
+
+
 
 
             //Addressables.Release(transform.Find("Raw Image 1").GetComponent<RawImage>().texture);
@@ -333,5 +363,5 @@ public class AddressablesExamples : MonoBehaviour
     }
 
 
-    
+
 }
