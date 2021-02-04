@@ -211,3 +211,22 @@ public class AssetMgr : IDisposable
         GC.SuppressFinalize(this);
     }
 }
+
+
+/*
+ * 
+ * https://blog.csdn.net/zhenghongzhi6/article/details/103334939
+ * 
+ * 
+ 采用第二种重载加载时，其实会去先查询每一个地址/标签对应的资源，然后再根据MergeMode进行最终结果的计算。
+
+举个栗子：
+
+比如传入的参数是new List<object>{"cube", "red"}，根据cube查询出来的资源有A、B、D，根据red查询出来的资源有C、D、E。
+
+那么MergeMode是Node或UseFirst时，会取第一个key查询到的资源：A、B、D；
+
+MergeMode是Union时，会取所有key查询到的资源的并集：A、B、C、D、E；
+
+MergeMode是Intersection时，会取所有key查询到的资源的交集：D。
+ */
