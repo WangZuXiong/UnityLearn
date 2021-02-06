@@ -42,6 +42,7 @@ public class AddressablesExamplesTest : MonoBehaviour
 
     private void OnDestroy()
     {
+        return;
         //Addressables.Release(handle1);
         Addressables.Release(AddressablesExamples.handle2);
 

@@ -30,6 +30,9 @@ public class AddressablesExamples : MonoBehaviour
 
     async void Start()
     {
+        TaskTest();
+
+        return;
         //IEnumerable enumerable = new object[] { "Cube Texture", "Test Label 1" };
         //IList<Texture2D> textures = await Addressables.LoadAssetsAsync<Texture2D>(enumerable, (t) =>
         //{
@@ -230,6 +233,24 @@ public class AddressablesExamples : MonoBehaviour
         UnityEngine.Debug.LogError(sprite.Count);
     }
 
+
+    private async void TaskTest()
+    {
+        UnityEngine.Debug.LogError("Before Await");
+        await _assetMgr.InstantiateAsync("Assets/RawResources/Cube.prefab");
+        UnityEngine.Debug.LogError("After Await");
+
+
+        //调用的顺序是
+        //Before Await
+        //Awake
+        //OnEnable
+        //Main
+        //Start
+        //Update
+        //After Await    
+    }
+
     private void OnDownloadQuestionsCategoryComplete(Texture2D obj)
     {
         UnityEngine.Debug.Log(obj.name);
@@ -247,7 +268,7 @@ public class AddressablesExamples : MonoBehaviour
 
     private async Task Instatiate()
     {
-        Stopwatch stopwatch = new Stopwatch();
+        System.Diagnostics.Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 
 
