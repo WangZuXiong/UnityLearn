@@ -27,83 +27,13 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     [ContextMenu("Start")]
     private void Start()
     {
-
         //Plane plane = new Plane(Vector3.up, Vector3.zero);
 
         //Destroy(gameObject,)
 
         //ProfilerDemo();
 
-
-        //Quaternion
-
     }
-
-
-
-
-
-    /// <summary>
-    /// 不同写法会会导致不一样的计算顺序，导致调用的操作符的次数不一样，产生对象的个数不一样
-    /// </summary>
-    private void Test1()
-    {
-        //MyVector3 t1 = 2 * MyVector3.right * 2;//调用了3次MyVector3() 产生了3个MyVector3对象
-        //MyVector3 t2 = 0 * MyVector3.right * 2;//调用了3次MyVector3() 产生了3个MyVector3对象
-        MyVector3 t3 = 0 * 2 * MyVector3.right;//调用了2次MyVector3() 产生了2个MyVector3对象
-
-    }
-
-    struct MyVector3
-    {
-        public int x;
-        public int y;
-        public int z;
-
-        public MyVector3(int x, int y, int z)
-        {
-            this.x = x;
-            this.y = y;
-            this.z = z;
-            Debug.LogError("MyVector3()");
-        }
-
-        public static MyVector3 right => new MyVector3(1, 0, 0);
-
-
-        public static MyVector3 operator *(MyVector3 a, int b)
-        {
-            return new MyVector3(a.x * b, a.y * b, a.z * b);
-        }
-
-        public static MyVector3 operator *(int b, MyVector3 a)
-        {
-            return new MyVector3(a.x * b, a.y * b, a.z * b);
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -717,7 +647,7 @@ public partial class Lab : MonoBehaviour, IPointerEnterHandler
     private IEnumerator Enumerator()
     {
         yield return null;
-    }
+}
 
     /// <summary>
     /// IEnumerable 可枚举的 实现这个接口就可以使用foreach遍历

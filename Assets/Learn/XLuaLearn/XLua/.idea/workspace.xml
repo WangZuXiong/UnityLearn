@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="82bfb65f-da8e-4adb-9d6c-06ed63efd63b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Test.lua.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Lab.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Lab.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Script/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Script/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Tips.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../Tips.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../UGUIAdvance.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Examples/01_Helloworld/Helloworld.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Examples/01_Helloworld/Helloworld.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gen/Resources/hotfix_id_map.lua.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gen/Resources/hotfix_id_map.lua.txt.20190424183153107" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gen/Resources/hotfix_id_map.lua.txt.20190425203001726" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gen/SystemCollectionsGenericList1SystemInt32Wrap.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Gen/SystemCollectionsGenericList1SystemInt32Wrap.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../设计模式/MVC模式/Player.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../设计模式/MVC模式/PlayerController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../设计模式/MVC模式/PlayerData.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../设计模式/MVC模式/PlayerModel.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../设计模式/MVC模式/PlayerView.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../设计模式/MVC模式/remade.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../设计模式/工厂模式/Factory.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../设计模式/工厂模式/Main.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../设计模式/策略模式/Main.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../设计模式/策略模式/StratagyDemo.cs" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Examples/02_U3DScripting/LuaTestScript.lua.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="130">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Test.lua.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="13" selection-start-column="13" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/Examples/02_U3DScripting/LuaTestScript.lua.txt" />
+        <option value="$PROJECT_DIR$/Test.lua.txt" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/XLua.iml" />
+        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
+        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/.idea/libraries/UnityEngine.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-18" />
+    <option name="y" value="277" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="01_Helloworld" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="02_U3DScripting" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="03_UIEvent" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="04_LuaObjectOrented" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="05_NoGc" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="06_Coroutine" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="07_AsyncTest" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="08_Hotfix" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="09_GenericMethod" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="XLua" type="462c0819:PsiDirectoryNode" />
+              <item name="Examples" type="462c0819:PsiDirectoryNode" />
+              <item name="10_SignatureLoader" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="XLua" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="UnityEngine" type="70bed36:NamedLibraryElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="D:/soft/Unity2018/Editor/Data/Managed/UnityEngine.dll" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Test.lua.txt" type="lua.app" factoryName="Lua Application" temporary="true">
+      <option name="program" value="lua.exe" />
+      <option name="file" value="$PROJECT_DIR$/Test.lua.txt" />
+      <option name="workingDir" value="" />
+      <option name="debuggerType" value="1" />
+      <option name="params" value="" />
+      <option name="charset" value="UTF-8" />
+      <option name="showConsole" value="true" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Lua Application.Test.lua.txt" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="82bfb65f-da8e-4adb-9d6c-06ed63efd63b" name="Default Changelist" comment="" />
+      <created>1559616575027</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1559616575027</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="LuaCheck" sideWeight="0.4989339" weight="0.32936078" />
+      <window_info anchor="bottom" id="Version Control" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info anchor="bottom" id="Terminal" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49946696" weight="0.32936078" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Maven" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Examples/01_Helloworld/Helloworld.cs">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/02_U3DScripting/LuaTestScript.lua.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="16" column="9" lean-forward="true" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/10_SignatureLoader/signatured2.lua">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples/10_SignatureLoader/signatured1.lua">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="5" column="49" lean-forward="true" selection-start-line="5" selection-start-column="49" selection-end-line="5" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Test.lua.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="13" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>XLua</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>UnityEngine</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
