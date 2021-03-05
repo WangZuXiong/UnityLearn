@@ -1,14 +1,4 @@
-local util = require 'util'
-local _, LuaDebuggee = pcall(require, 'LuaDebuggee')
-if LuaDebuggee and LuaDebuggee.StartDebug then
-	if LuaDebuggee.StartDebug('127.0.0.1', 9826) then
-		print('LuaPerfect: Successfully connected to debugger!')
-	else
-		print('LuaPerfect: Failed to connect debugger!')
-	end
-else
-	print('LuaPerfect: Check documents at: https://luaperfect.net')
-end
+
 
 --xlua.hotfix(CS.XLuaTest1,"Foo",nil)
 --util.hotfix_ex(CS.XLuaTest1,"Foo",function(self)
@@ -26,6 +16,8 @@ end
 		--print(k,v)
 	--end
 --end)
+
+print("12465")
 
 -- 参数个数不同的重载lua可以区分
 -- 参数类型不同的重载lua不可以区分 都会修改

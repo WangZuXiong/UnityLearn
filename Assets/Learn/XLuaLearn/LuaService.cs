@@ -20,7 +20,7 @@ public class LuaService : MonoBehaviour
         _luaEnv.AddLoader(Loader);
         _luaEnv.DoString("require 'LuaScript'");
     }
-
+ 
     private void OnDisable()
     {
         //_luaEnv.DoString("require 'LuaDispose'");
