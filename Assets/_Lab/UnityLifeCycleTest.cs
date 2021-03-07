@@ -19,7 +19,7 @@ public partial class UnityLifeCycleTest : MonoBehaviour
 
     private void Main()
     {
-        Debug.LogError("Main");
+        Debug.LogError("Main" + gameObject.name);
     }
 
 
@@ -28,9 +28,25 @@ public partial class UnityLifeCycleTest : MonoBehaviour
         Debug.LogError("Start::" + gameObject.name);
 
     }
+
+    private void FixedUpdate()
+    {
+        Debug.LogError("FixedUpdate");
+    }
+
     private void Update()
     {
         Debug.LogError("Update::" + gameObject.name);
+    }
+
+    private void LateUpdate()
+    {
+        Debug.LogError("LateUpdate");
+    }
+
+    private void OnGUI()
+    {
+        Debug.LogError("OnGUI");
     }
 
     private void OnDisable()
