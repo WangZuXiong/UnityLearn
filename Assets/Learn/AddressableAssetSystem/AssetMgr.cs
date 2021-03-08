@@ -210,6 +210,25 @@ public class AssetMgr : IDisposable
         GC.Collect();
         GC.SuppressFinalize(this);
     }
+
+
+
+
+
+
+
+
+
+
+
+    public static void Release(GameObject gameObject)
+    {
+        var t = gameObject.GetComponentsInChildren<ZBehaviour>(true);
+        foreach (var item in t)
+        {
+            item.Release();
+        }
+    }
 }
 
 
