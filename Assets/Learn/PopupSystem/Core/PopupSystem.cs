@@ -117,6 +117,7 @@ public class PopupSystem : MonoBehaviour
                 if (!_camera.enabled)
                     _camera.enabled = true;
             }
+            ToppingPopup.Release();
             Destroy(ToppingPopup.gameObject);
             var temp = _index - 1;
             _parentDict[temp].Item1.Hide();
@@ -171,6 +172,7 @@ public class PopupSystem : MonoBehaviour
         ClearStaticBg();
         foreach (var item in _popupDict)
         {
+            item.Value.Release();
             Destroy(item.Value.gameObject);
         }
         _popupDict.Clear();

@@ -54,17 +54,18 @@ public class AStarDemo : MonoBehaviour
     private IEnumerator Start()
     {
         yield return new WaitForSeconds(1);
-        FindPath(StartSquare);
+        ClosedSquares.Add(StartSquare);
+        FindPath();
         yield return new WaitForSeconds(1);
         DebugPath();
     }
 
     private void DebugPath()
     {
-        var length = ResultPath.Count;
+        var length = ClosedSquares.Count;
         for (int i = 0; i < length; i++)
         {
-            ResultPath[i].SetColor(Color.red);
+            ClosedSquares[i].SetColor(Color.red);
         }
     }
 
@@ -88,73 +89,45 @@ public class AStarDemo : MonoBehaviour
         return Mathf.Abs(EndSquare.X - current.X) + Mathf.Abs(EndSquare.Y - current.Y);
     }
 
-    public async Task FindPath(Square current)
+    public async Task FindPath()
     {
-        ResultPath.Add(current);
-        ClosedSquares.Add(current);
-        var aroundSquares = current.GetAroundSquare();
-        var aroundSquaresLength = aroundSquares.Count;
-        for (int i = 0; i < aroundSquaresLength; i++)
+        var s = GetLastItemInClosedSquares();
+
+        var list = s.GetAroundSquare();
+        OpenSquares.AddRange(list);
+        var min = FindMin(OpenSquares);
+        if (min != null)
         {
-            var temp = aroundSquares[i];
-            if (ClosedSquares.Contains(temp))
-            {
-                continue;
-            }
-            if (OpenSquares.Contains(temp))
-            {
-                continue;
-            }
-            temp.AddG();
-            OpenSquares.Add(temp);
+            OpenSquares.Remove(min);
+            ClosedSquares.Add(min);
         }
-
-        var length = OpenSquares.Count;
-        //计算OpenSquares里面的F
-        for (int i = 0; i < length; i++)
-        {
-            OpenSquares[i].Calculation();
-        }
-
-        //查找OpenSquares里面F最小的值
-        Square min = null;
-        for (int i = 0; i < length; i++)
-        {
-            if (min == null || OpenSquares[i].F < min.F)
-            {
-                min = OpenSquares[i];
-            }
-        }
-
-        foreach (var item in OpenSquares)
-        {
-            if (min != item)
-            {
-                ClosedSquares.Add(item);
-            }
-        }
+        await Task.Delay(100);
 
 
-        //记录min并且递归原来的操作
-        ResultPath.Add(min);
-        ClosedSquares.Add(min);
 
-
-        //if (Temp++ > 1000)
-        //{
-        //    return;
-        //}
-
-        if (min == EndSquare)
+        if (OpenSquares.Count == 0)
         {
             return;
         }
-
-        await Task.Delay(100);
-
-        await FindPath(min);
+        await FindPath();
     }
 
+    private Square GetLastItemInClosedSquares()
+    {
+        return ClosedSquares[ClosedSquares.Count - 1];
+    }
 
-    int Temp = 1;
+    private Square FindMin(List<Square> squares)
+    {
+        Square min = null;
+        var length = squares.Count;
+        for (int i = 0; i < length; i++)
+        {
+            if (min == null || squares[i].F < min.F)
+            {
+                min = squares[i];
+            }
+        }
+        return min;
+    }
 }

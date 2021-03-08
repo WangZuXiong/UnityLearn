@@ -106,10 +106,23 @@ public class Square : MonoBehaviour
         {
             var direction = (Direction)i;
             var temp = GetSquare(direction);
-            if (temp != null && !temp.IsObstacle)
+            if (temp.IsObstacle)
             {
-                result.Add(temp);
+                continue;
             }
+            if (_demo.ClosedSquares.Contains(temp))
+            {
+                continue;
+            }
+            if (_demo.OpenSquares.Contains(temp))
+            {
+                continue;
+            }
+            if (temp == null)
+            {
+                continue;
+            }
+            result.Add(temp);
         }
         return result;
     }

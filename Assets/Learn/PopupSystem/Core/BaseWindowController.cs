@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class BaseWindowController : MonoBehaviour
+public abstract class BaseWindowController : ZBehaviour
 {
     [Tooltip("勾选后，将使用遮罩背景")]
     public bool UseMask = true;
