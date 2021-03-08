@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
+
+[Obsolete("废弃了 使用AssetMgr代替")]
 public static class AddressableAssetManager
 {
     private struct AssetHandle
