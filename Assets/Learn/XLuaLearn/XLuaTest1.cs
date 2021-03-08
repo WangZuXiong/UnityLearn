@@ -19,7 +19,7 @@ public class XLuaTest1 : MonoBehaviour
         {
             //重新load
             LuaService.Instance.ReLoadLuaScript();
-            //Foo();
+            Foo();
             Foo1(999);
 
             //Foo(1);

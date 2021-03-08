@@ -41,7 +41,7 @@ public class LuaService : MonoBehaviour
 
     private byte[] Loader(ref string filepath)
     {
-        string path = Application.dataPath + "/Learn/XLuaLearn/LuaScript/" + filepath + ".lua";
+        string path = Application.dataPath + "/XLuaLearn/LuaScript/" + filepath + ".lua";
         if (File.Exists(path))
         {
             return Encoding.UTF8.GetBytes(File.ReadAllText(path));
